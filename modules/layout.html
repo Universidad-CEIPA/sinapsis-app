@@ -1,5 +1,5 @@
 <main>
-	<header v-if="$root.user">
+	<header v-if="$root.user" style="display: none;">
 		<h1>
 			<a is="router-link" :to="{name: 'home'}">Ceipa</a>
 		</h1>
@@ -8,8 +8,7 @@
 				<li><a href=""></a></li>
 			</ul>
 		</nav>
-		<nav class="user-nav">
-			<h1>{{ $root.user }}</h1>
+		<nav class="user-nav" >
 			<ul>
 				<li><a is="router-link" :to="{name: 'users:profile'}">Editar Perfil</a></li>
 				<li><a is="router-link" :to="{name: 'users:profile'}">Cerrar Sesión</a></li>

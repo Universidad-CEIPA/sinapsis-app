@@ -52,6 +52,9 @@ define([
 			src: {
 				type: String
 			},
+			selectOptions: {
+				type: Array
+			},
 			query: {
 				type: Object
 			},
@@ -69,7 +72,7 @@ define([
 				htmlId: `ui-input-${++htmlId}`,
 				isValid: true,
 				loading: false,
-				options: []
+				options: this.selectOptions || []
 			};
 		},
 		computed: {
@@ -85,6 +88,7 @@ define([
 				delete attrs.idProp;
 				delete attrs.labelProp;
 				delete attrs.modelValue;
+				delete attrs.selectOptions;
 				return attrs;
 			},
 			filteredModelValue() {

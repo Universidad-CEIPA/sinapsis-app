@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost/ceipa-backend/";
+const API_BASE_URL = "http://developer.local/ceipa-backend/";
 
 requirejs.config({
 	baseUrl: "res/scripts",

@@ -1,0 +1,28 @@
+<form @submit.prevent="next">
+    <section v-if="step === WELCOME_STEP">
+        <h1>Bienvenid@</h1>
+        Nuestra aplicación te sumergirá en <strong>apasionantes historias</strong> que fortalecerán tus competencias
+    </section>
+    <section v-if="step === INSTRUCTION_STEP">
+        <h1>
+            Para disfrutar de este viaje tendras que.....
+        </h1>
+        <ul>
+            <li>{%icon%} <strong>Leer las historias </strong> que te llegarán periodicamente</li>
+            <li>{%icon%} <strong>Autoevaluarte</strong> contestando algunas preguntas</li>
+            <li>{%icon%} <strong>Crear tu bitácora</strong> de videoselfies</li>
+            <li>{%icon%} <strong>A medida que avanzas, tu avatar adquiere mejores herramientas para seguir en este
+                    viaje</strong></li>
+            <li>{%icon%} <strong>Tu progeso es esencial</strong> para nosotros y tendrás un historial a medida que vas
+                avanzando</li>
+        </ul>
+    </section>
+    <section v-if="step === FINISH_STEP">
+        <h3>Para comenzar primero verifiquemos tus datos personales</h3>
+    </section>
+    <footer>
+        <button v-if="step > 1" type="button" class="previous" @click.prevent="back">Regresar</button>
+        <button v-if="step < MAX_STEPS" class="next">Siguiente</button>
+        <button v-if="step === MAX_STEPS" class="done action"> Iniciar </button>
+    </footer>
+</form>

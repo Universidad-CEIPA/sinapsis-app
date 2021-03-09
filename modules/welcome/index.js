@@ -1,30 +1,29 @@
 define([
-	"text!./index.html",
-	"components/ui-form",
-	"components/ui-input",
-	"api"
-], (html, UiForm, UiInput, api) => {
+    "text!./index.html"
+], (html) => {
 
-	return {
-		template: html,
-		data() {
-			return {
-				user: {
-					email: null,
-					password: null
-				},
-                type:'login'
-			};
-		},
-		methods: {
-			login () {
-				console.log(this.user)
-                api.post("students/login",this.user);
-			}
-		},
-		components: {
-			UiForm,
-			UiInput
-		}
-	};
-})
+    return {
+        template: html,
+        props: ["token"],
+        data() {
+            return {
+            };
+        },
+        methods: {
+        },
+        components: {
+        },
+        methods: {
+            loginToken()
+            {
+                // let userlogin = api.post("students/loginToken", this.token);
+
+                this.$root.processUser(this.$root.userdummy);
+            }
+        },
+        created() {
+            this.loginToken();
+        }
+
+    };
+});

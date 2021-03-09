@@ -1,0 +1,30 @@
+<div>
+    <ui-form :action="updateUser" :model="user" submit-label="Actualizar">
+        <template #header>
+            <h3>{{ username }} estos son tus datos</h3>
+        </template>
+        <ui-input type="text" label="Nombre Completo" v-model="user.name" required>
+            <template #validation>
+                Ingresa tu nombre completo
+            </template>
+        </ui-input>
+        <ui-input type="select" label="Identificación" v-model="user.documentType" :selectOptions="options" required>
+            <template #validation>
+                Selecciona un tipo de identificación
+            </template>
+        </ui-input>
+        <ui-input type="text" label="Número de identificación" v-model="user.document" required>
+            <template #validation>
+                Ingresa un número de identificación valido
+            </template>
+        </ui-input>
+        <ui-input type="date" label="Fecha de nacimiento" v-model="user.birthday" required>
+            <template #validation>
+                Ingresa una fecha valida
+            </template>
+        </ui-input>
+        <template #aside>
+            <button @click="$router.replace({ name: 'home' })">Omitir</button>
+        </template>
+    </ui-form>
+</div>
