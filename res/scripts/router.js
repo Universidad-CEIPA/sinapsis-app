@@ -8,7 +8,8 @@ define([
 	const router = VueRouter.createRouter({
 		history: VueRouter.createWebHashHistory(),
 		routes: [
-			{name: "home", path: "/", component: c("home/index")}
+			{name: "home", path: "/", component: c("home/index")},
+			{name: "welcome:login", path: "/login", component: c("welcome/index")},
 		]
 	});
 

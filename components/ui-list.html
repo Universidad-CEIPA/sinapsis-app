@@ -1,0 +1,15 @@
+<section class="ui-list">
+	<ul class="data-list">
+		<li v-for="i in data" class="data-item">
+			<template v-if="selection">
+				<div class="data-item-check">
+					<input type="checkbox" :checked="isItemSelected(i)" @input="() => toggleSelectedItem(i)">
+				</div>
+			</template>
+			<slot name="item" v-bind="i"></slot>
+		</li>
+	</ul>
+	<footer>
+		<ui-pagination v-if="data.pagination" :current="data.pagination.page" :total="data.pagination.pageCount" @page="p => loadPage(p)"></ui-pagination>
+	</footer>
+</section>

@@ -1,0 +1,38 @@
+<h1>Bienvenido a nuestra aplicacion</h1>
+<img src="res/images/logo_ceipa.jpeg" alt="">
+<ui-form :action="login" :model="user" submit-label="Entrar" @success="acceptUser" v-if="type==='login'">
+	<template #header>
+		<p>Inicie sesión con el nombre de usuario y las contraseñas asignadas</p>
+	</template>
+	<ui-input type="email" label="Nombre de usuario" v-model="user.email" required>
+		<template #validation>
+			Ingresa una dirección de e-mail válida
+		</template>
+	</ui-input>
+	<ui-input type="password" label="Contraseña" v-model="user.password" required>
+		<template #validation>
+			Ingresa tu contraseña
+		</template>
+	</ui-input>
+	<template #error>
+		Revisa la información
+	</template>
+    <template #aside>
+        <button @click="type='request'">¿Aún no lo tienes?</button>
+    </template>
+</ui-form>
+
+<ui-form :action="login" :model="user" submit-label="Entrar" @success="acceptUser" v-if="type==='request'">
+	<template #header>
+        <h1>¿Aún no lo tienes?</h1>
+		<p>Ingresa tu correo electrónico</p>
+	</template>
+	<ui-input type="email" label="Nombre de usuario" v-model="user.email" required>
+		<template #validation>
+			Ingresa una dirección de e-mail válida
+		</template>
+	</ui-input>
+    <template #aside>
+        <button @click="type='login'">Login</button>
+    </template>
+</ui-form>

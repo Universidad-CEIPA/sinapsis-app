@@ -1,4 +1,4 @@
-const API_BASE_URL = "./api/";
+const API_BASE_URL = "http://localhost/ceipa-backend/";
 
 requirejs.config({
 	baseUrl: "res/scripts",
@@ -13,6 +13,7 @@ requirejs.config({
 		"dayjs-relativeTime": "lib/dayjs-relativeTime.min",
 		"dayjs-utc": "lib/dayjs-utc.min",
 		"text": "lib/text",
+		"tiny-emitter": "lib/tinyemitter.min",
 		"vue": "lib/vue.global.prod",
 		"vue-router": "lib/vue-router.global.prod",
 	},

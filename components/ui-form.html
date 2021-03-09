@@ -1,0 +1,26 @@
+<form class="ui-form" :class="{loading}" @submit.prevent="submit" @reset="cancel" novalidate>
+	<header v-if="$slots.header" class="form-header">
+		<slot name="header"></slot>
+	</header>
+	<slot></slot>
+	<footer class="form-footer">
+		<div v-if="error !== null" class="notice form-notice error">
+			<p>
+				<template v-if="error">
+					{{ error }}
+				</template>
+				<template v-else>
+					<slot name="error"></slot>
+				</template>
+			</p>
+		</div>
+		<div class="form-actions">
+			<button v-if="submitLabel" class="action primary" :disabled="disabled || loading">{{ submitLabel }}</button>
+			<button v-if="cancelLabel" type="reset" class="action secondary" :disabled="disabled || loading">{{ cancelLabel }}</button>
+			<slot name="actions"></slot>
+		</div>
+	</footer>
+	<aside v-if="$slots.aside" class="form-aside">
+		<slot name="aside"></slot>
+	</aside>
+</form>
