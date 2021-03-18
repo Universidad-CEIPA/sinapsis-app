@@ -1,0 +1,43 @@
+.has-icon() {
+
+	&::before {
+		content: "";
+		display: inline-block;
+		width: var(--icon-size);
+		height: var(--icon-size);
+		margin-right: var(--icon-margin);
+		background-image: var(--icon);
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		background-size: var(--icon-bg-size);
+		vertical-align: middle;
+	}
+}
+
+.icon(@name) {
+	--icon: url("images/icon-@{name}.svg");
+}
+
+.declare-icon(@name) {
+	@selector: ~'[data-icon="@{name}"]';
+
+	@{selector} {
+		.icon(@name);
+	}
+}
+
+[data-icon] {
+	.has-icon;
+}
+
+.declare-icon("add");
+.declare-icon("cancel");
+.declare-icon("company");
+.declare-icon("competence");
+.declare-icon("course");
+.declare-icon("delete");
+.declare-icon("edit");
+.declare-icon("home");
+.declare-icon("storytelling");
+.declare-icon("student");
+.declare-icon("users");

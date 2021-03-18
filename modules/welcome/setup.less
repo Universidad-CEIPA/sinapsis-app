@@ -1,0 +1,62 @@
+#setup-account {
+    background: url('images/onboarding-sky.svg') calc(25% * (var(--step) - 1)) 0/cover no-repeat;
+    transition: background-position 600ms;
+
+    strong {
+        font-weight: bold;
+    }
+
+    form {
+        height: 100%;
+
+        footer {
+            position: absolute;
+            bottom  : 20px;
+            width   : 100%;
+
+            .counter {
+                display              : grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                padding              : 10%;
+                grid-gap             : 10px;
+
+                .indicator {
+                    background-color: @bg-color;
+                    height          : 10px;
+                    border-radius   : 25px;
+
+                    &.current {
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+    }
+
+    .header {
+        padding   : 20px;
+        text-align: center;
+
+        img {
+            max-width: 150px;
+        }
+    }
+
+    .section-step {
+        padding: 30px;
+
+        .title {
+            font-size    : 2.1em;
+            font-weight  : bold;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+        }
+
+        .done {
+            font-size: 1rem;
+        }
+    }
+}

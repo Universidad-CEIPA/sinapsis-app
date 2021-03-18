@@ -11,6 +11,9 @@ define([
 		routes: [
 
 			{ name: "home", path: "/", component: m("home/index") },
+			{ name: "story:home", path: "/story", component: m("story/index") },
+			
+			{ name: "story:profile", path: "/story/profile", component: m("story/profile") },
 
 			{ name: "welcome:finish", path: "/setup/finish", component: m("welcome/finish")},
 			{ name: "welcome:index", path: "/welcome/:token", component: m("welcome/index"), props: true  },

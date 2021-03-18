@@ -9,7 +9,7 @@ define([
                 WELCOME_STEP: 1,
                 INSTRUCTION_STEP: 2,
                 FINISH_STEP: 3,
-                MAX_STEPS:3,
+                MAX_STEPS: 3,
                 step: 1
             };
         },
@@ -18,7 +18,6 @@ define([
                 switch (this.step) {
                     case this.WELCOME_STEP:
                         this.step = this.INSTRUCTION_STEP;
-
                         break;
                     case this.INSTRUCTION_STEP:
                         this.step = this.FINISH_STEP;
@@ -27,7 +26,6 @@ define([
                         this.$router.push({ name: "welcome:finish" });
                         break;
                 }
-
             },
             back() {
                 switch (this.step) {
