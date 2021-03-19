@@ -18,9 +18,8 @@ define([
 		},
 		methods: {
 			login() {
-				// let userlogin = api.post("students/login", this.user);
-				this.$root.processUser(this.$root.userdummy);
-				this.$router.replace({ name: "welcome:setup" });
+				let userlogin = api.post("students/login", this.user).then(result => this.$root.processUser(result));
+				// this.$router.replace({ name: "welcome:setup" });
 			},
 			resendEmail() {
 				api.post("students/resend", this.user.email);

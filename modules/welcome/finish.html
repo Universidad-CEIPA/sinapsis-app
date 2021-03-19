@@ -1,6 +1,11 @@
-<div>
-    <ui-form :action="updateUser" :model="user" submit-label="Actualizar">
+<section class="view-section" id="finish-account">
+    <div class="header">
+        <img src="res/images/logo_uceipa_white.svg" alt="">
+    </div>
+
+    <ui-form :action="updateUser" :model="user" submit-label="Actualizar datos">
         <template #header>
+
             <h3>{{ username }} estos son tus datos</h3>
         </template>
         <ui-input type="text" label="Nombre Completo" v-model="user.name" required>
@@ -23,8 +28,11 @@
                 Ingresa una fecha valida
             </template>
         </ui-input>
+
+        <ui-input type="checkbox" label="Acepto términos y condiciones" required>
+        </ui-input>
         <template #aside>
-            <button @click="$router.replace({ name: 'home' })">Omitir</button>
+            <a @click="$router.replace({ name: 'home' })">Omitir</a>
         </template>
     </ui-form>
-</div>
+</section>

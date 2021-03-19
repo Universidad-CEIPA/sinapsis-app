@@ -3,7 +3,6 @@
         <div class="header">
             <img src="res/images/logo_uceipa_white.svg" alt="">
         </div>
-        <hr>
         <section v-if="step === WELCOME_STEP" class="section-step">
             <div class="title">Bienvenid@ {{ $root.user.name}}</div>
             <div class="subtitle">
@@ -18,20 +17,34 @@
             </div>
 
             <ul>
-                <li>{%icon%} <strong>Leer las historias </strong> que te llegarán periodicamente</li>
-                <li>{%icon%} <strong>Autoevaluarte</strong> contestando algunas preguntas</li>
-                <li>{%icon%} <strong>Crear tu bitácora</strong> de videoselfies</li>
-                <li>{%icon%} <strong>A medida que avanzas, tu avatar adquiere mejores herramientas para seguir en este
-                        viaje</strong></li>
-                <li>{%icon%} <strong>Tu progeso es esencial</strong> para nosotros y tendrás un historial a medida que
-                    vas
-                    avanzando</li>
+                <li data-icon="storytelling">
+                    <p><strong>Leer las historias </strong> que te llegarán periodicamente</p>
+                </li>
+                <li data-icon="evaluation">
+                    <p><strong>Autoevaluarte</strong> contestando algunas preguntas</p>
+                </li>
+                <li data-icon="binnacle">
+                    <p><strong>Crear tu bitácora</strong> de videoselfies</p>
+                </li>
+                <li data-icon="compass">
+                    <p><strong>A medida que avanzas, tu avatar adquiere mejores herramientas para
+                            seguir en este
+                            viaje</strong></p>
+                </li>
+                <li data-icon="map">
+                    <p><strong>Tu progeso es esencial</strong> para nosotros y tendrás un
+                        historial a medida que
+                        vas
+                        avanzando</p>
+                </li>
             </ul>
         </section>
         <section v-if="step === FINISH_STEP" class="section-step">
             <div class="subtitle">Para comenzar primero verifiquemos tus datos personales</div>
-            <img src="" alt="">
-            <button class="done action primary"> Iniciar </button>
+            <div class="img-check">
+                <img src="modules/welcome/images/check_valid.svg" alt="">
+            </div>
+            <button class="done action primary" data-icon-after="arrow-right"> Iniciar </button>
         </section>
         <footer>
             <div class="counter">
