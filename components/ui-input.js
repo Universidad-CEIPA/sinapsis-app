@@ -91,6 +91,15 @@ define([
 				delete attrs.selectOptions;
 				return attrs;
 			},
+			uiClasses() {
+				return [
+					{
+						valid: this.isValid, 
+						invalid: !this.isValid,
+					},
+					`ui-${this.type}`
+				];
+			},
 			filteredModelValue() {
 				if (this.type === "select" && this.modelValue === null) {
 					return "";

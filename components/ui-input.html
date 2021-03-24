@@ -1,7 +1,8 @@
-<div class="ui-input" :class="{valid: isValid, invalid: !isValid}">
+<div class="ui-input" :class="uiClasses">
 	<label class="input-label" :for="htmlId">{{ label }}</label>
 	<template v-if="type === 'select'">
-		<select class="input-field select-field" ref="input" :value="filteredModelValue" v-bind="attributes" @input="handleInput">
+		<select class="input-field select-field" ref="input" :value="filteredModelValue" v-bind="attributes"
+			@input="handleInput">
 			<option v-if="placeholder" value="">{{ placeholder }}</option>
 			<option v-for="o in options" :value="getOptionValue(o)">
 				<slot name="option">{{ getOptionLabel(o) }}</slot>
@@ -9,11 +10,17 @@
 		</select>
 	</template>
 	<template v-else-if="type === 'textarea'">
-		<textarea class="input-field textarea-field" ref="input" :value="modelValue" v-bind="attributes" @input="handleInput"></textarea>
+		<textarea class="input-field textarea-field" ref="input" :value="modelValue" v-bind="attributes"
+			@input="handleInput"></textarea>
 	</template>
 	<template v-else>
-		<input class="input-field default-field" ref="input" :value="modelValue" :type="type" v-bind="attributes" @input="handleInput">
+		<input class="input-field default-field" ref="input" :value="modelValue" :type="type" v-bind="attributes"
+			@input="handleInput">
 	</template>
+	<template v-if="type === 'checkbox'">
+		<span class="input-check"></span>
+	</template>
+
 	<template v-if="$slots.hint && isValid">
 		<p class="input-hint">
 			<slot name="hint"></slot>

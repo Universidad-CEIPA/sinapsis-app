@@ -2,16 +2,70 @@
 	margin: var(--pad-m) 0;
 
 	.input-label {
-		display: block;
+		display      : block;
 		margin-bottom: var(--pad-s);
-		color: var(--input-label-color);
+		color        : var(--input-label-color);
 	}
 
 	.input-field {
-		width: 100%;
-		height: var(--input-height);
-		padding: 0 var(--input-pad);
-		border: var(--input-border);
+		width        : 100%;
+		height       : var(--input-height);
+		padding      : 0 var(--input-pad);
+		border       : var(--input-border);
 		border-radius: var(--input-radius);
+	}
+
+
+	&.ui-checkbox {
+		position    : relative;
+		padding-left: calc(var(--input-pad) + (var(--input-height) / 2));
+
+		&:hover input~.input-check {
+			background-color: #fff;
+		}
+
+		/*hide input*/
+		.input-field {
+			position: absolute;
+			opacity : 0;
+			height  : 0;
+			width   : 0;
+			top     : 0;
+			left    : 0;
+		}
+
+		.input-check {
+			position     : absolute;
+			top          : 0;
+			left         : 0;
+			height       : calc(var(--input-height) / 2);
+			width        : calc(var(--input-height) / 2);
+			background   : #fff;
+			border-radius: var(--input-radius);
+			border       : var(--input-border);
+
+			&::after {
+				content  : "";
+				position : absolute;
+				display  : none;
+				transform: rotate(45deg);
+
+				left  : calc(var(--input-height) / 6);
+				top   : calc(var(--input-height) / 14);
+				width : calc(var(--input-height) / 8);
+				height: calc( var(--input-height) / 4);
+
+				border      : solid #000;
+				border-width: 0 3px 3px 0;
+			}
+		}
+
+		input:checked~.input-check {
+			background-color: #ccc;
+			&::after {
+				display: block;
+			}
+		}
+
 	}
 }
