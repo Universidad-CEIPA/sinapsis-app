@@ -1,13 +1,13 @@
 #finish-account {
     background: url('images/onboarding-sky.svg') 75% 0/cover no-repeat;
     transition: background-position 600ms;
-    position: absolute;
-    padding: 20px;
+    position  : absolute;
+    padding   : 20px;
 
     .header {
-        padding: 20px;
+        padding      : 20px;
         border-bottom: #fff solid 1px;
-        text-align: center;
+        text-align   : center;
 
         img {
             max-width: 150px;
@@ -21,14 +21,51 @@
 
     .input-field {
         border-radius: 25px;
-        background: rgba(255, 255, 255, 0.4);
-        color: #fff;
-        border-color: #000;
+        background   : rgba(255, 255, 255, 0.1);
+        color        : #fff;
+        border-color : #000;
+    }
+
+    /* select {
+        appearance           : none;
+        background           : transparent;
+        background-image     : url("../../res/theme/images/icon-arrow-right.svg");
+        background-repeat    : no-repeat;
+        background-position-x: 100%;
+        background-position-y: 5px;
+        border               : 1px solid #dfdfdf;
+        border-radius        : 2px;
+        margin-right         : 2rem;
+        padding              : 1rem;
+        padding-right        : 2rem;
+    } */
+
+    .ui-checkbox {
+        padding-left: 25px;
+
+        .input-check {
+            height       : 15px;
+            width        : 15px;
+            background   : unset;
+            border-radius: 25px;
+            border       : 1px solid black;
+
+            &::after {
+                left  : 4px;
+                top   : 2px;
+                width : 3px;
+                height: 6px;
+            }
+        }
+
+        input:checked~.input-check {
+            background-color: unset;
+        }
     }
 
     .form-actions {
         button {
-            border: 0;
+            border   : 0;
             font-size: 1.2em;
         }
     }

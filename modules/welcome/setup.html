@@ -1,4 +1,5 @@
 <section class="view-section" id="setup-account" :style="{'--step': step}">
+    <div class="img-bottom"></div>
     <form @click.prevent="next">
         <div class="header">
             <img src="res/images/logo_uceipa_white.svg" alt="">
@@ -9,7 +10,6 @@
                 Nuestra aplicación te sumergirá en <strong>apasionantes historias</strong> que fortalecerán tus
                 competencias
             </div>
-
         </section>
         <section v-if="step === INSTRUCTION_STEP" class="section-step">
             <div class="subtitle">
@@ -38,6 +38,7 @@
                         avanzando</p>
                 </li>
             </ul>
+
         </section>
         <section v-if="step === FINISH_STEP" class="section-step">
             <div class="subtitle">Para comenzar primero verifiquemos tus datos personales</div>

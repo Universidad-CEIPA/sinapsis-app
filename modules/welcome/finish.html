@@ -30,7 +30,11 @@
         </ui-input>
 
         <ui-input type="checkbox" label="Acepto términos y condiciones" required>
+            <template #validation>
+                Obligatorio
+            </template>
         </ui-input>
+
         <template #aside>
             <a @click="$router.replace({ name: 'home' })">Omitir</a>
         </template>

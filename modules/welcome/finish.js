@@ -13,9 +13,9 @@ define([
                 user: local('user'),
                 username: local('user').name,
                 options: [
-                    {id:'CC' , name:'CC'},
-                    {id:'CE' , name:'CE'},
-                    {id:'TI' , name:'TI'}
+                    { id: 'CC', name: 'CC' },
+                    { id: 'CE', name: 'CE' },
+                    { id: 'TI', name: 'TI' }
                 ]
             };
         },
@@ -23,8 +23,7 @@ define([
         },
         methods: {
             updateUser() {
-                // api.post('students/:id',this.user)
-                // this.$root.processUser(this.user);
+                this.$root.processUser(this.user);
                 this.$router.replace({ name: "home" });
             }
         },
