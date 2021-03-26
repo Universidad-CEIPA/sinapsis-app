@@ -38,7 +38,7 @@ define([
 						if (preview >= 0 && preview <= this.projects.length - 1) {
 
 							this.currentIndex = preview
-							this.dragProject = projects[preview]
+							this.dragProject = this.projects[preview]
 						}
 					}
 				}
@@ -49,6 +49,10 @@ define([
 				this.lastDelta = 0;
 				this.dragProject = null;
 			},
+			goCourse() {
+				this.$root.currentCourse = this.projects[this.currentIndex];
+				this.$router.replace({ name: "story:welcome" });
+			}
 		},
 		components: {
 		}

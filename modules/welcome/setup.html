@@ -5,7 +5,7 @@
             <img src="res/images/logo_uceipa_white.svg" alt="">
         </div>
         <section v-if="step === WELCOME_STEP" class="section-step">
-            <div class="title">Bienvenid@ {{ $root.user.name}}</div>
+            <div class="title">Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{ $root.user.name}}</div>
             <div class="subtitle">
                 Nuestra aplicación te sumergirá en <strong>apasionantes historias</strong> que fortalecerán tus
                 competencias

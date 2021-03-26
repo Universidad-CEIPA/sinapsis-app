@@ -9,26 +9,28 @@
 		<div class="cards" v-for="(project,index) in projects" @touchstart="handlePointerUp"
 			@touchmove="handlePointerMove" @touchend="handlePointerDown">
 			<template v-if="currentIndex === index">
-				<- {{ project.name }} <br>
+				<span class="title-project" data-icon="back">
+					{{ project.name }}
+				</span>
 
-					<div class="card">
-						<div class="shadow-card">
-							<section v-if="index !== 0">
-								{{ projects[index -1].course }}
-							</section>
-						</div>
-						<div class="current-card">
-							{{ project }}
-						</div>
-						<transition>
-							<div class="current-card dummy-card" v-if="dragProject">{{ dragProject }}</div>
-						</transition>
-						<div class="shadow-card">
-							<section v-if="index !== projects.length - 1">
-								{{ projects[index + 1].course }}
-							</section>
-						</div>
+				<div class="card">
+					<div class="shadow-card">
+						<section v-if="index !== 0">
+							{{ projects[index -1].course }}
+						</section>
 					</div>
+					<div class="current-card" @click="goCourse">
+						{{ project.course }}
+					</div>
+					<!-- <transition>
+							<div class="current-card dummy-card" v-if="dragProject">{{ dragProject }}</div>
+						</transition>-->
+					<div class="shadow-card">
+						<section v-if="index !== projects.length - 1">
+							{{ projects[index + 1].course }}
+						</section>
+					</div>
+				</div>
 
 			</template>
 

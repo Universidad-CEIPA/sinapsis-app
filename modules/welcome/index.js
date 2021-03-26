@@ -1,6 +1,7 @@
 define([
-    "text!./index.html"
-], (html) => {
+    "text!./index.html",
+    "api"
+], (html, api) => {
 
     return {
         template: html,
@@ -14,11 +15,17 @@ define([
         components: {
         },
         methods: {
-            loginToken()
-            {
-                // let userlogin = api.post("students/loginToken", this.token);
+            loginToken() {
+                api.post("students/loginToken", {token : this.token})
+                    .then(result => {
+                        this.$root.processUser(result);
+                        this.$router.replace({ name: "welcome:setup" })
+                    }).catch(err => {
+                        this.$router.replace({ name: "welcome:login" })
+                    });
 
-                this.$root.processUser(this.$root.userdummy);
+                /*this.$root.processUser(this.$root.userdummy);
+                this.$router.replace({ name: "welcome:setup" });*/
             }
         },
         created() {
