@@ -1,14 +1,14 @@
 #home-index-view {
-    background: url('../../res/images/bg_sky.svg') 50% 50%/cover no-repeat;
-    position: absolute;
-    padding: 35px;
-    color: #fff;
+    background : url('../../res/images/bg_sky.svg') 50% 50%/cover no-repeat;
+    position   : absolute;
+    padding    : 35px;
+    color      : #fff;
     font-weight: bolder;
 
     .header {
-        padding: 20px;
+        padding      : 20px;
         border-bottom: #fff solid 1px;
-        text-align: center;
+        text-align   : center;
 
         img {
             max-width: 150px;
@@ -22,25 +22,55 @@
         }
 
 
+        .slide-enter-active {
+            .current-card {
+                animation: bounce-in 1s;
+            }
+
+        }
+
+        .slide-leave-active {
+            .current-card {
+                animation: bounce-in 1s reverse;
+            }
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+
+
         .cards {
 
             .card {
                 display: flex;
-                margin: 20px 0;
+                margin : 20px 0;
 
 
 
 
                 .default-card {
-                    height: 400px;
-                    box-shadow: 10px 10px 5px 2px rgba(0,0,0,0.44);
+                    height    : 400px;
+                    box-shadow: 10px 10px 5px 2px rgba(0, 0, 0, 0.44);
                 }
 
                 .shadow-card {
 
                     min-width: 50px;
-                    margin: 20px 0;
-                    padding: 0;
+                    margin   : 20px 0;
+                    padding  : 0;
 
 
                     section {
@@ -57,10 +87,10 @@
 
                 .current-card {
                     .default-card;
-                    z-index: 1;
-                    width: -webkit-fill-available;
+                    z-index   : 1;
+                    width     : -webkit-fill-available;
                     background: url('../../res/images/uceipa_la_conquista.png') 50% 50%/cover no-repeat;
-                    padding: 20px;
+                    padding   : 20px;
 
                 }
 
