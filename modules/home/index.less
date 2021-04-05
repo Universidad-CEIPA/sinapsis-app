@@ -26,14 +26,12 @@
 
             .card {
                 display: flex;
+                position: relative;
                 margin: 20px 0;
-
-
-
 
                 .default-card {
                     height: 400px;
-                    box-shadow: 10px 10px 5px 2px rgba(0,0,0,0.44);
+                    box-shadow: 10px 10px 5px 2px rgba(0, 0, 0, 0.44);
                 }
 
                 .shadow-card {
@@ -63,8 +61,62 @@
                     padding: 20px;
 
                 }
+                .dummy-card {
+                    .default-card;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    width: -webkit-fill-available;
+                    background: url('../../res/images/uceipa_la_conquista.png') 50% 50%/cover no-repeat;
+                    padding: 20px;
+                    animation: dummy-card-enter 200ms;        
+                    &.v-leave-active {
+                        animation: dummy-card-leave 200ms;
+                    }
+                }
 
             }
         }
     }
+
+    &.prev-project {
+
+        .current-card {
+            transform: translateX(calc(var(--drag-x) * 1px));
+        }
+
+        .dummy-card {
+            transform: translateX(calc(-110% + var(--drag-x) * 1px));
+        }
+    }
+
+    &.next-project {
+
+        .current-card {
+            transform: translateX(calc(var(--drag-x) * 1px));
+        }
+
+        .dummy-card {
+            transform: translateX(calc(100% + var(--drag-x) * 1px));
+        }
+    }
+}
+
+@keyframes dummy-card-enter {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes dummy-card-leave {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }

@@ -1,32 +1,32 @@
-<section class="view-section" id="home-index-view">
+<section class="view-section" id="home-index-view" :class="this._lastDelta ? (this._lastDelta < 0 ? 'prev-project' : 'next-project') : null" :style="{'--drag-x': dragX}">
 	<div class="header">
 		<img src="res/images/logo_uceipa_white.svg" alt="">
 	</div>
 	<div class="slide-cards">
 		<p>
-			¿Cúal storytelling quieres elegir?
+			¿Cúal storytelling quieres elegir? {{dragProject}} idx: {{currentIndex}}
 		</p>
-		<div class="cards" v-for="(project,index) in projects" @touchstart="handlePointerUp"
-			@touchmove="handlePointerMove" @touchend="handlePointerDown">
+		<div class="cards" v-for="(project,index) in projects" @touchstart="handlePointerDown"
+			@touchmove="handlePointerMove" @touchend="handlePointerUp">
 			<template v-if="currentIndex === index">
 				<span class="title-project" data-icon="back">
 					{{ project.name }}
 				</span>
 
 				<div class="card">
-					<div class="shadow-card">
-						<section v-if="index !== 0">
+					<div class="shadow-card" v-if="!this._lastDelta">
+						<section v-if="index !== 0 ">
 							{{ projects[index -1].course }}
 						</section>
 					</div>
 					<div class="current-card" @click="goCourse">
 						{{ project.course }}
 					</div>
-					<!-- <transition>
-							<div class="current-card dummy-card" v-if="dragProject">{{ dragProject }}</div>
-						</transition>-->
-					<div class="shadow-card">
-						<section v-if="index !== projects.length - 1">
+					<transition>
+						<div class="dummy-card" v-if="dragProject || dragProject === 0">{{ projects[dragProject].course}}</div>
+					</transition>
+					<div class="shadow-card" v-if="!this._lastDelta">
+						<section v-if="index !== projects.length - 1 ">
 							{{ projects[index + 1].course }}
 						</section>
 					</div>
