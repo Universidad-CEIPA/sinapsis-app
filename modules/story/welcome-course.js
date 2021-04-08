@@ -13,7 +13,7 @@ define([
         },
         created() {
         },
-        methods: {
+        methods: {   
         },
         components: {
         }

@@ -1,17 +1,17 @@
 #setup-account {
     background: url('images/onboarding-sky.svg') calc(25% * (var(--step) - 1)) 0/cover no-repeat;
     transition: background-position 600ms;
-    position  : absolute;
-    padding   : 20px;
+    position: absolute;
+    --padding-form: 20px;
 
     .img-bottom {
         background: url('../../modules/welcome/images/chicos.svg') calc(100% * (var(--step) - 1)) 0/cover no-repeat;
         transition: background-position 600ms;
-        position  : absolute;
-        height    : 50%;
-        width     : calc(100% + 20px);
-        bottom    : -20px;
-        left      : -20px;
+        position: absolute;
+        height: 50%;
+        width: calc(100% + 20px);
+        bottom: -20px;
+        left: -20px;
     }
 
 
@@ -20,24 +20,25 @@
     }
 
     form {
-        height  : 100%;
+        height: calc(100% - (var(--padding-form) * 2));
         position: relative;
+        padding: var(--padding-form);
 
         footer {
             position: absolute;
-            bottom  : 20px;
-            width   : 100%;
+            bottom: 20px;
+            width: calc(100% - (var(--padding-form) * 2));
 
             .counter {
-                display              : grid;
+                display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
-                padding              : 10%;
-                grid-gap             : 10px;
+                padding: 10%;
+                grid-gap: 10px;
 
                 .indicator {
                     background-color: @bg-color;
-                    height          : 10px;
-                    border-radius   : 25px;
+                    height: 10px;
+                    border-radius: 25px;
 
                     &.current {
                         background-color: #fff;
@@ -48,9 +49,9 @@
     }
 
     .header {
-        padding      : 20px;
+        padding: 20px;
         border-bottom: #fff solid 1px;
-        text-align   : center;
+        text-align: center;
 
         img {
             max-width: 150px;
@@ -61,26 +62,26 @@
         padding: 30px;
 
         .title {
-            font-size    : 2.1em;
-            font-weight  : bold;
+            font-size: 2.1em;
+            font-weight: bold;
             margin-bottom: 20px;
         }
 
         .subtitle {
-            font-size    : 1.2em;
+            font-size: 1.2em;
             margin-bottom: 20px;
         }
 
         .done {
-            font-size : 1.5rem;
+            font-size: 1.5rem;
             text-align: left;
-            border    : 0;
-            position  : relative;
+            border: 0;
+            position: relative;
 
             &::after {
-                right       : 0;
-                height      : -webkit-fill-available;
-                position    : absolute;
+                right: 0;
+                height: -webkit-fill-available;
+                position: absolute;
                 margin-right: 20px;
             }
         }
@@ -89,7 +90,7 @@
             margin-bottom: 20px;
 
             p {
-                display     : table-cell;
+                display: table-cell;
                 padding-left: 20px;
             }
 

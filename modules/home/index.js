@@ -21,11 +21,13 @@ define([
 		methods: {
 			handlePointerDown(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
+				console.log(e)
 				this._pointerStart = e;
 				this._lastDelta = 0;
 			},
 			handlePointerMove(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
+				console.log(e)
 				if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 10) {
 					this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
 
@@ -43,6 +45,7 @@ define([
 			},
 			handlePointerUp(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
+				console.log(e)
 				if (Math.abs(this._pointerStart.clientX - e.clientX) > 10 && this.dragProject >= 0 && this.dragProject <= this.projects.length - 1 && this.dragProject !== null) {
 					this.currentIndex = this.dragProject
 				}

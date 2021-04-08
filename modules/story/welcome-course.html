@@ -9,7 +9,7 @@
     <button class="done action primary" data-icon-after="arrow-right"
         @click="$router.replace({ name: 'story:profile' })"> Iniciar </button>
     <div class="back">
-        <a @click="$router.replace({ name: 'home' })">Regresar</a>
+        <a @click="$root.destroyCourse()">Regresar</a>
     </div>
 
 </section>

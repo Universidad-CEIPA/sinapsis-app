@@ -29,6 +29,16 @@ define([
 			setCourse(course) {
 				local("currentCourse", course);
 				this.currentCourse = course;
+			},
+			destroyCourse(){
+				local("currentCourse", null);
+				this.currentCourse = null;
+				this.$router.replace({ name: 'home' })
+			},
+			logout(){
+				this.user = null;
+				local("user", null);
+				this.$router.replace({ name: 'welcome:login' })
 			}
 		}
 	};
