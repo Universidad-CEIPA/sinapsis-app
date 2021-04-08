@@ -2,9 +2,8 @@ define([
     "text!./finish.html",
     "components/ui-form",
     "components/ui-input",
-    "api",
     "local"
-], (html, UiForm, UiInput, api, local) => {
+], (html, UiForm, UiInput, local) => {
 
     return {
         template: html,
@@ -22,8 +21,8 @@ define([
         created() {
         },
         methods: {
-            updateUser() {
-                this.$root.processUser(this.user);
+            success(result, data) {
+                this.$root.processUser(result);
                 this.$router.replace({ name: "home" });
             }
         },

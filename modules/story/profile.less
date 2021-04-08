@@ -1,8 +1,60 @@
 #story-profile-view {
     background-color: @bg-color;
-    position: absolute;
-    padding: 35px;
+    position        : absolute;
+    padding         : 35px;
+    color           : #fff;
+
+    header {
+        color: #fff;
+        text-align: center;
+    }
 
 
-    color: #fff;
+    .info-general {
+        color        : black;
+        background   : white;
+        border-radius: 10px;
+        margin       : 20px 0;
+        min-height   : 300px;
+
+
+        .profile {
+            padding   : 10px;
+            min-height: 200px;
+        }
+
+        .tools {
+            padding   : 10px;
+            border-top: 1px solid black;
+            min-height: 100px;
+        }
+    }
+
+    .info-graph {
+        background   : white;
+        border-radius: 10px;
+        color        : black;
+        padding      : 20px;
+        min-height   : 200px;
+
+        .wish-eval {
+            background-color: @bg-color;
+            height          : 30px;
+            line-height     : 30px;
+        }
+    }
+
+    .info-actions {
+        margin-bottom: 20px;
+
+        button {
+            margin: 10px 0;
+        }
+
+        .logout {
+            --action-border: var(--action-border-primary);
+        }
+    }
+
+
 }

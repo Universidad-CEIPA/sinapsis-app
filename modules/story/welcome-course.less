@@ -1,12 +1,11 @@
 #home-welcome-view {
-    // background: url('../../res/images/uceipa_la_conquista.png') 50% 50%/cover no-repeat;
-    background-color: @bg-color;
-    position: absolute;
-    padding: 35px;
-    text-align: center;
+    background: url('../../res/images/bg_sky.svg') 50% 50%/cover no-repeat;
+    position        : absolute;
+    padding         : 35px;
+    text-align      : -webkit-center;
 
     .header {
-        padding: 20px;
+        padding   : 20px;
         text-align: center;
 
         img {
@@ -14,11 +13,13 @@
         }
     }
 
-    .img-project{
-        padding:  100px 50px;
+    .img-project {
+        padding  : 20px 0px;
+        max-width: 300px;
 
         img {
             width: 100%;
+            border-radius: 10px;
         }
     }
 
@@ -28,7 +29,7 @@
         text-align: left;
         border    : 0;
         position  : relative;
-        max-width: 200px;
+        max-width : 200px;
 
         &::after {
             right       : 0;
@@ -38,4 +39,7 @@
         }
     }
 
+    .back{
+        margin: 20px 0;
+    }
 }

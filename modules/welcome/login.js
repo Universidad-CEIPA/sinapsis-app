@@ -17,18 +17,9 @@ define([
 			};
 		},
 		methods: {
-			login() {
-				api.post("students/login", this.user)
-					.then(result => {
-						this.$root.processUser(result);
-						this.$router.replace({ name: "welcome:setup" })
-					}).catch(err => {
-						console.log(err)
-					});
-
-
-				/*this.$root.processUser(this.$root.userdummy)
-				this.$router.replace({ name: "welcome:setup" });*/
+			acceptUser(result, data) {
+				this.$root.processUser(result);
+				this.$router.replace({ name: "welcome:setup" })
 			},
 			resendEmail() {
 				api.post("students/resend", this.user.email);

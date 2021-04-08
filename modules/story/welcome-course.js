@@ -8,6 +8,7 @@ define([
         template: html,
         data() {
             return {
+                course: this.$root.currentCourse
             };
         },
         created() {

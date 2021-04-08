@@ -3,9 +3,8 @@
         <img src="res/images/logo_uceipa_white.svg" alt="">
     </div>
 
-    <ui-form :action="updateUser" :model="user" submit-label="Actualizar datos">
+    <ui-form :model="user" submit-label="Actualizar datos" :action="`students/${user.id}`" @success="success">
         <template #header>
-
             <h3>{{ username }} estos son tus datos</h3>
         </template>
         <ui-input type="text" label="Nombre Completo" v-model="user.name" required>
@@ -28,13 +27,11 @@
                 Ingresa una fecha valida
             </template>
         </ui-input>
-
         <ui-input type="checkbox" label="Acepto términos y condiciones" required>
             <template #validation>
                 Obligatorio
             </template>
         </ui-input>
-
         <template #aside>
             <a @click="$router.replace({ name: 'home' })">Omitir</a>
         </template>

@@ -13,6 +13,11 @@ define([
 				dragProject: null
 			};
 		},
+		computed: {
+			defaultImage() {
+				return '#263239';
+			},
+		},
 		methods: {
 			handlePointerDown(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
@@ -35,7 +40,6 @@ define([
 						}
 					}
 				}
-				console.log(this.dragProject)
 			},
 			handlePointerUp(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
@@ -47,9 +51,11 @@ define([
 
 			},
 			goCourse() {
-				this.$root.currentCourse = this.projects[this.currentIndex];
+				this.$root.setCourse(this.projects[this.currentIndex]);
 				this.$router.replace({ name: "story:welcome" });
 			}
+		},
+		created(){
 		},
 		components: {
 		}

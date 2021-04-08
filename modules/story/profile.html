@@ -1,12 +1,29 @@
 <section class="view-section" id="story-profile-view">
-    Perfil del PROYECTO
-    <br>
-    <br>
-    <br>
+    <header>Perfil</header>
+    <div class="info-general">
+        <section class="profile">
+            {{ $root.user.name }}
+            <br>
+            Nivel
+            <br>
 
-    {{ $root.user }}
+        </section>
+        <section class="tools">
+            Herramientas
+        </section>
+    </div>
 
-    <br>
+    <div class="info-graph">
+        Tus habilidades y progreso final
+        <button class="wish-eval action primary">Ingresa tu potencial deseado</button>
+    </div>
+
+    <div class="info-actions">
+        <button class="action primary" data-icon-after="edit">Editar mis datos</button>
+        <button class="logout action secundary">Cerrar sesión</button>
+    </div>
+
+
 
     {{ $root.currentCourse }}
 

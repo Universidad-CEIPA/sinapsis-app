@@ -55,52 +55,70 @@
         .cards {
 
             .card {
-                display: flex;
+                display : flex;
                 position: relative;
-                margin: 20px 0;
+                margin  : 20px 0;
+                width   : 300px;
+                left    : calc(50% - 150px);
 
                 .default-card {
-                    height: 400px;
+                    height    : 280px; // original 480px
+                    width     : 200px; // original 300px
                     box-shadow: 10px 10px 5px 2px rgba(0, 0, 0, 0.44);
                 }
 
                 .shadow-card {
 
-                    min-width: 50px;
-                    margin   : 20px 0;
-                    padding  : 0;
+                    width  : 50px;
+                    margin : 20px 0;
+                    padding: 0;
 
 
                     section {
                         .default-card;
-                        background: url('../../res/images/uceipa_la_conquista.png') 0 0/cover no-repeat;
+                        max-width : 50px;
+                        background: var(--prev-image) 0 0/cover no-repeat;
+                        border-radius: 8px 0 0 8px;
                     }
 
                     &:last-child {
                         section {
-                            background: url('../../res/images/uceipa_la_conquista.png') 100% 0/cover no-repeat;
+                            background: var(--next-image) 100% 0/cover no-repeat;
+                            border-radius: 0 8px 8px 0;
                         }
+                    }
+                }
+
+                .current-card,
+                .dummy-card {
+                    border-radius: 8px;
+
+                    p {
+                        display       : table-cell;
+                        vertical-align: middle;
+                        text-align    : center;
                     }
                 }
 
                 .current-card {
                     .default-card;
-                    z-index   : 1;
-                    width     : -webkit-fill-available;
-                    background: url('../../res/images/uceipa_la_conquista.png') 50% 50%/cover no-repeat;
-                    padding   : 20px;
-
+                    z-index         : 1;
+                    background-color: @bg-color;
+                    background      : var(--current-image) 50% 50%/cover no-repeat;
+                    padding         : 20px;
+                    display         : table;
                 }
+
                 .dummy-card {
                     .default-card;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    width: -webkit-fill-available;
-                    background: url('../../res/images/uceipa_la_conquista.png') 50% 50%/cover no-repeat;
-                    padding: 20px;
-                    animation: dummy-card-enter 200ms;        
+                    position  : absolute;
+                    top       : 0;
+                    left      : 0;
+                    right     : 0;
+                    background: var(--dummy-image) 50% 50%/cover no-repeat;
+                    padding   : 20px;
+                    animation : dummy-card-enter 200ms;
+
                     &.v-leave-active {
                         animation: dummy-card-leave 200ms;
                     }
@@ -117,7 +135,7 @@
         }
 
         .dummy-card {
-            transform: translateX(calc(-110% + var(--drag-x) * 1px));
+            transform: translateX(calc(-100% + var(--drag-x) * 1px));
         }
     }
 
@@ -128,25 +146,27 @@
         }
 
         .dummy-card {
-            transform: translateX(calc(100% + var(--drag-x) * 1px));
+            transform: translateX(calc(150% + var(--drag-x) * 1px));
         }
     }
 }
 
 @keyframes dummy-card-enter {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 @keyframes dummy-card-leave {
-	0% {
-		opacity: 1;
-	}
-	100% {
-		opacity: 0;
-	}
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

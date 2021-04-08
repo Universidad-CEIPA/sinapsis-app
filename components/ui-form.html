@@ -16,7 +16,8 @@
 		</div>
 		<div class="form-actions">
 			<button v-if="submitLabel" class="action primary" :disabled="disabled || loading">{{ submitLabel }}</button>
-			<button v-if="cancelLabel" type="reset" class="action secondary" :disabled="disabled || loading">{{ cancelLabel }}</button>
+			<button v-if="cancelLabel" type="reset" class="action secondary" :disabled="disabled || loading">{{
+				cancelLabel }}</button>
 			<slot name="actions"></slot>
 		</div>
 	</footer>

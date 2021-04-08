@@ -24,7 +24,6 @@ define([
 
 	router.beforeEach((to, from, next) => {
 		let user = local('user');
-		console.log(to.name);
 		if (!user && to.name !== "welcome:login" && to.name !== "welcome:index") {
 			next({ name: "welcome:login" });
 		} else {

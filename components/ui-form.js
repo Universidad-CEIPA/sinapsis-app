@@ -80,7 +80,7 @@ define([
 					if (typeof this.action === "function") {
 						result = await this.action(data, this.model);
 					} else {
-						result = await api.post(this.action);
+						result = await api.post(this.action, data);
 					}
 
 					this.$trigger("success", result, data);

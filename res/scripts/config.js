@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://developer.local/ceipa-backend/";
+const API_BASE_URL = "https://backend.uceipa.shiftactive.com/";
 
 requirejs.config({
 	baseUrl: "res/scripts",

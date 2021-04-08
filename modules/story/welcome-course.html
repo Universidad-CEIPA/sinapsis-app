@@ -3,8 +3,13 @@
         <img src="res/images/logo_uceipa_gold.svg" alt="">
     </div>
     <div class="img-project">
-        <img src="res/images/dorado-conquista.png" alt="">
+        <img :src="course.image[0].url" alt="">
+
     </div>
     <button class="done action primary" data-icon-after="arrow-right"
         @click="$router.replace({ name: 'story:profile' })"> Iniciar </button>
+    <div class="back">
+        <a @click="$router.replace({ name: 'home' })">Regresar</a>
+    </div>
+
 </section>
