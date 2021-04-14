@@ -12,6 +12,7 @@ define([
 
 			{ name: "home", path: "/", component: m("home/index") },
 
+			{ name: "story:home", path: "/story/home", component: m("story/index") },
 			{ name: "story:profile", path: "/story/profile", component: m("story/profile") },
 			{ name: "story:welcome", path: "/story/welcome", component: m("story/welcome-course") },
 

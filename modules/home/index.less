@@ -2,6 +2,7 @@
     background : url('../../res/images/bg_sky.svg') 50% 50%/cover no-repeat;
     position   : absolute;
     padding    : 35px;
+    height     : calc(100% - 70px);
     color      : #fff;
     font-weight: bolder;
 
@@ -76,14 +77,14 @@
 
                     section {
                         .default-card;
-                        max-width : 50px;
-                        background: var(--prev-image) 0 0/cover no-repeat;
+                        max-width    : 50px;
+                        background   : var(--prev-image) 0 0/cover no-repeat;
                         border-radius: 8px 0 0 8px;
                     }
 
                     &:last-child {
                         section {
-                            background: var(--next-image) 100% 0/cover no-repeat;
+                            background   : var(--next-image) 100% 0/cover no-repeat;
                             border-radius: 0 8px 8px 0;
                         }
                     }
@@ -126,6 +127,13 @@
 
             }
         }
+    }
+
+
+
+    &.prev-project,
+    &.next-project {
+        overflow: hidden;
     }
 
     &.prev-project {

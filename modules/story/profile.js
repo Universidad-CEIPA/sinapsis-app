@@ -7,7 +7,7 @@ define([
         template: html,
         data() {
             return {
-                story: this.$root.currentStory
+                story: this.$root.currentCourse
             };
         },
         methods: {

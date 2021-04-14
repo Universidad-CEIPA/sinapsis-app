@@ -1,30 +1,58 @@
 <section class="view-section" id="story-profile-view">
-    <header>Perfil</header>
+    <header data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })">PERFIL</header>
     <div class="info-general">
+        <div class="city-icon"></div>
         <section class="profile">
-            {{ $root.user.name }}
-            <br>
-            Nivel
-            <br>
-
+            <div class="info">
+                <div class="name">
+                    {{ $root.user.name }}
+                </div>
+                <div class="level">
+                    <h3> Nivel</h3>
+                    Navegante
+                </div>
+                <div class="city">
+                    <h3> Ciudad</h3>
+                    Cibolá
+                </div>
+            </div>
+            <div class="avatar">
+                <img src="modules/story/images/navegante.png" alt="">
+            </div>
         </section>
         <section class="tools">
-            Herramientas
+            <h5>Tus Herramientas</h5>
+            <ul class="tools-list">
+                <li>
+                    <div class="circle-img"><img src="modules/story/images/iron.png" alt=""></div>Brújula de Hierro
+                </li>
+                <li>
+                    <div class="circle-img"><img src="modules/story/images/plum.png" alt=""></div>Pluma
+                </li>
+                <li>
+                    <div class="circle-img"><img src="modules/story/images/skin.png" alt=""></div>Piel
+                </li>
+                <li>
+                    <div class="circle-img"><img src="modules/story/images/gem.png" alt=""></div>Gema
+                </li>
+                <li>
+                    <div class="circle-img"><img src="modules/story/images/art.png" alt=""></div>Artesania
+                </li>
+            </ul>
         </section>
     </div>
 
     <div class="info-graph">
-        Tus habilidades y progreso final
+        <div class="tittle">Tus habilidades y progreso final</div>
+        <div class="subtittle">Conoce tus competencias destacadas</div>
+        <div class="graph">
+            <img src="modules/story/images/graph.png" alt="">
+        </div>
         <button class="wish-eval action primary">Ingresa tu potencial deseado</button>
     </div>
-
     <div class="info-actions">
         <button class="action primary" data-icon-after="edit">Editar mis datos</button>
         <button class="logout action secundary" @click="$root.logout()">Cerrar sesión</button>
     </div>
-
-
-
-    {{ $root.currentCourse }}
-
+    <!-- {{ $root.currentCourse }}-->
 </section>

@@ -1,0 +1,72 @@
+<section class="view-section" id="story-home-view">
+    <header data-icon="tiny-back">{{ story.name }}</header>
+
+    <div class="general">
+
+        <div class="info">
+            <div class="advances">
+                <div class="circle"><span class="circle-text">1/7</span></div>
+                <span>Capítulos</span>
+            </div>
+            <div class="avatar">
+                <img src="modules/story/images/navegante.png" alt="">
+            </div>
+
+            <span class="name">{{ $root.user.name }}</span>
+            <span class="role">Eres navegante</span>
+            <span class="city">Perteneces a cíbola</span>
+        </div>
+
+        <div class="complement">
+            <div class="items">
+                <section class="position">
+                    <div class="icons"></div>
+                    Ciudades
+                </section>
+                <section class="tools">
+                    <div class="icons"></div>
+                    herramientas
+                </section>
+            </div>
+
+            <img src="modules/story/images/icono-pez.png" alt="">
+        </div>
+    </div>
+    <div class="chapters" :style="{'--show-chapter':maxShow , '--width-chapter':widthChapter}">
+        <div class="back">
+            < </div>
+                <div class="slide-chapters">
+                    <div v-for="c,index in chapters.slice(startShow,maxShow + startShow)" class="chapter">
+                        <div class="tittle">
+                            {{c.name}}
+                        </div>
+                        <section class="content">
+                            <div class="slide-advance">{{c.advance}}/{{c.total}}</div>
+                            <div class="summary">{{c.text}}</div>
+                        </section>
+                    </div>
+                </div>
+                <div class="next">></div>
+        </div>
+    </div>
+    <div class="activities">
+        <div class="header"> Tus actividades</div>
+        <section>
+            <div class="tabs">
+                <ul>
+                    <li :class="{'active': filterActivities === 'progress' }" @click="filterActivities = 'progress' ">En
+                        curso</li>
+                    <li :class="{'active': filterActivities === 'completed' }" @click="filterActivities = 'completed' ">
+                        Completadas</li>
+                </ul>
+            </div>
+            <div class="activity">
+                <img src="modules/story/images/icon-lectura.png" alt="">
+                <div class="title">Lee el capitulo 2</div>
+                <div class="content">La historia de los siete Sabios Portocalenses</div>
+                <div class="date">Enviado hoy</div>
+
+            </div>
+        </section>
+    </div>
+</section>
