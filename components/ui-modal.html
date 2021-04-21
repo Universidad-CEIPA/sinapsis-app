@@ -1,0 +1,13 @@
+<div class="ui-modal">
+	<section class="modal-container">
+		<header>
+			<slot name="title">
+				<h1>{{ title }}</h1>
+			</slot>
+			<button class="close" @click="close">{{ ui.strings.close }}</button>
+		</header>
+		<section class="modal-content">
+			<slot></slot>
+		</section>
+	</section>
+</div>

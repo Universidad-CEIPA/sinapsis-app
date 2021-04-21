@@ -94,11 +94,21 @@ define([
 			uiClasses() {
 				return [
 					{
-						valid: this.isValid, 
+						valid: this.isValid,
 						invalid: !this.isValid,
 					},
 					`ui-${this.type}`
 				];
+			},
+			customStyle() {
+				if (this.type === "range") {
+					return {
+						'--min-input': isNaN(this.min) ? 0 : this.min,
+						'--max-input': isNaN(this.max) ? 100 : this.max,
+						'--value-input' : this.modelValue || 0
+					}
+
+				}
 			},
 			filteredModelValue() {
 				if (this.type === "select" && this.modelValue === null) {

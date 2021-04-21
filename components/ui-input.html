@@ -17,9 +17,15 @@
 		<input class="input-field default-field" ref="input" :value="modelValue" :type="type" v-bind="attributes"
 			@input="handleInput">
 	</template>
-	<template v-if="type === 'checkbox'">
-		<span class="input-check"></span>
-	</template>
+	<slot>
+		<template v-if="type === 'checkbox'">
+			<span class="input-check"></span>
+		</template>
+		<template v-if="type === 'range'">
+			<span class="input-tag">{{ modelValue }}</span>
+		</template>
+	</slot>
+
 
 	<template v-if="$slots.hint && isValid">
 		<p class="input-hint">
