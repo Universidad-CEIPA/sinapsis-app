@@ -1,0 +1,14 @@
+<section class="view-section"  id="view-story-finish">
+
+    <img :src="course.image[0].url" alt="">
+
+    Te invitamos a explorar nuevamente
+    <div class="name-project"> La conquista del Dorado</div>
+    y leer todos los capitulos
+
+    <img class="arabesco" src="modules/story/images/arabesco-gold.svg" alt="">
+
+    <button class="action primary" data-icon-after="arrow-right"
+        @click="$router.replace({ name: 'story:home' })"> Explorar </button>
+
+</section>

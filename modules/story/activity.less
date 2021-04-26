@@ -1,0 +1,161 @@
+#story-activity-view {
+
+    .welcome {
+        height: calc(100vh - 50px);
+        background: @bg-color;
+        color: @main-color;
+        padding: 25px 25px 125px;
+        position: relative;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+
+        .title-type {
+            font-size: 2em;
+            margin-top: 20vh;
+            text-align: center;
+
+            img {
+                width: 50%;
+                margin-top: 20px;
+            }
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+
+            .title {
+                width: 250px;
+                text-align: center;
+                place-self: center;
+            }
+
+            .alert {
+                color: #000;
+                background: #fff;
+                border-radius: 25px;
+                padding: 10px;
+            }
+        }
+
+        .button-down {
+            width: 250px;
+            margin: 10vh auto;
+        }
+    }
+
+    .activity {
+        background: @bg-color;
+
+        .title {
+            padding: 25px;
+            min-height: 100px;
+            color: @main-color;
+            font-size: 1.5em;
+            text-align: center;
+
+        }
+
+        .finish-activity {
+            padding: 80px 20px;
+            min-height: 200px;
+            background-color: @main-color;
+            border-radius: 25px;
+            color: #fff;
+            text-align: center;
+            font-size: var(--font-size);
+            position: relative;
+
+            .arabesco-top,
+            .arabesco-down{
+                position: absolute;
+                left: 0;
+                right: 0;
+            }
+
+            .arabesco-top{
+                top: 0;
+            }
+
+            .arabesco-down{
+                bottom: 0;
+                transform: rotate(180deg);
+            }
+
+            h1 {
+                font-size: calc(var(--font-size) * 3);
+                margin: 30px auto
+            }
+
+            .completed {
+                margin: 30px auto;
+                background-color: @bg-color;
+            }
+        }
+
+    }
+
+    .panel {
+        position: fixed;
+        display: flex;
+        top: calc(50% - 50px);
+        height: 100px;
+        background-color: @main-color;
+        border-radius: 0 15px 15px 0;
+
+        .options {
+            display: grid;
+            width: 50px;
+
+            >div {
+                padding: 10px;
+            }
+        }
+
+        .control {
+            padding: 5px;
+            width: 10px;
+            line-height: 90px;
+        }
+    }
+
+
+    .scroll-activities {
+        position: fixed;
+        background-color: @bg-color;
+        height: 80px;
+        width: 100%;
+        display: flex;
+        top: calc(100vh - 80px);
+        grid-template-columns: 20px 1fr 20px;
+        color: #fff;
+
+        .back,
+        .next {
+            padding: 5px;
+            width: 10px;
+            line-height: 70px;
+        }
+
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            font-size: 0.8em;
+            text-align: center;
+            width: 100%;
+
+            .item {
+                padding: 10px;
+
+                img {
+                    max-height: 40px;
+                }
+
+            }
+        }
+
+    }
+
+}

@@ -1,0 +1,15 @@
+<section class="view-section" id="desired-skills">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span>PERFIL</header>
+    <ui-form :model="user" submit-label="Enviar" action="send" @success="success">
+        <template #header>
+            <h3>Ingresa lo que quieras mejorar</h3>
+        </template>
+
+        <ui-input v-for="skill in skills" type="range" :label="skill.name" v-model="skill.value" required @input="calculateLeft(skill.value, $event)" @click="calculateLeft(skill.value, $event)">
+			<template #validation>
+				Ingresa un valor
+			</template>
+		</ui-input>
+        
+    </ui-form>
+</section>

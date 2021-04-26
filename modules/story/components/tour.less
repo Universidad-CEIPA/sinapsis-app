@@ -1,0 +1,46 @@
+.focusable {
+    z-index: 1001;
+    border-radius: 50%;
+    border: @good-color 2px solid;
+    box-shadow: 0 0 10px @good-color;
+}
+
+#tour {
+    .ui-modal {
+        padding: 0 20px;
+        place-items: end;
+        justify-items: center;
+
+        header {
+            margin: -20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-container {
+            background-color: #fff;
+            border-radius: var(--panel-radius-l) var(--panel-radius-l) 0 0;
+        }
+
+        .modal-content {
+            >img {
+                width: 50%;
+            }
+        }
+
+        footer {
+            margin: -20px;
+            padding: 20px;
+            margin-top: 20px;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
+
+            button {
+                box-shadow: 0px 0px 10px #000000;
+                border: 0;
+            }
+        }
+
+
+    }
+
+
+}

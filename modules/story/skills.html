@@ -1,0 +1,99 @@
+<section class="view-section" id="story-profile-skills">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span> Habilidades
+    </header>
+    <div class="skills">
+
+        <div class="info-graph">
+            <div class="tittle">Tus habilidades y progreso final</div>
+            <div class="subtittle">Conoce tus competencias destacadas</div>
+            <div class="graph">
+                <graph-svg />
+            </div>
+            <button class="wish-eval action primary">Ingresa tu potencial deseado</button>
+        </div>
+
+        <div class="details">
+            <div class="line-time">
+                Mi potencial actual
+                <br>
+                datetime
+                <br>
+                <div class="slider">
+                    <ui-input type="range" label="" v-model="time"></ui-input>
+                </div>
+                Desplaza la barra para conocer tus competencias en evaluaciones anteriores a lo largo del tiempo
+            </div>
+            <div class="explain">
+                <div class="sub-title">
+                    Subcompetencias
+                </div>
+                <div class="competences">
+                    <div>
+                        <hr>
+                        <div class="name">Efectividad</div>
+                        IN Orientacion dirigida
+                        <br>
+                        SO orientacion lograda
+                        <br>
+                        GA Negociacion
+                        <br>
+                        EM Negociacion
+                        <br>
+                    </div>
+                    <div>
+                        <hr>
+                        <div class="name">Efectividad</div>
+                        IN Orientacion dirigida
+                        <br>
+                        SO orientacion lograda
+                        <br>
+                        GA Negociacion
+                        <br>
+                        EM Negociacion
+                        <br>
+                    </div>
+                    <div>
+                        <hr>
+                        <div class="name">Efectividad</div>
+                        IN Orientacion dirigida
+                        <br>
+                        SO orientacion lograda
+                        <br>
+                        GA Negociacion
+                        <br>
+                        EM Negociacion
+                        <br>
+                    </div>
+                    <div>
+                        <hr>
+                        <div class="name">Efectividad</div>
+                        IN Orientacion dirigida
+                        <br>
+                        SO orientacion lograda
+                        <br>
+                        GA Negociacion
+                        <br>
+                        EM Negociacion
+                        <br>
+                    </div>
+                    <div>
+                        <hr>
+                        <div class="name">Efectividad</div>
+                        IN Orientacion dirigida
+                        <br>
+                        SO orientacion lograda
+                        <br>
+                        GA Negociacion
+                        <br>
+                        EM Negociacion
+                        <br>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</section>

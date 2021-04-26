@@ -1,0 +1,15 @@
+<section id="activity-read" :style="{'--font-size':fontSize}">
+    <ul class="letters">
+        <li class="small" :class="{'active':fontSize === '0.8em'}" @click="fontSize = '0.8em'">a</li>
+        <li class="medium" :class="{'active':fontSize === '1em'}" @click="fontSize = '1em'">a</li>
+        <li class="big" :class="{'active':fontSize === '1.3em'}" @click="fontSize = '1.3em'">a</li>
+    </ul>
+    <div class="name">
+        Los Siete Sabios y la importancia del comercio
+    </div>
+    <div class="text" v-html="activity.text">
+        
+    </div>
+
+    <slot></slot>   
+</section>

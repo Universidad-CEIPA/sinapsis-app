@@ -1,0 +1,72 @@
+<section class="view-section" id="story-activity-view">
+    <header v-if="header"><span data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })"></span>{{
+        activity.title }}
+    </header>
+    <div class="welcome" v-if="!header">
+        <div class="title-type">
+            Carta del héroe
+            <img src="modules/story/images/arabesco-gold.svg" alt="">
+        </div>
+
+        <div class="content">
+            <div class="title">
+                {{activity.summary}}
+            </div>
+
+            <div class="alert">
+                Competencia a evaluar
+                <br>
+                <strong> Orientación al logro</strong>
+            </div>
+        </div>
+
+        <button class="action primary button-down" @click="doDown">v</button>
+    </div>
+    <div class="activity">
+        <div class="title" v-if="header">{{activity.summary}}</div>
+        <component :is="typeComponent" :activity="activity">
+            <div class="finish-activity">
+                <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
+                <h1> ¡Muy bien!</h1>
+                <img class="arabesco-center" src="modules/story/images/arabesco-blue.svg" alt="">
+                Has completado esta entrega, toca el botón y prepárate para la próxima lectura
+                
+                <button class="action primary completed"
+                    @click="$router.replace({ name : 'story:evaluation:cuantitative'})">Marcar como completado</button>
+                <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">
+            </div>
+        </component>
+    </div>
+
+    <div class="panel">
+        <div class="options" v-show="optionsPanel">
+            <div v-if="type !== 'audio'" @click="type = 'audio';optionsPanel= !optionsPanel"><img
+                    src="modules/story/images/audio.svg" alt=""></div>
+            <div v-if="type !== 'video'" @click="type = 'video';optionsPanel= !optionsPanel"><img
+                    src="modules/story/images/video.svg" alt=""></div>
+            <div v-if="type !== 'read'" @click="type = 'read';optionsPanel= !optionsPanel">Lect</div>
+        </div>
+        <div class="control" @click="optionsPanel= !optionsPanel"> {{ optionsPanel ? '<' : '>' }} </div>
+        </div>
+
+        <div class="scroll-activities" :style="{'--show-activities':maxShow }" v-if="activity.scroll">
+            <div class="back">
+                <span v-if="startShow != 0" @click="previousSlider">
+                    < </span>
+            </div>
+            <div class="items">
+                <div class="item" v-for="item in itemsShow">
+                    <img :src="item.img" alt="">
+                    {{ item.name}}
+                </div>
+            </div>
+            <div class="next">
+                <span v-if="(maxShow + startShow) < activityScrolls.length" @click="nextSlider">
+                    >
+                </span>
+            </div>
+
+        </div>
+
+
+</section>
