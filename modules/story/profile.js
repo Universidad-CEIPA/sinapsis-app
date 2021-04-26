@@ -1,20 +1,32 @@
 define([
     "text!./profile.html",
-    "local"
-], (html, local) => {
+    "components/ui-modal",
+    "./components/alert",
+    "./components/graph-svg",
+], (html, UiModal, alert, graphSvg) => {
 
     return {
         template: html,
         data() {
             return {
-                story: this.$root.currentCourse
+                story: this.$root.currentCourse,
+                modal: true,
+
             };
         },
+        computed: {
+
+        },
         methods: {
+
+        },
+        mounted() {
+
         },
         components: {
-        },
-        methods: {
+            UiModal,
+            alert,
+            graphSvg
         }
     };
 });

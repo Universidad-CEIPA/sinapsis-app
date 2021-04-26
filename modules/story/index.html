@@ -1,5 +1,6 @@
 <section class="view-section" id="story-home-view">
-    <header data-icon="tiny-back">{{ story.name }}</header>
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:welcome' })"></span>{{ story.name }}
+    </header>
 
     <div class="general">
 
@@ -20,12 +21,18 @@
         <div class="complement">
             <div class="items">
                 <section class="position">
-                    <div class="icons"></div>
+                    <div class="icons">
+                        <img src="modules/story/images/city.svg" alt="">
+                    </div>
                     Ciudades
                 </section>
                 <section class="tools">
-                    <div class="icons"></div>
-                    herramientas
+                    <div class="icons">
+                        <img src="modules/story/images/tools-1.svg" alt="">
+                        <img src="modules/story/images/tools-2.svg" alt="">
+                        <img src="modules/story/images/tools-3.svg" alt="">
+                    </div>
+                    Herramientas
                 </section>
             </div>
 
@@ -34,19 +41,27 @@
     </div>
     <div class="chapters" :style="{'--show-chapter':maxShow , '--width-chapter':widthChapter}">
         <div class="back">
-            < </div>
-                <div class="slide-chapters">
-                    <div v-for="c,index in chapters.slice(startShow,maxShow + startShow)" class="chapter">
-                        <div class="tittle">
-                            {{c.name}}
-                        </div>
-                        <section class="content">
-                            <div class="slide-advance">{{c.advance}}/{{c.total}}</div>
-                            <div class="summary">{{c.text}}</div>
-                        </section>
-                    </div>
+            <span v-if="startShow != 0" @click="previousSlider">
+                < </span>
+        </div>
+        <div class="slide-chapters">
+            <div v-for="c,index in chaptersShow" class="chapter" @click="openActivity(c)">
+                <div class="tittle">
+                    {{c.name}}
                 </div>
-                <div class="next">></div>
+                <section class="content">
+                    <div class="slide-advance">
+                        <div class="progress-chapter" :style="{'--width-advance': (c.advance * 100 / c.total)+'%' }">
+                            {{c.advance}}/{{c.total}}</div>
+                    </div>
+                    <div class="summary">{{c.summary}}</div>
+                </section>
+            </div>
+        </div>
+        <div class="next">
+            <span v-if="(maxShow + startShow) < chapters.length" @click="nextSlider">
+                >
+            </span>
         </div>
     </div>
     <div class="activities">
@@ -60,13 +75,27 @@
                         Completadas</li>
                 </ul>
             </div>
-            <div class="activity">
-                <img src="modules/story/images/icon-lectura.png" alt="">
-                <div class="title">Lee el capitulo 2</div>
-                <div class="content">La historia de los siete Sabios Portocalenses</div>
-                <div class="date">Enviado hoy</div>
+            <div class="activities">
+                <div class="activity progress" v-if="filterActivities === 'progress'">
+                    <img src="modules/story/images/icon-lectura.png" alt="">
+                    <div class="title">Lee el capitulo 2</div>
+                    <div class="content">La Profecia se cumple</div>
+                    <div class="date">Enviado hoy</div>
+                </div>
+
+                <div class="activity completed" v-if="filterActivities === 'completed'">
+                    <img src="modules/story/images/icon-lectura.png" alt="">
+                    <div class="title">Lee el capitulo 1</div>
+                    <div class="content">La historia de los siete Sabios Portocalenses</div>
+                    <div class="date">Enviado hace 8 días</div>
+                </div>
+
 
             </div>
         </section>
     </div>
+
+    <tour v-if="modal" @close="modal = false" selected="position" />
+
+    <finish-modal v-if="finished" @close="finished = false" />
 </section>

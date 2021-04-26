@@ -11,13 +11,22 @@ define([
 		routes: [
 
 			{ name: "home", path: "/", component: m("home/index") },
+			{ name: "home:profile", path: "/profile", component: m("home/profile") },
 
+			{ name: "story:activity", path: "/story/activity", component: m("story/activity"), props: true },
+			{ name: "story:binnacle", path: "/story/binnacle", component: m("story/binnacle") },
+			{ name: "story:evaluation:cuantitative", path: "/story/autoevaluation/cuantitative", component: m("story/autoevaluation"), props: { type: "cuantitative" } },
+			{ name: "story:evaluation:cualitative", path: "/story/autoevaluation/cualitative", component: m("story/autoevaluation"), props: { type: "cualitative" } },
+			{ name: "story:evaluation:video", path: "/story/autoevaluation/video", component: m("story/autoevaluation"), props: { type: "videoselfie" } },
+			{ name: "story:finish", path: "/story/finish", component: m("story/finish") },
+			{ name: "story:skills", path: "/story/skills", component: m("story/skills") },
+			{ name: "story:skills:desired", path: "/story/desired", component: m("story/desired-skills") },
 			{ name: "story:home", path: "/story/home", component: m("story/index") },
 			{ name: "story:profile", path: "/story/profile", component: m("story/profile") },
 			{ name: "story:welcome", path: "/story/welcome", component: m("story/welcome-course") },
 
-			{ name: "welcome:finish", path: "/setup/finish", component: m("welcome/finish")},
-			{ name: "welcome:index", path: "/welcome/:token", component: m("welcome/index"), props: true  },
+
+			{ name: "welcome:index", path: "/welcome/:token", component: m("welcome/index"), props: true },
 			{ name: "welcome:login", path: "/login", component: m("welcome/login") },
 			{ name: "welcome:setup", path: "/setup", component: m("welcome/setup") },
 		]

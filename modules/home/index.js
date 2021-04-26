@@ -59,6 +59,9 @@ define([
 			}
 		},
 		created(){
+			if(this.$root.currentCourse) {
+				this.$router.replace({ name: "story:profile" });
+			}
 		},
 		components: {
 		}

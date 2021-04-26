@@ -9,11 +9,11 @@
 	}
 
 	.form-actions {
-		display        : flex;
-		gap            : var(--pad-m);
+		display: flex;
+		gap: var(--pad-m);
 		justify-content: center;
-		font-size      : 1.5em;
-		font-weight    : bold;
+		font-size: 1.5em;
+		font-weight: bold;
 	}
 
 	.form-footer {
@@ -26,20 +26,20 @@
 }
 
 .ui-form-repeater {
-	border-top   : var(--separator-border);
+	border-top: var(--separator-border);
 	border-bottom: var(--separator-border);
-	padding      : var(--pad-m) 0;
+	padding: var(--pad-m) 0;
 
 	.repeater-label {
-		display      : block;
-		font-weight  : bold;
+		display: block;
+		font-weight: bold;
 		margin-bottom: var(--pad-m);
 	}
 
 	.repeater-item {
-		gap        : var(--pad-m);
+		gap: var(--pad-m);
 		align-items: end;
-		padding    : var(--pad-m) 0;
+		padding: var(--pad-m) 0;
 	}
 
 	.repeater-item-wrapper {
@@ -55,7 +55,7 @@
 
 	.repeater-item-actions {
 		display: flex;
-		gap    : var(--pad-s);
+		gap: var(--pad-s);
 	}
 
 	.repeater-item+.repeater-item {
@@ -89,12 +89,12 @@
 
 	.input-hint {
 		margin-top: var(--pad-s);
-		font-size : 0.8em;
+		font-size: 0.8em;
 	}
 
 	.input-notice {
 		margin-top: var(--pad-s);
-		font-size : 0.8em;
+		font-size: 0.8em;
 
 		&.error {
 			color: var(--text-critical-color);
@@ -103,17 +103,17 @@
 }
 
 .ui-loader {
-	padding   : var(--pad-l);
+	padding: var(--pad-l);
 	text-align: center;
 
 	&.status-loading {
 
 		&::before {
-			content      : "";
-			display      : block;
-			height       : 50px;
+			content: "";
+			display: block;
+			height: 50px;
 			margin-bottom: var(--pad-m);
-			background   : url("images/anim-loader.png") 50% 50% no-repeat / contain;
+			background: url("images/anim-loader.png") 50% 50% no-repeat / contain;
 		}
 	}
 }
@@ -121,12 +121,37 @@
 .ui-modal {
 
 	.modal-container {
+		position: relative;
+		text-align: center;
 
 		>header {
+			display: block;
 
 			.close {
-				.bare-icon(url("images/icon-close.svg"), 50% auto);
+				// .bare-icon(url("images/icon-close.svg"), 50% auto);
+
+				.icon("close");
+				.has-icon;
+
+				background-color: @main-color;
+				border-radius: 25px;
+				position: absolute;
+				top: calc(var(--action-icon-compact-height) / 2 * -1);
+				left: calc(50% - var(--action-icon-compact-height)/ 2);
 			}
+		}
+
+		.modal-content {
+			h1 {
+				font-size: 2em;
+				margin: 15px 0;
+			}
+
+			div {
+				margin: 20px 0;
+				font-size: 0.9em;
+			}
+
 		}
 	}
 }
@@ -134,7 +159,7 @@
 .ui-pagination {
 
 	select {
-		height : var(--input-height);
+		height: var(--input-height);
 		padding: 0 var(--pad-m);
 	}
 
@@ -152,17 +177,17 @@
 	.search-input {
 
 		input {
-			height    : var(--input-height);
-			padding   : 0 var(--input-pad);
-			border    : none;
+			height: var(--input-height);
+			padding: 0 var(--input-pad);
+			border: none;
 			background: none;
-			outline   : none;
+			outline: none;
 		}
 
 		button {
-			width     : var(--action-icon-width);
-			height    : var(--input-height);
-			border    : none;
+			width: var(--action-icon-width);
+			height: var(--input-height);
+			border: none;
 			background: none;
 			.bare-icon(url("images/icon-search.svg"), 50% auto);
 		}
@@ -172,7 +197,7 @@
 
 		footer {
 			display: flex;
-			gap    : var(--pad-s);
+			gap: var(--pad-s);
 
 			.action {
 				flex: 1 1;
@@ -191,11 +216,11 @@
 	}
 
 	.data-list-notice {
-		padding   : var(--pad-xl);
+		padding: var(--pad-xl);
 		text-align: center;
 
 		&.empty {
-			color     : var(--text-mute-color);
+			color: var(--text-mute-color);
 			font-style: italic;
 		}
 	}

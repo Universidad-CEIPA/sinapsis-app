@@ -23,7 +23,7 @@ define([
                         this.step = this.FINISH_STEP;
                         break;
                     case this.FINISH_STEP:
-                        this.$router.push({ name: "welcome:finish" });
+                        this.$router.push({ name: "home:profile" });
                         break;
                 }
             },
