@@ -1,7 +1,6 @@
 define([
-    "text!./finish-modal.html",
-    "components/ui-modal",
-], (html, UiModal) => {
+    "text!./credits.html",
+], (html) => {
 
     return {
         template: html,
@@ -12,10 +11,7 @@ define([
         methods: {
         },
         components: {
-            UiModal
         },
-        mounted() {
-        }
 
     };
 });
