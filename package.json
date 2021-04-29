@@ -1,10 +1,10 @@
 {
 	"name": "ceipa",
 	"dependencies": {
-		"@capacitor/android": "^2.4.6",
-		"@capacitor/cli": "^2.4.6",
-		"@capacitor/core": "^2.4.6",
-		"@capacitor/ios": "^2.4.6",
+		"@capacitor/android": "^2.4.7",
+		"@capacitor/cli": "^2.4.7",
+		"@capacitor/core": "^2.4.7",
+		"@capacitor/ios": "^2.4.7",
 		"@teamhive/capacitor-video-recorder": "^4.0.1",
 		"capacitor-video-player": "^2.4.7-2"
 	}

@@ -4,11 +4,8 @@ import android.os.Bundle;
 
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.Plugin;
-
 import com.github.sbannigan.capacitor.VideoRecorder;
 import com.jeep.plugin.capacitor.CapacitorVideoPlayer;
-
-
 import java.util.ArrayList;
 
 public class MainActivity extends BridgeActivity {
