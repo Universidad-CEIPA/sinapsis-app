@@ -1,4 +1,4 @@
-<div id="evaluation-videoselfie">
+<div id="evaluation-videoselfie" v-if="!camera && !showVideostatus">
     <header>
         <h3>Ponte a prueba</h3>
         <p>Contesta las siguientes preguntas según tu experiencia</p>
@@ -10,8 +10,22 @@
     <div class="avatar">
         <img src="modules/story/images/videoselfie.png" alt="">
     </div>
-    <div class="take-video">
+    <div class="take-video" @click="startCamera">
         <img src="modules/story/images/camera.png" alt="">
     </div>
+    <button @click="showVideo">Show video</button>
 
+</div>
+<div id="player" v-if="showVideostatus"></div>
+<div id="video-record" v-if="camera">
+    <div @click="startVideo" style="height: 70px;">
+        <img src="modules/story/images/camera.png" alt="" style="height: 70px;">
+    </div>
+    <div @click="StopVideo" style="height: 70px;">
+        <img src="modules/story/images/video.svg" alt="" style="height: 70px;">
+    </div>
+
+    <div @click="destroy" style="height: 70px;">
+        <img src="modules/story/images/videoselfie.png" alt="" style="height: 70px;">
+    </div>
 </div>
