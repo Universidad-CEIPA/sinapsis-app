@@ -5,6 +5,10 @@ import android.os.Bundle;
 import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.Plugin;
 
+import com.github.sbannigan.capacitor.VideoRecorder;
+import com.jeep.plugin.capacitor.CapacitorVideoPlayer;
+
+
 import java.util.ArrayList;
 
 public class MainActivity extends BridgeActivity {
@@ -16,6 +20,8 @@ public class MainActivity extends BridgeActivity {
     this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
       // Additional plugins you've installed go here
       // Ex: add(TotallyAwesomePlugin.class);
+      add(VideoRecorder.class);
+      add(CapacitorVideoPlayer.class);
     }});
   }
 }
