@@ -1,0 +1,24 @@
+<section class="view-section" id="story-map-view">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })"></span> CIUDADES </header>
+
+    <div class="title">
+        <h3>Explora</h3>
+        Ingresa a cada ciudad y aprende sobre ella
+    </div>
+
+    <div class="map-container">
+
+        <div v-for="group in finalDistribution" class="group-city">
+            <div v-for="city in group" class="city-content">
+                <div class="city" :style="city.style" @click="openActivity(city.activity)">
+                    <div class="city-logo">
+                        <img :src="city.logo" alt="">
+                    </div>
+                    <div class="city-name">{{ city.name}}</div>
+                </div>
+            </div>
+        </div>
+        <svg :width="sizeWidth" :height="sizeHeight" class="roads"></svg>
+    </div>
+
+</section>

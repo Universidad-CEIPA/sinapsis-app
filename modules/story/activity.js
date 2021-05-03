@@ -39,14 +39,12 @@ define([
                     "video": "activity-video"
                 }[this.type];
             },
-            header(){
-                return this.activity.type !=="card"
+            header() {
+                return this.activity.type !== "card"
+            },
+            welcome() {
+                return this.activity.type === "map"
             }
-        },
-        components: {
-            activityAudio,
-            activityRead,
-            activityVideo
         },
         methods: {
             nextSlider() {
@@ -64,16 +62,27 @@ define([
                 if (previousStart >= 0) {
                     this.startShow = previousStart
                 }
+            },
+            viewBack() {
+                if (this.activity.type === "map") {
+                    this.$router.replace({ name: 'story:map' })
+                } else {
+                    this.$router.replace({ name: 'story:home' })
+                }
+
             }
         },
         mounted() {
-            if(this.content){
+            if (this.content) {
                 this.activity = JSON.parse(this.content)
-            }else {
-                this.$router.replace({name: "story:home"})
+            } else {
+                this.$router.replace({ name: "story:home" })
             }
-            
-            
-        }
+        },
+        components: {
+            activityAudio,
+            activityRead,
+            activityVideo
+        },
     };
 });

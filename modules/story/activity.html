@@ -1,11 +1,23 @@
 <section class="view-section" id="story-activity-view">
-    <header v-if="header"><span data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })"></span>{{
-        activity.title }}
+    <header v-if="header"><span data-icon="tiny-back" @click="viewBack"></span>
+        <template v-if="activity.type === 'map'">
+            Mapa Ciudades
+        </template>
+        <template v-else>
+            {{activity.title }}
+        </template>
+
     </header>
-    <div class="welcome" v-if="!header">
-        <div class="title-type">
-            Carta del héroe
-            <img src="modules/story/images/arabesco-gold.svg" alt="">
+    <div class="welcome" v-if="!header || welcome">
+        <div class="title-type" :class="activity.type">
+            <template v-if="activity.type === 'card'">
+                Carta del héroe
+                <img src="modules/story/images/arabesco-gold.svg" alt="">
+            </template>
+            <template v-else-if="activity.type === 'map'">
+                Bienvenido a
+                <img :src="activity.logo" alt="">
+            </template>
         </div>
 
         <div class="content">
@@ -23,14 +35,14 @@
         <button class="action primary button-down" @click="doDown">v</button>
     </div>
     <div class="activity">
-        <div class="title" v-if="header">{{activity.summary}}</div>
+        <div class="title" v-if="header || !welcome">{{activity.summary}}</div>
         <component :is="typeComponent" :activity="activity">
             <div class="finish-activity">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <h1> ¡Muy bien!</h1>
                 <img class="arabesco-center" src="modules/story/images/arabesco-blue.svg" alt="">
                 Has completado esta entrega, toca el botón y prepárate para la próxima lectura
-                
+
                 <button class="action primary completed"
                     @click="$router.replace({ name : 'story:evaluation:cuantitative'})">Marcar como completado</button>
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">

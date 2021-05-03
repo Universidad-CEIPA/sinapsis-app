@@ -1,0 +1,90 @@
+#story-map-view {
+    background-color: @bg-color;
+
+    .title {
+        padding: 30px;
+        font-size: 0.9em;
+        color: #fff;
+        background-color: @main-color;
+
+        h3 {
+            font-size: 1.1em;
+            border-bottom: white solid 1px;
+            width: fit-content;
+            line-height: 1.5em;
+            font-weight: bold;
+        }
+    }
+
+    .map-container {
+        height: auto;
+        padding: 0 20px;
+        background-color: @main-color;
+        position: relative;
+        //max-width: 500px;
+        margin: auto;
+        z-index: 1;
+
+        .roads {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .group-city {
+            z-index: 2;
+            height: 100px;
+            width: 100%;
+            //max-width: 500px;
+            display: inline-flex;
+            flex-direction: row;
+            //justify-content: space-around;
+            margin: 10px 0;
+            justify-content: space-evenly;
+            //border: red solid 1px;
+
+            .city-content {
+                width: 120px;
+                height: 100%;
+                text-align: center;
+                //border: green solid 1px;
+                text-align: -webkit-center;
+                display: table;
+
+                .city {
+                    width: 72px;
+                    display: table-cell;
+
+                    vertical-align: middle;
+                    text-align: -webkit-center;
+
+                    .city-logo {
+                        background-color: @bg-color;
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+
+                    }
+
+                    .city-name {
+                        background-color: @main-color;
+                        border: @bg-color 1px solid;
+                        border-radius: 25px;
+                        width: 70px;
+                        text-align: center;
+                        padding: 2px 0;
+                        font-size: 0.6em;
+                    }
+                }
+            }
+
+
+        }
+    }
+
+}
