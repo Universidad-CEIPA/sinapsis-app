@@ -83,11 +83,12 @@
                     <div class="date">Enviado hoy</div>
                 </div>
 
-                <div class="activity completed" v-if="filterActivities === 'completed'">
-                    <img src="modules/story/images/icon-lectura.png" alt="">
+                <div class="activity completed" v-if="filterActivities === 'completed'" @click="$router.replace({ name: 'story:map' })">
+                    <!--<img src="modules/story/images/icon-lectura.png" alt="">
                     <div class="title">Lee el capitulo 1</div>
                     <div class="content">La historia de los siete Sabios Portocalenses</div>
-                    <div class="date">Enviado hace 8 días</div>
+                    <div class="date">Enviado hace 8 días</div>-->
+                    <div class="content">Ver mapa</div>
                 </div>
 
 

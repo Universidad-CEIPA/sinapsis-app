@@ -15,30 +15,27 @@ define([
 			};
 		},
 		methods: {
-			processUser(user) {
-
-				if (user.birthday) {
-					let current_datetime = new Date(user.birthday)
-					user.birthday = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
-				}
-
-				this.user = user;
-				local("user", user);
-				// api.post('students/' + this.user.id, this.user)
-			},
-			setCourse(course) {
-				local("currentCourse", course);
-				this.currentCourse = course;
-			},
-			destroyCourse(){
+			destroyCourse() {
 				local("currentCourse", null);
 				this.currentCourse = null;
 				this.$router.replace({ name: 'home' })
 			},
-			logout(){
+			logout() {
 				this.user = null;
 				local("user", null);
 				this.$router.replace({ name: 'welcome:login' })
+			},
+			processUser(user) {
+				if (user.birthday) {
+					let current_datetime = new Date(user.birthday)
+					user.birthday = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
+				}
+				this.user = user;
+				local("user", user);
+			},
+			setCourse(course) {
+				local("currentCourse", course);
+				this.currentCourse = course;
 			}
 		}
 	};

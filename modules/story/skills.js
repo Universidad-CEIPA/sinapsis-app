@@ -10,8 +10,6 @@ define([
             return {
             };
         },
-        computed: {
-        },
         components: {
             UiInput,
             graphSvg

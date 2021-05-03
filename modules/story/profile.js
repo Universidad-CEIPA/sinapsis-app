@@ -11,17 +11,11 @@ define([
             return {
                 story: this.$root.currentCourse,
                 modal: true,
-
             };
         },
         computed: {
-
         },
         methods: {
-
-        },
-        mounted() {
-
         },
         components: {
             UiModal,

@@ -14,7 +14,6 @@ define([
             addFocus() {
                 var Item = "." + this.selected
                 var focusItem = document.querySelector(Item)
-
                 let newClass = "focusable";
 
                 clasess = focusItem.className.split(" ");

@@ -14,6 +14,16 @@ define([
             };
         },
         methods: {
+            back() {
+                switch (this.step) {
+                    case this.INSTRUCTION_STEP:
+                        this.step = this.WELCOME_STEP;
+                        break;
+                    case this.FINISH_STEP:
+                        this.step = this.INSTRUCTION_STEP;
+                        break;
+                }
+            },
             next() {
                 switch (this.step) {
                     case this.WELCOME_STEP:
@@ -24,16 +34,6 @@ define([
                         break;
                     case this.FINISH_STEP:
                         this.$router.push({ name: "home:profile" });
-                        break;
-                }
-            },
-            back() {
-                switch (this.step) {
-                    case this.INSTRUCTION_STEP:
-                        this.step = this.WELCOME_STEP;
-                        break;
-                    case this.FINISH_STEP:
-                        this.step = this.INSTRUCTION_STEP;
                         break;
                 }
             }

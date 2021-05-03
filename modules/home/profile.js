@@ -18,8 +18,6 @@ define([
                 ]
             };
         },
-        created() {
-        },
         methods: {
             success(result, data) {
                 this.$root.processUser(result);
@@ -28,7 +26,6 @@ define([
                 } else {
                     this.$router.replace({ name: "home" });
                 }
-
             }
         },
         components: {

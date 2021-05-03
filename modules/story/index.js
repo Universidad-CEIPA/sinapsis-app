@@ -16,6 +16,8 @@ define([
                 finished: true,
                 widthChapter,
                 filterActivities: 'progress',
+                maxShow: 0,
+                chaptersShow: 0,
                 chapters:
                     [{
                         name: "Capítulo 1",
@@ -38,7 +40,7 @@ define([
                         type: "outdoor"
                     },
                     {
-                        name: "Capítulo 3",
+                        name: "Capítulo 3 / card",
                         advance: "1",
                         total: "5",
                         summary: "La historia de los siete Sabios Portocalenses",
@@ -47,26 +49,12 @@ define([
                         scroll: false,
                         type: "card"
                     }
-                
-                ]
+
+                    ]
 
             };
         },
         computed: {
-            maxShow() {
-                let spaceAvailable = Math.floor((window.screen.width - 40) / this.widthChapter)
-
-                if (spaceAvailable > this.chapters.length) {
-                    return this.chapters.length
-                } else {
-                    return spaceAvailable
-                }
-            },
-            chaptersShow() {
-                return this.chapters.slice(this.startShow, this.maxShow + this.startShow)
-            }
-        },
-        created() {
         },
         components: {
             UiModal,
@@ -76,12 +64,14 @@ define([
         methods: {
             nextSlider() {
                 let nextStart = this.startShow + 1;
-
                 let lengthSpace = nextStart + this.maxShow
 
                 if (lengthSpace <= this.chapters.length) {
                     this.startShow = nextStart
                 }
+            },
+            openActivity(c) {
+                this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
             },
             previousSlider() {
                 let previousStart = this.startShow - 1;
@@ -90,12 +80,27 @@ define([
                     this.startShow = previousStart
                 }
             },
-            openActivity(c) {
-                this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+            updateLayout() {
+                let spaceAvailable = Math.floor((window.screen.width - 40) / this.widthChapter)
+                if (spaceAvailable > this.chapters.length) {
+                    this.maxShow = this.chapters.length
+                } else {
+                    this.maxShow = spaceAvailable
+                }
+
+                this.chaptersShow = this.chapters.slice(this.startShow, this.maxShow + this.startShow)
             }
         },
-        watch: {
-
+        created() {
+            this.updateLayout();
+        },
+        mounted() {
+            window.addEventListener("resize", this._resizeHandler = e => {
+                this.updateLayout();
+            });
+        },
+        beforeDestroy() {
+            window.removeEventListener("resize", this._resizeHandler);
         }
     };
 });

@@ -16,7 +16,6 @@ define([
                     return 250
                 }
 
-
                 if (widthS <= 760) {
                     return 300
                 }
@@ -224,8 +223,6 @@ define([
                             }
                         }
 
-
-
                         canvas.appendChild(chartGroup);
 
                     };
@@ -341,8 +338,6 @@ define([
             chart.addDataSet(wish, "#95bfcb")
             chart.addDataSet(current, "#c39b52")
             chart.addTemplate(templateSvg);
-
-
 
             // https://codepen.io/juliosgarbi/pen/kXyRQr
         },

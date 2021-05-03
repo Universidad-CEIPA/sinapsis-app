@@ -19,6 +19,10 @@ define([
 			},
 		},
 		methods: {
+			goCourse() {
+				this.$root.setCourse(this.projects[this.currentIndex]);
+				this.$router.replace({ name: "story:welcome" });
+			},
 			handlePointerDown(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
 				console.log(e)
@@ -52,14 +56,10 @@ define([
 				this._lastDelta = 0;
 				this.dragProject = null;
 
-			},
-			goCourse() {
-				this.$root.setCourse(this.projects[this.currentIndex]);
-				this.$router.replace({ name: "story:welcome" });
 			}
 		},
-		created(){
-			if(this.$root.currentCourse) {
+		created() {
+			if (this.$root.currentCourse) {
 				this.$router.replace({ name: "story:profile" });
 			}
 		},

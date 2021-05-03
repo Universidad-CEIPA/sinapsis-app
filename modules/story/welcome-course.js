@@ -11,8 +11,6 @@ define([
                 course: this.$root.currentCourse
             };
         },
-        created() {
-        },
         methods: {   
         },
         components: {

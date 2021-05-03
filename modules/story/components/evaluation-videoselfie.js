@@ -20,33 +20,6 @@ define([
             };
         },
         methods: {
-            async startCamera() {
-                await this.recorder.initialize();
-                this.camera = 1
-            },
-            startVideo() {
-                this.recorder.startRecording();
-            },
-            async StopVideo() {
-                this.video = await this.recorder.stopRecording();
-
-                local("video", this.video)
-                return this.video;
-            },
-            destroy() {
-                this.recorder.destroy();
-                this.camera = 0;
-            },
-            async showVideo() {
-                let url = "application/files/" + this.video;
-                let res = await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
-                showVideostatus = 1
-                await this.videoPlayer.isPlaying({ playerId: "player" });
-
-                await this.videoPlayer.play({ playerId: "player" });
-                await this.videoPlayer.isPlaying({ playerId: "player" });
-
-            },
             addListenersToPlayerPlugin() {
                 this.videoPlayer.addListener('jeepCapVideoPlayerPlay', (data) => { }, false);
                 this.videoPlayer.addListener('jeepCapVideoPlayerPause', (data) => { }, false);
@@ -54,10 +27,43 @@ define([
                 this.videoPlayer.addListener('jeepCapVideoPlayerExit', async (data) => { }, false);
                 this.videoPlayer.addListener('jeepCapVideoPlayerReady', async (data) => { }, false);
                 this.videoPlayer.addListener('jeepCapVideoPlayerPlaying', async (data) => { }, false);
-            }
+            },
+            destroy() {
+                this.recorder.destroy();
+                this.camera = 0;
+            },
+            async showVideo() {
+                let url = "application/files/" + this.video;
+                await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
+                showVideostatus = 1
+                await this.videoPlayer.isPlaying({ playerId: "player" });
 
+                await this.videoPlayer.play({ playerId: "player" });
+                await this.videoPlayer.isPlaying({ playerId: "player" });
+
+            },
+            async startCamera() {
+                await this.recorder.initialize();
+                this.camera = 1
+            },
+            startVideo() {
+                this.recorder.startRecording();
+            },
+            async stopVideo() {
+                this.video = await this.recorder.stopRecording();
+
+                local("video", this.video)
+                return this.video;
+            },
         },
         components: {
+        },
+        async created() {
+            await CapacitorVideoRecorder.get().then(recorder => this.recorder = recorder)
+            if (window.Capacitor) {
+                this.videoPlayer = Capacitor.Plugins.CapacitorVideoPlayer;
+                this.addListenersToPlayerPlugin();
+            }
         },
         mounted() {
             this.answers = this.questions
@@ -70,13 +76,6 @@ define([
         },
         destroyed() {
             this.destroy()
-        },
-        async created() {
-            await CapacitorVideoRecorder.get().then(recorder => this.recorder = recorder)
-            if (window.Capacitor) {
-                this.videoPlayer = Capacitor.Plugins.CapacitorVideoPlayer;
-                this.addListenersToPlayerPlugin();
-            }
         }
     }
 
