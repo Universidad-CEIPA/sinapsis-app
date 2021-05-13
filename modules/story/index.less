@@ -1,12 +1,129 @@
 #story-home-view {
-    color: @bg-color;
+
+    &.mision {
+        color: @mision-color;
+        --background: url('images/mision/textura.jpg') 50% 50%/cover no-repeat;
+        background-color: rgba(149, 191, 203, .3);
+
+        .general {
+            .info {
+
+                .role,
+                .city {
+                    color: #fff
+                }
+            }
+        }
+
+
+        .chapters {
+            .slide-chapters {
+                .chapter {
+                    .content {
+                        .slide-advance {
+                            .progress-chapter {
+                                color: #fff;
+                                background-color: @mision-color;
+
+                                .text-advance {
+                                    background: @mision-color;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .activities {
+            section {
+                background: linear-gradient(0deg, rgba(149, 191, 203, .1) 60%, rgba(194, 194, 194, 1) 100%);
+
+                .tabs {
+                    ul {
+                        border: 1px solid @mision-color;
+
+                        li {
+                            &.active {
+                                background-color: @mision-color;
+                            }
+                        }
+                    }
+                }
+
+                .activity {
+                    background-color: #fff;
+                    text-align: initial;
+
+                    .title,
+                    .date {
+                        color: @mision-color;
+                    }
+
+                    .content {
+                        color: initial;
+                    }
+                }
+            }
+        }
+
+    }
+
+    &.dorado {
+        color: @bg-color;
+        --background: url('images/dorado/textura.jpg') 50% 50%/cover no-repeat;
+
+        .general {
+            .info {
+
+                .role,
+                .city {
+                    color: @main-color
+                }
+            }
+        }
+
+        .activities {
+            section {
+                background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
+
+                .tabs {
+                    ul {
+                        border: 1px solid @bg-color;
+
+                        li {
+                            &.active {
+                                background-color: @bg-color;
+                            }
+                        }
+                    }
+                }
+
+                .activity {
+                    background-color: @bg-color;
+
+                    .title,
+                    .date {
+                        color: @main-color;
+                    }
+
+                    .content {
+                        color: #fff;
+                    }
+                }
+
+            }
+        }
+    }
+
 
     >header {
-        background: url('images/textura.jpg') 50% 50%/cover no-repeat;
+        background: var(--background);
     }
 
     .general {
-        background: url('images/textura.jpg') 50% 50%/cover no-repeat;
+        background: var(--background);
         padding: 20px 20px 50px;
         border-radius: 0 0 50px 50px;
         display: grid;
@@ -64,11 +181,6 @@
             .name {
                 margin-top: 10px;
                 font-size: 1.3em;
-            }
-
-            .role,
-            .city {
-                color: @main-color
             }
         }
 
@@ -141,7 +253,6 @@
 
             .chapter {
                 background: #fff;
-                // max-width    : calc(var(--width-chapter) * 1px - var(--padding-chapter) * 2);
                 max-width: 300px;
                 width: -webkit-fill-available;
                 min-height: 100%;
@@ -175,6 +286,21 @@
                             padding: 0.4em 0.5em;
                             border-radius: 1em;
                             width: var(--width-advance);
+                            position: relative;
+
+
+                            .text-advance {
+                                position: absolute;
+                                right: 0;
+                                background: @bg-color;
+                                height: 1.2em;
+                                width: 1.2em;
+                                border-radius: 50%;
+                                padding: 0.7em;
+                                margin: -0.7em;
+                                box-shadow: 0px 0px 2px 1px black;
+                            }
+
                         }
 
 
@@ -199,7 +325,6 @@
         }
 
         section {
-            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
             padding: 20px;
             text-align: -webkit-center;
 
@@ -216,7 +341,7 @@
                     display: flex;
                     padding-left: 0;
                     margin-bottom: 0;
-                    border: 1px solid @bg-color;
+
                     border-radius: 1em;
                     width: fit-content;
 
@@ -231,14 +356,12 @@
 
                         &.active {
                             color: #fff;
-                            background-color: @bg-color;
                         }
                     }
                 }
             }
 
             .activity {
-                background-color: @bg-color;
                 border-radius: 50px;
                 min-width: 170px;
                 height: 4em;
@@ -251,15 +374,6 @@
                     position: absolute;
                     left: -30px;
                     top: 0;
-                }
-
-                .title,
-                .date {
-                    color: @main-color;
-                }
-
-                .content {
-                    color: #fff;
                 }
 
                 .content,

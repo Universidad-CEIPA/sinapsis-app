@@ -1,4 +1,5 @@
-.alert-modal{
+.dorado {
+    .alert-modal {
         .modal-container {
             background-color: @good-color;
             color: #fff
@@ -8,5 +9,61 @@
             box-shadow: 0px 0px 10px #000000;
             border: 0;
         }
+    }
+}
 
+.mision {
+    .alert-modal {
+        .modal-container {
+            background: url('../images/mision/textura.jpg') 50% 50%/cover no-repeat;
+            color: #fff;
+            z-index: 0;
+
+            >header {
+                img {
+                    position: absolute;
+                    z-index: -1;
+                    margin-left: auto;
+                    margin-right: auto;
+                    left: 0;
+                    right: 0;
+                }
+
+                .close {
+                    background-color: #fff;
+                    background-image: url(../../../res/theme/images/icon-arrow-right.svg)
+                }
+            }
+
+            .bottom-alert{
+                &::before {
+
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: calc(-1 * var(--size) / 2);
+                    margin: 0 -30px calc(-1 * var(--size) / 2);
+                    ;
+                    left: 0;
+                    right: 0;
+                    height: calc(2*var(--size));
+                    border-radius: 100%;
+                    background: radial-gradient(ellipse 209% 50% at 50% 3%, @bg-color -1000%, @bg-color -48%, transparent 50%, transparent 77%);
+                }
+            }
+
+            .modal-content {
+                margin-top: 100px;
+
+                button {
+                    color: @mision-color;
+                    background: #fff;
+                    box-shadow: 0px 0px 10px #000000;
+                    border: 0;
+                }
+            }
+        }
+
+
+    }
 }

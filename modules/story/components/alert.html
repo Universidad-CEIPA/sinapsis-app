@@ -1,8 +1,11 @@
-<ui-modal title="test" @close="$emit('close')" class="alert-modal"> 
+<ui-modal @close="$emit('close')" class="alert-modal">
     <template #title>
         <img src="modules/story/images/alert-great.png" alt="">
     </template>
     <h1>¡Fabuloso!</h1>
-    <div> Has completado este capitulo, prepárate para las próximas entregas</div>
-    <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+    <div class="bottom-alert">
+        <div> Has completado este capitulo, prepárate para las próximas entregas</div>
+        <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+    </div>
+
 </ui-modal>

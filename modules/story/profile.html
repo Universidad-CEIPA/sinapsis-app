@@ -1,6 +1,6 @@
-<section class="view-section" id="story-profile-view">
+<section class="view-section" id="story-profile-view" :class="$root.skin">
     <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })"></span>PERFIL</header>
-    <div class="profile">
+    <div class="profile-content">
         <div class="info-general">
             <div class="city-icon"></div>
             <section class="profile">
@@ -25,29 +25,34 @@
                 <h5>Tus Herramientas</h5>
                 <ul class="tools-list">
                     <li>
-                        <div class="circle-img"><img src="modules/story/images/iron.png" alt=""></div>Brújula de Hierro
+                        <div class="circle-img"><img src="modules/story/images/iron.png" alt=""></div>
+                        <p>Brújula de Hierro</p>
                     </li>
                     <li>
-                        <div class="circle-img"><img src="modules/story/images/plum.png" alt=""></div>Pluma
+                        <div class="circle-img"><img src="modules/story/images/plum.png" alt=""></div>
+                        <p>Pluma</p>
                     </li>
                     <li>
-                        <div class="circle-img"><img src="modules/story/images/skin.png" alt=""></div>Piel
+                        <div class="circle-img"><img src="modules/story/images/skin.png" alt=""></div>
+                        <p>Piel</p>
                     </li>
                     <li>
-                        <div class="circle-img"><img src="modules/story/images/gem.png" alt=""></div>Gema
+                        <div class="circle-img"><img src="modules/story/images/gem.png" alt=""></div>
+                        <p>Gema</p>
                     </li>
                     <li>
-                        <div class="circle-img"><img src="modules/story/images/art.png" alt=""></div>Artesania
+                        <div class="circle-img"><img src="modules/story/images/art.png" alt=""></div>
+                        <p>Artesania</p>
                     </li>
                 </ul>
             </section>
         </div>
 
         <div class="info-graph">
-            <div class="tittle">Tus habilidades y progreso final</div>
-            <div class="subtittle">Conoce tus competencias destacadas</div>
+            <div class="title">Tus habilidades y progreso final</div>
+            <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph" @click="$router.replace({ name: 'story:skills' })">
-                <graph-svg />
+                <graph-svg :skin="$root.skin" />
             </div>
             <button class="wish-eval action primary" @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
                 tu potencial deseado</button>

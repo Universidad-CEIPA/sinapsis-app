@@ -1,13 +1,13 @@
-<section class="view-section" id="story-profile-skills">
-    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span> Habilidades
+<section class="view-section" id="story-profile-skills" :class="$root.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span> TUS HABILIDADES
     </header>
     <div class="skills">
 
         <div class="info-graph">
-            <div class="tittle">Tus habilidades y progreso final</div>
-            <div class="subtittle">Conoce tus competencias destacadas</div>
+            <div class="title">Tus habilidades y progreso final</div>
+            <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph">
-                <graph-svg />
+                <graph-svg :skin="$root.skin" />
             </div>
             <button class="wish-eval action primary">Ingresa tu potencial deseado</button>
         </div>

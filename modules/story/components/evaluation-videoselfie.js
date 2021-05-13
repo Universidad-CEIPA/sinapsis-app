@@ -1,9 +1,8 @@
 define([
     "text!./evaluation-videoselfie.html",
     "CapacitorVideoRecorder",
-    "CapacitorFilesystem",
     "local"
-], (html, CapacitorVideoRecorder, CapacitorFilesystem, local) => {
+], (html, CapacitorVideoRecorder, local) => {
 
     return {
         template: html,

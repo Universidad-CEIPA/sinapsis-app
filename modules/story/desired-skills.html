@@ -1,4 +1,4 @@
-<section class="view-section" id="desired-skills">
+<section class="view-section" id="desired-skills" :class="$root.skin">
     <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span>PERFIL</header>
     <ui-form :model="user" submit-label="Enviar" action="send" @success="success">
         <template #header>

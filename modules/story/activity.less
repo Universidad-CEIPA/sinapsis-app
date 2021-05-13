@@ -2,8 +2,6 @@
 
     .welcome {
         height: calc(100vh - 50px);
-        background: @bg-color;
-        color: @main-color;
         padding: 25px 25px 125px;
         position: relative;
         display: grid;
@@ -12,12 +10,15 @@
         .title-type {
             font-size: 2em;
             text-align: center;
+            display: grid;
+
 
             &.card {
                 margin-top: 20vh;
             }
 
             img {
+                place-self: center;
                 width: 50%;
                 margin-top: 20px;
             }
@@ -49,22 +50,17 @@
     }
 
     .activity {
-        background: @bg-color;
 
         .title {
             padding: 25px;
             min-height: 100px;
-            color: @main-color;
             font-size: 1.5em;
             text-align: center;
 
         }
 
         .finish-activity {
-            padding: 80px 20px;
             min-height: 200px;
-            background-color: @main-color;
-            border-radius: 25px;
             color: #fff;
             text-align: center;
             font-size: var(--font-size);
@@ -91,10 +87,15 @@
                 margin: 30px auto
             }
 
-            .completed {
-                margin: 30px auto;
-                background-color: @bg-color;
+            .bottom-finish {
+                padding-top: 10px;
+
+                .completed {
+                    margin: 30px auto;
+                }
             }
+
+
         }
 
     }
@@ -104,7 +105,6 @@
         display: flex;
         top: calc(50% - 50px);
         height: 100px;
-        background-color: @main-color;
         border-radius: 0 15px 15px 0;
 
         .options {
@@ -159,6 +159,125 @@
             }
         }
 
+    }
+
+
+    &.mision {
+        background: url('images/mision/textura.jpg') 50% 50%/cover no-repeat;
+
+        .welcome {
+            color: #fff;
+
+            .button-down {
+                background: white;
+                color: @mision-color;
+            }
+        }
+
+        .activity {
+
+            .title {
+                color: #fff;
+            }
+
+            .finish-activity {
+                background-color: #fff;
+                border-bottom-right-radius: 50px;
+                padding: 80px 20px;
+                color: @mision-color;
+                z-index: 0;
+
+                .arabesco-top,
+                .arabesco-down {
+                    display: none;
+                }
+
+                .image-center {
+                    position: absolute;
+                    top: 20px;
+                    right: calc(50% - (250px / 2));
+                    width: 250px;
+                    height: 200px;
+                    z-index: -1;
+                    background: url("images/arabesco-blue.svg") 50% 50%/cover no-repeat;
+                }
+
+                .bottom-finish {
+                    --size : 50px;
+                    background-color: @mision-color;
+                    color: #fff;
+                    border-bottom-right-radius: 50px;
+                    padding: 0 18px 78px;
+                    margin: calc(10px + var(--size)) -18px -78px;
+                    position: relative;
+
+                    &::before {
+                        
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: calc(-1 * var(--size) / 2);
+                        margin: 0;
+                        left: 0;
+                        right: 0;
+                        height: var(--size);
+                        border-radius: 100%;
+                        background: radial-gradient(ellipse , @mision-color 100%, transparent 77%);
+
+                        z-index: -1;
+                    }
+
+                    .completed {
+                        color: @mision-color;
+                        background-color: #fff;
+                    }
+                }
+            }
+
+        }
+
+        .panel {
+            background-color: @mision-color;
+        }
+    }
+
+    &.dorado {
+        .welcome {
+            background: @bg-color;
+            color: @main-color;
+        }
+
+        .activity {
+            background: @bg-color;
+
+            .title {
+                color: @main-color;
+            }
+
+            .finish-activity {
+                background-color: @main-color;
+                border-radius: 25px;
+                padding: 80px 20px;
+
+                .image-center {
+                    background: url("images/arabesco-blue.svg") 50% 50%/contain no-repeat;
+                    width: 250px;
+                    height: 40px;
+                    margin: auto;
+                }
+
+                .bottom-finish {
+
+                    .completed {
+                        background-color: @bg-color;
+                    }
+                }
+            }
+        }
+
+        .panel {
+            background-color: @dorado-color;
+        }
     }
 
 }

@@ -2,19 +2,63 @@
     background-color: @bg-color;
     color: #fff;
 
+    &.mision {
+        --slider-color: @mision-color;
+        --linear-color: @mision-color;
+
+        >header {
+            background: url('images/mision/textura.jpg') 0 0/cover no-repeat;
+        }
+
+        .skills {
+            background: url('images/mision/textura.jpg') 0 0/cover no-repeat;
+        }
+
+        .info-graph,
+        .details {
+            background-color: rgba(255, 255, 255, .7);
+            color: @mision-color
+        }
+
+
+        .explain {
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 10%, rgba(255, 255, 255, 0.7) 100%);
+        }
+    }
+
+    &.dorado {
+        --slider-color: @main-color;
+        --linear-color: #fff;
+
+
+        .info-graph,
+        .details {
+            background: radial-gradient(circle at left top, @good-color -60%, @bg-color 110%);
+            color: #fff;
+        }
+
+        .explain {
+            background: radial-gradient(circle at left top, @good-color -200%, @bg-color 110%);
+        }
+
+    }
+
+
+
+
     .skills {
         padding: 15px;
     }
 
     .info-graph {
-        background: radial-gradient(circle at left top, @good-color -60%, @bg-color 110%);
+
         border-radius: 10px;
-        color: #fff;
+
         padding: 20px;
         min-height: 200px;
 
-        .tittle {
-            border-bottom: #fff solid 2px;
+        .title {
+            border-bottom: var(--linear-color) solid 2px;
             width: fit-content;
             line-height: 25px;
             margin-bottom: 5px;
@@ -24,7 +68,7 @@
 
         }
 
-        .subtittle {
+        .subtitle {
             font-size: 0.9em;
             margin-left: 12px;
         }
@@ -32,11 +76,6 @@
         .graph {
             text-align: center;
             margin: 40px 0;
-
-
-            .tag-name {
-                color: white;
-            }
 
             #radar {
                 width: 500px;
@@ -68,7 +107,6 @@
 
     .details {
         margin-top: 10px;
-        background: radial-gradient(circle at left top, @good-color -60%, @bg-color 110%);
         border-radius: 10px;
 
         .line-time {
@@ -76,15 +114,13 @@
 
 
             .ui-range {
-                position: relative;
 
                 .input-field {
-                    padding: 0;
-                    -webkit-appearance: none;
-                    overflow: hidden;
-                    background: transparent;
-                    border-radius: 50px;
-                    width: 100%;
+                    opacity: 1;
+
+                    background: white;
+                    border: 1px solid var(--slider-color);
+
 
                     &:focus {
                         outline: none;
@@ -96,7 +132,7 @@
                         animate: 0.2s;
                         z-index: 10;
                         background-color: transparent;
-                        border: 1px solid @main-color;
+                        border: 1px solid var(--slider-color);
 
                     }
 
@@ -120,15 +156,11 @@
 
 
                     .thumb {
-                        box-shadow: calc(var(--input-height) / 2 + 100vh * -1) 0 0 calc(100vh - var(--input-height)) @main-color;
-                        border: 1px solid @main-color;
-                        height: var(--input-height);
-                        width: var(--input-height);
+                        box-shadow: calc(var(--input-height) / 2 + 100vh * -1) 0 0 calc(100vh - var(--input-height)) var(--slider-color);
+                        border: 1px solid var(--slider-color);
                         background-color: #fff;
-                        cursor: pointer;
-                        border-radius: 50px;
                         margin-top: -1px;
-                        -webkit-appearance: none;
+                        opacity: 1;
                     }
 
                     &::-webkit-slider-thumb {
@@ -143,19 +175,6 @@
                         .thumb;
                     }
 
-                    &::-ms-fill-lower {
-                        border: 0px solid #000000;
-                        border-radius: 100px;
-                        box-shadow: 0px 0px 0px #000000;
-                    }
-
-                    &::-ms-fill-upper {
-                        border: 0px solid #000000;
-                        border-radius: 100px;
-                        box-shadow: 0px 0px 0px #000000;
-                    }
-
-
                 }
 
 
@@ -167,7 +186,6 @@
 
         .explain {
             padding: 20px;
-            background: radial-gradient(circle at left top, @good-color -200%, @bg-color 110%);
 
             .competences {
                 display: grid;

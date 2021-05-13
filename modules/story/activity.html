@@ -1,4 +1,4 @@
-<section class="view-section" id="story-activity-view">
+<section class="view-section" id="story-activity-view" :class="$root.skin">
     <header v-if="header"><span data-icon="tiny-back" @click="viewBack"></span>
         <template v-if="activity.type === 'map'">
             Mapa Ciudades
@@ -39,13 +39,20 @@
         <component :is="typeComponent" :activity="activity">
             <div class="finish-activity">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
-                <h1> ¡Muy bien!</h1>
-                <img class="arabesco-center" src="modules/story/images/arabesco-blue.svg" alt="">
-                Has completado esta entrega, toca el botón y prepárate para la próxima lectura
-
-                <button class="action primary completed"
-                    @click="$router.replace({ name : 'story:evaluation:cuantitative'})">Marcar como completado</button>
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">
+                <h1> ¡Muy bien!</h1>
+                <div class="image-center"></div>
+
+                <div class="bottom-finish">
+                    Has completado esta entrega, toca el botón y prepárate para la próxima lectura
+
+                    <button class="action primary completed"
+                        @click="$router.replace({ name : 'story:evaluation:cuantitative'})">Marcar como
+                        completado</button>
+
+                </div>
+
+
             </div>
         </component>
     </div>

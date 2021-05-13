@@ -1,4 +1,4 @@
-<section class="view-section" id="story-home-view">
+<section class="view-section" id="story-home-view" :class="$root.skin">
     <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:welcome' })"></span>{{ story.name }}
     </header>
 
@@ -52,7 +52,10 @@
                 <section class="content">
                     <div class="slide-advance">
                         <div class="progress-chapter" :style="{'--width-advance': (c.advance * 100 / c.total)+'%' }">
-                            {{c.advance}}/{{c.total}}</div>
+                            <div class="text-advance">
+                                {{c.advance}}/{{c.total}}
+                            </div>
+                        </div>
                     </div>
                     <div class="summary">{{c.summary}}</div>
                 </section>
@@ -83,7 +86,8 @@
                     <div class="date">Enviado hoy</div>
                 </div>
 
-                <div class="activity completed" v-if="filterActivities === 'completed'" @click="$router.replace({ name: 'story:map' })">
+                <div class="activity completed" v-if="filterActivities === 'completed'"
+                    @click="$router.replace({ name: 'story:map' })">
                     <!--<img src="modules/story/images/icon-lectura.png" alt="">
                     <div class="title">Lee el capitulo 1</div>
                     <div class="content">La historia de los siete Sabios Portocalenses</div>

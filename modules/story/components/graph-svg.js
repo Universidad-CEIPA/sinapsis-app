@@ -4,6 +4,7 @@ define([
 
     return {
         template: html,
+        props: ["skin"],
         data() {
             return {
             };
@@ -23,7 +24,7 @@ define([
                 if (widthS > 370) {
                     return 500
                 }
-            }
+            },
         },
         components: {
         },
@@ -174,8 +175,10 @@ define([
                             /****    Create prototype line for tags in chart *****/
                             var lines = document.createElementNS(xmlns, 'g');
                             lines.setAttributeNS(null, "id", "arrow");
+                            
 
                             var line = document.createElementNS(xmlns, 'line');
+                            line.setAttribute("class", "arrow");
                             line.setAttributeNS(null, 'stroke', "#fff")
                             line.setAttributeNS(null, 'x1', this.cfg.radius);
                             line.setAttributeNS(null, 'y1', this.cfg.radius);
@@ -234,6 +237,7 @@ define([
                         obj.setAttributeNS(null, 'cx', this.cfg.radius);
                         obj.setAttributeNS(null, 'cy', this.cfg.radius);
                         obj.setAttributeNS(null, 'fill', "none");
+                        //obj.setAttribute("class", "graph-circle");
                         obj.setAttributeNS(null, 'stroke', "#c39b52");
                         obj.setAttributeNS(null, 'stroke-width', "2");
 

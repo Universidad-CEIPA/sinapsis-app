@@ -1,42 +1,16 @@
 #story-profile-view {
-    background-color: @bg-color;
     position: absolute;
     color: #fff;
 
-    .profile {
+    .profile-content {
         padding: 15px;
     }
 
+
     .info-general {
-        color: black;
-        background: white;
         border-radius: 10px;
         margin: 20px 0;
         min-height: 300px;
-
-        .city-icon {
-            display: inline-block;
-            width: 50px;
-            padding: 25px 0 10px 0;
-            height: 40px;
-            margin-left: 35px;
-            background: linear-gradient(180deg, rgba(38, 50, 57, 1) 2%, rgba(38, 50, 57, 0.6728538283062645) 13%, rgba(38, 50, 57, 1) 30%);
-            position: absolute;
-            margin-top: -5px;
-            border-radius: 0 0 10px 10px;
-
-            &::before {
-                content: "";
-                display: inline-block;
-                width: 50px;
-                height: 100%;
-                background-image: url("images/icono-pez.png");
-                background-position: 50% 50%;
-                background-repeat: no-repeat;
-                background-size: var(--icon-bg-size);
-                vertical-align: middle;
-            }
-        }
 
         h3 {
             font-weight: bold;
@@ -49,15 +23,10 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
 
-
             .info {
-                margin: 60px 10px 0 20px;
-
                 div {
                     margin-bottom: 20px;
                 }
-
-
 
                 .name {
                     font-size: 1.2em;
@@ -68,14 +37,12 @@
             }
 
             .avatar {
-                padding: 20px 0;
                 text-align: center;
             }
         }
 
         .tools {
             padding: 20px 10px 10px 30px;
-            background: linear-gradient(0deg, rgba(255, 255, 255, 1) -5%, rgba(194, 194, 194, 1) 96%);
             min-height: 100px;
             border-radius: 0 0 10px 10px;
 
@@ -90,6 +57,7 @@
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
+                justify-content: space-around;
                 font-size: 0.8em;
 
                 li {
@@ -104,28 +72,31 @@
                         width: 50px;
                         height: 50px;
                         border-radius: 25px;
-                        background: @good-color;
                         display: flex;
 
                         img {
                             margin: auto;
                         }
                     }
+
+                    p {
+                        padding: 2px;
+                        border-radius: 10px;
+                        margin-top: 5px;
+                    }
                 }
             }
         }
     }
 
-
     .info-graph {
-        background: radial-gradient(circle at left top, @good-color -60%, @bg-color 110%);
+
         border-radius: 10px;
-        color: #fff;
+
         padding: 20px;
         min-height: 200px;
 
-        .tittle {
-            border-bottom: #fff solid 2px;
+        .title {
             width: fit-content;
             line-height: 25px;
             margin-bottom: 5px;
@@ -135,7 +106,7 @@
 
         }
 
-        .subtittle {
+        .subtitle {
             font-size: 0.9em;
             margin-left: 12px;
         }
@@ -178,5 +149,157 @@
             --action-border: var(--action-border-primary);
         }
     }
+
+
+    &.dorado {
+        background-color: @bg-color;
+
+        .info-general {
+            background: white;
+            color: black;
+
+            .city-icon {
+                display: inline-block;
+                width: 50px;
+                padding: 25px 0 10px 0;
+                height: 40px;
+                margin-left: 35px;
+                background: linear-gradient(180deg, rgba(38, 50, 57, 1) 2%, rgba(38, 50, 57, 0.6728538283062645) 13%, rgba(38, 50, 57, 1) 30%);
+                position: absolute;
+                margin-top: -5px;
+                border-radius: 0 0 10px 10px;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 50px;
+                    height: 100%;
+                    background-image: url("images/icono-pez.png");
+                    background-position: 50% 50%;
+                    background-repeat: no-repeat;
+                    background-size: var(--icon-bg-size);
+                    vertical-align: middle;
+                }
+            }
+
+            .profile {
+                .info {
+                    margin: 60px 10px 0 20px;
+                }
+
+                .avatar {
+                    padding: 20px 0;
+                }
+            }
+
+
+            .tools {
+                background: linear-gradient(0deg, rgba(255, 255, 255, 1) -5%, rgba(194, 194, 194, 1) 96%);
+
+                .tools-list {
+                    li {
+                        .circle-img {
+                            background: @good-color;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .info-graph {
+            background: radial-gradient(circle at left top, @good-color -60%, @bg-color 110%);
+            color: #fff;
+
+            .title {
+                border-bottom: #fff solid 2px;
+            }
+        }
+    }
+
+    &.mision {
+        background: url('images/mision/textura.jpg') 0 0/cover no-repeat;
+        ;
+
+        --background-section: rgba(255, 255, 255, .7);
+
+        >header {
+            background: transparent;
+        }
+
+        .info-general {
+            background: var(--background-section);
+            color: @bg-color;
+
+            .city-icon {
+                display: none;
+            }
+
+            .profile {
+                .info {
+                    margin: 60px -20px 0 20px;
+                }
+
+                .avatar {
+                    padding: 0;
+                }
+            }
+
+            .tools {
+                --size: 50px;
+
+                position: relative;
+                margin-top: calc(var(--size) / 2);
+
+                &::before {
+
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: calc(-1 * var(--size) / 2);
+                    margin: 0 -30px calc(-1 * var(--size) / 2);
+                    ;
+                    left: 0;
+                    right: 0;
+                    height: calc(2*var(--size));
+                    border-radius: 100%;
+                    background: radial-gradient(ellipse 209% 50% at 50% 3%, @bg-color -1000%, @bg-color -48%, transparent 50%, transparent 77%);
+                }
+
+                .tools-list {
+                    li {
+                        .circle-img {
+                            background: @mision-color;
+                        }
+
+                        p {
+                            background-color: @good-color;
+                        }
+                    }
+                }
+            }
+        }
+
+        .info-graph {
+            background: var(--background-section);
+            color: @mision-color;
+
+            .title {
+                border-bottom: @mision-color solid 2px;
+            }
+        }
+
+        .info-actions {
+            .primary {
+                color: @mision-color;
+                background-color: #fff;
+            }
+
+            .logout {
+                background-color: @mision-color;
+            }
+        }
+    }
+
 
 }

@@ -14,6 +14,16 @@ define([
 				currentCourse
 			};
 		},
+		computed: {
+			skin() {
+				if (this.currentCourse !== null) {
+					return this.currentCourse.skin[0]
+				}else{
+					return ""
+				}
+			}
+
+		},
 		methods: {
 			destroyCourse() {
 				local("currentCourse", null);
