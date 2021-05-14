@@ -18,7 +18,7 @@ define([
 			skin() {
 				if (this.currentCourse !== null) {
 					return this.currentCourse.skin[0]
-				}else{
+				} else {
 					return ""
 				}
 			}
@@ -37,15 +37,21 @@ define([
 			},
 			processUser(user) {
 				if (user.birthday) {
-					let current_datetime = new Date(user.birthday)
-					user.birthday = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate()
+					user.birthday = this.$toDateValue(user.birthday)
 				}
 				this.user = user;
 				local("user", user);
 			},
-			setCourse(course) {
-				local("currentCourse", course);
-				this.currentCourse = course;
+			async setCourse(course) {
+
+				console.log(course)
+				let currentCourse = course
+				currentCourse.schedule = await api.post('students/getInfoCourse', { courseId: course.course })
+
+				local("currentCourse", currentCourse);
+				this.currentCourse = currentCourse;
+				return true
+
 			}
 		}
 	};

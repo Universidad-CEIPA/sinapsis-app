@@ -12,14 +12,15 @@ define([
                 user: local('user'),
                 username: local('user').name,
                 options: [
-                    { id: 'CC', name: 'CC' },
-                    { id: 'CE', name: 'CE' },
-                    { id: 'TI', name: 'TI' }
+                    { id: 'CC', name: 'Cédula de Ciudadania' },
+                    { id: 'CE', name: 'Cédula de Extranjería' },
+                    { id: 'TI', name: 'Tarjeta de Identidad' }
                 ]
             };
         },
         methods: {
             success(result, data) {
+                // this.$toDateValue()
                 this.$root.processUser(result);
                 if (this.$root.currentCourse) {
                     this.$router.replace({ name: "story:profile" });

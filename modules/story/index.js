@@ -18,7 +18,8 @@ define([
                 filterActivities: 'progress',
                 maxShow: 0,
                 chaptersShow: 0,
-                chapters:
+                chapters:[]
+                /*chapters:
                     [{
                         name: "Capítulo 1",
                         advance: "1",
@@ -50,11 +51,12 @@ define([
                         type: "card"
                     }
 
-                    ]
+                    ]*/
 
             };
         },
         computed: {
+
         },
         components: {
             UiModal,
@@ -69,6 +71,7 @@ define([
                 if (lengthSpace <= this.chapters.length) {
                     this.startShow = nextStart
                 }
+                this.updateLayout();
             },
             openActivity(c) {
                 this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
@@ -79,6 +82,7 @@ define([
                 if (previousStart >= 0) {
                     this.startShow = previousStart
                 }
+                this.updateLayout();
             },
             updateLayout() {
                 let spaceAvailable = Math.floor((window.screen.width - 40) / this.widthChapter)
@@ -95,9 +99,20 @@ define([
             this.updateLayout();
         },
         mounted() {
+            this.story.schedule.forEach((program) => {
+                let activity = program.activity
+
+                activity.total = 5
+                activity.advance = 2
+                activity.title = "Capitulo " + activity.id
+                activity.scroll = Math.random() < 0.5;
+
+                this.chapters.push(activity)
+            })
             window.addEventListener("resize", this._resizeHandler = e => {
                 this.updateLayout();
             });
+            this.updateLayout();
         },
         beforeDestroy() {
             window.removeEventListener("resize", this._resizeHandler);

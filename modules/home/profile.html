@@ -22,7 +22,7 @@
                 Ingresa un número de identificación valido
             </template>
         </ui-input>
-        <ui-input type="date" label="Fecha de nacimiento" v-model="user.birthday" required>
+        <ui-input type="date" label="Fecha de nacimiento" v-model="user.birthday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
             <template #validation>
                 Ingresa una fecha valida
             </template>

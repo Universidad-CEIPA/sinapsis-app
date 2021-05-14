@@ -8,8 +8,12 @@ define([
         template: html,
         data() {
             return {
-                course: this.$root.currentCourse
             };
+        },
+        computed:{
+            course(){
+                return this.$root.currentCourse
+            }
         },
         methods: {   
         },

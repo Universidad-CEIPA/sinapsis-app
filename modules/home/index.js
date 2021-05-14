@@ -19,19 +19,18 @@ define([
 			},
 		},
 		methods: {
-			goCourse() {
-				this.$root.setCourse(this.projects[this.currentIndex]);
-				this.$router.replace({ name: "story:welcome" });
+			async goCourse() {
+				if (await this.$root.setCourse(this.projects[this.currentIndex])){
+					this.$router.replace({ name: "story:welcome" });
+				}
 			},
 			handlePointerDown(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
-				console.log(e)
 				this._pointerStart = e;
 				this._lastDelta = 0;
 			},
 			handlePointerMove(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
-				console.log(e)
 				if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 10) {
 					this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
 
