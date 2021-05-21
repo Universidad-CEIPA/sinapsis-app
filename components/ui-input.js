@@ -126,10 +126,10 @@ define([
 				switch (this.type) {
 					case "number":
 						return +rawValue;
-					case "date":
+					/*case "date":
 						return dayjs(rawValue).toDate();
 					case "datetime-local":
-						return dayjs(rawValue).toDate();
+						return dayjs(rawValue).toDate();*/
 					default:
 						return rawValue === "" ? null : rawValue;
 				}

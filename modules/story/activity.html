@@ -4,7 +4,7 @@
             Mapa Ciudades
         </template>
         <template v-else>
-            {{activity.title }}
+            {{ title }}
         </template>
 
     </header>
@@ -22,7 +22,7 @@
 
         <div class="content">
             <div class="title">
-                {{activity.summary}}
+                {{activity.activity.name}}
             </div>
 
             <div class="alert">
@@ -35,9 +35,9 @@
         <button class="action primary button-down" @click="doDown">v</button>
     </div>
     <div class="activity">
-        <div class="title" v-if="header || !welcome">{{activity.summary}}</div>
-        <component :is="typeComponent" :activity="activity">
-            <div class="finish-activity">
+        <div class="title" v-if="header || !welcome">{{activity.activity.name}}</div>
+        <component :is="typeComponent" :activity="activity.activity">
+            <div class="finish-activity" v-if="!activity.completed">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <h1> ¡Muy bien!</h1>
@@ -46,8 +46,7 @@
                 <div class="bottom-finish">
                     Has completado esta entrega, toca el botón y prepárate para la próxima lectura
 
-                    <button class="action primary completed"
-                        @click="$router.replace({ name : 'story:evaluation:cuantitative'})">Marcar como
+                    <button class="action primary completed" @click="completedActivity">Marcar como
                         completado</button>
 
                 </div>
@@ -57,24 +56,23 @@
         </component>
     </div>
 
-    <div class="panel">
+    <div class="panel" style="display: none;">
         <div class="options" v-show="optionsPanel">
             <div v-if="type !== 'audio'" @click="type = 'audio';optionsPanel= !optionsPanel"><img
                     src="modules/story/images/audio.svg" alt=""></div>
             <div v-if="type !== 'video'" @click="type = 'video';optionsPanel= !optionsPanel"><img
                     src="modules/story/images/video.svg" alt=""></div>
-            <div v-if="type !== 'read'" @click="type = 'read';optionsPanel= !optionsPanel">Lect</div>
+            <div v-if="type !== 'reading'" @click="type = 'reading';optionsPanel= !optionsPanel">Lect</div>
         </div>
         <div class="control" @click="optionsPanel= !optionsPanel"> {{ optionsPanel ? '<' : '>' }} </div>
         </div>
-
-        <div class="scroll-activities" :style="{'--show-activities':maxShow }" v-if="activity.scroll">
+        <div class="scroll-activities" :style="{'--show-activities':maxShow }" v-if="scroll">
             <div class="back">
                 <span v-if="startShow != 0" @click="previousSlider">
                     < </span>
             </div>
             <div class="items">
-                <div class="item" v-for="item in itemsShow">
+                <div class="item" v-for="item in itemsShow" @click="changeActivity(item.position)">
                     <img :src="item.img" alt="">
                     {{ item.name}}
                 </div>

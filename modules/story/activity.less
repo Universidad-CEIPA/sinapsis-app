@@ -50,6 +50,7 @@
     }
 
     .activity {
+        min-height: calc(100vh - var(--header-height) - (var(--header-padding) * 2));
 
         .title {
             padding: 25px;
@@ -203,7 +204,7 @@
                 }
 
                 .bottom-finish {
-                    --size : 50px;
+                    --size: 50px;
                     background-color: @mision-color;
                     color: #fff;
                     border-bottom-right-radius: 50px;
@@ -212,7 +213,7 @@
                     position: relative;
 
                     &::before {
-                        
+
                         content: "";
                         display: block;
                         position: absolute;
@@ -222,7 +223,7 @@
                         right: 0;
                         height: var(--size);
                         border-radius: 100%;
-                        background: radial-gradient(ellipse , @mision-color 100%, transparent 77%);
+                        background: radial-gradient(ellipse, @mision-color 100%, transparent 77%);
 
                         z-index: -1;
                     }

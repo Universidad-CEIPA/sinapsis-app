@@ -5,9 +5,9 @@
         <li class="big" :class="{'active':fontSize === '1.3em'}" @click="fontSize = '1.3em'">a</li>
     </ul>
     <div class="name">
-        Los Siete Sabios y la importancia del comercio
+        {{ activity.name }}
     </div>
-    <div class="text" v-html="activity.text">
+    <div class="text" v-html="activity.content">
         
     </div>
 

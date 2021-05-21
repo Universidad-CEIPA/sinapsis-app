@@ -51,13 +51,14 @@
                 </div>
                 <section class="content">
                     <div class="slide-advance">
-                        <div class="progress-chapter" :style="{'--width-advance': (c.advance * 100 / c.total)+'%' }">
+                        <div class="progress-chapter"
+                            :style="{'--width-advance': (advance(c.activities) * 100 / c.activities.length)+'%' }">
                             <div class="text-advance">
-                                {{c.advance}}/{{c.total}}
+                                {{advance(c.activities)}}/{{c.activities.length}}
                             </div>
                         </div>
                     </div>
-                    <div class="summary">{{c.summary}}</div>
+                    <div class="summary">{{c.name}}</div>
                 </section>
             </div>
         </div>
@@ -87,12 +88,11 @@
                 </div>
 
                 <div class="activity completed" v-if="filterActivities === 'completed'"
-                    @click="$router.replace({ name: 'story:map' })">
-                    <!--<img src="modules/story/images/icon-lectura.png" alt="">
+                    > <!-- @click="$router.replace({ name: 'story:map' })"-->
+                    <img src="modules/story/images/icon-lectura.png" alt="">
                     <div class="title">Lee el capitulo 1</div>
                     <div class="content">La historia de los siete Sabios Portocalenses</div>
-                    <div class="date">Enviado hace 8 días</div>-->
-                    <div class="content">Ver mapa</div>
+                    <div class="date">Enviado hace 8 días</div>
                 </div>
 
 
@@ -100,7 +100,9 @@
         </section>
     </div>
 
-    <tour v-if="modal" @close="modal = false" selected="position" />
+    <alert v-if="modal" @close="modal = false" />
+
+    <tour v-if="tour" @close="tour = false" selected="position" />
 
     <finish-modal v-if="finished" @close="finished = false" />
 </section>

@@ -48,7 +48,6 @@ define([
 			},
 			handlePointerUp(e) {
 				if (e.changedTouches) e = e.changedTouches[0];
-				console.log(e)
 				if (Math.abs(this._pointerStart.clientX - e.clientX) > 10 && this.dragProject >= 0 && this.dragProject <= this.projects.length - 1 && this.dragProject !== null) {
 					this.currentIndex = this.dragProject
 				}

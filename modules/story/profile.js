@@ -10,7 +10,7 @@ define([
         data() {
             return {
                 story: this.$root.currentCourse,
-                modal: true,
+                modal: false,
             };
         },
         computed: {
