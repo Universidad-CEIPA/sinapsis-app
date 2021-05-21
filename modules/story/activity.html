@@ -16,7 +16,7 @@
             </template>
             <template v-else-if="activity.type === 'map'">
                 Bienvenido a
-                <img :src="activity.logo" alt="">
+                <img :src="cover" alt="">
             </template>
         </div>
 
@@ -34,7 +34,7 @@
 
         <button class="action primary button-down" @click="doDown">v</button>
     </div>
-    <div class="activity">
+    <div class="activity" :class="{ 'scroll-padding' : scroll}">
         <div class="title" v-if="header || !welcome">{{activity.activity.name}}</div>
         <component :is="typeComponent" :activity="activity.activity">
             <div class="finish-activity" v-if="!activity.completed">
@@ -44,10 +44,11 @@
                 <div class="image-center"></div>
 
                 <div class="bottom-finish">
-                    Has completado esta entrega, toca el botón y prepárate para la próxima lectura
+                    <strong> Has completado esta entrega,</strong> toca el botón y prepárate para la próxima lectura
 
-                    <button class="action primary completed" @click="completedActivity">Marcar como
-                        completado</button>
+                    <button class="action primary completed" @click="completedActivity">
+                        Marcar como completado
+                    </button>
 
                 </div>
 

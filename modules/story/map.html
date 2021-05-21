@@ -10,9 +10,9 @@
 
         <div v-for="group in finalDistribution" class="group-city">
             <div v-for="city in group" class="city-content">
-                <div class="city" :style="city.style" @click="openActivity(city.activity)">
+                <div class="city" :style="city.style" @click="openActivity(city)">
                     <div class="city-logo">
-                        <img :src="city.logo" alt="">
+                        <img :src="city.cover" alt="">
                     </div>
                     <div class="city-name">{{ city.name}}</div>
                 </div>

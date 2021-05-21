@@ -14,6 +14,7 @@ define([
                 type: "reading",
                 activity: {},
                 title: "",
+                cover: null,
                 startShow: 0,
                 scroll: false,
                 activityScrolls: [],
@@ -100,34 +101,41 @@ define([
         mounted() {
             if (this.content) {
                 let chapter = JSON.parse(this.content)
-                this.title = chapter.title
-                this.scroll = chapter.scroll
+                if (chapter.type !== "map") {
+                    this.title = chapter.title
+                    this.scroll = chapter.scroll
 
-                if (chapter.scroll) {
-                    let position = 0
-                    chapter.activities.map((a) => {
-                        let activityName = {}
-                        activityName.name = a.activity.name
-                        activityName.position = position
-                        activityName.img = "modules/story/images/Navegante.svg"
-                        position++
-                        this.activityScrolls.push(activityName)
-                    })
-                    this.activity = chapter.activities[0]
-                    this.selectScroll = 0
-                } else {
-                    let activityPending = chapter.activities.filter(a => !a.completed)
-
-                    if (activityPending.length) {
-                        this.activity = activityPending[0]
+                    if (chapter.scroll) {
+                        let position = 0
+                        chapter.activities.map((a) => {
+                            let activityName = {}
+                            activityName.name = a.activity.name
+                            activityName.position = position
+                            activityName.img = "modules/story/images/Navegante.svg"
+                            position++
+                            this.activityScrolls.push(activityName)
+                        })
+                        this.activity = chapter.activities[0]
+                        this.selectScroll = 0
                     } else {
-                        this.activity = chapter.activities[chapter.activities.length - 1]
+                        let activityPending = chapter.activities.filter(a => !a.completed)
+
+                        if (activityPending.length) {
+                            this.activity = activityPending[0]
+                        } else {
+                            this.activity = chapter.activities[chapter.activities.length - 1]
+                        }
                     }
+
+                    this.type = this.activity.activity.type
+                } else {
+                    this.cover = chapter.cover
+                    this.activity.type = chapter.type
+                    this.activity.completed = false
+                    this.activity.activity = chapter.project_activities
                 }
 
 
-
-                this.type = this.activity.activity.type
             } else {
                 this.$router.replace({ name: "story:home" })
             }

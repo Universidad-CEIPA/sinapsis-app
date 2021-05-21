@@ -52,6 +52,10 @@
     .activity {
         min-height: calc(100vh - var(--header-height) - (var(--header-padding) * 2));
 
+        &.scroll-padding {
+            padding-bottom: 80px;
+        }
+
         .title {
             padding: 25px;
             min-height: 100px;
@@ -61,7 +65,9 @@
         }
 
         .finish-activity {
+            max-width: 380px;
             min-height: 200px;
+            margin: 20px auto;
             color: #fff;
             text-align: center;
             font-size: var(--font-size);
@@ -92,7 +98,26 @@
                 padding-top: 10px;
 
                 .completed {
+
+                    align-items: center;
                     margin: 30px auto;
+                    text-align: initial;
+                    padding: 0 15px;
+                    max-width: 230px;
+                    line-height: inherit;
+                    font-weight: bold;
+                    display: inline-flex;
+
+                    font-size: var(--font-size);
+
+                    .has-icon;
+
+                    &::before {
+                        filter: none;
+                        width: calc(var(--action-height) * 0.7);
+                        height: calc(var(--action-height) * 0.7);
+                    }
+
                 }
             }
 
@@ -231,6 +256,8 @@
                     .completed {
                         color: @mision-color;
                         background-color: #fff;
+
+                        .icon("complete-mision");
                     }
                 }
             }
@@ -271,6 +298,7 @@
 
                     .completed {
                         background-color: @bg-color;
+                        .icon("complete-dorado");
                     }
                 }
             }

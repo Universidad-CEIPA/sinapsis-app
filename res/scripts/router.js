@@ -21,7 +21,7 @@ define([
 			{ name: "story:evaluation:video", path: "/story/autoevaluation/video", component: m("story/autoevaluation"), props: { type: "videoselfie" } },
 			{ name: "story:finish", path: "/story/finish", component: m("story/finish") },
 			{ name: "story:home", path: "/story/home", component: m("story/index"), props: true },
-			{ name: "story:map", path: "/story/map", component: m("story/map") },
+			{ name: "story:map", path: "/story/map", component: m("story/map"), props: true },
 			{ name: "story:profile", path: "/story/profile", component: m("story/profile") },
 			{ name: "story:skills", path: "/story/skills", component: m("story/skills") },
 			{ name: "story:skills:desired", path: "/story/desired", component: m("story/desired-skills") },

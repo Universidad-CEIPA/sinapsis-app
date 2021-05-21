@@ -4,102 +4,10 @@ define([
 
     return {
         template: html,
+        props: ["content"],
         data() {
             return {
-                cities: [
-                    {
-                        logo: "modules/story/images/camera.png", name: "Cíbola o Teyuna", isLast: 0, activity: {
-                            logo: "modules/story/images/camera.png",
-                            name: "Cíbola o Teyuna",
-                            advance: "1",
-                            total: "5",
-                            summary: "Cíbola o Teyuna",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map"
-                        }
-                    },
-                    {
-                        logo: "modules/story/images/camera.png", name: "Tunja o Junsa", isLast: 0, activity: {
-                            logo: "modules/story/images/camera.png",
-                            name: "Tunja o Junsa",
-                            advance: "1",
-                            total: "5",
-                            summary: "Tunja o Junsa",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map"
-                        }
-                    },
-                    {
-                        logo: "modules/story/images/camera.png", name: "Behirá o Bejirá", isLast: 0, activity: {
-                            logo: "modules/story/images/camera.png",
-                            name: "Behirá o Bejirá",
-                            advance: "1",
-                            total: "5",
-                            summary: "Behirá o Bejirá",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map"
-                        }
-                    },
-                    {
-                        logo: "modules/story/images/camera.png", name: "Ansolí", isLast: 0, activity: {
-                            logo: "modules/story/images/camera.png",
-                            name: "Ansolí",
-                            advance: "1",
-                            total: "5",
-                            summary: "Ansolí",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map"
-                        }
-                    },
-                    {
-                        logo: "modules/story/images/camera.png", name: "Quimbayá o chinchiná", isLast: 0, activity: {
-                            logo: "modules/story/images/camera.png",
-                            name: "Quimbayá o chinchiná",
-                            advance: "1",
-                            total: "5",
-                            summary: "Quimbayá o chinchiná",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map"
-                        }
-                    },
-                    {
-                        logo: "modules/story/images/camera.png", name: "Antugá", isLast: 0, activity: {
-                            logo: "modules/story/images/camera.png",
-                            name: "Antugá",
-                            advance: "1",
-                            total: "5",
-                            summary: "Antugá",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map"
-                        }
-                    },
-                    {
-                        logo: "modules/story/images/camera.png", name: "El Dorado", isLast: 1, activity: {
-                            name: "El Dorado",
-                            advance: "1",
-                            total: "5",
-                            summary: "El Dorado",
-                            title: "CAPÍTULO 3",
-                            text: '<p>Hacia comienzos del siglo VIII de la era cristiana, durante el apogeo de las sociedades germánicas de laPenínsula Ibérica, un grupo de siete obispos portocalenses de la secta arriana dedicaban sus vidas al estudio y conocimiento de la obra de Dios en la tierra y su palabra.Estos obispos, que también eran eruditos y filósofos, después de muchos años de estudio y meditación llegaron a la conclusión que el conocimiento de la obra del Dios debía estar acompañado del conocimiento y aceptación de otros pueblos y modos de vida a partir de su comprensión de la compasión de Cristo. </p> <p> Debido a sus filosofías e interpretaciones de la Palabra, contaban tanto con fieles seguidores - una minoría entre la mayoría católica romana ibérica - como con acérrimos enemigos, especialmente dentro de la Iglesia Católica, que no sólo condenaba que los arrianos no asumieran a Cristo como un ser divino (desde lo que justamente partía su indiscriminada compasión hacia la condición humana), sino que también veía con malos ojos un discurso de aceptación y reconocimiento de otros pueblos con base pacífica, arguyendo que se ponía en contra de la sagrada labor de la evangelización, la encarnación de la esencia divina en el hombre y la conversión al catolicismo de todas las gentes de la tierra. </p> <p> Sin embargo, los reyes y obispos católicos visigodos no emprendieron acciones directas en contra de los obispos arrianos, conocidos como Los Siete Sabios Portocalenses, quienes tenían una pequeña, pero consistente y fervorosa cantidad de seguidores. Las noticias de sus palabras llegaban lejos y la periferia galaica se vio enriquecida tanto por su sabiduría como por sus decisiones estratégicas en cuanto a temas de comercio. Así, los Sabios planteaban que una de las formas más efectivas de aprender y recopilar conocimientos era mediante el comercio, ya que las relaciones de intercambio exigían un respeto mutuo por parte de ambos lados, además del privilegio que implicaba convivir con diversas comunidades y aprender de sus costumbres. </p> <p> De esta manera comenzaron a plantear que las ciudades deberían relacionarse a partir de rutas comerciales y no desde las conquistas armadas, costumbre no desconocida en los antiguos imperios de la Humanidad. Sus planes fueron fructíferos, los Sabios vivían sin problemas con sus comunidades, hasta que una conjunción de eventualidades y nuevos desafíos les obligaron a tomar una decisión que cambiaría sus vidas radicalmente. </p>',
-                            scroll: false,
-                            type: "map",
-                            logo: "modules/story/images/camera.png"
-                        }
-                    },
-                ],
-
+                locations: [],
                 finalDistribution: [],
                 sizeWidth: 0,
                 sizeHeight: 0
@@ -111,7 +19,7 @@ define([
                 let distribute = [1]
 
                 let acumulate = 1
-                let length = this.cities.length
+                let length = this.locations.length
                 let position = 1
 
                 while (acumulate < length) {
@@ -148,7 +56,7 @@ define([
                 let top = 1
 
                 distribute.forEach((value, index) => {
-                    let tempContent = this.cities.slice(start, start + value)
+                    let tempContent = this.locations.slice(start, start + value)
                     let styleCSS = {}// = { "text-align": "-webkit-center", "vertical-align": "middle" }
                     styleCSS["text-align"] = "-webkit-center"
                     styleCSS["vertical-align"] = "middle"
@@ -163,7 +71,7 @@ define([
                         side = side * -1
                         tempContent[0].pos = 0
 
-                        if (tempContent[0].isLast === 0) {
+                        if (tempContent[0].end === 0) {
                             tempContent[0].style = styleCSS
                         }
                     } else {
@@ -263,6 +171,7 @@ define([
                 document.querySelector(".map-container").appendChild(canvas)
             },
             openActivity(c) {
+                c.type = "map"
                 this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
             },
             updateLayout() {
@@ -273,10 +182,28 @@ define([
 
                 this.drawRoads();
             },
+            reset() {
+
+                if (this.content) {
+                    let chapter = JSON.parse(this.content)
+                    this.title = chapter.title
+
+                    this.locations = chapter.maps.map.locations
+
+                    this.locations.map(c => {
+                        c.cover = "modules/story/images/camera.png"
+                    })
+
+                } else {
+                    this.$router.replace({ name: "story:home" })
+                }
+
+            }
         },
         components: {
         },
         mounted() {
+            this.reset()
             this.calculateDistribute();
             this.updateLayout();
 

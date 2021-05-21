@@ -52,7 +52,12 @@ define([
                 this.updateLayout();
             },
             openActivity(c) {
-                this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                if (c.activities.length) {
+                    this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                } else if (c.maps.id) {
+                    this.$router.push({ name: 'story:map', params: { content: JSON.stringify(c) } })
+                }
+
             },
             previousSlider() {
                 let previousStart = this.startShow - 1;
