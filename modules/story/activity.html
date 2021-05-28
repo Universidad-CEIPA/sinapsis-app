@@ -36,7 +36,7 @@
     </div>
     <div class="activity" :class="{ 'scroll-padding' : scroll}">
         <div class="title" v-if="header || !welcome">{{activity.activity.name}}</div>
-        <component :is="typeComponent" :activity="activity.activity">
+        <component :is="typeComponent" :activity="activity.activity" :course="course">
             <div class="finish-activity" v-if="activity.completed !== 'completed'">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">

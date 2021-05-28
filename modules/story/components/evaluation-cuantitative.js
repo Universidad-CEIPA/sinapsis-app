@@ -9,7 +9,14 @@ define([
         props: ["questions"],
         data() {
             return {
-                answers: []
+                answers: {
+                    courseId: this.$root.currentCourse.courseId,
+                    studentId: this.$root.currentCourse.studentId,
+                    questionId: this.questions.id,
+                    evaluation: 0,
+                    type: this.questions.type,
+                    title: this.questions.content
+                },
                 //saveEvaluation($courseId, $studentId, $questionId, $evaluation, $type)
             }
         },
@@ -27,10 +34,11 @@ define([
                 etq.style.left = (Math.floor(value * pxls) + 2) + "px";
 
             },
+            async success(result, data) {
+                this.$emit('next')
+            },
         },
         mounted() {
-            this.answers = this.questions
-            this.answers.answer = 0
             /*Object.entries(this.answers).forEach(([key, question]) => {
                 question.answer = 0
             });*/

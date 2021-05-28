@@ -1,11 +1,11 @@
-<ui-form :model="answers" submit-label="Continuar" action="send" @success="success" id="evaluation-cuantitative" >
+<ui-form :model="answers" submit-label="Continuar" action="students/saveEvaluation"  @success="success" id="evaluation-cuantitative" >
     <template #header>
         <h3>Ponte a prueba</h3>
         <p>Realiza la siguiente autoevaluación según cada pregunta</p>
     </template>
 
-    <ui-input type="range" :label="answers.content" v-model="answers.answer" required
-    @input="calculateLeft(answers.answer, $event)" @click="calculateLeft(answers.answer, $event)">
+    <ui-input type="range" :label="answers.name" v-model="answers.evaluation" required
+    @input="calculateLeft(answers.evaluation, $event)" @click="calculateLeft(answers.evaluation, $event)">
     <template #validation>
         Ingresa un valor
     </template>
@@ -17,5 +17,4 @@
             Ingresa un valor
         </template>
     </ui-input>-->
-    <button  @click="$emit('next')"> next</button>
 </ui-form>
