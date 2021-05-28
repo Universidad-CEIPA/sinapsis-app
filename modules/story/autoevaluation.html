@@ -1,4 +1,5 @@
-<section class="view-section" id="form-autoevaluation" :class="$root.skin">
-    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span>AUTOEVALUACIÓN</header>
-    <component :is="typeComponent" :questions="questionsType" :skin="$root.skin"></component>
+<section class="view-section" id="form-autoevaluation" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span>AUTOEVALUACIÓN
+    </header>
+    <component :is="typeComponent" :questions="questions[currentQuestion]" @next="nextQuestion"></component>
 </section>

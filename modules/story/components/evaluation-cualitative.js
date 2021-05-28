@@ -12,14 +12,12 @@ define([
                 answers: []
             };
         },
-        methods: {
-        },
-
         mounted() {
             this.answers = this.questions
-            Object.entries(this.answers).forEach(([key, question]) => {
+            this.answers.answer = ""
+            /*Object.entries(this.answers).forEach(([key, question]) => {
                 question.answer = ""
-            });
+            });*/
         },
         components: {
             UiForm,

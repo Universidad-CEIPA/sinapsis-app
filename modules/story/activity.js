@@ -1,13 +1,15 @@
 define([
     "text!./activity.html",
+    "api",
+    "local",
     "./components/activity-audio",
     "./components/activity-read",
     "./components/activity-video"
-], (html, activityAudio, activityRead, activityVideo) => {
+], (html, api, local, activityAudio, activityRead, activityVideo) => {
 
     return {
         template: html,
-        props: ["content"],
+        props: ["content", "course"],
         data() {
             return {
                 optionsPanel: false,
@@ -18,23 +20,18 @@ define([
                 startShow: 0,
                 scroll: false,
                 activityScrolls: [],
-                selectScroll: 0,
-                /*activityScrolls: [
-                    { name: "Abridores de Caminos", img: "modules/story/images/Navegante.svg" },
-                    { name: "Sacerdotes", img: "modules/story/images/Sacerdotes.svg" },
-                    { name: "Oradores", img: "modules/story/images/Oradores.svg" },
-                    { name: "Magos", img: "modules/story/images/Magos.svg" },
-                    { name: "Navegante", img: "modules/story/images/Navegante.svg" }
-                ]*/
-
+                selectScroll: 0
             };
         },
         computed: {
-            maxShow() {
-                return 4
+            header() {
+                return this.activity.type !== "card"
             },
             itemsShow() {
                 return this.activityScrolls.slice(this.startShow, this.maxShow + this.startShow)
+            },
+            maxShow() {
+                return 4
             },
             typeComponent() {
                 return {
@@ -43,31 +40,51 @@ define([
                     "video": "activity-video"
                 }[this.type];
             },
-            header() {
-                return this.activity.type !== "card"
-            },
             welcome() {
                 return this.activity.type === "map"
             }
         },
         methods: {
-            completedActivity() {
+            changeActivity(index) {
+                this.selectScroll = index
                 let chapter = JSON.parse(this.content)
-                chapter.activities.map((a) => {
-                    if (a.id === this.activity.id) {
-                        a.completed = true
+                this.activity = chapter.activities[index]
+            },
+            async completedActivity() {
+                if (this.activity.type !== "map") {
+                    let result = await api.post('students/studentCourseActivity', {
+                        student: this.course.courseId,
+                        activity: this.activity.id,
+                        status: "completed"
+                    })
+
+
+                    let chapter = JSON.parse(this.content)
+                    chapter.activities.map((a) => {
+                        if (a.id === this.activity.id) {
+                            a.completed[0] = "completed"
+                        }
+                    })
+                    this.$root.updateChapters(chapter)
+
+                    let activityPending = chapter.activities.filter(a => a.completed[0] !== "completed")
+
+
+
+
+                    if (activityPending.length === 0) {
+                        this.$router.push({ name: 'story:home', params: { chapterModal: true } })
+                    } else if (!this.scroll) {
+                        this.$router.replace({ name: 'story:home' })
                     }
-                })
-
-                let activityPending = chapter.activities.filter(a => !a.completed)
-
-                this.$root.updateChapters(chapter)
-
-                if (activityPending.length === 0) {
-                    this.$router.push({ name: 'story:home', params: { chapterModal: true } })
-                } else if (!this.scroll) {
-                    this.$router.replace({ name: 'story:home' })
+                } else if (this.activity.activity.questions.length) {
+                    local("questions", this.activity.activity.questions)
+                    this.$router.push({ name: 'story:evaluation' })
+                } else {
+                    this.$router.replace({ name: 'story:map' })
                 }
+
+
             },
             nextSlider() {
                 let nextStart = this.startShow + 1;
@@ -92,13 +109,9 @@ define([
                     this.$router.replace({ name: 'story:home' })
                 }
             },
-            changeActivity(index) {
-                this.selectScroll = index
-                let chapter = JSON.parse(this.content)
-                this.activity = chapter.activities[index]
-            }
+
         },
-        mounted() {
+        created() {
             if (this.content) {
                 let chapter = JSON.parse(this.content)
                 if (chapter.type !== "map") {
@@ -118,7 +131,7 @@ define([
                         this.activity = chapter.activities[0]
                         this.selectScroll = 0
                     } else {
-                        let activityPending = chapter.activities.filter(a => !a.completed)
+                        let activityPending = chapter.activities.filter(a => a.completed[0] !== "completed")
 
                         if (activityPending.length) {
                             this.activity = activityPending[0]
@@ -130,10 +143,11 @@ define([
                     this.type = this.activity.activity.type
                 } else {
                     this.cover = chapter.cover
-                    this.activity.type = chapter.type
-                    this.activity.completed = false
-                    this.activity.activity = chapter.project_activities
+                    this.activity = chapter
+                    this.activity.activity = this.activity.project_activities
+                    delete this.activity.project_activities
                 }
+
 
 
             } else {

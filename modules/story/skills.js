@@ -6,15 +6,11 @@ define([
 
     return {
         template: html,
-        data() {
-            return {
-            };
-        },
+        props:["course"],
+        // getHistoryCompetences($courseId, $studentId)
         components: {
             UiInput,
             graphSvg
-        },
-        methods: {
         }
     };
 });

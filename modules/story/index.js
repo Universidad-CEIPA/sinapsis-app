@@ -12,11 +12,13 @@ define([
             chapterModal: {
                 type: Boolean
             },
+            course: {
+                required: true
+            }
         },
         data() {
             widthChapter = 160;
             return {
-                story: this.$root.currentCourse,
                 startShow: 0,
                 modal: false,
                 tour: false,
@@ -29,9 +31,6 @@ define([
 
             };
         },
-        computed: {
-
-        },
         components: {
             UiModal,
             alert,
@@ -40,7 +39,7 @@ define([
         },
         methods: {
             advance(activities) {
-                return activities.filter(a => a.completed).length
+                return activities.filter(a => a.completed[0] === "completed").length
             },
             nextSlider() {
                 let nextStart = this.startShow + 1;
@@ -79,12 +78,10 @@ define([
             }
         },
         created() {
-            this.story.schedule.forEach((program, index) => {
+            this.course.schedule.forEach((program, index) => {
                 program.title = "Capítulo " + (index + 1)
                 this.chapters.push(program)
             })
-            //this.chapters = this.$root.chapters
-
 
             if (this.chapterModal) {
                 this.modal = true

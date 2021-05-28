@@ -1,5 +1,5 @@
-<section class="view-section" id="story-home-view" :class="$root.skin">
-    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:welcome' })"></span>{{ story.name }}
+<section class="view-section" id="story-home-view" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:welcome' })"></span>{{ course.name }}
     </header>
 
     <div class="general">
@@ -14,8 +14,9 @@
             </div>
 
             <span class="name">{{ $root.user.name }}</span>
-            <span class="role">Eres navegante</span>
-            <span class="city">Perteneces a cíbola</span>
+            
+            <span class="role" v-if="course.getRole()">Eres {{ course.getRole() }}</span>
+            <span class="city" v-if="course.getLocation()">Perteneces a {{ course.getLocation() }}</span>
         </div>
 
         <div class="complement">
@@ -87,8 +88,8 @@
                     <div class="date">Enviado hoy</div>
                 </div>
 
-                <div class="activity completed" v-if="filterActivities === 'completed'"
-                    > <!-- @click="$router.replace({ name: 'story:map' })"-->
+                <div class="activity completed" v-if="filterActivities === 'completed'">
+                    <!-- @click="$router.replace({ name: 'story:map' })"-->
                     <img src="modules/story/images/icon-lectura.png" alt="">
                     <div class="title">Lee el capitulo 1</div>
                     <div class="content">La historia de los siete Sabios Portocalenses</div>

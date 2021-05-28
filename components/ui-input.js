@@ -124,6 +124,7 @@ define([
 		methods: {
 			castValue(rawValue) {
 				switch (this.type) {
+					case "range":
 					case "number":
 						return +rawValue;
 					/*case "date":

@@ -6,6 +6,7 @@ requirejs.config({
 	paths: {
 		"components": "../../components",
 		"modules": "../../modules",
+		"logic": "../../logic",
 
 		"axios": "lib/axios.min",
 		"dayjs": "lib/dayjs.min",

@@ -6,18 +6,14 @@ define([
 
     return {
         template: html,
+        props: ["course"],
         data() {
             return {
-                skills: [
-                    { name: "Autosuficiencia", value: 40 },
-                    { name: "Dirección de equipo", value: 60 },
-                    { name: "Orientación al logro", value: 15 },
-                    { name: "Competitividad", value: 42 },
-                    { name: "Comunicación efectiva", value: 50 },
-                    { name: "Inteligencia Social", value: 50 },
-                    { name: "Manejo Emocional", value: 60 },
-                    { name: "Innovación y creación", value: 20 }
-                ]
+                skills: {
+                    courseId: this.course.courseId,
+                    studentId: this.course.studentId,
+                    evaluations: []
+                }
             };
         },
         methods: {
@@ -31,11 +27,20 @@ define([
 
                 etq.style.left = (Math.floor(value * pxls) + 2) + "px";
             },
+            async success(result, data) {
+                await this.course.setStudentCompetences()
+                this.$router.replace({ name: 'welcome:profile' })
+            },
         },
-        mounted(){
+        created() {
+            this.course.competences.map((c) => {
+                this.skills.evaluations.push({ name: c.name, ...c.evaluation })
+            })
+        },
+        mounted() {
             var inputs = document.querySelectorAll('.input-field')
 
-            inputs.forEach(function(input){
+            inputs.forEach(function (input) {
                 input.click()
             })
         },

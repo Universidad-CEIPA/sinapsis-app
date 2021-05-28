@@ -1,4 +1,4 @@
-<section class="view-section" id="story-profile-view" :class="$root.skin">
+<section class="view-section" id="story-profile-view" :class="course.skin">
     <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })"></span>PERFIL</header>
     <div class="profile-content">
         <div class="info-general">
@@ -8,13 +8,14 @@
                     <div class="name">
                         {{ $root.user.name }}
                     </div>
-                    <div class="level">
+                    <div class="level" v-if="course.getRole()">
                         <h3> Nivel</h3>
-                        Navegante
+                        {{ course.getRole() }}
+                        getLocation
                     </div>
-                    <div class="city">
+                    <div class="city" v-if="course.getLocation()">
                         <h3> Ciudad</h3>
-                        Cibolá
+                        {{ course.getLocation() }}
                     </div>
                 </div>
                 <div class="avatar">
@@ -52,10 +53,16 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph" @click="$router.replace({ name: 'story:skills' })">
-                <graph-svg :skin="$root.skin" />
+                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="course.graphDataSets()" :colors="course.graphColors()" />
             </div>
-            <button class="wish-eval action primary" @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
+            <button class="wish-eval action primary" v-if="course.needImprovementDesired()"
+                @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
                 tu potencial deseado</button>
+            <div v-else>
+                <div>Inicial</div>
+                <div>Deseado</div>
+                <div>Actual</div>
+            </div>
         </div>
         <div class="info-actions">
             <button class="action primary" data-icon-after="edit"
@@ -65,10 +72,5 @@
     </div>
 
     <alert v-if="modal" @close="modal = false">
-
     </alert>
-
-
-
-    <!-- {{ $root.currentCourse }}-->
 </section>

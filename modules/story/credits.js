@@ -4,14 +4,6 @@ define([
 
     return {
         template: html,
-        data() {
-            return {
-            };
-        },
-        methods: {
-        },
-        components: {
-        },
-
+        props:["course"]
     };
 });

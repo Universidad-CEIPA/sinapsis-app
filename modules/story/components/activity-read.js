@@ -9,12 +9,6 @@ define([
             return {
                 fontSize: '1em'
             };
-        },
-        methods: {
-        },
-        components: {
-        },
-        methods: {
         }
     };
 });

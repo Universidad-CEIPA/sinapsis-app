@@ -6,10 +6,6 @@ define([
     return {
         template: html,
         props: ["selected"],
-        data() {
-            return {
-            };
-        },
         methods: {
             addFocus() {
                 var Item = "." + this.selected

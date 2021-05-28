@@ -37,8 +37,6 @@ define([
                         break;
                 }
             }
-        },
-        components: {
         }
     };
 });

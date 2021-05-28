@@ -5,12 +5,6 @@ define([
 
     return {
         template: html,
-        data() {
-            return {
-            };
-        },
-        methods: {
-        },
         components: {
             UiModal
         },

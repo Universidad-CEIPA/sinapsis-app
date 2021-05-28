@@ -4,15 +4,6 @@ define([
 
     return {
         template: html,
-        data() {
-            return {
-                course: this.$root.currentCourse
-            };
-        },
-        methods: {
-        },
-        components: {
-        },
-
+        props:["course"]
     };
 });

@@ -55,8 +55,6 @@ define([
                 return this.video;
             },
         },
-        components: {
-        },
         async created() {
             await CapacitorVideoRecorder.get().then(recorder => this.recorder = recorder)
             if (window.Capacitor) {

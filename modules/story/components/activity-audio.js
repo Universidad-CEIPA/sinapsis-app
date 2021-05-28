@@ -4,17 +4,6 @@ define([
 
     return {
         template: html,
-        props: ['activity'],
-        data() {
-            return {
-
-            };
-        },
-        methods: {
-        },
-        components: {
-        },
-        methods: {
-        }
+        props: ['activity']
     };
 });

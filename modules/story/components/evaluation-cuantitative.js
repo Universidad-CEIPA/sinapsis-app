@@ -10,10 +10,8 @@ define([
         data() {
             return {
                 answers: []
+                //saveEvaluation($courseId, $studentId, $questionId, $evaluation, $type)
             }
-        },
-        computed: {
-
         },
         methods: {
             calculateLeft(value, event) {
@@ -32,9 +30,10 @@ define([
         },
         mounted() {
             this.answers = this.questions
-            Object.entries(this.answers).forEach(([key, question]) => {
+            this.answers.answer = 0
+            /*Object.entries(this.answers).forEach(([key, question]) => {
                 question.answer = 0
-            });
+            });*/
         },
         components: {
             UiForm,

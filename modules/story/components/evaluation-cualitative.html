@@ -1,13 +1,20 @@
-<ui-form :model="answers" submit-label="Continuar" action="send" @success="success" id="evaluation-cualitative">
+<ui-form :model="answers" submit-label="Continuar" :action="" @success="success" id="evaluation-cualitative">
     <template #header>
         <h3>Ponte a prueba</h3>
         <p>Contesta las siguientes preguntas según tu experiencia</p>
     </template>
 
-    <ui-input v-for="q,index in answers" type="textarea" rows="10" :label="(index+1) +'. '+ q.question" v-model="q.answer" required placeholder="Escribe tu respesta aquí">
+
+    <ui-input type="textarea" rows="10" :label="answers.question" v-model="answers.answer" required placeholder="Escribe tu respesta aquí">
         <template #validation>
             Ingresa un valor
         </template>
     </ui-input>
-    <button  @click="$router.replace({ name : 'story:evaluation:video'})"> next</button>
+
+    <!--<ui-input v-for="q,index in answers" type="textarea" rows="10" :label="(index+1) +'. '+ q.question" v-model="q.answer" required placeholder="Escribe tu respesta aquí">
+        <template #validation>
+            Ingresa un valor
+        </template>
+    </ui-input>-->
+    <button  @click="$emit('next')"> next</button>
 </ui-form>

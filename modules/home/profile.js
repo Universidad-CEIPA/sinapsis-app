@@ -7,6 +7,7 @@ define([
 
     return {
         template: html,
+        props:["course"],
         data() {
             return {
                 user: local('user'),
@@ -20,9 +21,8 @@ define([
         },
         methods: {
             success(result, data) {
-                // this.$toDateValue()
                 this.$root.processUser(result);
-                if (this.$root.currentCourse) {
+                if (this.course) {
                     this.$router.replace({ name: "story:profile" });
                 } else {
                     this.$router.replace({ name: "home" });

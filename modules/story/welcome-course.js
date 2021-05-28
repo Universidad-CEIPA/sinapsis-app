@@ -1,23 +1,9 @@
 define([
-    "text!./welcome-course.html",
-    "api",
-    "local"
-], (html, api, local) => {
+    "text!./welcome-course.html"
+], (html) => {
 
     return {
         template: html,
-        data() {
-            return {
-            };
-        },
-        computed:{
-            course(){
-                return this.$root.currentCourse
-            }
-        },
-        methods: {   
-        },
-        components: {
-        }
+        props: ["course"]
     };
 });

@@ -6,10 +6,6 @@ define([
     return {
         template: html,
         props: ["token"],
-        data() {
-            return {
-            };
-        },
         methods: {
             loginToken() {
                 api.post("students/loginToken", { token: this.token })
@@ -24,8 +20,5 @@ define([
         created() {
             this.loginToken();
         },
-        components: {
-        },
-
     };
 });

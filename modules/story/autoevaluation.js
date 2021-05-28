@@ -1,34 +1,36 @@
 define([
     "text!./autoevaluation.html",
+    "local",
     "./components/evaluation-cualitative",
     "./components/evaluation-cuantitative",
     "./components/evaluation-videoselfie"
-], (html, evaluationCualitative, evaluationCuantitative, evaluationVideoselfie) => {
+], (html, local, evaluationCualitative, evaluationCuantitative, evaluationVideoselfie) => {
 
     return {
         template: html,
-        props: ["type"],
+        props:["course"],
         data() {
             return {
-                questions: [
-                    { type: "cuantitative", question: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim" },
-                    { type: "cuantitative", question: "veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate" },
-                    { type: "cualitative", question: "Como se sintio" },
-                    { type: "videoselfie", question: "Grabar video" }
-                ]
+                currentQuestion : 0,
+                questions: []
             };
         },
         computed: {
-            questionsType() {
-                return this.questions.filter(r => r.type === this.type)
-            },
             typeComponent() {
                 return {
-                    "cualitative": "evaluation-cualitative",
-                    "cuantitative": "evaluation-cuantitative",
-                    "videoselfie": "evaluation-videoselfie"
-                }[this.type];
+                    "qualitative": "evaluation-cualitative",
+                    "quantitative": "evaluation-cuantitative",
+                    "video": "evaluation-videoselfie"
+                }[this.questions[this.currentQuestion].type];
             }
+        },
+        methods:{
+            nextQuestion(){
+                this.currentQuestion ++
+            }
+        },
+        created(){
+            this.questions = local("questions")
         },
         components: {
             evaluationCualitative,

@@ -4,11 +4,18 @@
         <p>Realiza la siguiente autoevaluación según cada pregunta</p>
     </template>
 
-    <ui-input v-for="q,index in answers" type="range" :label="(index+1) +'. '+ q.question" v-model="q.answer" required
+    <ui-input type="range" :label="answers.content" v-model="answers.answer" required
+    @input="calculateLeft(answers.answer, $event)" @click="calculateLeft(answers.answer, $event)">
+    <template #validation>
+        Ingresa un valor
+    </template>
+</ui-input>
+
+    <!--<ui-input v-for="q,index in answers" type="range" :label="(index+1) +'. '+ q.content" v-model="q.answer" required
         @input="calculateLeft(q.answer, $event)" @click="calculateLeft(q.answer, $event)">
         <template #validation>
             Ingresa un valor
         </template>
-    </ui-input>
-    <button  @click="$router.replace({ name : 'story:evaluation:cualitative'})"> next</button>
+    </ui-input>-->
+    <button  @click="$emit('next')"> next</button>
 </ui-form>

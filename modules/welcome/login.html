@@ -4,7 +4,7 @@
 		<img src="res/images/logo_uceipa_gold.svg" alt="">
 	</div>
 
-	<ui-form action="students/login" :model="user" submit-label="Entrar" @success="acceptUser	" @error="errorUser" v-if="type==='login'">
+	<ui-form action="students/login" :model="user" submit-label="Entrar" @success="acceptUser" @error="errorUser" v-if="type==='login'">
 		<template #header>
 			<p>Inicie sesión con el correo y la contraseña asignada</p>
 		</template>

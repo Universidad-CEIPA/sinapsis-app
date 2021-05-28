@@ -7,15 +7,11 @@ define([
 
     return {
         template: html,
+        props:["course"],
         data() {
             return {
-                story: this.$root.currentCourse,
                 modal: false,
             };
-        },
-        computed: {
-        },
-        methods: {
         },
         components: {
             UiModal,

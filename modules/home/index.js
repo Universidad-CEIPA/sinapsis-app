@@ -4,6 +4,7 @@ define([
 
 	return {
 		template: html,
+		props:["course"],
 		data() {
 			return {
 				projects: this.$root.user.projects,
@@ -57,11 +58,9 @@ define([
 			}
 		},
 		created() {
-			if (this.$root.currentCourse) {
+			if (this.course) {
 				this.$router.replace({ name: "story:profile" });
 			}
 		},
-		components: {
-		}
 	};
 });

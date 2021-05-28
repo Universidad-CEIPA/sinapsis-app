@@ -1,16 +1,18 @@
 define([
     "text!./map.html",
-], (html) => {
+    "local"
+], (html, local) => {
 
     return {
         template: html,
-        props: ["content"],
+        props: ["content", "course"],
         data() {
             return {
                 locations: [],
                 finalDistribution: [],
                 sizeWidth: 0,
-                sizeHeight: 0
+                sizeHeight: 0,
+                map: null,
             };
         },
         methods: {
@@ -170,9 +172,30 @@ define([
                 canvas.appendChild(lines);
                 document.querySelector(".map-container").appendChild(canvas)
             },
+            goBack() {
+                local("currentMap", null);
+                this.$router.replace({ name: 'story:home' })
+            },
             openActivity(c) {
                 c.type = "map"
                 this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+            },
+            reset() {
+
+                if (this.map) {
+                    let chapter = JSON.parse(this.map)
+                    this.title = chapter.title
+
+                    this.locations = chapter.maps.map.locations
+
+                    this.locations.map(c => {
+                        c.cover = "modules/story/images/camera.png"
+                    })
+                    local("currentMap", this.map)
+                } else {
+                    this.$router.replace({ name: "story:home" })
+                }
+
             },
             updateLayout() {
                 let content = document.querySelector(".map-container")
@@ -182,27 +205,10 @@ define([
 
                 this.drawRoads();
             },
-            reset() {
 
-                if (this.content) {
-                    let chapter = JSON.parse(this.content)
-                    this.title = chapter.title
-
-                    this.locations = chapter.maps.map.locations
-
-                    this.locations.map(c => {
-                        c.cover = "modules/story/images/camera.png"
-                    })
-
-                } else {
-                    this.$router.replace({ name: "story:home" })
-                }
-
-            }
-        },
-        components: {
         },
         mounted() {
+            this.map = this.content || local("currentMap")
             this.reset()
             this.calculateDistribute();
             this.updateLayout();
