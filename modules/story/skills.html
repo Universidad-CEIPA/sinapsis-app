@@ -7,7 +7,8 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph">
-                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="course.graphDataSets()" :colors="course.graphColors()" />
+                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets"
+                    :colors="course.graphColors()" ref="graph"/>
             </div>
             <button class="wish-eval action primary">Ingresa tu potencial deseado</button>
         </div>
@@ -16,10 +17,10 @@
             <div class="line-time">
                 Mi potencial actual
                 <br>
-                datetime
+                {{dates[position]}}
                 <br>
                 <div class="slider">
-                    <ui-input type="range" label="" v-model="time"></ui-input>
+                    <ui-input type="range" label="" v-model="position" min="0" :max="dates.length - 1" @input="updateGraph"></ui-input>
                 </div>
                 Desplaza la barra para conocer tus competencias en evaluaciones anteriores a lo largo del tiempo
             </div>

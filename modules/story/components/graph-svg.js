@@ -52,6 +52,10 @@ define([
 
                 chart.addTemplate(templateSvg);
 
+            },
+            reset(){
+                let children = document.querySelector(".chartGroup").remove()
+                this.init()
             }
         },
         mounted() {
