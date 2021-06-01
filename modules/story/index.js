@@ -14,6 +14,10 @@ define([
             },
             course: {
                 required: true
+            },
+            redirect:{
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -78,16 +82,25 @@ define([
             }
         },
         created() {
-            this.course.schedule.forEach((program, index) => {
-                program.title = "Capítulo " + (index + 1)
-                this.chapters.push(program)
-            })
+            if (this.redirect) {
+                this.$router.replace({ name: "story:profile" })
+            } else {
 
-            if (this.chapterModal) {
-                this.modal = true
+                this.course.schedule.forEach((program, index) => {
+                    program.title = "Capítulo " + (index + 1)
+                    this.chapters.push(program)
+                })
+
+                if (this.chapterModal) {
+                    this.modal = true
+                }
+
+                this.updateLayout();
+
             }
 
-            this.updateLayout();
+
+
 
         },
         mounted() {

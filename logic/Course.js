@@ -1,7 +1,15 @@
 define([
     "api",
     "local",
-], (api, local) => {
+    "dayjs",
+    "dayjs-relativeTime",
+    "dayjs-utc",
+    "dayjs-es",
+], (api, local, dayjs, relativeTime, utc) => {
+
+    dayjs.extend(relativeTime);
+    dayjs.extend(utc);
+    dayjs.locale("es");
 
     class Course {
 
@@ -16,6 +24,34 @@ define([
             this.schedule = currentCourse.schedule || null
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
+        }
+
+        static getCurrent() {
+            return local("currentCourse");
+        }
+
+        currentActivity() {
+            let activityOrder = []
+            let schedule = local("currentCourse").schedule
+
+            schedule.map(chapter => {
+                let activity = chapter.activities.length ? chapter.activities : chapter.maps
+                activity
+
+
+                if (Array.isArray(activity)) {
+                    activity.map(act => {
+
+                        act.chapter = chapter.id
+                        activityOrder.push(act)
+                        
+                    })
+                } else {
+                    activity.chapter = chapter.id
+                    activityOrder.push(activity)
+                }
+            })
+            //console.log(activityOrder)
         }
 
         destroy() {
@@ -67,20 +103,22 @@ define([
         getLocation() {
             return this.profile.location.name
         }
-        
+
         getRole() {
             return this.profile.rol.name
         }
-        
+
 
         needImprovementDesired() {
             this.competences.filter((c) => c.evaluation.improvementDesired === 0).length
         }
 
         async reset() {
-            this.setSchedule()
-            this.setStudentProfile()
-            this.setStudentCompetences()
+            await this.setSchedule()
+            await this.setStudentProfile()
+            await this.setStudentCompetences()
+            local("currentCourse", this.getFullInfo());
+            this.currentActivity()
         }
 
         async setSchedule() {
@@ -97,6 +135,7 @@ define([
         updateChapters(chapter) {
             let index = this.schedule.findIndex(c => c.id === chapter.id)
             Object.assign(this.schedule[index], chapter)
+            local("currentCourse", this.getFullInfo());
         }
     }
 

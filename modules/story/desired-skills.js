@@ -29,7 +29,7 @@ define([
             },
             async success(result, data) {
                 await this.course.setStudentCompetences()
-                this.$router.replace({ name: 'welcome:profile' })
+                this.$router.replace({ name: 'story:profile' })
             },
         },
         created() {

@@ -17,7 +17,6 @@ define([
                     type: this.questions.type,
                     title: this.questions.content
                 },
-                //saveEvaluation($courseId, $studentId, $questionId, $evaluation, $type)
             }
         },
         methods: {

@@ -1,6 +1,6 @@
 define(() => {
 
-	let cache = {};
+	//let cache = [];
 	let hooks = [];
 
 	function broadcast(key, value) {
@@ -10,23 +10,24 @@ define(() => {
 	function local(key, value) {
 		if (key === null) {
 			localStorage.clear();
-			cache = {};
+			//cache = [];
 			return;
 		}
 
 		if (value === undefined) {
-			if (key in cache) {
-				return cache[key];
-			} else {
-				return cache[key] = key in localStorage ? JSON.parse(localStorage[key]) : null;
-			}
+			return key in localStorage ? JSON.parse(localStorage[key]) : null
+			/*cache[key]
+						if (key in cache) {
+						} else {
+							return cache[key] = key in localStorage ? JSON.parse(localStorage[key]) : null;
+						}*/
 		} else {
 			if (value === null) {
 				delete localStorage[key];
-				delete cache[key];
+				//	delete cache[key];
 			} else {
 				localStorage[key] = JSON.stringify(value);
-				cache[key] = value;
+				//	cache[key] = value;
 			}
 
 			broadcast(key, value);
@@ -34,8 +35,8 @@ define(() => {
 		}
 	}
 
-	local.hook = function(key, callback) {
-		hooks.push({key, callback});
+	local.hook = function (key, callback) {
+		hooks.push({ key, callback });
 	};
 
 	return local;

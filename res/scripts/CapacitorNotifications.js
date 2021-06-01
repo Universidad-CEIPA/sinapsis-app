@@ -13,12 +13,12 @@ define(() => {
 					backend = Plugins.LocalNotifications;
 
 					if (Capacitor.platform === "android") {
-						let channel = (await backend.listChannels()).channels.filter(c => c.id === "cami")[0];
+						let channel = (await backend.listChannels()).channels.filter(c => c.id === "ceipa")[0];
 
 						if (!channel) {
 							backend.createChannel({
-								id: "cami",
-								name: "Cami",
+								id: "ceipa",
+								name: "Ceipa",
 								description: 'Contraceptive alerts',
 								importance: 5,
 								visibility: 1,
@@ -73,13 +73,13 @@ define(() => {
 				notifications: [{
 					...moreOptions,
 					id: options.id,
-					title: "Cami",
+					title: "Ceipa",
 					body: options.text,
 					schedule: options.trigger,
 					group: options.group,
-					channelId: "cami",
-					threadIdentifier: "Cami",
-					summaryArgument: "Cami",
+					channelId: "ceipa",
+					threadIdentifier: "Ceipa",
+					summaryArgument: "Ceipa",
 					attachments: null,
 					actionTypeId: "",
 					extra: null

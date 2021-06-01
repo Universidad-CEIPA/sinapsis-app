@@ -4,7 +4,7 @@
         <p>Realiza la siguiente autoevaluación según cada pregunta</p>
     </template>
 
-    <ui-input type="range" :label="answers.name" v-model="answers.evaluation" required
+    <ui-input type="range" :label="answers.title" v-model="answers.evaluation" required
     @input="calculateLeft(answers.evaluation, $event)" @click="calculateLeft(answers.evaluation, $event)">
     <template #validation>
         Ingresa un valor

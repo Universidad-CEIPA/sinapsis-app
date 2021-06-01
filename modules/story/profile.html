@@ -54,7 +54,7 @@
             <div class="graph" @click="$router.replace({ name: 'story:skills' })">
                 <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="course.graphDataSets()" :colors="course.graphColors()" />
             </div>
-            <button class="wish-eval action primary" v-if="course.needImprovementDesired()"
+            <button class="wish-eval action primary" v-if="course.needImprovementDesired"
                 @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
                 tu potencial deseado</button>
             <div v-else>

@@ -35,10 +35,7 @@ define([
 			async setCourse(course) {
 				if (course !== null) {
 					this.currentCourse = await new Course(course, this.user.id)
-
 					await this.currentCourse.reset()
-
-					local("currentCourse", this.currentCourse.getFullInfo());
 					return true
 				}
 				return false
@@ -47,8 +44,6 @@ define([
 			},
 			updateChapters(chapter) {
 				this.currentCourse.updateChapters(chapter);
-
-				local("currentCourse", this.currentCourse.getFullInfo());
 			}
 		},
 		async created() {

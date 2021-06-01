@@ -124,7 +124,8 @@ define([
                             let activityName = {}
                             activityName.name = a.activity.name
                             activityName.position = position
-                            activityName.img = "modules/story/images/Navegante.svg"
+                            activityName.img = a.activity.image || "modules/story/images/Navegante.svg"
+                            activityName.completed = a.completed[0] === "completed"
                             position++
                             this.activityScrolls.push(activityName)
                         })

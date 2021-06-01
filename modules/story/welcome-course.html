@@ -7,7 +7,7 @@
 
     </div>
     <button class="done action primary" data-icon-after="arrow-right"
-        @click="$router.replace({ name: 'story:profile' })"> Iniciar </button>
+        @click="$router.push({ name: 'story:home', params:{ 'redirect': course.needImprovementDesired } })"> Iniciar </button>
     <div class="back">
         <a @click="$root.destroyCourse()">Regresar</a>
     </div>

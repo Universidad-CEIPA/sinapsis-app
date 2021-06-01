@@ -67,13 +67,15 @@
         </div>
         <div class="control" @click="optionsPanel= !optionsPanel"> {{ optionsPanel ? '<' : '>' }} </div>
         </div>
+
+
         <div class="scroll-activities" :style="{'--show-activities':maxShow }" v-if="scroll">
             <div class="back">
                 <span v-if="startShow != 0" @click="previousSlider">
                     < </span>
             </div>
             <div class="items">
-                <div class="item" v-for="item in itemsShow" @click="changeActivity(item.position)">
+                <div class="item" v-for="item in itemsShow" :class="{'selected': selectScroll === item.position  , 'pending': !item.completed}" @click="changeActivity(item.position)">
                     <img :src="item.img" alt="">
                     {{ item.name}}
                 </div>
