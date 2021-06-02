@@ -24,10 +24,44 @@ define([
             this.schedule = currentCourse.schedule || null
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
+
+            this.notifications = ""
+
+            this.activeRol = false
+            this.activeCity = false
+            this.activeMap = false
+            this.activeTools = false
+
+
+            this.currentChapter = null,
+
+                this.chapterActiveRol = 2
+            this.chapterActiveMap = []
         }
 
         static getCurrent() {
             return local("currentCourse");
+        }
+
+        showRol() {
+            this.activeTools = this.isCompletedChapter(this.schedule[this.chapterActiveRol - 1])
+            this.activeCity = this.isCompletedChapter(this.schedule[this.chapterActiveRol - 1])
+            return this.activeRol = this.isCompletedChapter(this.schedule[this.chapterActiveRol - 1])
+        }
+
+        lastRolPending() {
+            return this.schedule[this.chapterActiveRol - 1].activities.filter(a => a.completed[0] !== "completed").length === 1
+        }
+
+        advanceChapters() {
+            let totalChapters = this.schedule.length
+            let completedChapters = 0
+
+            this.schedule.map(chapter => {
+                if (this.isCompletedChapter(chapter)) { completedChapters++ }
+            })
+
+            return completedChapters + "/" + totalChapters
         }
 
         currentActivity() {
@@ -44,18 +78,56 @@ define([
 
                         act.chapter = chapter.id
                         activityOrder.push(act)
-                        
+
                     })
                 } else {
                     activity.chapter = chapter.id
                     activityOrder.push(activity)
                 }
             })
-            //console.log(activityOrder)
         }
 
         destroy() {
             local("currentCourse", null);
+        }
+
+        getAlert() {
+            if (this.notifications) {
+                return this.notifications
+            } else {
+                return false
+            }
+        }
+
+        getChaptersMap() {
+            this.schedule.map((chapter, index) => {
+                if (chapter.maps.id) {
+                    this.chapterActiveMap.push(index + 1)
+                }
+            })
+        }
+
+        getFullInfo() {
+            return {
+                courseId: this.courseId,
+                projectId: this.projectId,
+                studentId: this.studentId,
+                name: this.name,
+                skin: this.skin,
+                image: this.image,
+                schedule: this.schedule,
+                profile: this.profile,
+                competences: this.competences
+            }
+        }
+
+        getLocation() {
+            return this.profile.location.name
+        }
+
+
+        getRole() {
+            return this.profile.rol.name
         }
 
         graphColors() {
@@ -86,31 +158,17 @@ define([
             return this.competences.map((c) => { return c.name })
         }
 
-        getFullInfo() {
-            return {
-                courseId: this.courseId,
-                projectId: this.projectId,
-                studentId: this.studentId,
-                name: this.name,
-                skin: this.skin,
-                image: this.image,
-                schedule: this.schedule,
-                profile: this.profile,
-                competences: this.competences
-            }
+        isCompletedChapter(chapter) {
+            return chapter.activities.filter(a => a.completed[0] !== "completed").length === 0
         }
-
-        getLocation() {
-            return this.profile.location.name
-        }
-
-        getRole() {
-            return this.profile.rol.name
-        }
-
 
         needImprovementDesired() {
+
             this.competences.filter((c) => c.evaluation.improvementDesired === 0).length
+        }
+
+        removeAlert() {
+            this.notifications = ""
         }
 
         async reset() {
@@ -118,7 +176,17 @@ define([
             await this.setStudentProfile()
             await this.setStudentCompetences()
             local("currentCourse", this.getFullInfo());
+
+            this.showRol()
+            this.getChaptersMap()
+
+
             this.currentActivity()
+        }
+
+
+        setAlert(alert) {
+            this.notifications = alert
         }
 
         async setSchedule() {
@@ -132,10 +200,51 @@ define([
             this.competences = await api.get(`courses/competencyAssessment?courseId=${this.courseId}&projectId= ${this.projectId}&studentId=${this.studentId}`);
         }
 
-        updateChapters(chapter) {
+        async updateChapters(chapter) {
             let index = this.schedule.findIndex(c => c.id === chapter.id)
             Object.assign(this.schedule[index], chapter)
-            local("currentCourse", this.getFullInfo());
+
+            this.setAlert("chapterCompleted")
+
+            if (index === this.chapterActiveRol - 1 && this.showRol()) {
+                this.setAlert("showRol")
+            }
+
+            await this.reset()
+        }
+
+
+        updateActivity(activity) {
+            let indexChapter = 0
+            this.schedule.map((chapter, index) => {
+                let content = chapter.activities.length ? chapter.activities : chapter.maps
+
+
+                if (Array.isArray(content)) {
+                    content.map(act => {
+                        if (act.id === activity.id) {
+                            indexChapter = index
+                            act = activity
+                        }
+
+                    })
+                } else {
+                    content.map.locations.map(act => {
+                        if (act.id === activity.id) {
+                            activity.project_activities = activity.activity
+                            delete activity.activity
+                            indexChapter = index
+                            act = activity
+                        }
+
+                    })
+                }
+            })
+
+            this.schedule[indexChapter]
+
+
+            this.updateChapters(this.schedule[indexChapter])
         }
     }
 

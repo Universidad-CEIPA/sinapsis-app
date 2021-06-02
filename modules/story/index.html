@@ -6,7 +6,7 @@
 
         <div class="info"  @click="$router.replace({name : 'story:profile'})">
             <div class="advances">
-                <div class="circle"><span class="circle-text">1/7</span></div>
+                <div class="circle"><span class="circle-text">{{course.advanceChapters()}}</span></div>
                 <span>Capítulos</span>
             </div>
             <div class="avatar">
@@ -15,20 +15,20 @@
 
             <span class="name">{{ $root.user.name }}</span>
             
-            <span class="role" v-if="course.getRole()">Eres {{ course.getRole() }}</span>
-            <span class="city" v-if="course.getLocation()">Perteneces a {{ course.getLocation() }}</span>
+            <span class="role" v-if="course.activeRol">Eres {{ course.getRole() }}</span>
+            <span class="city" v-if="course.activeCity">Perteneces a {{ course.getLocation() }}</span>
         </div>
 
         <div class="complement">
             <div class="items">
-                <section class="position">
+                <section class="position"  v-if="course.activeMap">
                     <div class="icons">
                         <img src="modules/story/images/city.svg" alt="">
                     </div>
                     Ciudades
                 </section>
-                <section class="tools">
-                    <div class="icons">
+                <section class="tools" v-if="course.activeTools">
+                    <div class="icons" >
                         <img src="modules/story/images/tools-1.svg" alt="">
                         <img src="modules/story/images/tools-2.svg" alt="">
                         <img src="modules/story/images/tools-3.svg" alt="">
@@ -101,9 +101,7 @@
         </section>
     </div>
 
-    <alert v-if="modal" @close="modal = false" />
-
-    <tour v-if="tour" @close="tour = false" selected="position" />
+    <alert v-if="modal" @close="modal = false" :course="course"/>
 
     <finish-modal v-if="finished" @close="finished = false" />
 </section>

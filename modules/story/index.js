@@ -2,20 +2,16 @@ define([
     "text!./index.html",
     "components/ui-modal",
     "./components/alert",
-    "./components/tour",
     "./components/finish-modal",
-], (html, UiModal, alert, tour, finishModal) => {
+], (html, UiModal, alert, finishModal) => {
 
     return {
         template: html,
         props: {
-            chapterModal: {
-                type: Boolean
-            },
             course: {
                 required: true
             },
-            redirect:{
+            redirect: {
                 type: Boolean,
                 default: false
             }
@@ -25,7 +21,6 @@ define([
             return {
                 startShow: 0,
                 modal: false,
-                tour: false,
                 finished: false,
                 widthChapter,
                 filterActivities: 'progress',
@@ -38,7 +33,6 @@ define([
         components: {
             UiModal,
             alert,
-            tour,
             finishModal
         },
         methods: {
@@ -55,10 +49,15 @@ define([
                 this.updateLayout();
             },
             openActivity(c) {
-                if (c.activities.length) {
+
+                if (this.course.chapterActiveMap.includes(c.chapterNumber)) {
+                    this.course.activeMap = true
+                    this.course.setAlert("showCities")
+                    this.modal = true
+
+                    this.course.currentChapter = c
+                } else {
                     this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
-                } else if (c.maps.id) {
-                    this.$router.push({ name: 'story:map', params: { content: JSON.stringify(c) } })
                 }
 
             },
@@ -88,15 +87,16 @@ define([
 
                 this.course.schedule.forEach((program, index) => {
                     program.title = "Capítulo " + (index + 1)
+                    program.chapterNumber = index + 1
                     this.chapters.push(program)
                 })
 
-                if (this.chapterModal) {
+                if (this.course.getAlert()) {
                     this.modal = true
                 }
 
-                this.updateLayout();
 
+                this.updateLayout();
             }
 
 

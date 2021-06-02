@@ -37,22 +37,30 @@
     <div class="activity" :class="{ 'scroll-padding' : scroll}">
         <div class="title" v-if="header || !welcome">{{activity.activity.name}}</div>
         <component :is="typeComponent" :activity="activity.activity" :course="course">
-            <div class="finish-activity" v-if="activity.completed !== 'completed'">
+            <div class="finish-activity" v-if="activity.completed[0] !== 'completed'">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <h1> ¡Muy bien!</h1>
                 <div class="image-center"></div>
 
                 <div class="bottom-finish">
-                    <strong> Has completado esta entrega,</strong> toca el botón y prepárate para la próxima lectura
+                    <strong> Has completado esta entrega,</strong> toca el botón y
+                    <template v-if="!course.lastRolPending()">
+                        prepárate para la próxima lectura
+                    </template>
+                    <template v-else>
+                        descubre tu gremio
+                    </template>
 
                     <button class="action primary completed" @click="completedActivity">
-                        Marcar como completado
+                        <template v-if="!course.lastRolPending()">
+                            Marcar como completado
+                        </template>
+                        <template v-else>
+                            Descubre tu gremio
+                        </template>
                     </button>
-
                 </div>
-
-
             </div>
         </component>
     </div>
@@ -75,7 +83,9 @@
                     < </span>
             </div>
             <div class="items">
-                <div class="item" v-for="item in itemsShow" :class="{'selected': selectScroll === item.position  , 'pending': !item.completed}" @click="changeActivity(item.position)">
+                <div class="item" v-for="item in itemsShow"
+                    :class="{'selected': selectScroll === item.position  , 'pending': !item.completed}"
+                    @click="changeActivity(item.position)">
                     <img :src="item.img" alt="">
                     {{ item.name}}
                 </div>

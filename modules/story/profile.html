@@ -8,11 +8,11 @@
                     <div class="name">
                         {{ $root.user.name }}
                     </div>
-                    <div class="level" v-if="course.getRole()">
+                    <div class="level" v-if="course.activeRol">
                         <h3> Nivel</h3>
                         {{ course.getRole() }}
                     </div>
-                    <div class="city" v-if="course.getLocation()">
+                    <div class="city" v-if="course.activeCity">
                         <h3> Ciudad</h3>
                         {{ course.getLocation() }}
                     </div>
@@ -23,7 +23,7 @@
             </section>
             <section class="tools">
                 <h5>Tus Herramientas</h5>
-                <ul class="tools-list">
+                <ul class="tools-list"  v-if="course.activeTools">
                     <li>
                         <div class="circle-img"><img src="modules/story/images/iron.png" alt=""></div>
                         <p>Brújula de Hierro</p>

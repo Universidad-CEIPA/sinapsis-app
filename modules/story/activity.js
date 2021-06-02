@@ -20,7 +20,8 @@ define([
                 startShow: 0,
                 scroll: false,
                 activityScrolls: [],
-                selectScroll: 0
+                selectScroll: 0,
+                chapter: null
             };
         },
         computed: {
@@ -47,41 +48,42 @@ define([
         methods: {
             changeActivity(index) {
                 this.selectScroll = index
-                let chapter = JSON.parse(this.content)
-                this.activity = chapter.activities[index]
+                this.activity = this.chapter.activities[index]
             },
             async completedActivity() {
+
+                await api.post('students/studentCourseActivity', {
+                    student: this.course.studentId,
+                    activity: this.activity.activity.id,
+                    status: "completed"
+                })
+
+                let questions = []
                 if (this.activity.type !== "map") {
-                    let result = await api.post('students/studentCourseActivity', {
-                        student: this.course.courseId,
-                        activity: this.activity.id,
-                        status: "completed"
-                    })
-
-
-                    let chapter = JSON.parse(this.content)
-                    chapter.activities.map((a) => {
+                    this.chapter.activities.map((a) => {
                         if (a.id === this.activity.id) {
                             a.completed[0] = "completed"
                         }
                     })
-                    this.$root.updateChapters(chapter)
 
-                    let activityPending = chapter.activities.filter(a => a.completed[0] !== "completed")
+                    this.course.updateChapters(this.chapter);
 
+                    questions = this.activity.activity.questions
 
-
-
-                    if (activityPending.length === 0) {
-                        this.$router.push({ name: 'story:home', params: { chapterModal: true } })
-                    } else if (!this.scroll) {
-                        this.$router.replace({ name: 'story:home' })
-                    }
-                } else if (this.activity.activity.questions.length) {
-                    local("questions", this.activity.activity.questions)
-                    this.$router.push({ name: 'story:evaluation' })
                 } else {
+                    this.activity.completed[0] = "completed"
+                    this.course.updateActivity(this.activity);
+                    questions = this.activity.project_activities.questions
+                }
+
+                if (questions.length) {
+                    local("questions", questions)
+                    this.course.setAlert("startQuestions")
+                    this.$router.push({ name: 'story:evaluation' })
+                } else if (this.activity.type === "map") {
                     this.$router.replace({ name: 'story:map' })
+                } else {
+                    this.$router.replace({ name: 'story:home' })
                 }
 
 
@@ -113,38 +115,38 @@ define([
         },
         created() {
             if (this.content) {
-                let chapter = JSON.parse(this.content)
-                if (chapter.type !== "map") {
-                    this.title = chapter.title
-                    this.scroll = chapter.scroll
+                this.chapter = JSON.parse(this.content)
+                if (this.chapter.type !== "map") {
+                    this.title = this.chapter.title
+                    this.scroll = this.chapter.scroll
 
-                    if (chapter.scroll) {
+                    if (this.chapter.scroll) {
                         let position = 0
-                        chapter.activities.map((a) => {
+                        this.chapter.activities.map((a) => {
                             let activityName = {}
                             activityName.name = a.activity.name
                             activityName.position = position
-                            activityName.img = a.activity.image || "modules/story/images/Navegante.svg"
+                            activityName.img = a.activity.imagen || "modules/story/images/Navegante.svg"
                             activityName.completed = a.completed[0] === "completed"
                             position++
                             this.activityScrolls.push(activityName)
                         })
-                        this.activity = chapter.activities[0]
+                        this.activity = this.chapter.activities[0]
                         this.selectScroll = 0
                     } else {
-                        let activityPending = chapter.activities.filter(a => a.completed[0] !== "completed")
+                        let activityPending = this.chapter.activities.filter(a => a.completed[0] !== "completed")
 
                         if (activityPending.length) {
                             this.activity = activityPending[0]
                         } else {
-                            this.activity = chapter.activities[chapter.activities.length - 1]
+                            this.activity = this.chapter.activities[this.chapter.activities.length - 1]
                         }
                     }
 
                     this.type = this.activity.activity.type
                 } else {
-                    this.cover = chapter.cover
-                    this.activity = chapter
+                    this.cover = this.chapter.cover
+                    this.activity = this.chapter
                     this.activity.activity = this.activity.project_activities
                     delete this.activity.project_activities
                 }

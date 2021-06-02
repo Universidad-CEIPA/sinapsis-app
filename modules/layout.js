@@ -39,12 +39,7 @@ define([
 					return true
 				}
 				return false
-
-
 			},
-			updateChapters(chapter) {
-				this.currentCourse.updateChapters(chapter);
-			}
 		},
 		async created() {
 			await this.setCourse(local("currentCourse"))

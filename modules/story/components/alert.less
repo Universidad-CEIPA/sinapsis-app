@@ -1,71 +1,130 @@
 .dorado {
     .alert-modal {
-        .modal-container {
-            background-color: @good-color;
-            color: #fff
+        &.chapter-completed {
+            .modal-container {
+                background-color: @good-color;
+                color           : #fff
+            }
+
+            button {
+                box-shadow : 0px 0px 10px #000000;
+                border     : 0;
+                font-weight: bold;
+                max-width  : 250px;
+            }
         }
 
-        button {
-            box-shadow: 0px 0px 10px #000000;
-            border: 0;
-            font-weight: bold;
-            max-width: 250px;
-        }
+
     }
 }
 
 .mision {
     .alert-modal {
+        &.chapter-completed {
+            .modal-container {
+                background: url('../images/mision/textura.jpg') 50% 50%/cover no-repeat;
+                color     : #fff;
+                z-index   : 0;
+
+                >header {
+                    img {
+                        position    : absolute;
+                        z-index     : -1;
+                        margin-left : auto;
+                        margin-right: auto;
+                        left        : 0;
+                        right       : 0;
+                    }
+
+                    .close {
+                        background-color: #fff;
+                        background-image: url(../../../res/theme/images/icon-arrow-right.svg)
+                    }
+                }
+
+                .bottom-alert {
+                    &::before {
+
+                        content : "";
+                        display : block;
+                        position: absolute;
+                        top     : calc(-1 * var(--size) / 2);
+                        margin  : 0 -30px calc(-1 * var(--size) / 2);
+                        ;
+                        left         : 0;
+                        right        : 0;
+                        height       : calc(2*var(--size));
+                        border-radius: 100%;
+                        background   : radial-gradient(ellipse 209% 50% at 50% 3%, @bg-color -1000%, @bg-color -48%, transparent 50%, transparent 77%);
+                    }
+                }
+
+                .modal-content {
+                    margin-top: 100px;
+
+                    button {
+                        color     : @mision-color;
+                        background: #fff;
+                        box-shadow: 0px 0px 10px #000000;
+                        border    : 0;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+
+
+
+
+
+
+
+.focusable {
+    z-index      : 1001;
+    border-radius: 50%;
+    border       : @good-color 2px solid;
+    box-shadow   : 0 0 10px @good-color;
+}
+
+#tour {
+    .ui-modal {
+        padding      : 0 20px;
+        place-items  : end;
+        justify-items: center;
+
+        header {
+            margin       : -20px;
+            margin-bottom: 20px;
+        }
+
         .modal-container {
-            background: url('../images/mision/textura.jpg') 50% 50%/cover no-repeat;
-            color: #fff;
-            z-index: 0;
+            background-color: #fff;
+            border-radius   : var(--panel-radius-l) var(--panel-radius-l) 0 0;
+        }
 
-            >header {
-                img {
-                    position: absolute;
-                    z-index: -1;
-                    margin-left: auto;
-                    margin-right: auto;
-                    left: 0;
-                    right: 0;
-                }
-
-                .close {
-                    background-color: #fff;
-                    background-image: url(../../../res/theme/images/icon-arrow-right.svg)
-                }
+        .modal-content {
+            >img {
+                width: 50%;
             }
+        }
 
-            .bottom-alert{
-                &::before {
+        footer {
+            margin    : -20px;
+            padding   : 20px;
+            margin-top: 20px;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
 
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    top: calc(-1 * var(--size) / 2);
-                    margin: 0 -30px calc(-1 * var(--size) / 2);
-                    ;
-                    left: 0;
-                    right: 0;
-                    height: calc(2*var(--size));
-                    border-radius: 100%;
-                    background: radial-gradient(ellipse 209% 50% at 50% 3%, @bg-color -1000%, @bg-color -48%, transparent 50%, transparent 77%);
-                }
-            }
-
-            .modal-content {
-                margin-top: 100px;
-
-                button {
-                    color: @mision-color;
-                    background: #fff;
-                    box-shadow: 0px 0px 10px #000000;
-                    border: 0;
-                }
+            button {
+                box-shadow: 0px 0px 10px #000000;
+                border    : 0;
             }
         }
 
 
     }
+
+
 }

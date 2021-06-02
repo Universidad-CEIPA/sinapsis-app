@@ -1,11 +1,75 @@
-<ui-modal @close="$emit('close')" class="alert-modal">
-    <template #title>
-        <img src="modules/story/images/alert-great.png" alt="">
-    </template>
-    <h1>¡Fabuloso!</h1>
-    <div class="bottom-alert">
-        <div> Has completado este capitulo, <br>prepárate para las próximas entregas</div>
-        <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+<transition>
+    <ui-modal @close="$emit('close')" class="alert-modal chapter-completed" v-if="typeAlert === 'chapterCompleted'">
+        <template #title>
+            <img src="modules/story/images/alert-great.png" alt="">
+        </template>
+        <h1>¡Fabuloso!</h1>
+        <div class="bottom-alert">
+            <div> Has completado este capitulo, <br>prepárate para las próximas entregas</div>
+            <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+        </div>
+    </ui-modal>
+</transition>
+<transition>
+    <div id="tour" v-if="typeAlert === 'showRol'">
+        <ui-modal title="test" @close="removeTourRol">
+            <template #title>
+                <img src="modules/story/images/arabesco-gold-half.svg" alt="">
+            </template>
+            <h1>Eres {{course.getRole()}}</h1>
+            <img src="modules/story/images/arabesco-gold.svg" alt="">
+            <h1>¡Felicidades!</h1>
+            <div> Según tus competencias este es tu gremio</div>
+            <footer>
+                <button class="done action primary" data-icon-after="arrow-right"
+                    @click="removeTourRol">Continuar</button>
+            </footer>
+
+        </ui-modal>
+    </div>
+</transition>
+
+
+<transition>
+    <div id="tour" v-if="typeAlert === 'showTools'">
+        <ui-modal title="test" @close="removeTourTools">
+            <h1>Genial ¡Ya tienes Herramientas!</h1>
+            <img src="modules/story/images/arabesco-gold.svg" alt="">
+            <div> Acorde a tus competencias estas son tus herramientas</div>
+            <footer>
+                <button class="done action primary" data-icon-after="arrow-right" @click="removeTourTools">Ver
+                    perfil</button>
+            </footer>
+
+        </ui-modal>
     </div>
 
-</ui-modal>
+</transition>
+
+<transition>
+    <div id="tour" v-if="typeAlert === 'showCities'">
+        <ui-modal title="test" @close="removeTourMaps">
+            <h1>Nuevas Tierras</h1>
+            <img src="modules/story/images/arabesco-gold.svg" alt="">
+            <div>Desde aquí  puedes entrar  al mapa de las ciudades  <strong>La conquista del Dorado</strong></div>
+            <footer>
+                <button class="done action primary" data-icon-after="arrow-right" @click="removeTourMaps">Explorar Mapa</button>
+            </footer>
+
+        </ui-modal>
+    </div>
+</transition>
+
+
+<transition>
+    <ui-modal @close="$emit('close')" class="alert-modal chapter-completed" v-if="typeAlert === 'startQuestions'">
+        <template #title>
+            <img src="modules/story/images/alert-great.png" alt="">
+        </template>
+        <h1>¡Fabuloso!</h1>
+        <div class="bottom-alert">
+            <div> Es momento de autoevaluarte</div>
+            <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+        </div>
+    </ui-modal>
+</transition>
