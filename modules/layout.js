@@ -22,7 +22,9 @@ define([
 			},
 			logout() {
 				local("user", null);
+				this.currentCourse.destroy();
 				this.user = null;
+				this.currentCourse = null;
 				this.$router.replace({ name: 'welcome:login' })
 			},
 			processUser(user) {

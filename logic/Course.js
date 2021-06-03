@@ -32,10 +32,7 @@ define([
             this.activeMap = false
             this.activeTools = false
 
-
-            this.currentChapter = null,
-
-                this.chapterActiveRol = 2
+            this.chapterActiveRol = 2
             this.chapterActiveMap = []
         }
 
@@ -63,6 +60,35 @@ define([
 
             return completedChapters + "/" + totalChapters
         }
+
+        activitiesTracking() {
+            let completed = []
+            let pending = []
+            this.schedule.map((chapter, index) => {
+                let activity = chapter.activities.length ? chapter.activities : chapter.maps
+                if (Array.isArray(activity)) {
+                    activity.map(act => {
+                        act.chapter = index + 1
+                        if (act.completed[0] === "completed") {
+                            completed.push(act)
+                        } else {
+                            pending.push(act)
+                        }
+                    })
+                } else {
+                    activity.chapter = index + 1
+                    if (this.isCompletedChapter(chapter)) {
+                        completed.push(activity)
+                    } else {
+                        pending.push(activity)
+                    }
+                }
+
+            })
+
+            return [completed.reverse(), pending]
+        }
+
 
         currentActivity() {
             let activityOrder = []

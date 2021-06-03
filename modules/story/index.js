@@ -27,7 +27,9 @@ define([
                 filterActivities: 'progress',
                 maxShow: 0,
                 chaptersShow: 0,
-                chapters: []
+                chapters: [],
+                activityCompleted: [],
+                activityPending: [],
 
             };
         },
@@ -44,6 +46,27 @@ define([
             advancePercent(chapter) {
                 let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
                 return (activities.filter(a => a.completed[0] === "completed").length * 100) / activities.length
+            },
+
+            dateAgo(activity) {
+                let date = new Date(activity.date)
+                let time = new Date(activity.time)
+
+                date.setHours(time.getHours())
+                date.setMinutes(time.getMinutes());
+                date.setSeconds(0);
+
+                let diff = new Date() - date
+
+                let day_as_milliseconds = 86400000;
+                if (Math.abs(diff) < day_as_milliseconds) {
+                    return "hoy"
+                } else {
+                    diff_in_days = Math.trunc(diff / day_as_milliseconds);
+
+                    return "hace " + diff_in_days +" días"
+                }
+
             },
 
             nextSlider() {
@@ -108,6 +131,7 @@ define([
                     this.modal = true
                 }
 
+                [this.activityCompleted, this.activityPending] = this.course.activitiesTracking()
 
                 this.updateLayout();
             }

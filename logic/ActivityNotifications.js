@@ -89,7 +89,8 @@ define([
         }
 
         schedule(options) {
-            console.log("ActivityNotifications::schedule", options.trigger ? options.trigger.at : "(now)", options.text);
+            // control de notificaciones en web
+            //console.log("ActivityNotifications::schedule", options.trigger ? options.trigger.at : "(now)", options.text);
             return this.backend.schedule({
                 icon: null,
                 smallIcon: "res://notification",

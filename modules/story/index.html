@@ -4,7 +4,7 @@
 
     <div class="general">
 
-        <div class="info"  @click="$router.replace({name : 'story:profile'})">
+        <div class="info" @click="$router.replace({name : 'story:profile'})">
             <div class="advances">
                 <div class="circle"><span class="circle-text">{{course.advanceChapters()}}</span></div>
                 <span>Capítulos</span>
@@ -14,21 +14,21 @@
             </div>
 
             <span class="name">{{ $root.user.name }}</span>
-            
+
             <span class="role" v-if="course.activeRol">Eres {{ course.getRole() }}</span>
             <span class="city" v-if="course.activeCity">Perteneces a {{ course.getLocation() }}</span>
         </div>
 
         <div class="complement">
             <div class="items">
-                <section class="position"  v-if="course.activeMap">
+                <section class="position" v-if="course.activeMap">
                     <div class="icons">
                         <img src="modules/story/images/city.svg" alt="">
                     </div>
                     Ciudades
                 </section>
                 <section class="tools" v-if="course.activeTools">
-                    <div class="icons" >
+                    <div class="icons">
                         <img src="modules/story/images/tools-1.svg" alt="">
                         <img src="modules/story/images/tools-2.svg" alt="">
                         <img src="modules/story/images/tools-3.svg" alt="">
@@ -52,8 +52,7 @@
                 </div>
                 <section class="content">
                     <div class="slide-advance">
-                        <div class="progress-chapter"
-                            :style="{'--width-advance': advancePercent(c)+'%' }">
+                        <div class="progress-chapter" :style="{'--width-advance': advancePercent(c)+'%' }">
                             <div class="text-advance">
                                 {{advanceCompleted(c)}}
                             </div>
@@ -83,25 +82,23 @@
             <div class="activities">
                 <div class="activity progress" v-if="filterActivities === 'progress'">
                     <img src="modules/story/images/icon-lectura.png" alt="">
-                    <div class="title">Lee el capitulo 2</div>
-                    <div class="content">La Profecia se cumple</div>
-                    <div class="date">Enviado hoy</div>
+                    <div class="title">Lee el capitulo {{activityPending[0].chapter}}</div>
+                    <div class="content">{{activityPending[0].activity.name}}</div>
+                    <div class="date">Enviado {{dateAgo(activityPending[0])}}</div>
                 </div>
 
                 <div class="activity completed" v-if="filterActivities === 'completed'">
-                    <!-- @click="$router.replace({ name: 'story:map' })"-->
                     <img src="modules/story/images/icon-lectura.png" alt="">
-                    <div class="title">Lee el capitulo 1</div>
-                    <div class="content">La historia de los siete Sabios Portocalenses</div>
-                    <div class="date">Enviado hace 8 días</div>
+                    <div class="title">Lee el capitulo {{activityPending[0].chapter}}</div>
+                    <div class="content">{{activityCompleted[0].activity.name}}</div>
+                    <div class="date">Enviado {{dateAgo(activityCompleted[0])}}</div>
                 </div>
-
 
             </div>
         </section>
     </div>
 
-    <alert v-if="modal" @close="modal = false" :course="course"/>
+    <alert v-if="modal" @close="modal = false" :course="course" />
 
     <finish-modal v-if="finished" @close="finished = false" />
 </section>
