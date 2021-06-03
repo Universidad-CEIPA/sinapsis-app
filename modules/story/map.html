@@ -20,5 +20,5 @@
         </div>
         <svg :width="sizeWidth" :height="sizeHeight" class="roads"></svg>
     </div>
-
+    <alert v-if="modal" @close="modal = false" :course="course"/>
 </section>

@@ -1,7 +1,8 @@
 define([
     "text!./map.html",
-    "local"
-], (html, local) => {
+    "local",
+    "./components/alert",
+], (html, local, alert) => {
 
     return {
         template: html,
@@ -13,6 +14,7 @@ define([
                 sizeWidth: 0,
                 sizeHeight: 0,
                 map: null,
+                modal : false
             };
         },
         methods: {
@@ -119,7 +121,6 @@ define([
                 this.finalDistribution.forEach((value, index) => {
 
                     let heightMax = 120;
-                    let widthMax = 120;
                     let positionHeight = heightMax / 2 + (heightMax * index)
 
 
@@ -178,7 +179,16 @@ define([
             },
             openActivity(c) {
                 c.type = "map"
-                this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                if (!c.end) {
+                    this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                } else {
+                    let cities = this.locations.filter(l => l.end === 0)
+                    let pending = cities.filter(a => a.completed[0] !== "completed").length === 0
+                    if (pending) {
+                        this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                    }
+                }
+
             },
             reset() {
 
@@ -213,6 +223,9 @@ define([
             this.calculateDistribute();
             this.updateLayout();
 
+            if(this.course.getAlert())
+                this.modal = true
+
             window.addEventListener("resize", this._resizeHandler = e => {
                 this.updateLayout();
             });
@@ -220,5 +233,8 @@ define([
         beforeDestroy() {
             window.removeEventListener("resize", this._resizeHandler);
         },
+        components: {
+            alert
+        }
     };
 });

@@ -71,6 +71,7 @@ define([
                     questions = this.activity.activity.questions
 
                 } else {
+                    
                     this.activity.completed[0] = "completed"
                     this.course.updateActivity(this.activity);
                     questions = this.activity.project_activities.questions

@@ -37,6 +37,7 @@
     <div class="activity" :class="{ 'scroll-padding' : scroll}">
         <div class="title" v-if="header || !welcome">{{activity.activity.name}}</div>
         <component :is="typeComponent" :activity="activity.activity" :course="course">
+            
             <div class="finish-activity" v-if="activity.completed[0] !== 'completed'">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">
@@ -45,19 +46,19 @@
 
                 <div class="bottom-finish">
                     <strong> Has completado esta entrega,</strong> toca el botón y
-                    <template v-if="!course.lastRolPending()">
-                        prepárate para la próxima lectura
+                    <template v-if="course.chapterActiveRol ===  chapter.chapterNumber  && course.lastRolPending()">
+                        descubre tu gremio
                     </template>
                     <template v-else>
-                        descubre tu gremio
+                        prepárate para la próxima lectura
                     </template>
 
                     <button class="action primary completed" @click="completedActivity">
-                        <template v-if="!course.lastRolPending()">
-                            Marcar como completado
+                        <template v-if="course.chapterActiveRol ===  chapter.chapterNumber  && course.lastRolPending()">
+                            Descubre tu gremio
                         </template>
                         <template v-else>
-                            Descubre tu gremio
+                            Marcar como completado
                         </template>
                     </button>
                 </div>

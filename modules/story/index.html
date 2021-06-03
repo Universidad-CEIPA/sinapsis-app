@@ -53,9 +53,9 @@
                 <section class="content">
                     <div class="slide-advance">
                         <div class="progress-chapter"
-                            :style="{'--width-advance': (advance(c.activities) * 100 / c.activities.length)+'%' }">
+                            :style="{'--width-advance': advancePercent(c)+'%' }">
                             <div class="text-advance">
-                                {{advance(c.activities)}}/{{c.activities.length}}
+                                {{advanceCompleted(c)}}
                             </div>
                         </div>
                     </div>

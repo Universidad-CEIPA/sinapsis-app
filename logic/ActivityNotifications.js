@@ -52,7 +52,9 @@ define([
                         date.setHours(time.getHours())
                         date.setMinutes(time.getMinutes());
                         date.setSeconds(0);
-                        text = "Nueva Actividad de " + act.activity.type
+                        text = {
+                            "reading": "Tienes una nueva lectura",
+                        }[act.activity.type];
 
 
                         this.schedule({
@@ -71,7 +73,7 @@ define([
                     date.setMinutes(time.getMinutes());
                     date.setSeconds(0);
 
-                    text = "Nuevo Mapa disponible"
+                    text = "Tiene una nueva actividad en el mapa"
 
                     this.schedule({
                         id: id++,

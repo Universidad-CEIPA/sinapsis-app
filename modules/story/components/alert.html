@@ -1,18 +1,32 @@
 <transition>
-    <ui-modal @close="$emit('close')" class="alert-modal chapter-completed" v-if="typeAlert === 'chapterCompleted'">
+    <ui-modal @close="remove" class="alert-modal chapter-completed" v-if="typeAlert === 'chapterCompleted'">
         <template #title>
             <img src="modules/story/images/alert-great.png" alt="">
         </template>
         <h1>¡Fabuloso!</h1>
         <div class="bottom-alert">
             <div> Has completado este capitulo, <br>prepárate para las próximas entregas</div>
-            <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+            <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
         </div>
     </ui-modal>
 </transition>
+
+<transition>
+    <ui-modal @close="remove" class="alert-modal chapter-completed" v-if="typeAlert === 'startQuestions'">
+        <template #title>
+            <img src="modules/story/images/alert-great.png" alt="">
+        </template>
+        <h1>¡Fabuloso!</h1>
+        <div class="bottom-alert">
+            <div> Es momento de autoevaluarte</div>
+            <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
+        </div>
+    </ui-modal>
+</transition>
+
 <transition>
     <div id="tour" v-if="typeAlert === 'showRol'">
-        <ui-modal title="test" @close="removeTourRol">
+        <ui-modal @close="removeTourRol">
             <template #title>
                 <img src="modules/story/images/arabesco-gold-half.svg" alt="">
             </template>
@@ -29,10 +43,9 @@
     </div>
 </transition>
 
-
 <transition>
     <div id="tour" v-if="typeAlert === 'showTools'">
-        <ui-modal title="test" @close="removeTourTools">
+        <ui-modal @close="removeTourTools">
             <h1>Genial ¡Ya tienes Herramientas!</h1>
             <img src="modules/story/images/arabesco-gold.svg" alt="">
             <div> Acorde a tus competencias estas son tus herramientas</div>
@@ -43,33 +56,45 @@
 
         </ui-modal>
     </div>
-
 </transition>
 
 <transition>
     <div id="tour" v-if="typeAlert === 'showCities'">
-        <ui-modal title="test" @close="removeTourMaps">
+        <ui-modal @close="removeTourMaps">
             <h1>Nuevas Tierras</h1>
             <img src="modules/story/images/arabesco-gold.svg" alt="">
-            <div>Desde aquí  puedes entrar  al mapa de las ciudades  <strong>La conquista del Dorado</strong></div>
+            <div>Desde aquí puedes entrar al mapa de las ciudades <strong>La conquista del Dorado</strong></div>
             <footer>
-                <button class="done action primary" data-icon-after="arrow-right" @click="removeTourMaps">Explorar Mapa</button>
+                <button class="done action primary" data-icon-after="arrow-right" @click="removeTourMaps">Explorar
+                    Mapa</button>
             </footer>
-
         </ui-modal>
     </div>
 </transition>
 
-
 <transition>
-    <ui-modal @close="$emit('close')" class="alert-modal chapter-completed" v-if="typeAlert === 'startQuestions'">
+    <ui-modal @close="removeWelcome" class="start-course" v-if="typeAlert === 'startCourse'">
         <template #title>
             <img src="modules/story/images/alert-great.png" alt="">
         </template>
-        <h1>¡Fabuloso!</h1>
+        <h1>Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{$root.user.name.split(" ")[0]}}</h1>
         <div class="bottom-alert">
-            <div> Es momento de autoevaluarte</div>
-            <button class="done action primary" data-icon-after="arrow-right" @click="$emit('close')">Continuar</button>
+            <div>Aquí encontrarás todas las actividades que hemos preparado para ti</div>
+        </div>
+    </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="remove" class="new-city" v-if="typeAlert === 'newCity'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="">
+        </template>
+        <h1>¡Muy bien!</h1>
+        <div>Haz explorado todas las ciudades </div>
+        <img src="modules/story/images/arabesco-gold.svg" alt="">
+        <div class="bottom-alert">
+            Ahora visita <br>
+            El Dorado
         </div>
     </ui-modal>
 </transition>

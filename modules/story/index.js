@@ -1,9 +1,10 @@
 define([
     "text!./index.html",
+    "local",
     "components/ui-modal",
     "./components/alert",
     "./components/finish-modal",
-], (html, UiModal, alert, finishModal) => {
+], (html, local, UiModal, alert, finishModal) => {
 
     return {
         template: html,
@@ -36,9 +37,15 @@ define([
             finishModal
         },
         methods: {
-            advance(activities) {
-                return activities.filter(a => a.completed[0] === "completed").length
+            advanceCompleted(chapter) {
+                let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
+                return activities.filter(a => a.completed[0] === "completed").length + "/" + activities.length
             },
+            advancePercent(chapter) {
+                let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
+                return (activities.filter(a => a.completed[0] === "completed").length * 100) / activities.length
+            },
+
             nextSlider() {
                 let nextStart = this.startShow + 1;
                 let lengthSpace = nextStart + this.maxShow
@@ -92,6 +99,12 @@ define([
                 })
 
                 if (this.course.getAlert()) {
+                    this.modal = true
+                } else if (!local("firtsTime") || !local("firtsTime").includes(this.course.courseId)) {
+                    let firstTime = local("firtsTime") || []
+                    this.course.setAlert("startCourse")
+                    firstTime.push(this.course.courseId)
+                    local("firtsTime", firstTime)
                     this.modal = true
                 }
 

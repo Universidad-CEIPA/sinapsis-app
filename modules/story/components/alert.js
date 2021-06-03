@@ -17,12 +17,25 @@ define([
                     focusItem.className += " " + newClass;
                 }
             },
+            addClass() {
+                var Item = "." + this.itemFront
+                var focusItem = document.querySelector(Item)
+                let newClass = "front";
+
+                clasess = focusItem.className.split(" ");
+                if (clasess.indexOf(newClass) == -1) {
+                    focusItem.className += " " + newClass;
+                }
+            },
+            remove(){
+                this.course.removeAlert()
+                this.$emit('close');
+            },
             removeTour() {
-                var Item = "." + this.focusable
+                var Item = "." + this.focusable 
                 var focusItem = document.querySelector(Item)
                 focusItem.classList.remove("focusable");
 
-                //this.$emit('close');
             },
             removeTourRol(){
                 this.removeTour()
@@ -41,19 +54,31 @@ define([
                 this.removeTour()
                 this.course.removeAlert()
                 this.$router.push({ name: 'story:map', params: { content: JSON.stringify(this.course.currentChapter) } })
+            },
+            removeWelcome(){
+                var Item = "." + this.itemFront 
+                var focusItem = document.querySelector(Item)
+                focusItem.classList.remove("front");
+                this.course.removeAlert()
             }
         },
         computed: {
             typeAlert() {
                 return {
+                    "startCourse": "startCourse",
                     "chapterCompleted": "chapterCompleted",
                     "showRol": "showRol",
                     "showTools": "showTools",
                     "showCities": "showCities",
                     "startQuestions": "startQuestions",
+                    "newCity": "newCity",
                 }[this.course.getAlert()]; 
             },
-
+            itemFront(){
+                return {
+                    "startCourse": "activities",
+                }[this.course.getAlert()];
+            },
             focusable() {
                 return {
                     "showRol": "avatar",
@@ -66,6 +91,11 @@ define([
             if(this.focusable){
                 this.addFocus()
             }
+
+            if(this.itemFront){
+                this.addClass()
+            }
+            
         },
         components: {
             UiModal

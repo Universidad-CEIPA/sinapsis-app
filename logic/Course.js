@@ -20,7 +20,7 @@ define([
             this.studentId = studentId
             this.name = currentCourse.name
             this.skin = Array.isArray(currentCourse.skin) ? currentCourse.skin[0] : currentCourse.skin
-            this.image = currentCourse.image[0].url || currentCourse.image
+            this.image = Array.isArray(currentCourse.image) ? currentCourse.image[0]?.url : currentCourse.image
             this.schedule = currentCourse.schedule || null
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
@@ -159,7 +159,8 @@ define([
         }
 
         isCompletedChapter(chapter) {
-            return chapter.activities.filter(a => a.completed[0] !== "completed").length === 0
+            let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
+            return activities.filter(a => a.completed[0] !== "completed").length === 0
         }
 
         needImprovementDesired() {
@@ -204,11 +205,14 @@ define([
             let index = this.schedule.findIndex(c => c.id === chapter.id)
             Object.assign(this.schedule[index], chapter)
 
-            this.setAlert("chapterCompleted")
+            if (this.getAlert() !== "newCity") {
+                this.setAlert("chapterCompleted")
 
-            if (index === this.chapterActiveRol - 1 && this.showRol()) {
-                this.setAlert("showRol")
+                if (index === this.chapterActiveRol - 1 && this.showRol()) {
+                    this.setAlert("showRol")
+                }
             }
+
 
             await this.reset()
         }
@@ -229,6 +233,14 @@ define([
 
                     })
                 } else {
+                    let cities = content.map.locations.filter(l => l.end === 0)
+                    let end = content.map.locations.filter(l => l.end === 1).length
+                    let pending = cities.filter(a => a.completed[0] !== "completed").length === 1
+
+                    if (pending && end) {
+                        this.setAlert("newCity")
+                    }
+
                     content.map.locations.map(act => {
                         if (act.id === activity.id) {
                             activity.project_activities = activity.activity
