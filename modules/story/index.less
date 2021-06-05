@@ -1,8 +1,51 @@
 #story-home-view {
 
+    .tiny-alert {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 20px;
+        width: calc(100% - 50px - 20px);
+        position: absolute;
+        z-index: 10;
+        top: -56px;
+        left: 25px;
+        color: #fff;
+
+        .msg {
+            padding: 15px;
+            font-size: 0.8em;
+            background-color: #3CB5E0;
+            border-radius: 50px;
+            margin-bottom: 0.25rem;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 13px;
+            border-color: #3CB5E0 transparent transparent;
+            bottom: -20px;
+            left: 20px;
+        }
+    }
+    .shadow{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 20px;
+        overflow: auto;
+        background: var(--backdrop-bg);
+    }
+
     .activities {
         position: relative;
-
         .header {
             background: #fff;
         }
@@ -342,8 +385,13 @@
 
 
             .tabs,
-            .activities {
+            .activity-content {
                 max-width: 400px
+            }
+
+            .activity-content {
+                position: relative;
+                z-index: 5;
             }
 
             .tabs {

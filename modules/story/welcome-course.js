@@ -7,7 +7,10 @@ define([
         template: html,
         props: ["course"],
         async created(){
-            await ActivityNotifications.get().then(n => n.reset());
+            let router = this.$router
+            await ActivityNotifications.get().then(n => {
+                n.reset(router)
+            });
         }
     };
 });

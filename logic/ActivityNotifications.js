@@ -27,11 +27,11 @@ define([
             this.backend.onNotificactionActivation(id => this.processNotification(id, router));
         }
 
-        processNotification(id, router) {
-            router.push({ name: "story:home" });
+        processNotification(router) {
+            router.push({ name: 'story:home', params: { 'tiny': true } })
         }
 
-        async reset() {
+        async reset(router) {
             let text = "Alarma";
 
             /*const device = window.Capacitor ? await Capacitor.Plugins.Device.getInfo() : {};
@@ -39,6 +39,7 @@ define([
             const SECOND_WAVE_DAYS = device.operatingSystem === "ios" ? FIRST_WAVE_DAYS + 3 : 365;*/
             let id = 1;
 
+            let today = new Date()
 
             this.course.schedule.map(chapter => {
                 let activity = chapter.activities.length ? chapter.activities : chapter.maps
@@ -56,13 +57,13 @@ define([
                             "reading": "Tienes una nueva lectura",
                         }[act.activity.type];
 
-
-                        this.schedule({
-                            id: id++,
-                            text: text,
-                            group: "activity",
-                            trigger: { at: date }
-                        });
+                        if (date > today)
+                            this.schedule({
+                                id: id++,
+                                text: text,
+                                group: "activity",
+                                trigger: { at: date }
+                            });
                     })
                 } else {
 
@@ -74,23 +75,23 @@ define([
                     date.setSeconds(0);
 
                     text = "Tiene una nueva actividad en el mapa"
-
-                    this.schedule({
-                        id: id++,
-                        text: text,
-                        group: "activity",
-                        trigger: { at: date }
-                    });
+                    if (date > today)
+                        this.schedule({
+                            id: id++,
+                            text: text,
+                            group: "activity",
+                            trigger: { at: date }
+                        });
 
                 }
             })
 
-
+            this.backend.listener(router);
         }
 
         schedule(options) {
             // control de notificaciones en web
-            //console.log("ActivityNotifications::schedule", options.trigger ? options.trigger.at : "(now)", options.text);
+            console.log("ActivityNotifications::schedule", options.trigger ? options.trigger.at : "(now)", options.text);
             return this.backend.schedule({
                 icon: null,
                 smallIcon: "res://notification",

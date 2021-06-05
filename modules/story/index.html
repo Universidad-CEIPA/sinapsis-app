@@ -79,7 +79,13 @@
                         Completadas</li>
                 </ul>
             </div>
-            <div class="activities">
+            
+            <div class="activity-content">
+                <div class="tiny-alert" v-if="tinyAlert" @click="tinyAlert = false">
+                    <div class="msg">
+                        Te ha llegado una nueva actividad
+                    </div>
+                </div>
                 <div class="activity progress" v-if="filterActivities === 'progress'">
                     <img src="modules/story/images/icon-lectura.png" alt="">
                     <div class="title">Lee el capitulo {{activityPending[0].chapter}}</div>
@@ -99,6 +105,8 @@
     </div>
 
     <alert v-if="modal" @close="modal = false" :course="course" />
-
     <finish-modal v-if="finished" @close="finished = false" />
+
+    <div class="shadow" v-if="tinyAlert">
+    </div>
 </section>

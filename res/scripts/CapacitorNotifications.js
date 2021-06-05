@@ -1,5 +1,5 @@
 define(() => {
-	
+
 	class CapacitorNotifications {
 
 		static async get() {
@@ -42,8 +42,8 @@ define(() => {
 				cancelAll() { return Promise.resolve(); },
 				createChannel() { return Promise.resolve(); },
 				addListener() { return Promise.resolve({}); },
-				getPending() { return Promise.resolve({notifications: []}); },
-				listChannels() { return Promise.resolve({channels: []}); },
+				getPending() { return Promise.resolve({ notifications: [] }); },
+				listChannels() { return Promise.resolve({ channels: [] }); },
 				schedule() { return Promise.resolve({}); }
 			};
 		}
@@ -58,8 +58,15 @@ define(() => {
 			});
 		}
 
-		onNotificactionActivation(callback) {
-			this.backend.addListener("localNotificationActionPerformed", e => callback(e.notification.id));
+
+		listener(router) {
+			this.backend.addListener('localNotificationActionPerformed', (payload) => {
+				const route = payload.notification.extra.route;
+				const params = payload.notification.extra.params;
+				router.push({ name: route, params: params })
+			});
+
+
 		}
 
 		schedule(options) {
@@ -82,9 +89,14 @@ define(() => {
 					summaryArgument: "Ceipa",
 					attachments: null,
 					actionTypeId: "",
-					extra: null
+					extra: {
+						route: "story:home",
+						params: {tiny: true}
+					},
 				}]
 			})
+
+
 		}
 	}
 

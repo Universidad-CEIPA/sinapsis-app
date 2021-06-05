@@ -6,13 +6,14 @@
 	</div>
 	<div class="slide-cards">
 		<p>
-			¿Cúal storytelling quieres elegir?
+			¿Cuál aventura quieres iniciar?
 		</p>
 		<div class="cards" v-for="(project,index) in projects" @touchstart="handlePointerDown"
 			@touchmove="handlePointerMove" @touchend="handlePointerUp">
 			<template v-if="currentIndex === index">
-				<span class="title-project" data-icon="back">
-					{{ project.name }}
+				<span class="title-project">
+
+					{{project.courseName[0]}} - {{ project.name }}
 				</span>
 
 				<div class="card">

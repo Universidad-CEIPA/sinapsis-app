@@ -2,7 +2,7 @@
     <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span>PERFIL</header>
     <ui-form :model="skills" submit-label="Enviar" action="students/saveDesiredEvaluations" @success="success">
         <template #header>
-            <h3>Ingresa lo que quieras mejorar</h3>
+            <h3>¡Comencemos esta aventura! Elije el nivel que deseas alcanzar para tus competencias</h3>
         </template>
 
         <ui-input v-for="skill in skills.evaluations" type="range" :label="skill.name" v-model="skill.improvementDesired" required @input="calculateLeft(skill.improvementDesired, $event)" @click="calculateLeft(skill.improvementDesired, $event)">

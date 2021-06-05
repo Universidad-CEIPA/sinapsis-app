@@ -72,6 +72,7 @@ define([
                     "showCities": "showCities",
                     "startQuestions": "startQuestions",
                     "newCity": "newCity",
+                    "tiny": "tiny",
                 }[this.course.getAlert()]; 
             },
             itemFront(){

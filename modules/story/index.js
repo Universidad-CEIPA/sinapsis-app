@@ -15,6 +15,10 @@ define([
             redirect: {
                 type: Boolean,
                 default: false
+            },
+            tiny:{
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -30,7 +34,7 @@ define([
                 chapters: [],
                 activityCompleted: [],
                 activityPending: [],
-
+                tinyAlert: false
             };
         },
         components: {
@@ -145,6 +149,10 @@ define([
                 this.updateLayout();
             });
             this.updateLayout();
+
+            if(this.tiny){
+                this.tinyAlert = true
+            }
         },
         beforeDestroy() {
             window.removeEventListener("resize", this._resizeHandler);
