@@ -9,6 +9,14 @@ define([
             return {
                 fontSize: '1em'
             };
+        },
+        computed: {
+            firstLetter() {
+                return this.activity.content.charAt(0);
+            },
+            nextContent() {
+                return this.activity.content.slice(1);
+            }
         }
     };
 });

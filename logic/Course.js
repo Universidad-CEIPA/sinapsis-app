@@ -24,8 +24,11 @@ define([
             this.schedule = currentCourse.schedule || null
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
+            this.rubrics = null
 
             this.notifications = ""
+
+            this.selectedTool = null
 
             this.activeRol = false
             this.activeCity = false
@@ -143,7 +146,8 @@ define([
                 image: this.image,
                 schedule: this.schedule,
                 profile: this.profile,
-                competences: this.competences
+                competences: this.competences,
+                rubrics: this.rubrics,
             }
         }
 
@@ -202,6 +206,10 @@ define([
             await this.setSchedule()
             await this.setStudentProfile()
             await this.setStudentCompetences()
+
+            await this.setRubrics()
+
+            this.setTools()
             local("currentCourse", this.getFullInfo());
 
             this.showRol()
@@ -211,6 +219,9 @@ define([
             this.currentActivity()
         }
 
+        selectTool(competence) {
+            this.selectedTool = competence
+        }
 
         setAlert(alert) {
             this.notifications = alert
@@ -223,9 +234,24 @@ define([
             this.profile = await api.post('students/getProfileCourse', { courseId: this.courseId, studentId: this.studentId })
         }
 
+        async setRubrics() {
+            this.rubrics = await api.post('students/getTools', { rolId: this.profile.rol.id });
+        }
+
+
         async setStudentCompetences() {
             this.competences = await api.get(`courses/competencyAssessment?courseId=${this.courseId}&projectId= ${this.projectId}&studentId=${this.studentId}`);
         }
+
+        setTools() {
+            this.competences.map(comp => {
+                let rubric = this.rubrics.find(rub => comp.id === rub.competence.id)
+
+                comp.rubric = rubric.rubrics[0].avatars.filter(av => av.threshold <= comp.evaluation.value).reverse()
+            })
+        }
+
+
 
         async updateChapters(chapter) {
             let index = this.schedule.findIndex(c => c.id === chapter.id)

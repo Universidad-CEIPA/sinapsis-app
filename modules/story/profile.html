@@ -23,26 +23,11 @@
             </section>
             <section class="tools">
                 <h5>Tus Herramientas</h5>
-                <ul class="tools-list"  v-if="course.activeTools">
-                    <li>
-                        <div class="circle-img"><img src="modules/story/images/iron.png" alt=""></div>
-                        <p>Brújula de Hierro</p>
-                    </li>
-                    <li>
-                        <div class="circle-img"><img src="modules/story/images/plum.png" alt=""></div>
-                        <p>Pluma</p>
-                    </li>
-                    <li>
-                        <div class="circle-img"><img src="modules/story/images/skin.png" alt=""></div>
-                        <p>Piel</p>
-                    </li>
-                    <li>
-                        <div class="circle-img"><img src="modules/story/images/gem.png" alt=""></div>
-                        <p>Gema</p>
-                    </li>
-                    <li>
-                        <div class="circle-img"><img src="modules/story/images/art.png" alt=""></div>
-                        <p>Artesania</p>
+                <ul class="tools-list">
+                    <li v-for="competence in course.competences" @click="showInfoTool(competence)">
+                        <div class="circle-img"><img v-if="!course.activeTools"
+                                :src="competence.rubric[0].cover || 'modules/story/images/iron.png'" alt=""></div>
+                        <p v-if="!course.activeTools">{{competence.rubric[0].name}}</p>
                     </li>
                 </ul>
             </section>
@@ -52,7 +37,8 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph" @click="$router.replace({ name: 'story:skills' })">
-                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="course.graphDataSets()" :colors="course.graphColors()" />
+                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="course.graphDataSets()"
+                    :colors="course.graphColors()" />
             </div>
             <button class="wish-eval action primary" v-if="course.needImprovementDesired"
                 @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
@@ -70,6 +56,6 @@
         </div>
     </div>
 
-    <alert v-if="modal" @close="modal = false">
+    <alert v-if="modal" @close="modal = false" :course="course" />
     </alert>
 </section>

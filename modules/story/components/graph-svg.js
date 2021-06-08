@@ -18,9 +18,12 @@ define([
             },
         },
         computed: {
+            
+        },
+        methods: {
             sizeChart() {
-                var widthS = window.screen.width
 
+                var widthS = window.screen.width
                 if (widthS < 370) {
                     return 250
                 }
@@ -33,12 +36,10 @@ define([
                     return 500
                 }
             },
-        },
-        methods: {
             init() {
                 var templateSvg = document.querySelector("#graph-svg");
 
-                var radius = this.sizeChart / 4
+                var radius = this.sizeChart() / 4
                 var chart = new radialGraph(radius, 100);
 
                 chart.addTags(this.tags)
@@ -53,12 +54,17 @@ define([
                 chart.addTemplate(templateSvg);
 
             },
-            reset(){
-                let children = document.querySelector(".chartGroup").remove()
+            reset() {
+                document.querySelector(".chartGroup").remove()
                 this.init()
             }
         },
         mounted() {
+            window.addEventListener("resize", this._resizeHandler = e => {
+                this.reset();
+            });
+
+
             this.init();
         },
     };

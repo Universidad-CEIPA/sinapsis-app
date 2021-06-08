@@ -32,12 +32,17 @@
             </div>
         </div>
 
-        <button class="action primary button-down" @click="doDown">v</button>
+        <button class="action primary button-down" @click="goDown">v</button>
     </div>
-    <div class="activity" :class="{ 'scroll-padding' : scroll}">
-        <div class="title" v-if="header || !welcome">{{activity.activity.name}}</div>
+    <div class="activity" id="activity" :class="{ 'scroll-padding' : scroll}">
+        <div class="title" v-if="header || !welcome">
+            {{activity.activity.name}}
+
+            <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+        </div>
+
         <component :is="typeComponent" :activity="activity.activity" :course="course">
-            
+
             <div class="finish-activity" v-if="activity.completed[0] !== 'completed'">
                 <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
                 <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">

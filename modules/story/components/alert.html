@@ -12,6 +12,20 @@
 </transition>
 
 <transition>
+    <ui-modal @close="remove" class="alert-modal tools-modal" v-if="typeAlert === 'tools'">
+        <template #title>
+            <img :src="course.selectedTool.rubric[0].media || 'modules/story/images/iron.png'" alt="">
+        </template>
+        <h1>{{course.selectedTool.rubric[0].name}}</h1>
+        <div>Competencia: {{course.selectedTool.name}} <br>
+            Puntaje: {{course.selectedTool.evaluation.value}}</div>
+        <div class="line"></div>
+        <div>{{course.selectedTool.rubric[0].description}}</div>
+
+    </ui-modal>
+</transition>
+
+<transition>
     <ui-modal @close="remove" class="alert-modal chapter-completed" v-if="typeAlert === 'startQuestions'">
         <template #title>
             <img src="modules/story/images/alert-great.png" alt="">
@@ -75,7 +89,7 @@
 <transition>
     <ui-modal @close="removeWelcome" class="start-course" v-if="typeAlert === 'startCourse'">
         <template #title>
-            <img src="modules/story/images/alert-great.png" alt="">
+            <img src="modules/story/images/welcome.png" alt="">
         </template>
         <h1>Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{$root.user.name.split(" ")[0]}}</h1>
         <div class="bottom-alert">

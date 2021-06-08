@@ -89,6 +89,9 @@ define([
 
 
             },
+            goDown(){
+                document.getElementById("activity").scrollIntoView({ behavior: "smooth" });
+            },
             nextSlider() {
                 let nextStart = this.startShow + 1;
 

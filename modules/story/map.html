@@ -10,9 +10,11 @@
 
         <div v-for="group in finalDistribution" class="group-city">
             <div v-for="city in group" class="city-content">
+                
                 <div class="city" :style="city.style" @click="openActivity(city)">
                     <div class="city-logo">
-                        <img :src="city.cover" alt="">
+                        <img :src="city.cover" alt="" class="cover">
+                        <img  v-if="city.completed[0] === 'completed'" src="modules/story/images/completed-map.png" class="check" alt="">
                     </div>
                     <div class="city-name">{{ city.name}}</div>
                 </div>
