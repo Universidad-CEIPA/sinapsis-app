@@ -27,45 +27,51 @@ define([
                     focusItem.className += " " + newClass;
                 }
             },
-            remove(){
+            remove() {
                 this.course.removeAlert()
                 this.$emit('close');
             },
             removeTour() {
-                var Item = "." + this.focusable 
+                var Item = "." + this.focusable
                 var focusItem = document.querySelector(Item)
                 focusItem.classList.remove("focusable");
 
             },
-            removeTourRol(){
+            removeTourRol() {
                 this.removeTour()
                 this.course.removeAlert()
                 this.course.setAlert("showTools")
 
                 this.addFocus()
             },
-            removeTourTools(){
+            removeTourTools() {
                 this.removeTour()
                 this.course.removeAlert()
 
-                this.$router.replace({name:"story:profile"})
+                this.$router.replace({ name: "story:profile" })
             },
-            removeTourMaps(){
+            removeTourMaps() {
                 this.removeTour()
                 this.course.removeAlert()
                 this.$router.push({ name: 'story:map', params: { content: JSON.stringify(this.course.currentChapter) } })
             },
-            removeWelcome(){
-                var Item = "." + this.itemFront 
+            removeWelcome() {
+                var Item = "." + this.itemFront
                 var focusItem = document.querySelector(Item)
                 focusItem.classList.remove("front");
                 this.course.removeAlert()
+            },
+            removeFinish() {
+                this.course.removeAlert()
+                this.course.setAlert("continueTravel")
             }
         },
         computed: {
             typeAlert() {
                 return {
                     "startCourse": "startCourse",
+                    "finishCourse": "finishCourse",
+                    "continueTravel": "continueTravel",
                     "chapterCompleted": "chapterCompleted",
                     "showRol": "showRol",
                     "showTools": "showTools",
@@ -73,10 +79,10 @@ define([
                     "startQuestions": "startQuestions",
                     "newCity": "newCity",
                     "tiny": "tiny",
-                    "tools": "tools",
-                }[this.course.getAlert()]; 
+                    "tools": "tools"
+                }[this.course.getAlert()];
             },
-            itemFront(){
+            itemFront() {
                 return {
                     "startCourse": "activities",
                 }[this.course.getAlert()];
@@ -90,14 +96,14 @@ define([
             },
         },
         mounted() {
-            if(this.focusable){
+            if (this.focusable) {
                 this.addFocus()
             }
 
-            if(this.itemFront){
+            if (this.itemFront) {
                 this.addClass()
             }
-            
+
         },
         components: {
             UiModal

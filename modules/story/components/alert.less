@@ -10,26 +10,26 @@
         &::before {
 
 
-            content            : "";
-            height             : 100px;
-            width              : 50px;
-            position           : absolute;
-            background-image   : url("../images/leaves.png");
+            content: "";
+            height: 100px;
+            width: 50px;
+            position: absolute;
+            background-image: url("../images/leaves.png");
             background-position: 50% 50%;
-            background-repeat  : no-repeat;
-            top                : 50%;
-            background-size    : cover;
+            background-repeat: no-repeat;
+            top: 50%;
+            background-size: cover;
 
 
         }
 
         &::after {
-            left     : 0;
+            left: 0;
             transform: translateY(-50%);
         }
 
         &::before {
-            right    : 0;
+            right: 0;
             transform: scale(-1, 1) translateY(-50%);
         }
     }
@@ -38,45 +38,74 @@
         &.chapter-completed {
             .modal-container {
                 background-color: @good-color;
-                color           : #fff;
+                color: #fff;
                 .leaves;
             }
 
             button {
-                box-shadow : 0px 0px 10px #000000;
-                border     : 0;
+                box-shadow: 0px 0px 10px #000000;
+                border: 0;
                 font-weight: bold;
-                max-width  : 250px;
+                max-width: 250px;
             }
         }
 
         &.tools-modal {
             .modal-container {
                 background-color: @main-color;
-                color           : #fff;
+                color: #fff;
                 .leaves;
 
                 header {
                     img {
                         height: 150px;
-                        width : 150px;
+                        width: 150px;
                     }
                 }
 
                 .modal-content {
                     position: inherit;
-                    z-index : 1;
+                    z-index: 1;
 
                     .line {
-                        margin       : auto;
-                        width        : 150px;
-                        height       : 5px;
+                        margin: auto;
+                        width: 150px;
+                        height: 5px;
                         border-bottom: #fff solid 2px;
                     }
                 }
             }
         }
 
+    }
+
+    .finish {
+
+        header {
+            margin: -100px -20px 20px;
+            position: relative;
+
+            .text-header {
+                color: @main-color;
+                position: absolute;
+                left: 50%;
+                bottom: -20px;
+                font-size: 2em;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .center-img {
+            img {
+                width: 250px;
+                margin: auto;
+            }
+
+        }
+
+        footer {
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
+        }
     }
 }
 
@@ -90,17 +119,17 @@
         &.chapter-completed {
             .modal-container {
                 background: url('../images/mision/textura.jpg') 50% 50%/cover no-repeat;
-                color     : #fff;
-                z-index   : 0;
+                color: #fff;
+                z-index: 0;
 
                 >header {
                     img {
-                        position    : absolute;
-                        z-index     : -1;
-                        margin-left : auto;
+                        position: absolute;
+                        z-index: -1;
+                        margin-left: auto;
                         margin-right: auto;
-                        left        : 0;
-                        right       : 0;
+                        left: 0;
+                        right: 0;
                     }
 
                     .close {
@@ -112,17 +141,17 @@
                 .bottom-alert {
                     &::before {
 
-                        content : "";
-                        display : block;
+                        content: "";
+                        display: block;
                         position: absolute;
-                        top     : calc(-1 * var(--size) / 2);
-                        margin  : 0 -30px calc(-1 * var(--size) / 2);
+                        top: calc(-1 * var(--size) / 2);
+                        margin: 0 -30px calc(-1 * var(--size) / 2);
                         ;
-                        left         : 0;
-                        right        : 0;
-                        height       : calc(2*var(--size));
+                        left: 0;
+                        right: 0;
+                        height: calc(2*var(--size));
                         border-radius: 100%;
-                        background   : radial-gradient(ellipse 209% 50% at 50% 3%, @bg-color -1000%, @bg-color -48%, transparent 50%, transparent 77%);
+                        background: radial-gradient(ellipse 209% 50% at 50% 3%, @bg-color -1000%, @bg-color -48%, transparent 50%, transparent 77%);
                     }
                 }
 
@@ -130,16 +159,92 @@
                     margin-top: 100px;
 
                     button {
-                        color     : @mision-color;
+                        color: @mision-color;
                         background: #fff;
                         box-shadow: 0px 0px 10px #000000;
-                        border    : 0;
+                        border: 0;
                     }
                 }
             }
         }
 
     }
+
+
+    .finish {
+        .modal-container {
+            background: url('../images/mision/textura.jpg') 50% 50%/cover no-repeat;
+            color: #fff;
+            --size: 50px;
+
+
+            header {
+                img {
+                    display: none;
+                    margin: 0;
+                }
+
+                .close {
+                    background-color: #fff;
+                    background-image: url(../../../res/theme/images/icon-arrow-right.svg)
+                }
+            }
+
+            .center-img {
+                img {
+                    display: none;
+                }
+
+                margin-bottom: calc(var(--size) * -1.5);
+
+                &::before {
+
+                    content: "";
+                    display: block;
+                    top: calc(-1 * var(--size) / 2);
+                    margin: 0 -30px calc(-1 * var(--size) / 2);
+                    left: 0;
+                    right: 0;
+                    height: calc(2*var(--size));
+                    border-radius: 100%;
+                    background: radial-gradient(ellipse 209% 50% at 50% 3%, #fff -1000%, #fff -48%, transparent 50%, transparent 77%);
+                }
+
+
+            }
+
+            footer {
+                background: #fff;
+                position: relative;
+                margin-top: calc(var(--size) + 20px);
+
+
+                &::before {
+
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    top: calc(-1 * var(--size));
+                    left: 0;
+                    right: 0;
+                    margin: 0;
+
+                    height: calc(var(--size));
+                    width: 100%;
+
+                    background: radial-gradient(ellipse 50% 50% at 50% 0, transparent 100%, #fff 110%, #fff 0);
+                }
+
+                button {
+                    color: @mision-color;
+                    background: #fff;
+                }
+            }
+        }
+
+    }
+
+
 }
 
 
@@ -150,28 +255,33 @@
     .has-icon();
 
     &::before {
-        width     : 100%;
-        position  : absolute;
+        width: 100%;
+        position: absolute;
         margin-top: -100px;
-        height    : 100px;
+        height: 100px;
     }
 }
+
+
+
+
+
 
 .ui-modal {
     .close {
         box-shadow: 0 0 10px #000;
-        border    : 0;
+        border: 0;
     }
 
     &.start-course {
-        padding-top  : calc(var(--header-padding) * 2 + var(--header-height) + 120px);
-        place-items  : start;
+        padding-top: calc(var(--header-padding) * 2 + var(--header-height) + 120px);
+        place-items: start;
         justify-items: center;
-        color        : #fff;
+        color: #fff;
 
         .modal-container {
             background-color: @main-color;
-            min-height      : 200px;
+            min-height: 200px;
 
             .modal-content {
                 max-width: 250px;
@@ -181,17 +291,18 @@
 
 
     &.new-city {
-        place-items    : end;
-        padding-bottom : 0;
+        place-items: end;
+        padding-bottom: 0;
         justify-content: center;
 
 
         .modal-container {
-            padding         : 0;
+            padding: 0;
             background-color: #fff;
 
             .modal-content {
                 padding: 20px;
+                min-width: 250px;
 
                 h1 {
                     color: @main-color;
@@ -200,12 +311,70 @@
 
             .bottom-alert {
                 background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
-                margin    : 20px -20px;
-                padding   : 20px;
+                margin: 20px -20px;
+                padding: 20px;
+
+                img {
+                    display: block;
+                    margin: auto;
+                }
             }
         }
 
 
+
+    }
+
+    &.continue-travel {
+        
+
+        .modal-container {
+            padding: 50px 20px;
+            background-color: @main-color;
+            color: #fff;
+
+            header {
+                .arabezco {
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    left: 0;
+                    height: auto;
+                }
+            }
+
+
+            .action {
+                text-align: center;
+                background-color: @bg-color;
+            }
+        }
+
+    }
+
+
+    &.finish {
+        padding: 0 20px;
+        place-items: end;
+        justify-items: center;
+
+        .modal-container {
+            background-color: #fff;
+            border-radius: var(--panel-radius-l) var(--panel-radius-l) 0 0;
+        }
+
+
+        footer {
+            margin: -20px;
+            padding: 20px;
+            margin-top: 20px;
+
+
+            button {
+                box-shadow: 0px 0px 10px #000000;
+                border: 0;
+            }
+        }
 
     }
 }
@@ -214,26 +383,26 @@
 
 
 .focusable {
-    z-index      : 1001;
-    border-radius: 50%;
-    border       : @good-color 2px solid;
-    box-shadow   : 0 0 10px @good-color;
+    z-index: 1001;
+    border-radius: 10px;
+    border: @good-color 2px solid;
+    box-shadow: 0 0 15px 5px #95bfcb;
 }
 
 #tour {
     .ui-modal {
-        padding      : 0 20px;
-        place-items  : end;
+        padding: 0 20px;
+        place-items: end;
         justify-items: center;
 
         header {
-            margin       : -20px;
+            margin: -20px;
             margin-bottom: 20px;
         }
 
         .modal-container {
             background-color: #fff;
-            border-radius   : var(--panel-radius-l) var(--panel-radius-l) 0 0;
+            border-radius: var(--panel-radius-l) var(--panel-radius-l) 0 0;
         }
 
         .modal-content {
@@ -243,14 +412,14 @@
         }
 
         footer {
-            margin    : -20px;
-            padding   : 20px;
+            margin: -20px;
+            padding: 20px;
             margin-top: 20px;
             background: linear-gradient(0deg, rgba(255, 255, 255, 1) 60%, rgba(194, 194, 194, 1) 100%);
 
             button {
                 box-shadow: 0px 0px 10px #000000;
-                border    : 0;
+                border: 0;
             }
         }
 

@@ -41,7 +41,7 @@ define([
 
             let today = new Date()
 
-            this.course.schedule.map(chapter => {
+            this.course.chapters.map(chapter => {
                 let activity = chapter.activities.length ? chapter.activities : chapter.maps
 
                 if (Array.isArray(activity)) {

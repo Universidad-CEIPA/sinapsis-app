@@ -4,11 +4,29 @@
         <li class="medium" :class="{'active':fontSize === '1em'}" @click="fontSize = '1em'">a</li>
         <li class="big" :class="{'active':fontSize === '1.3em'}" @click="fontSize = '1.3em'">a</li>
     </ul>
-    <div class="name">
-        {{ activity.name }}
-        <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+    <div class="name" :class="{'full-title' : showImages}">
+
+        <div class="avatar" v-if="showImages">
+            <img class="circle" src="modules/story/images/circle.png" alt="">
+        </div>
+        <div class="title-activity">
+            <template v-if="showImages">
+                Entrega {{countActivity}}
+            </template>
+            <template v-else>
+                {{ title }}
+            </template>
+            
+            <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+            
+            {{ activity.name }}
+            <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+        </div>
+
+
+
     </div>
-    
+
     <div class="text">
         {{ activity.content}}
     </div>

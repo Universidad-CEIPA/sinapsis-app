@@ -4,19 +4,28 @@ define([
 
     return {
         template: html,
-        props: ['activity'],
+        props: ['activity', 'course'],
         data() {
             return {
-                fontSize: '1em'
+                fontSize: '1em',
+                currentChapter: null
             };
         },
         computed: {
-            firstLetter() {
-                return this.activity.content.charAt(0);
+            showImages() {
+                return this.currentChapter === this.course.chapterActiveRol && this.course.chapters[this.currentChapter - 1].scroll
             },
-            nextContent() {
-                return this.activity.content.slice(1);
+            countActivity() {
+                return this.course.chapters[this.currentChapter - 1].activities.findIndex(activity => activity.activity.id === this.activity.id) + 1
+            },
+            title(){
+                return this.course.chapters[this.currentChapter - 1].title
             }
+
+        },
+        created() {
+            this.currentChapter = this.course.getChapter(this.activity.id)
         }
+
     };
 });

@@ -4,7 +4,7 @@ define([
 
 	return {
 		template: html,
-		props:["course"],
+		props: ["course"],
 		data() {
 			return {
 				projects: this.$root.user.projects,
@@ -21,7 +21,7 @@ define([
 		},
 		methods: {
 			async goCourse() {
-				if (await this.$root.setCourse(this.projects[this.currentIndex])){
+				if (await this.$root.setCourse(this.projects[this.currentIndex])) {
 					this.$router.replace({ name: "story:welcome" });
 				}
 			},
@@ -55,6 +55,13 @@ define([
 				this._lastDelta = 0;
 				this.dragProject = null;
 
+			},
+			setImage(image) {
+				if (image.length) {
+					return `url(${image[0].url.trim().replace(' ', "%20")})`
+				} else {
+					return this.defaultImage
+				}
 			}
 		},
 		created() {

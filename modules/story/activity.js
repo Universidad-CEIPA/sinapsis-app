@@ -16,6 +16,7 @@ define([
                 type: "reading",
                 activity: {},
                 title: "",
+                chapterName: "",
                 cover: null,
                 startShow: 0,
                 scroll: false,
@@ -25,6 +26,14 @@ define([
             };
         },
         computed: {
+            showCompetence() {
+                if (this.isMap) {
+                    // just show second map
+                    return this.course.indexMap() === 1
+                } else {
+                    return false
+                }
+            },
             header() {
                 return this.activity.type !== "card"
             },
@@ -41,9 +50,10 @@ define([
                     "video": "activity-video"
                 }[this.type];
             },
-            welcome() {
+            isMap() {
                 return this.activity.type === "map"
-            }
+            },
+
         },
         methods: {
             changeActivity(index) {
@@ -66,14 +76,14 @@ define([
                         }
                     })
 
-                    this.course.updateChapters(this.chapter);
+                    await this.course.updateChapters(this.chapter);
 
                     questions = this.activity.activity.questions
 
                 } else {
-                    
+
                     this.activity.completed[0] = "completed"
-                    this.course.updateActivity(this.activity);
+                    await this.course.updateActivity(this.activity);
                     questions = this.activity.project_activities.questions
                 }
 
@@ -89,7 +99,7 @@ define([
 
 
             },
-            goDown(){
+            goDown() {
                 document.getElementById("activity").scrollIntoView({ behavior: "smooth" });
             },
             nextSlider() {
@@ -115,6 +125,36 @@ define([
                     this.$router.replace({ name: 'story:home' })
                 }
             },
+            handlePointerDown(e) {
+                if (e.changedTouches) e = e.changedTouches[0];
+                this._pointerStart = e;
+                this._lastDelta = 0;
+            },
+            handlePointerMove(e) {
+                if (e.changedTouches) e = e.changedTouches[0];
+                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 5) {
+                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
+
+                    let delta = this.dragX < 0 ? 1 : -1;
+
+                    if (delta !== this._lastDelta) {
+                        this._lastDelta = delta;
+
+                        let nextStart = this.startShow + delta
+                        if (nextStart >= 0 && nextStart + this.maxShow <= this.activityScrolls.length) {
+                            this.dragShow = nextStart
+                        }
+                    }
+                }
+            },
+            handlePointerUp(e) {
+                if (e.changedTouches) e = e.changedTouches[0];
+                if (Math.abs(this._pointerStart.clientX - e.clientX) > 5 && this.dragShow >= 0 && this.dragShow + this.maxShow <= this.activityScrolls.length && this.dragShow !== null) {
+                    this.startShow = this.dragShow
+                }
+                this._lastDelta = 0;
+                this.dragShow = null;
+            }
 
         },
         created() {
@@ -123,6 +163,8 @@ define([
                 if (this.chapter.type !== "map") {
                     this.title = this.chapter.title
                     this.scroll = this.chapter.scroll
+                    this.chapterName = this.chapter.name
+
 
                     if (this.chapter.scroll) {
                         let position = 0

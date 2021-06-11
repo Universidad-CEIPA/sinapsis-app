@@ -19,18 +19,18 @@
 				<div class="card">
 					<div class="shadow-card" v-if="!this._lastDelta">
 						<section v-if="index !== 0 "
-							:style="{'--prev-image': projects[index -1].image.length?'url('+projects[index -1].image[0].url+')':defaultImage}">
+							:style="{'--prev-image': setImage(projects[index -1].image)}">
 						</section>
 					</div>
 					<div class="current-card" @click="goCourse"
-						:style="{'--current-image': project.image.length?'url('+project.image[0].url+')':defaultImage}">
+						:style="{'--current-image': setImage(project.image)}">
 						<p>
 							{{ !project.image.length ? project.name : '' }}
 						</p>
 					</div>
 					<transition>
 						<div class="dummy-card" v-if="dragProject || dragProject === 0"
-							:style="{'--dummy-image': projects[dragProject].image.length?'url('+projects[dragProject].image[0].url+')':defaultImage}">
+							:style="{'--dummy-image':  setImage(projects[dragProject].image)}">
 							<p>
 								{{ !projects[dragProject].image.length ? projects[dragProject].name : '' }}
 							</p>
@@ -38,7 +38,7 @@
 					</transition>
 					<div class="shadow-card" v-if="!this._lastDelta">
 						<section v-if="index !== projects.length - 1 "
-							:style="{'--next-image': projects[index +1].image.length?'url('+projects[index +1].image[0].url+')':defaultImage}">
+							:style="{'--next-image': setImage(projects[index +1].image)}">
 						</section>
 					</div>
 

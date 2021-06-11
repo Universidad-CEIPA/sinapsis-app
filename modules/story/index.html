@@ -10,7 +10,8 @@
                 <span>Capítulos</span>
             </div>
             <div class="avatar">
-                <img src="modules/story/images/navegante.png" alt="">
+                <div class="shadow-focus"></div>
+                <img :src="course.getRoleAvatar()" alt="">
             </div>
 
             <span class="name">{{ $root.user.name }}</span>
@@ -37,15 +38,16 @@
                 </section>
             </div>
 
-            <img src="modules/story/images/icono-pez.png" alt="">
+            <img :src="course.getRoleIcon()" alt="">
         </div>
     </div>
     <div class="chapters" :style="{'--show-chapter':maxShow , '--width-chapter':widthChapter}">
         <div class="back">
-            <span v-if="startShow != 0" @click="previousSlider">
+            <span v-if="startShow != 0">
                 < </span>
         </div>
-        <div class="slide-chapters">
+        <div class="slide-chapters" @touchstart="handlePointerDown" @touchmove="handlePointerMove"
+            @touchend="handlePointerUp">
             <div v-for="c,index in chaptersShow" class="chapter" @click="openActivity(c)">
                 <div class="tittle">
                     {{c.title}}
@@ -61,9 +63,19 @@
                     <div class="summary">{{c.name}}</div>
                 </section>
             </div>
+
+            <!-- <transition>
+                <div class="dummy-chapter" v-if="dragShow || dragShow === 0">
+                    <p>
+                        TEST
+                    </p>
+                </div>
+            </transition>-->
+
+
         </div>
         <div class="next">
-            <span v-if="(maxShow + startShow) < chapters.length" @click="nextSlider">
+            <span v-if="(maxShow + startShow) < chapters.length">
                 >
             </span>
         </div>
@@ -79,25 +91,30 @@
                         Completadas</li>
                 </ul>
             </div>
-            
+
             <div class="activity-content">
                 <div class="tiny-alert" v-if="tinyAlert" @click="tinyAlert = false">
                     <div class="msg">
                         Te ha llegado una nueva actividad
                     </div>
                 </div>
-                <div class="activity progress" v-if="filterActivities === 'progress'">
+                <div class="activity progress" v-if="filterActivities === 'progress'  && activityPending.length > 0"
+                    @touchstart="handlePointerDownProgress" @touchmove="handlePointerMoveProgress"
+                    @touchend="handlePointerUpProgress">
                     <img src="modules/story/images/icon-lectura.png" alt="">
-                    <div class="title">Lee el capitulo {{activityPending[0].chapter}}</div>
-                    <div class="content">{{activityPending[0].activity.name}}</div>
-                    <div class="date">Enviado {{dateAgo(activityPending[0])}}</div>
+                    <div class="title">Lee el capitulo {{activityPending[progressShow].chapter}}</div>
+                    <div class="content">{{setName(activityPending[progressShow])}}</div>
+                    <div class="date">Enviado {{dateAgo(activityPending[progressShow])}}</div>
+
                 </div>
 
-                <div class="activity completed" v-if="filterActivities === 'completed'">
+                <div class="activity completed" v-if="filterActivities === 'completed' && activityCompleted.length > 0"
+                    @touchstart="handlePointerDownCompleted" @touchmove="handlePointerMoveCompleted"
+                    @touchend="handlePointerUpCompleted">
                     <img src="modules/story/images/icon-lectura.png" alt="">
-                    <div class="title">Lee el capitulo {{activityPending[0].chapter}}</div>
-                    <div class="content">{{activityCompleted[0].activity.name}}</div>
-                    <div class="date">Enviado {{dateAgo(activityCompleted[0])}}</div>
+                    <div class="title">Capitulo {{activityCompleted[completedShow].chapter}}</div>
+                    <div class="content">{{setName(activityCompleted[completedShow])}}</div>
+                    <div class="date">Enviado {{dateAgo(activityCompleted[completedShow])}}</div>
                 </div>
 
             </div>
@@ -105,7 +122,6 @@
     </div>
 
     <alert v-if="modal" @close="modal = false" :course="course" />
-    <finish-modal v-if="finished" @close="finished = false" />
 
     <div class="shadow" v-if="tinyAlert">
     </div>

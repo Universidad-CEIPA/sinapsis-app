@@ -21,13 +21,15 @@ define([
             this.name = currentCourse.name
             this.skin = Array.isArray(currentCourse.skin) ? currentCourse.skin[0] : currentCourse.skin
             this.image = Array.isArray(currentCourse.image) ? currentCourse.image[0]?.url : currentCourse.image
-            this.schedule = currentCourse.schedule || null
+            this.schedule = null,
+            this.chapters = currentCourse.chapters || null
+
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
             this.rubrics = null
 
             this.notifications = ""
-
+            this.mapActivity = []
             this.selectedTool = null
 
             this.activeRol = false
@@ -35,8 +37,12 @@ define([
             this.activeMap = false
             this.activeTools = false
 
+
             this.chapterActiveRol = 2
             this.chapterActiveMap = []
+
+            this.currentChapter = null
+            this.memory = 0
         }
 
         static getCurrent() {
@@ -44,20 +50,20 @@ define([
         }
 
         showRol() {
-            this.activeTools = this.isCompletedChapter(this.schedule[this.chapterActiveRol - 1])
-            this.activeCity = this.isCompletedChapter(this.schedule[this.chapterActiveRol - 1])
-            return this.activeRol = this.isCompletedChapter(this.schedule[this.chapterActiveRol - 1])
+            this.activeTools = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
+            this.activeCity = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
+            return this.activeRol = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
         }
 
         lastRolPending() {
-            return this.schedule[this.chapterActiveRol - 1].activities.filter(a => a.completed[0] !== "completed").length === 1
+            return this.chapters[this.chapterActiveRol - 1].activities.filter(a => a.completed[0] !== "completed").length === 1
         }
 
         advanceChapters() {
-            let totalChapters = this.schedule.length
+            let totalChapters = this.chapters.length
             let completedChapters = 0
 
-            this.schedule.map(chapter => {
+            this.chapters.map(chapter => {
                 if (this.isCompletedChapter(chapter)) { completedChapters++ }
             })
 
@@ -67,7 +73,7 @@ define([
         activitiesTracking() {
             let completed = []
             let pending = []
-            this.schedule.map((chapter, index) => {
+            this.chapters.map((chapter, index) => {
                 let activity = chapter.activities.length ? chapter.activities : chapter.maps
                 if (Array.isArray(activity)) {
                     activity.map(act => {
@@ -95,7 +101,7 @@ define([
 
         currentActivity() {
             let activityOrder = []
-            let schedule = local("currentCourse").schedule
+            let schedule = local("currentCourse").chapters
 
             schedule.map(chapter => {
                 let activity = chapter.activities.length ? chapter.activities : chapter.maps
@@ -114,6 +120,8 @@ define([
                     activityOrder.push(activity)
                 }
             })
+
+            this.mapActivity = activityOrder
         }
 
         destroy() {
@@ -127,13 +135,42 @@ define([
                 return false
             }
         }
+        getChapter(activityId) {
+            let indexChapter = 0
+            this.chapters.map((chapter, index) => {
+                let content = chapter.activities.length ? chapter.activities : chapter.maps
+
+
+                if (Array.isArray(content)) {
+                    content.map(act => {
+                        if (act.activity.id === activityId) {
+                            indexChapter = index
+                        }
+                    })
+                } else {
+                    content.map.locations.map(act => {
+                        if (act.project_activities.id === activityId) {
+                            indexChapter = index
+                        }
+
+                    })
+                }
+            })
+
+            return indexChapter + 1
+
+        }
 
         getChaptersMap() {
-            this.schedule.map((chapter, index) => {
+            this.chapters.map((chapter, index) => {
                 if (chapter.maps.id) {
                     this.chapterActiveMap.push(index + 1)
                 }
             })
+        }
+
+        getCurrentChapter() {
+            return this.chapters.find(chapter => this.currentChapter === chapter.id )
         }
 
         getFullInfo() {
@@ -144,7 +181,7 @@ define([
                 name: this.name,
                 skin: this.skin,
                 image: this.image,
-                schedule: this.schedule,
+                chapters: this.chapters,
                 profile: this.profile,
                 competences: this.competences,
                 rubrics: this.rubrics,
@@ -155,9 +192,21 @@ define([
             return this.profile.location.name
         }
 
+        getLocationImage() {
+            return this.profile.location.cover
+        }
+
 
         getRole() {
             return this.profile.rol.name
+        }
+
+        getRoleAvatar() {
+            return this.profile.rol.avatar.url
+        }
+
+        getRoleIcon() {
+            return this.profile.rol.icon.url
         }
 
         graphColors() {
@@ -188,9 +237,18 @@ define([
             return this.competences.map((c) => { return c.name })
         }
 
+        indexMap(){
+            let chapterNumber = this.chapters.findIndex(c => c.id === this.currentChapter) + 1
+            return this.chapterActiveMap.findIndex(c => c === chapterNumber)
+        }
+
         isCompletedChapter(chapter) {
             let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
             return activities.filter(a => a.completed[0] !== "completed").length === 0
+        }
+
+        memoryShow(index) {
+            this.memory = index
         }
 
         needImprovementDesired() {
@@ -216,7 +274,7 @@ define([
             this.getChaptersMap()
 
 
-            this.currentActivity()
+            // this.currentActivity()
         }
 
         selectTool(competence) {
@@ -227,8 +285,13 @@ define([
             this.notifications = alert
         }
 
+        setCurrentChapter(chapter) {
+            this.currentChapter = chapter
+        }
+
         async setSchedule() {
             this.schedule = await api.post('students/getInfoCourse', { courseId: this.courseId, studentId: this.studentId })
+            this.chapters = this.schedule.chapters
         }
         async setStudentProfile() {
             this.profile = await api.post('students/getProfileCourse', { courseId: this.courseId, studentId: this.studentId })
@@ -254,17 +317,23 @@ define([
 
 
         async updateChapters(chapter) {
-            let index = this.schedule.findIndex(c => c.id === chapter.id)
-            Object.assign(this.schedule[index], chapter)
+            let index = this.chapters.findIndex(c => c.id === chapter.id)
+            Object.assign(this.chapters[index], chapter)
 
+            
             if (this.getAlert() !== "newCity") {
                 this.setAlert("chapterCompleted")
 
                 if (index === this.chapterActiveRol - 1 && this.showRol()) {
                     this.setAlert("showRol")
                 }
-            }
 
+                let [completed, pending] = this.activitiesTracking()
+
+                if(pending.length === 0 && (!local("finishCourse") || !local("finishCourse").includes(this.courseId))){
+                    this.setAlert("finishCourse")
+                }
+            }
 
             await this.reset()
         }
@@ -272,7 +341,7 @@ define([
 
         updateActivity(activity) {
             let indexChapter = 0
-            this.schedule.map((chapter, index) => {
+            this.chapters.map((chapter, index) => {
                 let content = chapter.activities.length ? chapter.activities : chapter.maps
 
 
@@ -305,10 +374,8 @@ define([
                 }
             })
 
-            this.schedule[indexChapter]
 
-
-            this.updateChapters(this.schedule[indexChapter])
+            this.updateChapters(this.chapters[indexChapter])
         }
     }
 

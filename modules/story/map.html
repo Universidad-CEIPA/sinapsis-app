@@ -1,26 +1,29 @@
 <section class="view-section" id="story-map-view" :class="course.skin">
     <header><span data-icon="tiny-back" @click="goBack"></span> CIUDADES </header>
+    <div :class="classes">
+        <div class="title">
+            <h3>Explora</h3>
+            Ingresa a cada ciudad y aprende sobre ella
+        </div>
 
-    <div class="title">
-        <h3>Explora</h3>
-        Ingresa a cada ciudad y aprende sobre ella
-    </div>
+        <div class="map-container">
 
-    <div class="map-container">
+            <div v-for="group in finalDistribution" class="group-city">
+                <div v-for="city in group" class="city-content">
 
-        <div v-for="group in finalDistribution" class="group-city">
-            <div v-for="city in group" class="city-content">
-                
-                <div class="city" :style="city.style" @click="openActivity(city)">
-                    <div class="city-logo">
-                        <img :src="city.cover" alt="" class="cover">
-                        <img  v-if="city.completed[0] === 'completed'" src="modules/story/images/completed-map.png" class="check" alt="">
+                    <div class="city" :style="city.style" @click="openActivity(city)">
+                        <div class="city-logo">
+                            <img v-if="course.indexMap() === 1" src="modules/story/images/feather.png" alt="" class="feather">
+                            <img :src="city.cover" alt="" class="cover">
+                            <img v-if="city.completed[0] === 'completed'" src="modules/story/images/completed.png"
+                                class="check" alt="">
+                        </div>
+                        <div class="city-name">{{ city.name}}</div>
                     </div>
-                    <div class="city-name">{{ city.name}}</div>
                 </div>
             </div>
+            <svg :width="sizeWidth" :height="sizeHeight" class="roads"></svg>
         </div>
-        <svg :width="sizeWidth" :height="sizeHeight" class="roads"></svg>
     </div>
-    <alert v-if="modal" @close="modal = false" :course="course"/>
+    <alert v-if="modal" @close="modal = false" :course="course" />
 </section>

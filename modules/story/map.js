@@ -13,9 +13,14 @@ define([
                 finalDistribution: [],
                 sizeWidth: 0,
                 sizeHeight: 0,
-                map: null,
-                modal : false
+                chapter: null,
+                modal: false
             };
+        },
+        computed: {
+            classes() {
+                return "map-"+ (this.course.indexMap() + 1)
+            }
         },
         methods: {
 
@@ -174,7 +179,7 @@ define([
                 document.querySelector(".map-container").appendChild(canvas)
             },
             goBack() {
-                local("currentMap", null);
+                this.course.setCurrentChapter(null)
                 this.$router.replace({ name: 'story:home' })
             },
             openActivity(c) {
@@ -192,16 +197,15 @@ define([
             },
             reset() {
 
-                if (this.map) {
-                    let chapter = JSON.parse(this.map)
-                    this.title = chapter.title
+                if (this.chapter) {
+                    this.title = this.chapter.title
 
-                    this.locations = chapter.maps.map.locations
+                    this.locations = this.chapter.maps.map.locations
 
                     this.locations.map(c => {
                         c.cover = "modules/story/images/camera.png"
                     })
-                    local("currentMap", this.map)
+                    this.course.setCurrentChapter(this.chapter.id)
                 } else {
                     this.$router.replace({ name: "story:home" })
                 }
@@ -217,13 +221,14 @@ define([
             },
 
         },
-        mounted() {
-            this.map = this.content || local("currentMap")
+        async mounted() {
+            await this.course.reset()
+            this.chapter = this.content ? JSON.parse(this.content) : this.course.getCurrentChapter()
             this.reset()
             this.calculateDistribute();
             this.updateLayout();
 
-            if(this.course.getAlert())
+            if (this.course.getAlert())
                 this.modal = true
 
             window.addEventListener("resize", this._resizeHandler = e => {
