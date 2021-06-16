@@ -22,6 +22,7 @@ define([
         },
         data() {
             widthChapter = 160;
+            
             return {
                 startShow: 0,
                 progressShow: 0,
@@ -34,7 +35,13 @@ define([
                 chapters: [],
                 activityCompleted: [],
                 activityPending: [],
-                tinyAlert: false
+                tinyAlert: false,
+
+                animation: 20,
+                limitAnimation: {
+                    start: 20,
+                    finish: 0
+                }
             };
         },
         components: {
@@ -50,7 +57,6 @@ define([
                 let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
                 return (activities.filter(a => a.completed[0] === "completed").length * 100) / activities.length
             },
-
             dateAgo(activity) {
                 let date = new Date(activity.date)
                 let time = new Date(activity.time)
@@ -82,7 +88,6 @@ define([
                 this.updateLayout();
             },
             openActivity(c) {
-
                 if (this.course.chapterActiveMap.includes(c.chapterNumber)) {
                     this.course.activeMap = true
                     this.course.setAlert("showCities")
@@ -91,6 +96,26 @@ define([
                     this.course.currentChapter = c
                 } else {
                     this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                }
+
+            },
+            openActivityList(content) {
+                if (content.activity) {
+                    let chapterID = this.course.getChapterByActivity(content.activity.id)
+
+                    if (chapterID) {
+                        let chapter = this.chapters.find(c => c.chapterNumber === chapterID)
+                        this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(chapter), forceActivity: content.id } })
+                    } else {
+                        content.type = "hero-letter"
+                        console.log(content)
+                        this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(content) } })
+                    }
+
+                } else {
+                    let chapterID = this.course.getChapterByMap(content.map.id)
+                    let chapter = this.chapters.find(c => c.chapterNumber === chapterID)
+                    this.$router.push({ name: 'story:map', params: { content: JSON.stringify(chapter) } })
                 }
 
             },
@@ -105,14 +130,19 @@ define([
             setName(act) {
                 return act.activity ? act.activity.name : act.map.name
             },
+            setImage(act) {
+                return act.activity ? act.activity.type : "map"
+            },
             updateLayout() {
                 let spaceAvailable = Math.floor((window.screen.width - 40) / this.widthChapter)
-                this.course.memoryShow(this.startShow)
+                //this.course.memoryShow(this.startShow)
                 if (spaceAvailable > this.chapters.length) {
                     this.maxShow = this.chapters.length
                 } else {
                     this.maxShow = spaceAvailable
                 }
+
+                this.limitAnimation.finish = -(this.widthChapter * this.chapters.length + this.chapters.length * 20) + window.screen.width
 
                 this.chaptersShow = this.chapters.slice(this.startShow, this.maxShow + this.startShow)
             },
@@ -123,10 +153,19 @@ define([
             },
             handlePointerMove(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 5) {
-                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
+                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 100) {
+                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX) / 100;
 
-                    let delta = this.dragX < 0 ? 1 : -1;
+
+                    let next = this.animation + this.dragX
+
+                    if (next <= this.limitAnimation.start && next >= this.limitAnimation.finish){
+                    this.animation = this.animation + this.dragX
+                    }
+
+
+
+                    /*let delta = this.dragX < 0 ? 1 : -1;
 
                     if (delta !== this._lastDelta) {
                         this._lastDelta = delta;
@@ -135,7 +174,7 @@ define([
                         if (nextStart >= 0 && nextStart + this.maxShow <= this.chapters.length) {
                             this.dragShow = nextStart
                         }
-                    }
+                    }*/
                 }
             },
             handlePointerUp(e) {
@@ -147,75 +186,6 @@ define([
                 this._lastDelta = 0;
                 this.dragShow = null;
             },
-
-
-
-
-            handlePointerDownProgress(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                this._pointerStart = e;
-                this._lastDelta = 0;
-            },
-            handlePointerMoveProgress(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 5) {
-                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
-
-                    let delta = this.dragX < 0 ? 1 : -1;
-
-                    if (delta !== this._lastDelta) {
-                        this._lastDelta = delta;
-
-                        let nextStart = this.progressShow + delta
-                        if (nextStart >= 0 && nextStart + 1 <= this.activityPending.length) {
-                            this.dragShow = nextStart
-                        }
-                    }
-                }
-            },
-            handlePointerUpProgress(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                if (Math.abs(this._pointerStart.clientX - e.clientX) > 5 && this.dragShow >= 0 && this.dragShow + 1 <= this.activityPending.length && this.dragShow !== null) {
-                    this.progressShow = this.dragShow
-                }
-                this._lastDelta = 0;
-                this.dragShow = null;
-            },
-
-
-
-
-
-            handlePointerDownCompleted(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                this._pointerStart = e;
-                this._lastDelta = 0;
-            },
-            handlePointerMoveCompleted(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 5) {
-                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
-
-                    let delta = this.dragX < 0 ? 1 : -1;
-
-                    if (delta !== this._lastDelta) {
-                        this._lastDelta = delta;
-
-                        let nextStart = this.completedShow + delta
-                        if (nextStart >= 0 && nextStart + 1 <= this.activityCompleted.length) {
-                            this.dragShow = nextStart
-                        }
-                    }
-                }
-            },
-            handlePointerUpCompleted(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                if (Math.abs(this._pointerStart.clientX - e.clientX) > 5 && this.dragShow >= 0 && this.dragShow + 1 <= this.activityCompleted.length && this.dragShow !== null) {
-                    this.completedShow = this.dragShow
-                }
-                this._lastDelta = 0;
-                this.dragShow = null;
-            }
         },
         created() {
             if (this.redirect) {
@@ -247,7 +217,7 @@ define([
                 }
 
                 [this.activityCompleted, this.activityPending] = this.course.activitiesTracking()
-                this.startShow = this.course.memory
+                //this.startShow = this.course.memory
                 this.updateLayout();
             }
 

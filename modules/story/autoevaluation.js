@@ -32,7 +32,15 @@ define([
                 this.modal = false
             },
             nextQuestion() {
-                this.currentQuestion++
+                let next = this.currentQuestion + 1
+                if (next <= this.questions.length - 1) {
+                    this.currentQuestion = next
+                } else {
+                    local("questions", null)
+                    this.course.setAlert("finish-evaluation")
+                    this.modal = true
+                }
+
             }
         },
         created() {

@@ -57,6 +57,7 @@
     </div>
 </transition>
 
+
 <transition>
     <div id="tour" v-if="typeAlert === 'showTools'">
         <ui-modal @close="removeTourTools">
@@ -156,5 +157,35 @@
         
         <button class="done action primary" @click="remove"> www.ceipa.edu.co</button>
 
+    </ui-modal>
+</transition>
+
+<transition>
+        <ui-modal @close="remove" class="hero-letter" v-if="typeAlert === 'hero-letter'">
+            <template #title>
+                <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+            </template>
+            <h1>Tus fortalezas te han ayudado a avanzar en esta travesia</h1>
+            <img src="modules/story/images/arabesco-gold.svg" alt="">
+            <div>Con la carta del Héroe fortalecerás tus habilidades para continuar con tu progreso <br>
+                Ponte a prueba y sé más efectivo
+            </div>
+            <footer>
+                <button class="done action primary" data-icon-after="arrow-right"
+                    @click="remove">Continuar</button>
+            </footer>
+        </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="removeEvaluation" class="alert-modal chapter-completed" v-if="typeAlert === 'finish-evaluation'">
+        <template #title>
+            <img src="modules/story/images/alert-great.png" alt="">
+        </template>
+        <h1>Genial</h1>
+        <div class="bottom-alert">
+            <div> Haz completado la autoevaluación sigue explorando el mapa</div>
+            <button class="done action primary" data-icon-after="arrow-right" @click="removeEvaluation">Volver al mapa</button>
+        </div>
     </ui-modal>
 </transition>

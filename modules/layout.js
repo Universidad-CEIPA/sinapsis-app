@@ -44,7 +44,9 @@ define([
 			},
 		},
 		async created() {
-			await this.setCourse(local("currentCourse"))
+			if (local("currentCourse")){
+				await this.setCourse(local("currentCourse"))
+			}
 		}
 	};
 });

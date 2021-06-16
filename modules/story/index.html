@@ -42,13 +42,9 @@
         </div>
     </div>
     <div class="chapters" :style="{'--show-chapter':maxShow , '--width-chapter':widthChapter}">
-        <div class="back">
-            <span v-if="startShow != 0">
-                < </span>
-        </div>
-        <div class="slide-chapters" @touchstart="handlePointerDown" @touchmove="handlePointerMove"
+        <div class="slide-chapters" :style="{'--left-animation':animation}" @touchstart="handlePointerDown" @touchmove="handlePointerMove"
             @touchend="handlePointerUp">
-            <div v-for="c,index in chaptersShow" class="chapter" @click="openActivity(c)">
+            <div v-for="c,index in chapters" class="chapter" @click="openActivity(c)">
                 <div class="tittle">
                     {{c.title}}
                 </div>
@@ -63,21 +59,6 @@
                     <div class="summary">{{c.name}}</div>
                 </section>
             </div>
-
-            <!-- <transition>
-                <div class="dummy-chapter" v-if="dragShow || dragShow === 0">
-                    <p>
-                        TEST
-                    </p>
-                </div>
-            </transition>-->
-
-
-        </div>
-        <div class="next">
-            <span v-if="(maxShow + startShow) < chapters.length">
-                >
-            </span>
         </div>
     </div>
     <div class="activities">
@@ -98,23 +79,25 @@
                         Te ha llegado una nueva actividad
                     </div>
                 </div>
-                <div class="activity progress" v-if="filterActivities === 'progress'  && activityPending.length > 0"
-                    @touchstart="handlePointerDownProgress" @touchmove="handlePointerMoveProgress"
-                    @touchend="handlePointerUpProgress">
-                    <img src="modules/story/images/icon-lectura.png" alt="">
-                    <div class="title">Lee el capitulo {{activityPending[progressShow].chapter}}</div>
-                    <div class="content">{{setName(activityPending[progressShow])}}</div>
-                    <div class="date">Enviado {{dateAgo(activityPending[progressShow])}}</div>
+                <div class="activity progress" v-if="filterActivities === 'progress'"
+                    v-for="activity in activityPending" @click="openActivityList(activity)">
+                    <img :src="`modules/story/images/${course.skin}/icon-${setImage(activity)}.png`" alt="">
+
+
+                    <div class="title" v-if="activity.chapter">Lee el capitulo {{activity.chapter}}</div>
+                    <div class="title" v-else>Carta del Héroe</div>
+                    <div class="content">{{setName(activity)}}</div>
+                    <div class="date">Enviado {{dateAgo(activity)}}</div>
 
                 </div>
 
-                <div class="activity completed" v-if="filterActivities === 'completed' && activityCompleted.length > 0"
-                    @touchstart="handlePointerDownCompleted" @touchmove="handlePointerMoveCompleted"
-                    @touchend="handlePointerUpCompleted">
-                    <img src="modules/story/images/icon-lectura.png" alt="">
-                    <div class="title">Capitulo {{activityCompleted[completedShow].chapter}}</div>
-                    <div class="content">{{setName(activityCompleted[completedShow])}}</div>
-                    <div class="date">Enviado {{dateAgo(activityCompleted[completedShow])}}</div>
+                <div class="activity completed" v-if="filterActivities === 'completed'"
+                    v-for="activity in activityCompleted" @click="openActivityList(activity)">
+                    <img :src="`modules/story/images/${course.skin}/icon-${setImage(activity)}.png`" alt="">
+                    <div class="title" v-if="activity.chapter">Lee el capitulo {{activity.chapter}}</div>
+                    <div class="title" v-else>Carta del Héroe</div>
+                    <div class="content">{{setName(activity)}}</div>
+                    <div class="date">Enviado {{dateAgo(activity)}}</div>
                 </div>
 
             </div>

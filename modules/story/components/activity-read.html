@@ -10,18 +10,22 @@
             <img class="circle" src="modules/story/images/circle.png" alt="">
         </div>
         <div class="title-activity">
-            <template v-if="showImages">
-                Entrega {{countActivity}}
+            <template v-if="activity.type !== 'hero-letter'">
+                <template v-if="showImages">
+                    Entrega {{countActivity}}
+                </template>
+                <template v-else>
+                    {{ title }}
+                </template>
+                <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+                {{ activity.name }}
             </template>
             <template v-else>
-                {{ title }}
+                Carta del Héroe
             </template>
-            
-            <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
-            
-            {{ activity.name }}
             <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
         </div>
+        
 
 
 

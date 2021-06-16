@@ -31,6 +31,10 @@ define([
                 this.course.removeAlert()
                 this.$emit('close');
             },
+            removeEvaluation(){
+                this.course.removeAlert()
+                this.$router.replace({ name: 'story:map' })
+            },
             removeTour() {
                 var Item = "." + this.focusable
                 var focusItem = document.querySelector(Item)
@@ -79,7 +83,9 @@ define([
                     "startQuestions": "startQuestions",
                     "newCity": "newCity",
                     "tiny": "tiny",
-                    "tools": "tools"
+                    "tools": "tools",
+                    "hero-letter": "hero-letter",
+                    "finish-evaluation": "finish-evaluation"
                 }[this.course.getAlert()];
             },
             itemFront() {

@@ -19,12 +19,12 @@ define([
                 return this.course.chapters[this.currentChapter - 1].activities.findIndex(activity => activity.activity.id === this.activity.id) + 1
             },
             title(){
-                return this.course.chapters[this.currentChapter - 1].title
+                return this.course.chapters[this.currentChapter - 1].title || ""
             }
 
         },
         created() {
-            this.currentChapter = this.course.getChapter(this.activity.id)
+            this.currentChapter = this.course.getChapterByActivity(this.activity.id)
         }
 
     };

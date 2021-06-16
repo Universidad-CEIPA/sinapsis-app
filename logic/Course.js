@@ -21,8 +21,9 @@ define([
             this.name = currentCourse.name
             this.skin = Array.isArray(currentCourse.skin) ? currentCourse.skin[0] : currentCourse.skin
             this.image = Array.isArray(currentCourse.image) ? currentCourse.image[0]?.url : currentCourse.image
-            this.schedule = null,
+            this.schedule = currentCourse.schedule || null
             this.chapters = currentCourse.chapters || null
+            this.hero_letter = currentCourse.hero_letter || null
 
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
@@ -92,8 +93,12 @@ define([
                         pending.push(activity)
                     }
                 }
-
             })
+
+            this.hero_letter.map((card) => {
+                pending.push(card)
+            })
+
 
             return [completed.reverse(), pending]
         }
@@ -135,8 +140,8 @@ define([
                 return false
             }
         }
-        getChapter(activityId) {
-            let indexChapter = 0
+        getChapterByActivity(activityId) {
+            let indexChapter = -1
             this.chapters.map((chapter, index) => {
                 let content = chapter.activities.length ? chapter.activities : chapter.maps
 
@@ -161,7 +166,13 @@ define([
 
         }
 
-        getChaptersMap() {
+        getChapterByMap(mapId) {
+            let indexChapter = this.chapters.findIndex((chapter) => chapter.maps.map.id === mapId)
+
+            return indexChapter + 1
+        }
+
+        trackingMaps() {
             this.chapters.map((chapter, index) => {
                 if (chapter.maps.id) {
                     this.chapterActiveMap.push(index + 1)
@@ -170,7 +181,7 @@ define([
         }
 
         getCurrentChapter() {
-            return this.chapters.find(chapter => this.currentChapter === chapter.id )
+            return this.chapters.find(chapter => this.currentChapter === chapter.id)
         }
 
         getFullInfo() {
@@ -182,9 +193,11 @@ define([
                 skin: this.skin,
                 image: this.image,
                 chapters: this.chapters,
+                hero_letter: this.hero_letter,
                 profile: this.profile,
                 competences: this.competences,
                 rubrics: this.rubrics,
+                schedule: this.schedule
             }
         }
 
@@ -237,7 +250,7 @@ define([
             return this.competences.map((c) => { return c.name })
         }
 
-        indexMap(){
+        indexMap() {
             let chapterNumber = this.chapters.findIndex(c => c.id === this.currentChapter) + 1
             return this.chapterActiveMap.findIndex(c => c === chapterNumber)
         }
@@ -271,7 +284,7 @@ define([
             local("currentCourse", this.getFullInfo());
 
             this.showRol()
-            this.getChaptersMap()
+            this.trackingMaps()
 
 
             // this.currentActivity()
@@ -292,6 +305,7 @@ define([
         async setSchedule() {
             this.schedule = await api.post('students/getInfoCourse', { courseId: this.courseId, studentId: this.studentId })
             this.chapters = this.schedule.chapters
+            this.hero_letter = this.schedule.hero_letter
         }
         async setStudentProfile() {
             this.profile = await api.post('students/getProfileCourse', { courseId: this.courseId, studentId: this.studentId })
@@ -320,7 +334,7 @@ define([
             let index = this.chapters.findIndex(c => c.id === chapter.id)
             Object.assign(this.chapters[index], chapter)
 
-            
+
             if (this.getAlert() !== "newCity") {
                 this.setAlert("chapterCompleted")
 
@@ -330,7 +344,7 @@ define([
 
                 let [completed, pending] = this.activitiesTracking()
 
-                if(pending.length === 0 && (!local("finishCourse") || !local("finishCourse").includes(this.courseId))){
+                if (pending.length === 0 && (!local("finishCourse") || !local("finishCourse").includes(this.courseId))) {
                     this.setAlert("finishCourse")
                 }
             }

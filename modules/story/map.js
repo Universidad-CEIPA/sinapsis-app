@@ -84,7 +84,6 @@ define([
                             tempContent[0].style = styleCSS
                         }
                     } else {
-
                         tempContent[0].style = {}
                         tempContent[0].style["text-align"] = side > 0 ? "-webkit-right" : "-webkit-left"
                         tempContent[0].style["vertical-align"] = top > 0 ? "top" : "bottom"
@@ -193,10 +192,8 @@ define([
                         this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
                     }
                 }
-
             },
             reset() {
-
                 if (this.chapter) {
                     this.title = this.chapter.title
 

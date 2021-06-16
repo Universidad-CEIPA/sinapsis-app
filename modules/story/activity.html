@@ -1,18 +1,20 @@
 <section class="view-section" id="story-activity-view" :class="course.skin">
-    <header v-if="header"><span data-icon="tiny-back" @click="viewBack"></span>
-        <template v-if="activity.type === 'map'">
+    <header v-if="!isHero"><span data-icon="tiny-back" @click="viewBack"></span>
+        <template v-if="isMap">
             Mapa Ciudades
         </template>
-        <template v-else>
+        </template>
+            <template v-else>
+                
             {{ title }}
         </template>
 
     </header>
-    <div class="welcome" v-if="!header || isMap">
+    <div class="welcome" id="welcome" v-if="isHero || isMap">
         <div class="title-type" :class="activity.type">
-            <template v-if="activity.type === 'card'">
+            <template v-if="isHero">
                 Carta del héroe
-                <img src="modules/story/images/arabesco-gold.svg" alt="">
+                <img src="modules/story/images/arabesco-gold.svg" class="arabezco" alt="">
             </template>
             <template v-else-if="activity.type === 'map'">
                 Bienvenido a
@@ -53,7 +55,7 @@
     </div>
     <div class="activity" id="activity" :class="{ 'scroll-padding' : scroll}">
         <div class="title">
-            <div v-if="header || !isMap">
+            <div v-if="!isHero && !isMap">
                 <template v-if="scroll">
                     {{chapterName}}
                 </template>
@@ -130,5 +132,5 @@
 
         </div>
 
-
+<alert v-if="modal" @close="modal = false" :course="course" />
 </section>

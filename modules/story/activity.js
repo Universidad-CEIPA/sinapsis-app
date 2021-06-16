@@ -4,12 +4,13 @@ define([
     "local",
     "./components/activity-audio",
     "./components/activity-read",
-    "./components/activity-video"
-], (html, api, local, activityAudio, activityRead, activityVideo) => {
+    "./components/activity-video",
+    "./components/alert"
+], (html, api, local, activityAudio, activityRead, activityVideo, alert) => {
 
     return {
         template: html,
-        props: ["content", "course"],
+        props: ["content", "forceActivity", "course"],
         data() {
             return {
                 optionsPanel: false,
@@ -22,7 +23,9 @@ define([
                 scroll: false,
                 activityScrolls: [],
                 selectScroll: 0,
-                chapter: null
+                chapter: null,
+                modal: false
+
             };
         },
         computed: {
@@ -30,12 +33,11 @@ define([
                 if (this.isMap) {
                     // just show second map
                     return this.course.indexMap() === 1
+                } else if (this.isHero) {
+                    return true
                 } else {
                     return false
                 }
-            },
-            header() {
-                return this.activity.type !== "card"
             },
             itemsShow() {
                 return this.activityScrolls.slice(this.startShow, this.maxShow + this.startShow)
@@ -52,6 +54,9 @@ define([
             },
             isMap() {
                 return this.activity.type === "map"
+            },
+            isHero() {
+                return this.activity.type === "hero-letter"
             },
 
         },
@@ -160,7 +165,15 @@ define([
         created() {
             if (this.content) {
                 this.chapter = JSON.parse(this.content)
-                if (this.chapter.type !== "map") {
+
+
+                let exceptions = [
+                    'map',
+                    'hero-letter'
+                ]
+
+
+                if (!exceptions.includes(this.chapter.type)) {
                     this.title = this.chapter.title
                     this.scroll = this.chapter.scroll
                     this.chapterName = this.chapter.name
@@ -179,6 +192,8 @@ define([
                         })
                         this.activity = this.chapter.activities[0]
                         this.selectScroll = 0
+                    } else if (this.forceActivity) {
+                        this.activity = this.chapter.activities.find(a => a.id == this.forceActivity)
                     } else {
                         let activityPending = this.chapter.activities.filter(a => a.completed[0] !== "completed")
 
@@ -190,23 +205,30 @@ define([
                     }
 
                     this.type = this.activity.activity.type
+                } else if (this.chapter.type === 'hero-letter') {
+                    this.activity = this.chapter
                 } else {
                     this.cover = this.chapter.cover
                     this.activity = this.chapter
                     this.activity.activity = this.activity.project_activities
                     delete this.activity.project_activities
                 }
-
-
-
             } else {
                 this.$router.replace({ name: "story:home" })
+            }
+        },
+        mounted(){
+            if (this.chapter.type === 'hero-letter'){
+                document.getElementById("welcome").scrollIntoView({ behavior: "smooth" });
+                this.course.setAlert("hero-letter")
+                this.modal = true
             }
         },
         components: {
             activityAudio,
             activityRead,
-            activityVideo
+            activityVideo,
+            alert
         },
     };
 });

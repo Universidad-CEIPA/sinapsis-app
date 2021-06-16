@@ -82,7 +82,7 @@ define([
 					} else {
 						result = await api.post(this.action, data);
 					}
-
+					this.loading = false;
 					this.$trigger("success", result, data);
 				} catch (err) {
 					this.error = err.response?.data?.message ?? err.message;

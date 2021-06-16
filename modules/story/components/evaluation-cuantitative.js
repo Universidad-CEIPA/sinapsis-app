@@ -12,10 +12,10 @@ define([
                 answers: {
                     courseId: this.$root.currentCourse.courseId,
                     studentId: this.$root.currentCourse.studentId,
-                    questionId: this.questions.id,
+                    questionId: null,
                     evaluation: 0,
-                    type: this.questions.type,
-                    title: this.questions.content
+                    type: null,
+                    title: null
                 },
             }
         },
@@ -36,11 +36,26 @@ define([
             async success(result, data) {
                 this.$emit('next')
             },
+
+            reset() {
+                this.answers.courseId = this.$root.currentCourse.courseId
+                this.answers.studentId = this.$root.currentCourse.studentId
+                this.answers.evaluation = 0
+                this.answers.questionId = this.questions.id
+                this.answers.type = this.questions.type
+                this.answers.title = this.questions.content
+            }
         },
-        mounted() {
+        created() {
+            this.reset()
             /*Object.entries(this.answers).forEach(([key, question]) => {
                 question.answer = 0
             });*/
+        },
+        watch: {
+            questions() {
+                this.reset()
+            }
         },
         components: {
             UiForm,
