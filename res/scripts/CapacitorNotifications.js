@@ -80,7 +80,7 @@ define(() => {
 				notifications: [{
 					...moreOptions,
 					id: options.id,
-					title: "Ceipa",
+					title: options.title ? "Ceipa" : options.title,
 					body: options.text,
 					schedule: options.trigger,
 					group: options.group,
@@ -89,10 +89,7 @@ define(() => {
 					summaryArgument: "Ceipa",
 					attachments: null,
 					actionTypeId: "",
-					extra: {
-						route: "story:home",
-						params: {tiny: true}
-					},
+					extra: options.extra,
 				}]
 			})
 

@@ -196,12 +196,7 @@ define([
             reset() {
                 if (this.chapter) {
                     this.title = this.chapter.title
-
                     this.locations = this.chapter.maps.map.locations
-
-                    this.locations.map(c => {
-                        c.cover = "modules/story/images/camera.png"
-                    })
                     this.course.setCurrentChapter(this.chapter.id)
                 } else {
                     this.$router.replace({ name: "story:home" })

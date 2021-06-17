@@ -137,7 +137,7 @@
 
         <div>Has completado todas las actividades. <br> 
             % Texto de invitación de backoffice %
-            {{ course.schedule.invitation }}
+            {{ course.invitation }}
         </div>
         <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
         <footer>
@@ -148,14 +148,14 @@
 </transition>
 
 <transition>
-    <ui-modal @close="remove" class="continue-travel" v-if="typeAlert === 'continueTravel'">
+    <ui-modal @close="removeContinue" class="continue-travel" v-if="typeAlert === 'continueTravel'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
             <img src="modules/story/images/dorado/dorado-alert.png" alt="">
         </template>
         <h1>Continúa este viaje en </h1>
         
-        <button class="done action primary" @click="remove"> www.ceipa.edu.co</button>
+        <button class="done action primary" @click="removeContinue"> www.ceipa.edu.co</button>
 
     </ui-modal>
 </transition>

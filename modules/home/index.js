@@ -4,7 +4,7 @@ define([
 
 	return {
 		template: html,
-		props: ["course"],
+		props: ["course", "close"],
 		data() {
 			return {
 				projects: this.$root.user.projects,
@@ -65,7 +65,9 @@ define([
 			}
 		},
 		created() {
-			if (this.course) {
+			if (this.close) {
+				this.$root.destroyCourse()
+			} else if (this.course) {
 				this.$router.replace({ name: "story:profile" });
 			}
 		},

@@ -13,11 +13,14 @@
 
                     <div class="city" :style="city.style" @click="openActivity(city)">
                         <div class="city-logo" :class="{'city-end' : city.end}">
-                            <img v-if="city.end" :src="`modules/story/images/decor-end-${course.indexMap() + 1}.png`" alt="" class="decor-end">
-                            <img v-if="city.end" :src="`modules/story/images/decor-end-${course.indexMap() + 1}.png`" alt="" class="decor-end-revert">
-                            <img v-if="!city.end && course.indexMap() === 1" src="modules/story/images/feather.png" alt=""
-                                class="feather">
-                            <img :src="city.cover" alt="" class="cover">
+                            <img v-if="city.end" :src="`modules/story/images/decor-end-${course.indexMap() + 1}.png`"
+                                alt="" class="decor-end">
+                            <img v-if="city.end" :src="`modules/story/images/decor-end-${course.indexMap() + 1}.png`"
+                                alt="" class="decor-end-revert">
+                            <img v-if="!city.end && course.indexMap() === 1" src="modules/story/images/feather.png"
+                                alt="" class="feather">
+                            <img :src="city.cover?.url ?? 'modules/story/images/camera.png'" alt="" class="cover"
+                                :class="{'pending': city.completed[0] !== 'completed'}">
                             <img v-if="city.completed[0] === 'completed'" src="modules/story/images/completed.png"
                                 class="check" alt="">
                         </div>

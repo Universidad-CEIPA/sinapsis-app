@@ -22,16 +22,11 @@ define([
         },
         data() {
             widthChapter = 160;
-            
+
             return {
-                startShow: 0,
-                progressShow: 0,
-                completedShow: 0,
                 modal: false,
                 widthChapter,
                 filterActivities: 'progress',
-                maxShow: 0,
-                chaptersShow: 0,
                 chapters: [],
                 activityCompleted: [],
                 activityPending: [],
@@ -77,16 +72,6 @@ define([
                 }
 
             },
-
-            nextSlider() {
-                let nextStart = this.startShow + 1;
-                let lengthSpace = nextStart + this.maxShow
-
-                if (lengthSpace <= this.chapters.length) {
-                    this.startShow = nextStart
-                }
-                this.updateLayout();
-            },
             openActivity(c) {
                 if (this.course.chapterActiveMap.includes(c.chapterNumber)) {
                     this.course.activeMap = true
@@ -119,14 +104,6 @@ define([
                 }
 
             },
-            previousSlider() {
-                let previousStart = this.startShow - 1;
-
-                if (previousStart >= 0) {
-                    this.startShow = previousStart
-                }
-                this.updateLayout();
-            },
             setName(act) {
                 return act.activity ? act.activity.name : act.map.name
             },
@@ -134,58 +111,28 @@ define([
                 return act.activity ? act.activity.type : "map"
             },
             updateLayout() {
-                let spaceAvailable = Math.floor((window.screen.width - 40) / this.widthChapter)
-                //this.course.memoryShow(this.startShow)
-                if (spaceAvailable > this.chapters.length) {
-                    this.maxShow = this.chapters.length
-                } else {
-                    this.maxShow = spaceAvailable
-                }
-
+                //this.course.memoryShow(0)
                 this.limitAnimation.finish = -(this.widthChapter * this.chapters.length + this.chapters.length * 20) + window.screen.width
-
-                this.chaptersShow = this.chapters.slice(this.startShow, this.maxShow + this.startShow)
             },
             handlePointerDown(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
                 this._pointerStart = e;
-                this._lastDelta = 0;
             },
             handlePointerMove(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 100) {
-                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX) / 100;
+                if (Math.abs(this._pointerStart.clientX - e.clientX) > 10) {
+                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX) / 50;
 
 
                     let next = this.animation + this.dragX
 
-                    if (next <= this.limitAnimation.start && next >= this.limitAnimation.finish){
-                    this.animation = this.animation + this.dragX
+                    if (next <= this.limitAnimation.start && next >= this.limitAnimation.finish) {
+                        this.animation = this.animation + this.dragX
                     }
 
 
-
-                    /*let delta = this.dragX < 0 ? 1 : -1;
-
-                    if (delta !== this._lastDelta) {
-                        this._lastDelta = delta;
-
-                        let nextStart = this.startShow + delta
-                        if (nextStart >= 0 && nextStart + this.maxShow <= this.chapters.length) {
-                            this.dragShow = nextStart
-                        }
-                    }*/
                 }
-            },
-            handlePointerUp(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                if (Math.abs(this._pointerStart.clientX - e.clientX) > 5 && this.dragShow >= 0 && this.dragShow + this.maxShow <= this.chapters.length && this.dragShow !== null) {
-                    this.startShow = this.dragShow
-                    this.updateLayout();
-                }
-                this._lastDelta = 0;
-                this.dragShow = null;
-            },
+            }
         },
         created() {
             if (this.redirect) {
@@ -217,7 +164,6 @@ define([
                 }
 
                 [this.activityCompleted, this.activityPending] = this.course.activitiesTracking()
-                //this.startShow = this.course.memory
                 this.updateLayout();
             }
 

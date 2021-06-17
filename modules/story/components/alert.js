@@ -65,10 +65,11 @@ define([
                 focusItem.classList.remove("front");
                 this.course.removeAlert()
             },
-            removeFinish() {
+            removeContinue() {
                 this.course.removeAlert()
-                this.course.setAlert("continueTravel")
+                this.$router.replace({ name: "story:finish" })
             }
+            
         },
         computed: {
             typeAlert() {

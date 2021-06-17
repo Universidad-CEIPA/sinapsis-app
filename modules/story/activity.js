@@ -74,7 +74,7 @@ define([
                 })
 
                 let questions = []
-                if (this.activity.type !== "map") {
+                if (!this.isMap && !this.isHero) {
                     this.chapter.activities.map((a) => {
                         if (a.id === this.activity.id) {
                             a.completed[0] = "completed"
@@ -87,9 +87,15 @@ define([
 
                 } else {
 
-                    this.activity.completed[0] = "completed"
-                    await this.course.updateActivity(this.activity);
-                    questions = this.activity.project_activities.questions
+                    let tempAct = this.activity
+                    tempAct.completed[0] = "completed"
+                    await this.course.updateActivity(tempAct);
+                    if (this.isMap) {
+                        questions = this.activity.project_activities.questions
+                    }
+                    if (this.isHero) {
+                        questions = this.activity.activity.questions || []
+                    }
                 }
 
                 if (questions.length) {
@@ -217,8 +223,8 @@ define([
                 this.$router.replace({ name: "story:home" })
             }
         },
-        mounted(){
-            if (this.chapter.type === 'hero-letter'){
+        mounted() {
+            if (this.chapter.type === 'hero-letter') {
                 document.getElementById("welcome").scrollIntoView({ behavior: "smooth" });
                 this.course.setAlert("hero-letter")
                 this.modal = true

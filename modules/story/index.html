@@ -41,9 +41,8 @@
             <img :src="course.getRoleIcon()" alt="">
         </div>
     </div>
-    <div class="chapters" :style="{'--show-chapter':maxShow , '--width-chapter':widthChapter}">
-        <div class="slide-chapters" :style="{'--left-animation':animation}" @touchstart="handlePointerDown" @touchmove="handlePointerMove"
-            @touchend="handlePointerUp">
+    <div class="chapters" :style="{'--width-chapter':widthChapter}">
+        <div class="slide-chapters" :style="{'--left-animation':animation}" @touchstart="handlePointerDown" @touchmove="handlePointerMove">
             <div v-for="c,index in chapters" class="chapter" @click="openActivity(c)">
                 <div class="tittle">
                     {{c.title}}
@@ -82,7 +81,6 @@
                 <div class="activity progress" v-if="filterActivities === 'progress'"
                     v-for="activity in activityPending" @click="openActivityList(activity)">
                     <img :src="`modules/story/images/${course.skin}/icon-${setImage(activity)}.png`" alt="">
-
 
                     <div class="title" v-if="activity.chapter">Lee el capitulo {{activity.chapter}}</div>
                     <div class="title" v-else>Carta del Héroe</div>

@@ -1,14 +1,13 @@
-<section class="view-section"  id="view-story-finish" :class="course.skin">
+<section class="view-section" id="view-story-finish" :class="course.skin">
 
-    <img :src="course.image" alt="">
+    <img :src="`modules/story/images/${course.skin}/finish.png`" alt="" class="image-finish">
 
-    Te invitamos a explorar nuevamente
-    <div class="name-project"> La conquista del Dorado</div>
-    y leer todos los capitulos
-
-    <img class="arabesco" src="modules/story/images/arabesco-gold.svg" alt="">
-
-    <button class="action primary" data-icon-after="arrow-right"
-        @click="$router.replace({ name: 'story:home' })"> Explorar </button>
-
+    <div>
+        Te invitamos a explorar nuevamente
+        <div class="name-project"> La Conquista del Dorado</div>
+        y leer todos los capitulos
+        <img class="arabesco" src="modules/story/images/arabesco-gold.svg" alt="">
+    </div>
+    <button class="action primary" data-icon-after="arrow-right" @click="$router.replace({ name: 'story:home' })">
+        Explorar </button>
 </section>

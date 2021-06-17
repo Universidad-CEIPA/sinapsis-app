@@ -7,9 +7,12 @@
 
     </div>
     <button class="done action primary" data-icon-after="arrow-right"
-        @click="$router.push({ name: 'story:home', params:{ 'redirect': course.needImprovementDesired } })"> Iniciar </button>
+        @click="$router.push({ name: 'story:home', params:{ 'redirect': course.needImprovementDesired } })"> Iniciar
+    </button>
     <div class="back">
-        <a @click="$root.destroyCourse()">Regresar</a>
+        <a @click="$router.push({ name: 'home', params:{'close' : true} })">Regresar</a>
+        <br>
+        <button @click="forceNotifications">Forzar Notificaciones</button>
     </div>
 
 </section>

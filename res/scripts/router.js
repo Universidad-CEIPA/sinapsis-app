@@ -10,7 +10,7 @@ define([
 		history: VueRouter.createWebHashHistory(),
 		routes: [
 
-			{ name: "home", path: "/", component: m("home/index") },
+			{ name: "home", path: "/", component: m("home/index") , props: true },
 			{ name: "home:profile", path: "/profile", component: m("home/profile") },
 
 			{ name: "story:activity", path: "/story/activity", component: m("story/activity"), props: true },

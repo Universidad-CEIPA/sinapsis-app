@@ -3,12 +3,13 @@
 
 
     .map-1 {
-        background   : url('images/dorado/back-map-1.png') 50% 50%/cover no-repeat;
-        margin       : 10px;
+        background: url('images/dorado/back-map-1.png') 50% 50%/cover no-repeat;
+        margin: 10px;
         border-radius: 50px;
-        overflow     : hidden;
+        overflow: hidden;
 
         .city-logo {
+            background-color: @bg-color;
             .decor-end {
                 left: -15px;
             }
@@ -24,19 +25,20 @@
 
 
         .city-logo {
+            background-color: #303721;
 
             &.city-end {
-                background-color: @main-color  !important;
+                background-color: #704F00  !important;
 
                 .cover {
-                    filter: invert(1);
+                    // filter: invert(79%) sepia(56%) saturate(393%) hue-rotate(355deg) brightness(101%) contrast(101%);;
                 }
             }
 
             .feather {
                 position: absolute;
-                right   : -16px;
-                z-index : -10;
+                right: -16px;
+                z-index: -10;
             }
 
             .decor-end {
@@ -53,78 +55,86 @@
 
 
     .title {
-        padding  : 30px;
+        padding: 30px;
         font-size: 0.9em;
-        color    : #fff;
+        color: #fff;
 
         h3 {
-            font-size    : 1.1em;
+            font-size: 1.1em;
             border-bottom: white solid 1px;
-            width        : fit-content;
-            line-height  : 1.5em;
-            font-weight  : bold;
+            width: fit-content;
+            line-height: 1.5em;
+            font-weight: bold;
         }
     }
 
     .map-container {
-        height     : auto;
-        padding    : 0 20px;
-        background : url('images/dorado/texture-map.png') 50% 50%/cover no-repeat;
-        position   : relative;
+        height: auto;
+        padding: 0 20px;
+        background: url('images/dorado/texture-map.png') 50% 50%/cover no-repeat;
+        position: relative;
         //max-width: 500px;
-        margin     : auto;
-        z-index    : 1;
+        margin: auto;
+        z-index: 1;
 
         .roads {
             position: absolute;
-            top     : 0;
-            left    : 0;
-            z-index : -50;
+            top: 0;
+            left: 0;
+            z-index: -50;
         }
 
         .group-city {
-            z-index          : 2;
-            height           : 100px;
-            width            : 100%;
+            z-index: 2;
+            height: 100px;
+            width: 100%;
             //max-width: 500px;
-            display          : inline-flex;
-            flex-direction   : row;
+            display: inline-flex;
+            flex-direction: row;
             //justify-content: space-around;
-            margin           : 10px 0;
-            justify-content  : space-evenly;
+            margin: 10px 0;
+            justify-content: space-evenly;
             //border: red solid 1px;
 
             .city-content {
-                width     : 120px;
-                height    : 100%;
+                width: 120px;
+                height: 100%;
                 text-align: center;
                 //border: green solid 1px;
                 text-align: -webkit-center;
-                display   : table;
+                display: table;
 
                 .city {
-                    width  : 72px;
+                    width: 72px;
                     display: table-cell;
 
                     vertical-align: middle;
-                    text-align    : -webkit-center;
+                    text-align: -webkit-center;
 
                     .city-logo {
-                        background-color: @bg-color;
-                        width           : 70px;
-                        height          : 70px;
-                        border-radius   : 50%;
-                        display         : flex;
-                        justify-content : center;
-                        align-items     : center;
-                        position        : relative;
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
 
                         .check {
                             position: absolute;
-                            width   : 25px;
-                            height  : 25px;
-                            bottom  : 0px;
-                            right   : 0px;
+                            width: 25px;
+                            height: 25px;
+                            bottom: 0px;
+                            right: 0px;
+                        }
+
+                        .cover {
+                            width: 62px;
+
+                            &.pending {
+                                // compute color to filter  https://codepen.io/sosuke/pen/Pjoqqp
+                                filter: invert(40%) sepia(18%) saturate(158%) hue-rotate(157deg) brightness(98%) contrast(100%);
+                            }
                         }
 
                         .decor-end,
@@ -141,12 +151,12 @@
 
                     .city-name {
                         background-color: @main-color;
-                        border          : @bg-color 1px solid;
-                        border-radius   : 25px;
-                        width           : 70px;
-                        text-align      : center;
-                        padding         : 2px 0;
-                        font-size       : 0.6em;
+                        border: @bg-color 1px solid;
+                        border-radius: 25px;
+                        width: 70px;
+                        text-align: center;
+                        padding: 2px 0;
+                        font-size: 0.6em;
                     }
                 }
             }

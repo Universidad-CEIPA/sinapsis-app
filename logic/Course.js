@@ -24,6 +24,7 @@ define([
             this.schedule = currentCourse.schedule || null
             this.chapters = currentCourse.chapters || null
             this.hero_letter = currentCourse.hero_letter || null
+            this.invitation = currentCourse.invitation || null
 
             this.profile = currentCourse.profile || null
             this.competences = currentCourse.competences || null
@@ -96,38 +97,18 @@ define([
             })
 
             this.hero_letter.map((card) => {
-                pending.push(card)
+                if (card.completed[0] === "completed") {
+                    completed.push(card)
+                } else {
+                    pending.push(card)
+                }
+                
             })
 
 
             return [completed.reverse(), pending]
         }
 
-
-        currentActivity() {
-            let activityOrder = []
-            let schedule = local("currentCourse").chapters
-
-            schedule.map(chapter => {
-                let activity = chapter.activities.length ? chapter.activities : chapter.maps
-                activity
-
-
-                if (Array.isArray(activity)) {
-                    activity.map(act => {
-
-                        act.chapter = chapter.id
-                        activityOrder.push(act)
-
-                    })
-                } else {
-                    activity.chapter = chapter.id
-                    activityOrder.push(activity)
-                }
-            })
-
-            this.mapActivity = activityOrder
-        }
 
         destroy() {
             local("currentCourse", null);
@@ -194,6 +175,7 @@ define([
                 image: this.image,
                 chapters: this.chapters,
                 hero_letter: this.hero_letter,
+                invitation: this.invitation,
                 profile: this.profile,
                 competences: this.competences,
                 rubrics: this.rubrics,
@@ -286,8 +268,6 @@ define([
             this.showRol()
             this.trackingMaps()
 
-
-            // this.currentActivity()
         }
 
         selectTool(competence) {
@@ -306,6 +286,7 @@ define([
             this.schedule = await api.post('students/getInfoCourse', { courseId: this.courseId, studentId: this.studentId })
             this.chapters = this.schedule.chapters
             this.hero_letter = this.schedule.hero_letter
+            this.invitation = this.schedule.invitation
         }
         async setStudentProfile() {
             this.profile = await api.post('students/getProfileCourse', { courseId: this.courseId, studentId: this.studentId })
@@ -324,7 +305,7 @@ define([
             this.competences.map(comp => {
                 let rubric = this.rubrics.find(rub => comp.id === rub.competence.id)
 
-                comp.rubric = rubric.rubrics[0].avatars.filter(av => av.threshold <= comp.evaluation.value).reverse()
+                comp.rubric = rubric.rubrics[0].avatars.filter(av => av.threshold >= comp.evaluation.value)
             })
         }
 
@@ -354,42 +335,53 @@ define([
 
 
         updateActivity(activity) {
-            let indexChapter = 0
-            this.chapters.map((chapter, index) => {
-                let content = chapter.activities.length ? chapter.activities : chapter.maps
 
-
-                if (Array.isArray(content)) {
-                    content.map(act => {
-                        if (act.id === activity.id) {
-                            indexChapter = index
-                            act = activity
+            if(activity.type !== 'hero-letter'){
+                let indexChapter = -1
+                this.chapters.map((chapter, index) => {
+                    let content = chapter.activities.length ? chapter.activities : chapter.maps
+    
+    
+                    if (Array.isArray(content)) {
+                        content.map(act => {
+                            if (act.id === activity.id) {
+                                indexChapter = index
+                                act = activity
+                            }
+    
+                        })
+                    } else {
+                        let cities = content.map.locations.filter(l => l.end === 0)
+                        let end = content.map.locations.filter(l => l.end === 1).length
+                        let pending = cities.filter(a => a.completed[0] !== "completed").length === 1
+    
+                        if (pending && end) {
+                            this.setAlert("newCity")
                         }
-
-                    })
-                } else {
-                    let cities = content.map.locations.filter(l => l.end === 0)
-                    let end = content.map.locations.filter(l => l.end === 1).length
-                    let pending = cities.filter(a => a.completed[0] !== "completed").length === 1
-
-                    if (pending && end) {
-                        this.setAlert("newCity")
+    
+                        content.map.locations.map(act => {
+                            if (act.id === activity.id) {
+                                activity.project_activities = activity.activity
+                                delete activity.activity
+                                indexChapter = index
+                                act = activity
+                            }
+    
+                        })
                     }
+                })
+    
+                    this.updateChapters(this.chapters[indexChapter])    
+            } else {
+                this.hero_letter.map(card => {
+                    if(card.id === activity.id){
+                        card = activity
+                    }
+                })
+            }
+            
 
-                    content.map.locations.map(act => {
-                        if (act.id === activity.id) {
-                            activity.project_activities = activity.activity
-                            delete activity.activity
-                            indexChapter = index
-                            act = activity
-                        }
-
-                    })
-                }
-            })
-
-
-            this.updateChapters(this.chapters[indexChapter])
+            
         }
     }
 

@@ -18,7 +18,6 @@ define([
 			destroyCourse() {
 				this.currentCourse.destroy();
 				this.currentCourse = null;
-				this.$router.replace({ name: 'home' })
 			},
 			logout() {
 				local("user", null);

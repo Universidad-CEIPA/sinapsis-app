@@ -32,14 +32,16 @@ define([
         }
 
         async reset(router) {
-            let text = "Alarma";
-
-            /*const device = window.Capacitor ? await Capacitor.Plugins.Device.getInfo() : {};
-            const FIRST_WAVE_DAYS = 14;
-            const SECOND_WAVE_DAYS = device.operatingSystem === "ios" ? FIRST_WAVE_DAYS + 3 : 365;*/
+            // this.backend.cancelAll();
             let id = 1;
 
             let today = new Date()
+
+            let text = {
+                "reading": "Tienes una nueva lectura",
+                "map": "Tienes un nuevo mapa",
+                "hero-letter": "Tienes una nueva lectura",
+            };
 
             this.course.chapters.map(chapter => {
                 let activity = chapter.activities.length ? chapter.activities : chapter.maps
@@ -53,16 +55,18 @@ define([
                         date.setHours(time.getHours())
                         date.setMinutes(time.getMinutes());
                         date.setSeconds(0);
-                        text = {
-                            "reading": "Tienes una nueva lectura",
-                        }[act.activity.type];
+
 
                         if (date > today)
                             this.schedule({
                                 id: id++,
-                                text: text,
+                                text: text[act.activity.type],
                                 group: "activity",
-                                trigger: { at: date }
+                                trigger: { at: date },
+                                extra: {
+                                    route: "story:home",
+                                    params: {tiny: true}
+                                }
                             });
                     })
                 } else {
@@ -74,24 +78,126 @@ define([
                     date.setMinutes(time.getMinutes());
                     date.setSeconds(0);
 
-                    text = "Tiene una nueva actividad en el mapa"
                     if (date > today)
                         this.schedule({
                             id: id++,
-                            text: text,
+                            text: text["map"],
                             group: "activity",
-                            trigger: { at: date }
+                            trigger: { at: date },
+                            extra: {
+                                route: "story:home",
+                                params: {tiny: true}
+                            }
                         });
 
                 }
             })
 
+
+            this.course.hero_letter.map(card => {
+                let date = new Date(card.date)
+                let time = new Date(card.time)
+
+                date.setHours(time.getHours())
+                date.setMinutes(time.getMinutes());
+                date.setSeconds(0);
+
+                if (date > today)
+                    this.schedule({
+                        id: id++,
+                        text: text[card.activity.type],
+                        group: "activity",
+                        trigger: { at: date },
+                        extra: {
+                            route: "story:home",
+                            params: {tiny: true}
+                        }
+                    });
+            })
+
             this.backend.listener(router);
         }
+
+        async forceReset(router) {
+            //this.backend.cancelAll();
+            let id = 1;
+
+            let addMinute = 5;
+
+            let today = new Date()
+
+            let text = {
+                "reading": "Tienes una nueva lectura",
+                "map": "Tienes un nuevo mapa",
+                "hero-letter": "Tienes una carta del héroe",
+            };
+
+            this.course.chapters.map(chapter => {
+                let activity = chapter.activities.length ? chapter.activities : chapter.maps
+
+                if (Array.isArray(activity)) {
+                    activity.map(act => {
+                        today.setMinutes(today.getMinutes() + addMinute);
+
+                        this.schedule({
+                            id: id++,
+                            text: text[act.activity.type],
+                            group: "activity",
+                            trigger: { at: today },
+                            extra: {
+                                route: "story:home",
+                                params: {tiny: true}
+                            }
+                        });
+                    })
+                } else {
+                    today.setMinutes(today.getMinutes() + addMinute);
+
+                    this.schedule({
+                        id: id++,
+                        text: text["map"],
+                        group: "activity",
+                        trigger: { at: today },
+                        extra: {
+                            route: "story:home",
+                            params: {tiny: true}
+                        }
+                    });
+
+                }
+            })
+
+
+            this.course.hero_letter.map(card => {
+                today.setMinutes(today.getMinutes() + addMinute);
+
+                this.schedule({
+                    id: id++,
+                    text: text[card.activity.type],
+                    group: "activity",
+                    trigger: { at: today },
+                    extra: {
+						route: "story:home",
+						params: {tiny: true}
+					}
+                });
+            })
+
+            this.schedule({
+                id: id++,
+                title: "Notificaciones forzadas",
+                text: "Las notificaciones han sido reprogramadas",
+                extra: null
+            });
+
+            this.backend.listener(router);
+        }
+
 
         schedule(options) {
             // control de notificaciones en web
             console.log("ActivityNotifications::schedule", options.trigger ? options.trigger.at : "(now)", options.text);
+            
             return this.backend.schedule({
                 icon: null,
                 smallIcon: "res://notification",
