@@ -7,10 +7,14 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph">
-                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets"
+                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets"
                     :colors="course.graphColors()" ref="graph"/>
             </div>
-            <button class="wish-eval action primary">Ingresa tu potencial deseado</button>
+            <div class="type-eval">
+                <div class="type"><span></span>Autoevaluación inicial</div>
+                <div class="type"><span></span>Mi potencial deseado</div>
+                <div class="type"><span></span>Mi potencial actual</div>
+            </div>
         </div>
 
         <div class="details">

@@ -7,6 +7,7 @@ define([
 
 	return {
 		template: html,
+		props: ["close"],
 		data() {
 			return {
 				user: {
@@ -25,6 +26,12 @@ define([
 				api.post("students/resend", this.user.email);
 			}
 
+		},
+		created() {
+			if (this.close) {
+				this.$root.destroyCourse()
+				this.$root.destroyUser()
+			}
 		},
 		components: {
 			UiForm,

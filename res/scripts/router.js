@@ -27,7 +27,7 @@ define([
 
 
 			{ name: "welcome:index", path: "/welcome/:token", component: m("welcome/index"), props: true },
-			{ name: "welcome:login", path: "/login", component: m("welcome/login") },
+			{ name: "welcome:login", path: "/login", component: m("welcome/login"), props: true },
 			{ name: "welcome:setup", path: "/setup", component: m("welcome/setup") },
 		]
 	});

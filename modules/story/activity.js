@@ -81,7 +81,7 @@ define([
                         }
                     })
 
-                    await this.course.updateChapters(this.chapter);
+                    this.course.updateChapters(this.chapter);
 
                     questions = this.activity.activity.questions
 
@@ -89,7 +89,7 @@ define([
 
                     let tempAct = this.activity
                     tempAct.completed[0] = "completed"
-                    await this.course.updateActivity(tempAct);
+                    this.course.updateActivity(tempAct);
                     if (this.isMap) {
                         questions = this.activity.project_activities.questions
                     }
@@ -189,15 +189,30 @@ define([
                         let position = 0
                         this.chapter.activities.map((a) => {
                             let activityName = {}
+                            activityName.id = a.activity.id
                             activityName.name = a.activity.name
                             activityName.position = position
-                            activityName.img = a.activity.imagen || "modules/story/images/Navegante.svg"
+                            activityName.img = a.activity.imagen || "modules/story/images/welcome.png"
                             activityName.completed = a.completed[0] === "completed"
                             position++
                             this.activityScrolls.push(activityName)
                         })
-                        this.activity = this.chapter.activities[0]
-                        this.selectScroll = 0
+                        if (!this.forceActivity) {
+                            let activityPending = this.chapter.activities.filter(a => a.completed[0] !== "completed")
+
+                            if (activityPending.length) {
+                                this.activity = activityPending[0]
+                                this.selectScroll = this.activityScrolls.findIndex(a => a.id === this.activity.activity.id)
+                            } else {
+                                this.activity = this.chapter.activities[this.chapter.activities.length - 1]
+                                this.selectScroll = this.chapter.activities.length - 1
+                            }
+                        } else {
+                            this.activity = this.chapter.activities.find(a => a.id == this.forceActivity)    
+                            this.selectScroll = this.activityScrolls.findIndex(a => a.id === this.activity.activity.id)
+                        }
+
+
                     } else if (this.forceActivity) {
                         this.activity = this.chapter.activities.find(a => a.id == this.forceActivity)
                     } else {

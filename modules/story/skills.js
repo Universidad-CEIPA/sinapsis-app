@@ -64,6 +64,9 @@ define([
             })
             this.position = this.dates.length - 1
         },
+        beforeDestroy() {
+            this.$refs.graph.destroy()
+        },
         components: {
             UiInput,
             graphSvg

@@ -19,12 +19,12 @@ define([
 				this.currentCourse.destroy();
 				this.currentCourse = null;
 			},
-			logout() {
+			destroyUser() {
 				local("user", null);
-				this.currentCourse.destroy();
 				this.user = null;
-				this.currentCourse = null;
-				this.$router.replace({ name: 'welcome:login' })
+			},
+			logout() {
+				this.$router.push({ name: 'welcome:login', params: { 'close': true } })
 			},
 			processUser(user) {
 				if (user.birthday) {
@@ -43,7 +43,7 @@ define([
 			},
 		},
 		async created() {
-			if (local("currentCourse")){
+			if (local("currentCourse")) {
 				await this.setCourse(local("currentCourse"))
 			}
 		}

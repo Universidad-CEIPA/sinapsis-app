@@ -55,17 +55,25 @@ define([
 
             },
             reset() {
-                document.querySelector(".chartGroup").remove()
-                this.init()
+                let element = document.querySelector(".chartGroup")
+                if(element){
+                    element.remove()
+                    this.init()
+                }
+                
+            },
+            destroy(){
+                window.removeEventListener("resize", this._resizeHandler);
             }
         },
         mounted() {
             window.addEventListener("resize", this._resizeHandler = e => {
                 this.reset();
             });
-
-
             this.init();
         },
+        beforeDestroy() {
+            this.destroy()
+        }
     };
 });

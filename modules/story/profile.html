@@ -28,9 +28,9 @@
                 <ul class="tools-list">
                     <li v-for="competence in course.competences" @click="showInfoTool(competence)">
                         <div class="circle-img">
-                            <img v-if="!course.activeTools"
-                                :src="competence.rubric[0].cover || 'modules/story/images/iron.png'" alt=""></div>
-                        <p v-if="!course.activeTools">{{competence.rubric[0].name}}</p>
+                            <img v-if="!course.activeTools" :src="getCoverTool(competence)" alt="">
+                        </div>
+                        <p v-if="!course.activeTools">{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
                     </li>
                 </ul>
             </section>
@@ -45,16 +45,16 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph" @click="$router.replace({ name: 'story:skills' })">
-                <graph-svg :class="course.skin+'_graph'" :tags="course.graphTags()" :values="course.graphDataSets()"
-                    :colors="course.graphColors()" />
+                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()"
+                    :values="course.graphDataSets()" :colors="course.graphColors()" />
             </div>
-            <button class="wish-eval action primary" v-if="course.needImprovementDesired"
+            <button class="wish-eval action primary" v-if="course.needImprovementDesired()"
                 @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
                 tu potencial deseado</button>
-            <div v-else>
-                <div>Inicial</div>
-                <div>Deseado</div>
-                <div>Actual</div>
+            <div v-else class="type-eval">
+                <div class="type"><span></span>Autoevaluación inicial</div>
+                <div class="type"><span></span>Mi potencial deseado</div>
+                <div class="type"><span></span>Mi potencial actual</div>
             </div>
         </div>
         <div class="info-actions">

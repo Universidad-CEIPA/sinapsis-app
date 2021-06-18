@@ -188,7 +188,7 @@ define([
         }
 
         getLocationImage() {
-            return this.profile.location.cover
+            return this.profile.location?.cover ?? 'modules/story/images/welcome.png'
         }
 
 
@@ -197,11 +197,11 @@ define([
         }
 
         getRoleAvatar() {
-            return this.profile.rol.avatar.url
+            return this.profile.rol.avatar?.url ?? 'modules/story/images/welcome.png'
         }
 
         getRoleIcon() {
-            return this.profile.rol.icon.url
+            return this.profile.rol.icon?.url ?? 'modules/story/images/welcome.png'
         }
 
         graphColors() {
@@ -334,7 +334,7 @@ define([
         }
 
 
-        updateActivity(activity) {
+        async updateActivity(activity) {
 
             if(activity.type !== 'hero-letter'){
                 let indexChapter = -1
@@ -371,13 +371,14 @@ define([
                     }
                 })
     
-                    this.updateChapters(this.chapters[indexChapter])    
+                    await this.updateChapters(this.chapters[indexChapter])    
             } else {
                 this.hero_letter.map(card => {
                     if(card.id === activity.id){
                         card = activity
                     }
                 })
+                await this.reset()
             }
             
 
