@@ -1,7 +1,7 @@
 <transition>
     <ui-modal @close="remove" class="alert-modal chapter-completed" v-if="typeAlert === 'chapterCompleted'">
         <template #title>
-            <img src="modules/story/images/alert-great.png" alt="">
+            <img :src="`modules/story/images/${course.skin}/alert-great.png`" alt="">
         </template>
         <h1>¡Fabuloso!</h1>
         <div class="bottom-alert">
@@ -14,7 +14,7 @@
 <transition>
     <ui-modal @close="remove" class="alert-modal tools-modal" v-if="typeAlert === 'tools'">
         <template #title>
-            <img :src="course.selectedTool.rubric[0]?.media ?? 'modules/story/images/welcome.png'" alt="">
+            <img :src="course.selectedTool.rubric[0]?.media ?? 'modules/story/images/iron.png'" alt="">
         </template>
         <h1>{{course.selectedTool.rubric[0]?.name ?? ''}}</h1>
         <div>Competencia: {{course.selectedTool.name}} <br>
@@ -40,7 +40,7 @@
 
 <transition>
     <div id="tour" v-if="typeAlert === 'showRol'">
-        <ui-modal @close="removeTourRol">
+        <ui-modal @close="removeTourRol" class="alert-modal">
             <template #title>
                 <img src="modules/story/images/arabesco-gold-half.svg" alt="">
             </template>
@@ -60,7 +60,7 @@
 
 <transition>
     <div id="tour" v-if="typeAlert === 'showTools'">
-        <ui-modal @close="removeTourTools">
+        <ui-modal @close="removeTourTools" class="alert-modal">
             <h1>Genial ¡Ya tienes Herramientas!</h1>
             <img src="modules/story/images/arabesco-gold.svg" alt="">
             <div> Acorde a tus competencias estas son tus herramientas</div>
@@ -75,7 +75,7 @@
 
 <transition>
     <div id="tour" v-if="typeAlert === 'showCities'">
-        <ui-modal @close="removeTourMaps">
+        <ui-modal class="alert-modal" @close="removeTourMaps">
             <h1>Nuevas Tierras</h1>
             <img src="modules/story/images/arabesco-gold.svg" alt="">
             <div>Desde aquí puedes entrar al mapa de las ciudades <strong>La conquista del Dorado</strong></div>
@@ -88,9 +88,9 @@
 </transition>
 
 <transition>
-    <ui-modal @close="removeWelcome" class="start-course" v-if="typeAlert === 'startCourse'">
+    <ui-modal @close="removeWelcome" class="alert-modal start-course" v-if="typeAlert === 'startCourse'">
         <template #title>
-            <img src="modules/story/images/welcome.png" alt="">
+            <img :src="`modules/story/images/${course.skin}/welcome.png`" alt="">
         </template>
         <h1>Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{$root.user.name.split(" ")[0]}}</h1>
         <div class="bottom-alert">
@@ -100,7 +100,7 @@
 </transition>
 
 <transition>
-    <ui-modal @close="remove" class="new-city" v-if="typeAlert === 'newCity'">
+    <ui-modal @close="remove" class="alert-modal new-city" v-if="typeAlert === 'newCity'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="">
         </template>
@@ -125,7 +125,7 @@
 </transition>
 
 <transition>
-    <ui-modal @close="removeFinish" class="finish" v-if="typeAlert === 'finishCourse'">
+    <ui-modal @close="removeFinish" class="alert-modal  finish" v-if="typeAlert === 'finishCourse'">
         <template #title>
             
             <img src="modules/story/images/conquistador.png" alt="">
@@ -148,7 +148,7 @@
 </transition>
 
 <transition>
-    <ui-modal @close="removeContinue" class="continue-travel" v-if="typeAlert === 'continueTravel'">
+    <ui-modal @close="removeContinue" class="alert-modal  continue-travel" v-if="typeAlert === 'continueTravel'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
             <img src="modules/story/images/dorado/dorado-alert.png" alt="">
@@ -161,7 +161,7 @@
 </transition>
 
 <transition>
-        <ui-modal @close="remove" class="hero-letter" v-if="typeAlert === 'hero-letter'">
+        <ui-modal @close="remove" class="alert-modal  hero-letter" v-if="typeAlert === 'hero-letter'">
             <template #title>
                 <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
             </template>

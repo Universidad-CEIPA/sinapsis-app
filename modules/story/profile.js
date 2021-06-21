@@ -15,7 +15,7 @@ define([
         },
         methods:{
             showInfoTool(competence){
-                if(!this.course.activeTools){
+                if(this.course.activeTools){
                     this.course.selectTool(competence)
                     this.course.setAlert("tools")
                     this.modal = true

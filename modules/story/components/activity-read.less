@@ -18,6 +18,15 @@
         .letters {
             background: @dorado-color;
         }
+
+        .text{
+            &::first-letter {
+                font-family: Rage;
+                font-size: calc(var(--font-size) * 5);
+                margin: calc(var(--font-size) / 3 + 15px) calc(var(--font-size) / 3) 15px 0px;
+                float: left;
+            }
+        }
     }
 
 }
@@ -55,12 +64,7 @@
         line-height: calc(var(--font-size) + 5px);
 
 
-        &::first-letter {
-            font-family: Rage;
-            font-size: calc(var(--font-size) * 5);
-            margin: calc(var(--font-size) / 3 + 15px) calc(var(--font-size) / 3) 15px 0px;
-            float: left;
-        }
+
 
         >p {
             margin-bottom: calc(var(--font-size) + 5px);

@@ -10,11 +10,11 @@
                     <div class="name">
                         {{ $root.user.name }}
                     </div>
-                    <div class="level" v-if="!course.activeRol">
+                    <div class="level" v-if="course.activeRol">
                         <h3> Nivel</h3>
                         {{ course.getRole() }}
                     </div>
-                    <div class="city" v-if="!course.activeCity">
+                    <div class="city" v-if="course.activeCity">
                         <h3> Ciudad</h3>
                         {{ course.getLocation() }}
                     </div>
@@ -24,13 +24,14 @@
                 </div>
             </section>
             <section class="tools">
-                <h5>Tus Herramientas</h5>
+                <h5 v-if="course.skin === 'dorado'">Tus Herramientas</h5>
+                <h5 v-if="course.skin === 'mision'">Tus gadgets</h5>
                 <ul class="tools-list">
-                    <li v-for="competence in course.competences" @click="showInfoTool(competence)">
+                    <li v-for="competence in course.tools()" @click="showInfoTool(competence)">
                         <div class="circle-img">
-                            <img v-if="!course.activeTools" :src="getCoverTool(competence)" alt="">
+                            <img v-if="course.activeTools" :src="getCoverTool(competence)" alt="">
                         </div>
-                        <p v-if="!course.activeTools">{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
+                        <p v-if="course.activeTools">{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
                     </li>
                 </ul>
             </section>

@@ -22,12 +22,17 @@
                 Ingresa un número de identificación valido
             </template>
         </ui-input>
-        <ui-input type="date" label="Fecha de nacimiento" v-model="user.birthday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required>
+        <ui-input type="date" label="Fecha de nacimiento" v-model="user.birthday" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            required>
             <template #validation>
                 Ingresa una fecha valida
             </template>
         </ui-input>
-        <ui-input type="checkbox" label="Acepto términos y condiciones" required>
+
+        <ui-input type="checkbox" required>
+            <template #label>
+                <span @click="habeasData"> Políticas de Privacidad y Habeas Data</span>
+            </template>
             <template #validation>
                 Campo obligatorio
             </template>

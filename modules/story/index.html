@@ -38,7 +38,7 @@
                 </section>
             </div>
 
-            <img :src="course.getRoleIcon()" alt="">
+            <img v-if="course.getRoleIcon()" :src="course.getRoleIcon()" alt="">
         </div>
     </div>
     <div class="chapters" :style="{'--width-chapter':widthChapter}">

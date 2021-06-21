@@ -40,7 +40,7 @@ define([
             this.activeTools = false
 
 
-            this.chapterActiveRol = 2
+            this.chapterActiveRol = this.skin === 'dorado' ? 2 : 1
             this.chapterActiveMap = []
 
             this.currentChapter = null
@@ -53,7 +53,7 @@ define([
 
         showRol() {
             this.activeTools = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
-            this.activeCity = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
+            this.activeCity = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1]) && this.skin === 'dorado'
             return this.activeRol = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
         }
 
@@ -102,7 +102,7 @@ define([
                 } else {
                     pending.push(card)
                 }
-                
+
             })
 
 
@@ -184,7 +184,7 @@ define([
         }
 
         getLocation() {
-            return this.profile.location.name
+            return this.profile.location?.name ?? ''
         }
 
         getLocationImage() {
@@ -197,11 +197,11 @@ define([
         }
 
         getRoleAvatar() {
-            return this.profile.rol.avatar?.url ?? 'modules/story/images/welcome.png'
+            return this.profile.rol.avatar?.url ?? `modules/story/images/${this.skin}/avatar-default.png`
         }
 
         getRoleIcon() {
-            return this.profile.rol.icon?.url ?? 'modules/story/images/welcome.png'
+            return this.profile.rol.icon?.url ?? null
         }
 
         graphColors() {
@@ -216,7 +216,10 @@ define([
             let initialValue = []
             let improvementDesired = []
             let currentvalue = []
-            this.competences.map((c) => {
+
+            let competencesAvailable = this.competences.filter(comp => comp.rubric)
+
+            competencesAvailable.map((c) => {
                 initialValue.push({ value: c.evaluation.initialValue })
                 improvementDesired.push({ value: c.evaluation.improvementDesired })
                 currentvalue.push({ value: c.evaluation.value })
@@ -229,7 +232,8 @@ define([
         }
 
         graphTags() {
-            return this.competences.map((c) => { return c.name })
+            let competencesAvailable = this.competences.filter(comp => comp.rubric)
+            return competencesAvailable.map((c) => { return c.name })
         }
 
         indexMap() {
@@ -304,12 +308,15 @@ define([
         setTools() {
             this.competences.map(comp => {
                 let rubric = this.rubrics.find(rub => comp.id === rub.competence.id)
-
-                comp.rubric = rubric.rubrics[0].avatars.filter(av => av.threshold >= comp.evaluation.value)
+                if (rubric) {
+                    comp.rubric = rubric.rubrics[0].avatars.filter(av => av.threshold >= comp.evaluation.value)
+                }
             })
         }
 
-
+        tools() {
+            return this.competences.filter(comp => comp.rubric)
+        }
 
         async updateChapters(chapter) {
             let index = this.chapters.findIndex(c => c.id === chapter.id)
@@ -336,29 +343,29 @@ define([
 
         async updateActivity(activity) {
 
-            if(activity.type !== 'hero-letter'){
+            if (activity.type !== 'hero-letter') {
                 let indexChapter = -1
                 this.chapters.map((chapter, index) => {
                     let content = chapter.activities.length ? chapter.activities : chapter.maps
-    
-    
+
+
                     if (Array.isArray(content)) {
                         content.map(act => {
                             if (act.id === activity.id) {
                                 indexChapter = index
                                 act = activity
                             }
-    
+
                         })
                     } else {
                         let cities = content.map.locations.filter(l => l.end === 0)
                         let end = content.map.locations.filter(l => l.end === 1).length
                         let pending = cities.filter(a => a.completed[0] !== "completed").length === 1
-    
+
                         if (pending && end) {
                             this.setAlert("newCity")
                         }
-    
+
                         content.map.locations.map(act => {
                             if (act.id === activity.id) {
                                 activity.project_activities = activity.activity
@@ -366,23 +373,23 @@ define([
                                 indexChapter = index
                                 act = activity
                             }
-    
+
                         })
                     }
                 })
-    
-                    await this.updateChapters(this.chapters[indexChapter])    
+
+                await this.updateChapters(this.chapters[indexChapter])
             } else {
                 this.hero_letter.map(card => {
-                    if(card.id === activity.id){
+                    if (card.id === activity.id) {
                         card = activity
                     }
                 })
                 await this.reset()
             }
-            
 
-            
+
+
         }
     }
 

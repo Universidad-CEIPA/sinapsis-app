@@ -1,5 +1,5 @@
 <div class="ui-input" :class="uiClasses">
-	<label class="input-label" :for="htmlId">{{ label }}</label>
+	<label class="input-label" :for="htmlId" ><slot name="label">{{ label }}</slot></label>
 	<template v-if="type === 'select'">
 		<select class="input-field select-field" ref="input" :value="filteredModelValue" v-bind="attributes"
 			@input="handleInput">

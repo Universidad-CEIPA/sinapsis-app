@@ -28,22 +28,14 @@
         border-color: #000;
     }
 
-    /* select {
-        appearance           : none;
-        background           : transparent;
-        background-image     : url("../../res/theme/images/icon-arrow-right.svg");
-        background-repeat    : no-repeat;
-        background-position-x: 100%;
-        background-position-y: 5px;
-        border               : 1px solid #dfdfdf;
-        border-radius        : 2px;
-        margin-right         : 2rem;
-        padding              : 1rem;
-        padding-right        : 2rem;
-    } */
-
     .ui-checkbox {
         padding-left: 25px;
+
+        .input-label {
+            span {
+                text-decoration: underline ;
+            }
+        }
 
         .input-check {
             height: 15px;
@@ -63,6 +55,8 @@
         input:checked~.input-check {
             background-color: unset;
         }
+
+
     }
 
     .form-actions {
