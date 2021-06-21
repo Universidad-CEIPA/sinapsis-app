@@ -7,7 +7,7 @@
     <div class="name" :class="{'full-title' : showImages}">
 
         <div class="avatar" v-if="showImages">
-            <img class="circle" src="modules/story/images/circle.png" alt="">
+            <img class="circle" :src="`modules/story/images/avatar/${activity.name}.png`" alt="">
         </div>
         <div class="title-activity">
             <template v-if="activity.type !== 'hero-letter'">

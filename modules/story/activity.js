@@ -239,8 +239,9 @@ define([
             }
         },
         mounted() {
+            document.getElementById("story-activity-view").scrollIntoView({ behavior: "smooth" });
+            
             if (this.chapter.type === 'hero-letter') {
-                document.getElementById("welcome").scrollIntoView({ behavior: "smooth" });
                 this.course.setAlert("hero-letter")
                 this.modal = true
             }

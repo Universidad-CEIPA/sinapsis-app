@@ -42,8 +42,10 @@
         </div>
     </div>
     <div class="chapters" :style="{'--width-chapter':widthChapter}">
-        <div class="slide-chapters" :style="{'--left-animation':animation}" @touchstart="handlePointerDown" @touchmove="handlePointerMove">
+        <div class="slide-chapters" :style="{'--left-animation':animation}" @touchstart="handlePointerDown"
+            @touchmove="handlePointerMove">
             <div v-for="c,index in chapters" class="chapter" @click="openActivity(c)">
+                <div v-if="disableTime(c)" class="disable-mask"></div>
                 <div class="tittle">
                     {{c.title}}
                 </div>

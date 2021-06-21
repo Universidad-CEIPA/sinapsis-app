@@ -177,6 +177,23 @@
         </ui-modal>
 </transition>
 
+
+<transition>
+
+    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'chaptersPending'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+        </template>
+        <h1>Te invitamos a ponerte al día en las tareas anteriores para poder entrar a esta actividad</h1>
+    
+        <button class="done action primary" @click="remove">Continuar</button>
+    
+    </ui-modal>
+
+
+
+</transition>
+
 <transition>
     <ui-modal @close="removeEvaluation" class="alert-modal chapter-completed" v-if="typeAlert === 'finish-evaluation'">
         <template #title>

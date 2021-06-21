@@ -52,6 +52,38 @@ define([
                 let activities = chapter.activities.length ? chapter.activities : chapter.maps.map.locations
                 return (activities.filter(a => a.completed[0] === "completed").length * 100) / activities.length
             },
+            afterChaptersCompleted(chapterIndex) {
+                let next = true
+
+                for (let index = 0; index < chapterIndex; index++) {
+                    if (!this.course.isCompletedChapter(this.chapters[index]))
+                        next = false;
+                }
+
+                return next
+            },
+            disableTime(chapter) {
+                let schedule = chapter.activities.length ? chapter.activities : chapter.maps
+
+                let today = new Date();
+
+                if (Array.isArray(schedule)) {
+
+                    let dates = []
+
+                    schedule.map(act => {
+                        dates.push(this.course.castDate(act.date, act.time))
+                    })
+
+                    dates.sort((a, b) => new Date(a).getTime() > new Date(b).getTime())
+                    return dates[0] > today
+                } else {
+                    let date = this.course.castDate(schedule.date, schedule.time)
+                    return date > today
+                }
+
+
+            },
             dateAgo(activity) {
                 let date = new Date(activity.date)
                 let time = new Date(activity.time)
@@ -73,16 +105,23 @@ define([
 
             },
             openActivity(c) {
-                if (this.course.chapterActiveMap.includes(c.chapterNumber)) {
-                    this.course.activeMap = true
-                    this.course.setAlert("showCities")
-                    this.modal = true
+                if (!this.disableTime(c)) {
+                    if (this.afterChaptersCompleted(c.chapterNumber - 1)) {
+                        if (this.course.chapterActiveMap.includes(c.chapterNumber)) {
+                            this.course.activeMap = true
+                            this.course.setAlert("showCities")
+                            this.modal = true
 
-                    this.course.currentChapter = c
-                } else {
-                    this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                            this.course.currentChapter = c
+                        } else {
+                            this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(c) } })
+                        }
+                    } else {
+                        this.course.setAlert("chaptersPending")
+                        this.modal = true
+                    }
+
                 }
-
             },
             openActivityList(content) {
                 if (content.activity) {
@@ -120,7 +159,7 @@ define([
             },
             handlePointerMove(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                if (Math.abs(this._pointerStart.clientX - e.clientX) > 10) {
+                if (Math.abs(this._pointerStart.clientX - e.clientX) > 1) {
                     this.dragX = Math.round(e.clientX - this._pointerStart.clientX) / 50;
 
 
@@ -176,7 +215,7 @@ define([
                 this.updateLayout();
             });
             this.updateLayout();
-
+            document.getElementById("story-home-view").scrollIntoView({ behavior: "smooth" });
 
 
 

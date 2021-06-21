@@ -75,6 +75,9 @@ define([
         activitiesTracking() {
             let completed = []
             let pending = []
+
+            let today = new Date();
+
             this.chapters.map((chapter, index) => {
                 let activity = chapter.activities.length ? chapter.activities : chapter.maps
                 if (Array.isArray(activity)) {
@@ -82,7 +85,7 @@ define([
                         act.chapter = index + 1
                         if (act.completed[0] === "completed") {
                             completed.push(act)
-                        } else {
+                        } else if (this.castDate(act.date, act.time) < today) {
                             pending.push(act)
                         }
                     })
@@ -90,7 +93,7 @@ define([
                     activity.chapter = index + 1
                     if (this.isCompletedChapter(chapter)) {
                         completed.push(activity)
-                    } else {
+                    } else if (this.castDate(activity.date, activity.time) < today) {
                         pending.push(activity)
                     }
                 }
@@ -99,16 +102,29 @@ define([
             this.hero_letter.map((card) => {
                 if (card.completed[0] === "completed") {
                     completed.push(card)
-                } else {
+                } else if (this.castDate(card.date, card.time) < today) {
                     pending.push(card)
                 }
 
             })
 
 
-            return [completed.reverse(), pending]
+            pending.sort((a, b) => this.castDate(b.date, b.time).getTime() - this.castDate(a.date, a.time).getTime())
+            completed.sort((a, b) => this.castDate(b.date, b.time).getTime() - this.castDate(a.date, a.time).getTime())
+            return [completed, pending]
         }
 
+
+        castDate(date, time) {
+            let current = new Date(date)
+            let hour = new Date(time)
+
+            current.setHours(hour.getHours())
+            current.setMinutes(hour.getMinutes());
+            current.setSeconds(hour.getSeconds());
+
+            return current
+        }
 
         destroy() {
             local("currentCourse", null);
@@ -251,8 +267,7 @@ define([
         }
 
         needImprovementDesired() {
-
-            this.competences.filter((c) => c.evaluation.improvementDesired === 0).length
+            return this.competences.filter((c) => c.evaluation.improvementDesired === 0).length
         }
 
         removeAlert() {

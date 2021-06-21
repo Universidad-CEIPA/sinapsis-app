@@ -86,6 +86,7 @@ define([
                     "tiny": "tiny",
                     "tools": "tools",
                     "hero-letter": "hero-letter",
+                    "chaptersPending": "chaptersPending",
                     "finish-evaluation": "finish-evaluation"
                 }[this.course.getAlert()];
             },
