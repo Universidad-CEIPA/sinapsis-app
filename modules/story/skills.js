@@ -13,10 +13,14 @@ define([
             return {
                 history: [],
                 dates: [],
-                position: 0
+                position: 0,
+                filter: 'all'
             }
         },
         computed: {
+            
+        },
+        methods: {
             dataSets() {
                 let [initialValue, improvementDesired, currentvalue] = this.course.graphDataSets()
 
@@ -32,16 +36,58 @@ define([
                     }
                 }
 
-                return [
-                    initialValue,
-                    improvementDesired,
-                    currentvalue
-                ]
-            }
-        },
-        methods: {
+                let filter = {
+                    'all': [
+                        initialValue,
+                        improvementDesired,
+                        currentvalue
+                    ],
+                    'auto': [
+                        initialValue
+                    ],
+                    'desired': [
+                        improvementDesired
+                    ],
+                    'current': [
+                        currentvalue
+                    ],
+                }
+
+                return filter[this.filter]
+            },
+            colors() {
+                let [initialValue, improvementDesired, currentvalue] = this.course.graphColors()
+
+                let filter = {
+                    'all': [
+                        initialValue,
+                        improvementDesired,
+                        currentvalue
+                    ],
+                    'auto': [
+                        initialValue
+                    ],
+                    'desired': [
+                        improvementDesired
+                    ],
+                    'current': [
+                        currentvalue
+                    ],
+                }
+                return filter[this.filter]
+            },
             updateGraph() {
                 this.$refs.graph.reset();
+            },
+            filterGraph(filter) {
+                if (filter === this.filter) {
+                    this.filter = 'all'
+                } else {
+                    this.filter = filter
+                }
+                this.$nextTick(() => {
+                    this.updateGraph();
+                });
             }
         },
         async created() {

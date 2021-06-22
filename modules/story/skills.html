@@ -7,13 +7,16 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph">
-                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets"
-                    :colors="course.graphColors()" ref="graph"/>
+                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets()"
+                    :colors="colors()"/>
             </div>
             <div class="type-eval">
-                <div class="type"><span></span>Autoevaluación inicial</div>
-                <div class="type"><span></span>Mi potencial deseado</div>
-                <div class="type"><span></span>Mi potencial actual</div>
+                <div class="type" :style="{'--color-circle' : course.graphColors()[0]}" @click="filterGraph('auto')">
+                    <span></span>Autoevaluación inicial</div>
+                <div class="type" :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
+                    <span></span>Mi potencial deseado</div>
+                <div class="type" :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
+                    <span></span>Mi potencial actual</div>
             </div>
         </div>
 
@@ -24,7 +27,8 @@
                 {{dates[position]}}
                 <br>
                 <div class="slider">
-                    <ui-input type="range" label="" v-model="position" min="0" :max="dates.length - 1" @input="updateGraph"></ui-input>
+                    <ui-input type="range" label="" v-model="position" min="0" :max="dates.length - 1"
+                        @input="updateGraph"></ui-input>
                 </div>
                 Desplaza la barra para conocer tus competencias en evaluaciones anteriores a lo largo del tiempo
             </div>
