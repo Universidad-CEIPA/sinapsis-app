@@ -192,7 +192,7 @@ define([
                             activityName.id = a.activity.id
                             activityName.name = a.activity.name
                             activityName.position = position
-                            activityName.img = a.activity.imagen || "modules/story/images/welcome.png"
+                            activityName.img = a.activity.imagen || "modules/story/images/default-scroll.svg"
                             activityName.completed = a.completed[0] === "completed"
                             position++
                             this.activityScrolls.push(activityName)
@@ -208,7 +208,7 @@ define([
                                 this.selectScroll = this.chapter.activities.length - 1
                             }
                         } else {
-                            this.activity = this.chapter.activities.find(a => a.id == this.forceActivity)    
+                            this.activity = this.chapter.activities.find(a => a.id == this.forceActivity)
                             this.selectScroll = this.activityScrolls.findIndex(a => a.id === this.activity.activity.id)
                         }
 
@@ -226,6 +226,8 @@ define([
                     }
 
                     this.type = this.activity.activity.type
+
+
                 } else if (this.chapter.type === 'hero-letter') {
                     this.activity = this.chapter
                 } else {
@@ -234,13 +236,19 @@ define([
                     this.activity.activity = this.activity.project_activities
                     delete this.activity.project_activities
                 }
+
+
+                if (this.course.castDate(this.activity.date, this.activity.time) > new Date()) {
+                    this.course.setAlert("activityDisable")
+                    this.$router.replace({ name: "story:home" })
+                }
             } else {
                 this.$router.replace({ name: "story:home" })
             }
         },
         mounted() {
             document.getElementById("story-activity-view").scrollIntoView({ behavior: "smooth" });
-            
+
             if (this.chapter.type === 'hero-letter') {
                 this.course.setAlert("hero-letter")
                 this.modal = true

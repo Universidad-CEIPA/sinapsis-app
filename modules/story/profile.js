@@ -23,9 +23,9 @@ define([
             },
             getCoverTool(competence){
                 if(competence.rubric && competence.rubric.length){
-                    return competence.rubric[0]?.cover ??'modules/story/images/iron.png'
+                    return competence.rubric[0]?.media?.url ??'modules/story/images/default-tool.png'
                 }else {
-                    return 'modules/story/images/welcome.png'
+                    return 'modules/story/images/default-tool.png'
                 }
             }
         },

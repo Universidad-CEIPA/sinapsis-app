@@ -72,7 +72,7 @@ define([
             return completedChapters + "/" + totalChapters
         }
 
-        activitiesTracking() {
+        activitiesTracking(filterDate = true) {
             let completed = []
             let pending = []
 
@@ -85,7 +85,10 @@ define([
                         act.chapter = index + 1
                         if (act.completed[0] === "completed") {
                             completed.push(act)
-                        } else if (this.castDate(act.date, act.time) < today) {
+                        } else if (filterDate) {
+                            if (this.castDate(act.date, act.time) < today)
+                                pending.push(act)
+                        } else {
                             pending.push(act)
                         }
                     })
@@ -93,7 +96,10 @@ define([
                     activity.chapter = index + 1
                     if (this.isCompletedChapter(chapter)) {
                         completed.push(activity)
-                    } else if (this.castDate(activity.date, activity.time) < today) {
+                    } else if (filterDate) {
+                        if (this.castDate(activity.date, activity.time) < today)
+                            pending.push(activity)
+                    } else {
                         pending.push(activity)
                     }
                 }
@@ -204,7 +210,7 @@ define([
         }
 
         getLocationImage() {
-            return this.profile.location?.cover ?? 'modules/story/images/welcome.png'
+            return this.profile.location?.cover?.url ?? ''
         }
 
 
@@ -345,7 +351,7 @@ define([
                     this.setAlert("showRol")
                 }
 
-                let [completed, pending] = this.activitiesTracking()
+                let [completed, pending] = this.activitiesTracking(false)
 
                 if (pending.length === 0 && (!local("finishCourse") || !local("finishCourse").includes(this.courseId))) {
                     this.setAlert("finishCourse")

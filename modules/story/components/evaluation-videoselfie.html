@@ -8,7 +8,7 @@
         <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.</p>
     </div>
     <div class="avatar">
-        <img src="modules/story/images/videoselfie.png" alt="">
+        <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="">
     </div>
     <div class="take-video" @click="startCamera">
         <img src="modules/story/images/camera.png" alt="">
@@ -26,6 +26,6 @@
     </div>
 
     <div @click="destroy" style="height: 70px;">
-        <img src="modules/story/images/videoselfie.png" alt="" style="height: 70px;">
+        <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="" style="height: 70px;">
     </div>
 </div>

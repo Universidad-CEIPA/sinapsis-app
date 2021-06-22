@@ -14,7 +14,7 @@
 <transition>
     <ui-modal @close="remove" class="alert-modal tools-modal" v-if="typeAlert === 'tools'">
         <template #title>
-            <img :src="course.selectedTool.rubric[0]?.media ?? 'modules/story/images/iron.png'" alt="">
+            <img :src="course.selectedTool.rubric[0]?.media?.url ?? 'modules/story/images/default-tool.png'" alt="">
         </template>
         <h1>{{course.selectedTool.rubric[0]?.name ?? ''}}</h1>
         <div>Competencia: {{course.selectedTool.name}} <br>
@@ -28,7 +28,7 @@
 <transition>
     <ui-modal @close="remove" class="alert-modal chapter-completed" v-if="typeAlert === 'startQuestions'">
         <template #title>
-            <img src="modules/story/images/alert-great.png" alt="">
+            <img :src="`modules/story/images/${course.skin}/alert-great.png`" alt="">
         </template>
         <h1>¡Fabuloso!</h1>
         <div class="bottom-alert">
@@ -119,7 +119,7 @@
 <transition>
     <div class="tiny-alert" v-if="typeAlert === 'tiny'">
         <div class="msg">
-            Sabias de que de cada 10 persona en el mundo
+            
         </div>
     </div>
 </transition>
@@ -128,7 +128,7 @@
     <ui-modal @close="removeFinish" class="alert-modal  finish" v-if="typeAlert === 'finishCourse'">
         <template #title>
             
-            <img src="modules/story/images/conquistador.png" alt="">
+            <img :src="`modules/story/images/${course.skin}/conquistador.png`" alt="">
             <div class="text-header">Eres un conquistador</div>
         </template>
         <div class="center-img">
@@ -179,7 +179,6 @@
 
 
 <transition>
-
     <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'chaptersPending'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
@@ -189,15 +188,24 @@
         <button class="done action primary" @click="remove">Continuar</button>
     
     </ui-modal>
+</transition>
 
-
-
+<transition>
+    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'activityDisable'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+        </template>
+        <h1>No hay más actividades pendientes, esta atento a nuevas entregas proximamente</h1>
+    
+        <button class="done action primary" @click="remove">Continuar</button>
+    
+    </ui-modal>
 </transition>
 
 <transition>
     <ui-modal @close="removeEvaluation" class="alert-modal chapter-completed" v-if="typeAlert === 'finish-evaluation'">
         <template #title>
-            <img src="modules/story/images/alert-great.png" alt="">
+            <img :src="`modules/story/images/${course.skin}/alert-great.png`" alt="">
         </template>
         <h1>Genial</h1>
         <div class="bottom-alert">

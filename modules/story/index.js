@@ -155,20 +155,19 @@ define([
             },
             handlePointerDown(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                this._pointerStart = e;
+                this._pointerStart = e.clientX;
             },
             handlePointerMove(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                if (Math.abs(this._pointerStart.clientX - e.clientX) > 1) {
-                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX) / 50;
-
+                if (Math.abs(this._pointerStart - e.clientX) > 1) {
+                    this.dragX = Math.round(e.clientX - this._pointerStart);
+                    this._pointerStart = e.clientX
 
                     let next = this.animation + this.dragX
 
                     if (next <= this.limitAnimation.start && next >= this.limitAnimation.finish) {
-                        this.animation = this.animation + this.dragX
+                        this.animation = next
                     }
-
 
                 }
             }
