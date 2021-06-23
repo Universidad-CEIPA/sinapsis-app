@@ -4,6 +4,7 @@
             <img :src="`modules/story/images/${course.skin}/alert-great.png`" alt="">
         </template>
         <h1>¡Fabuloso!</h1>
+        <img v-if="course.skin === 'mision'" src="modules/story/images/divisor.png" alt="">
         <div class="bottom-alert">
             <div> Has completado este capitulo, <br>prepárate para las próximas entregas</div>
             <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
@@ -14,7 +15,8 @@
 <transition>
     <ui-modal @close="remove" class="alert-modal tools-modal" v-if="typeAlert === 'tools'">
         <template #title>
-            <img :src="course.selectedTool.rubric[0]?.media?.url ?? 'modules/story/images/default-tool.png'" alt="">
+            <img :src="course.selectedTool.rubric[0]?.media?.url ?? `modules/story/images/${course.skin}/default-tool.png`"
+                alt="">
         </template>
         <h1>{{course.selectedTool.rubric[0]?.name ?? ''}}</h1>
         <div>Competencia: {{course.selectedTool.name}} <br>
@@ -40,7 +42,7 @@
 
 <transition>
     <div id="tour" v-if="typeAlert === 'showRol'">
-        <ui-modal @close="removeTourRol" class="alert-modal">
+        <ui-modal @close="removeTourRol" class="alert-modal show-rol">
             <template #title>
                 <img src="modules/story/images/arabesco-gold-half.svg" alt="">
             </template>
@@ -60,7 +62,10 @@
 
 <transition>
     <div id="tour" v-if="typeAlert === 'showTools'">
-        <ui-modal @close="removeTourTools" class="alert-modal">
+        <ui-modal @close="removeTourTools" class="alert-modal show-rol">
+            <template #title>
+                <img src="modules/story/images/arabesco-gold-half.svg" alt="">
+            </template>
             <h1>Genial ¡Ya tienes Herramientas!</h1>
             <img src="modules/story/images/arabesco-gold.svg" alt="">
             <div> Acorde a tus competencias estas son tus herramientas</div>
@@ -71,6 +76,118 @@
 
         </ui-modal>
     </div>
+</transition>
+
+
+
+<transition>
+    <ui-modal @close="removeWelcome" class="alert-modal start-course" v-if="typeAlert === 'startCourse'">
+        <template #title>
+            <img :src="`modules/story/images/${course.skin}/welcome.png`" alt="">
+        </template>
+        <h1>Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{$root.user.name.split(" ")[0]}}</h1>
+        <div class="bottom-alert">
+            <div>Aquí encontrarás todas las actividades que hemos preparado para ti</div>
+        </div>
+    </ui-modal>
+</transition>
+
+<transition>
+    <div class="tiny-alert" v-if="typeAlert === 'tiny'">
+        <div class="msg">
+
+        </div>
+    </div>
+</transition>
+
+<transition>
+    <ui-modal @close="removeFinish" class="alert-modal  finish" v-if="typeAlert === 'finishCourse'">
+        <template #title>
+
+            <img :src="`modules/story/images/${course.skin}/conquistador.png`" alt="">
+            <div class="text-header">Eres un conquistador</div>
+        </template>
+        <div class="center-img">
+            <img src="modules/story/images/arabesco-gold.svg" alt="">
+        </div>
+
+        <div>Has completado todas las actividades. <br>
+            {{ course.invitation }}
+        </div>
+        <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
+        <footer>
+            <button class="done action primary" data-icon-after="arrow-right" @click="removeFinish">Ver mi
+                progreso</button>
+        </footer>
+
+    </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="removeContinue" class="alert-modal  continue-travel" v-if="typeAlert === 'continueTravel'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+            <img src="modules/story/images/dorado/dorado-alert.png" alt="">
+        </template>
+        <h1>Continúa este viaje en </h1>
+
+        <button class="done action primary" @click="removeContinue"> www.ceipa.edu.co</button>
+
+    </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'chaptersPending'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+        </template>
+        <h1>Te invitamos a ponerte al día en las tareas anteriores para poder entrar a esta actividad</h1>
+
+        <button class="done action primary" @click="remove">Continuar</button>
+
+    </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'activityDisable'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+        </template>
+        <h1>No hay más actividades pendientes, esta atento a nuevas entregas proximamente</h1>
+
+        <button class="done action primary" @click="remove">Continuar</button>
+
+    </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="removeEvaluation" class="alert-modal chapter-completed" v-if="typeAlert === 'finish-evaluation'">
+        <template #title>
+            <img :src="`modules/story/images/${course.skin}/alert-great.png`" alt="">
+        </template>
+        <h1>Genial</h1>
+        <div class="bottom-alert">
+            <div> Haz completado la autoevaluación sigue explorando el mapa</div>
+            <button class="done action primary" data-icon-after="arrow-right" @click="removeEvaluation">Volver al
+                mapa</button>
+        </div>
+    </ui-modal>
+</transition>
+
+<transition>
+    <ui-modal @close="remove" class="alert-modal  hero-letter" v-if="typeAlert === 'hero-letter'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+        </template>
+        <h1>Tus fortalezas te han ayudado a avanzar en esta travesia</h1>
+        <img src="modules/story/images/arabesco-gold.svg" alt="">
+        <div>Con la carta del Héroe fortalecerás tus habilidades para continuar con tu progreso <br>
+            Ponte a prueba y sé más efectivo
+        </div>
+        <footer>
+            <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
+        </footer>
+    </ui-modal>
 </transition>
 
 <transition>
@@ -88,18 +205,6 @@
 </transition>
 
 <transition>
-    <ui-modal @close="removeWelcome" class="alert-modal start-course" v-if="typeAlert === 'startCourse'">
-        <template #title>
-            <img :src="`modules/story/images/${course.skin}/welcome.png`" alt="">
-        </template>
-        <h1>Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{$root.user.name.split(" ")[0]}}</h1>
-        <div class="bottom-alert">
-            <div>Aquí encontrarás todas las actividades que hemos preparado para ti</div>
-        </div>
-    </ui-modal>
-</transition>
-
-<transition>
     <ui-modal @close="remove" class="alert-modal new-city" v-if="typeAlert === 'newCity'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="">
@@ -112,105 +217,6 @@
             El Dorado
 
             <img src="modules/story/images/dorado/dorado-alert.png" alt="">
-        </div>
-    </ui-modal>
-</transition>
-
-<transition>
-    <div class="tiny-alert" v-if="typeAlert === 'tiny'">
-        <div class="msg">
-            
-        </div>
-    </div>
-</transition>
-
-<transition>
-    <ui-modal @close="removeFinish" class="alert-modal  finish" v-if="typeAlert === 'finishCourse'">
-        <template #title>
-            
-            <img :src="`modules/story/images/${course.skin}/conquistador.png`" alt="">
-            <div class="text-header">Eres un conquistador</div>
-        </template>
-        <div class="center-img">
-            <img src="modules/story/images/arabesco-gold.svg" alt="">
-        </div>
-
-        <div>Has completado todas las actividades. <br> 
-            % Texto de invitación de backoffice %
-            {{ course.invitation }}
-        </div>
-        <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
-        <footer>
-            <button class="done action primary" data-icon-after="arrow-right" @click="removeFinish">Ver mi progreso</button>
-        </footer>
-
-    </ui-modal>
-</transition>
-
-<transition>
-    <ui-modal @close="removeContinue" class="alert-modal  continue-travel" v-if="typeAlert === 'continueTravel'">
-        <template #title>
-            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
-            <img src="modules/story/images/dorado/dorado-alert.png" alt="">
-        </template>
-        <h1>Continúa este viaje en </h1>
-        
-        <button class="done action primary" @click="removeContinue"> www.ceipa.edu.co</button>
-
-    </ui-modal>
-</transition>
-
-<transition>
-        <ui-modal @close="remove" class="alert-modal  hero-letter" v-if="typeAlert === 'hero-letter'">
-            <template #title>
-                <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
-            </template>
-            <h1>Tus fortalezas te han ayudado a avanzar en esta travesia</h1>
-            <img src="modules/story/images/arabesco-gold.svg" alt="">
-            <div>Con la carta del Héroe fortalecerás tus habilidades para continuar con tu progreso <br>
-                Ponte a prueba y sé más efectivo
-            </div>
-            <footer>
-                <button class="done action primary" data-icon-after="arrow-right"
-                    @click="remove">Continuar</button>
-            </footer>
-        </ui-modal>
-</transition>
-
-
-<transition>
-    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'chaptersPending'">
-        <template #title>
-            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
-        </template>
-        <h1>Te invitamos a ponerte al día en las tareas anteriores para poder entrar a esta actividad</h1>
-    
-        <button class="done action primary" @click="remove">Continuar</button>
-    
-    </ui-modal>
-</transition>
-
-<transition>
-    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'activityDisable'">
-        <template #title>
-            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
-        </template>
-        <h1>No hay más actividades pendientes, esta atento a nuevas entregas proximamente</h1>
-    
-        <button class="done action primary" @click="remove">Continuar</button>
-    
-    </ui-modal>
-</transition>
-
-<transition>
-    <ui-modal @close="removeEvaluation" class="alert-modal chapter-completed" v-if="typeAlert === 'finish-evaluation'">
-        <template #title>
-            <img :src="`modules/story/images/${course.skin}/alert-great.png`" alt="">
-        </template>
-        <h1>Genial</h1>
-        <div class="bottom-alert">
-            <div> Haz completado la autoevaluación sigue explorando el mapa</div>
-            <button class="done action primary" data-icon-after="arrow-right" @click="removeEvaluation">Volver al mapa</button>
         </div>
     </ui-modal>
 </transition>

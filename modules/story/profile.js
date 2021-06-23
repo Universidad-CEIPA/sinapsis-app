@@ -70,9 +70,9 @@ define([
             },
             getCoverTool(competence) {
                 if (competence.rubric && competence.rubric.length) {
-                    return competence.rubric[0]?.media?.url ?? 'modules/story/images/default-tool.png'
+                    return competence.rubric[0]?.media?.url ?? `modules/story/images/${this.course.skin}/default-tool.png`
                 } else {
-                    return 'modules/story/images/default-tool.png'
+                    return `modules/story/images/default-tool.png`
                 }
             },
             updateGraph() {

@@ -227,11 +227,19 @@ define([
         }
 
         graphColors() {
-            return [
-                "#263239",//initialValue
-                "#95bfcb",//improvementDesired
-                "#c39b52"//currentvalue
-            ]
+
+            return {
+                "dorado":[
+                    "#263239",//initialValue
+                    "#95bfcb",//improvementDesired
+                    "#c39b52"//currentvalue
+                ] ,
+                "mision":[
+                    "#505659",//initialValue
+                    "#c39b52",//improvementDesired
+                    "#37356C"//currentvalue
+                ]
+            }[this.skin]
         }
 
         graphDataSets() {
