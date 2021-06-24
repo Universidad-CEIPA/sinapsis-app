@@ -28,6 +28,9 @@ define([
                     focusItem.className += " " + newClass;
                 }
             },
+            redirectCeipa(){
+                window.open('https://ceipa.edu.co/','_blank')
+            },
             remove() {
                 this.course.removeAlert()
                 this.$emit('close');

@@ -213,8 +213,11 @@ define([
             },
 
         },
-        async mounted() {
-            await this.course.reset()
+        async created(){
+          await  this.course.setSchedule()
+        },
+        mounted() {
+            
             this.chapter = this.content ? JSON.parse(this.content) : this.course.getCurrentChapter()
             this.reset()
             this.calculateDistribute();

@@ -112,7 +112,8 @@
         </div>
 
         <div>Has completado todas las actividades. <br>
-            {{ course.invitation }}
+            Te invitamos el próximo <span class="invitation-date"> {{ $formatDate(course.invitation.date , "DD [de] MMMM") }} en {{ course.invitation.description }} a las {{ $formatDate(course.invitation.hour , "hh:mm a") }} </span> para realizar la actividad de cierre
+            
         </div>
         <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
         <footer>
@@ -131,7 +132,7 @@
         </template>
         <h1>Continúa este viaje en </h1>
 
-        <button class="done action primary" @click="removeContinue"> www.ceipa.edu.co</button>
+        <button class="done action primary" @click="redirectCeipa"> www.ceipa.edu.co</button>
 
     </ui-modal>
 </transition>

@@ -30,7 +30,6 @@ define([
             },
             habeasData(){
                 window.open("https://ceipa.edu.co/politicas-de-privacidad-y-habeas-data?_gl=1*1s26xlw*_ga*MTYyNjI4MzEzMi4xNjIzNzg4NzE2*_ga_KPMW4DLCY2*MTYyMzc4ODcxNS4xLjEuMTYyMzc4ODc3MC4w","_blank")
-                
             }
         },
         components: {

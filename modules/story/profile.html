@@ -3,7 +3,8 @@
     <div class="profile-content">
         <div class="info-general">
             <div class="city-icon">
-                <img :src="course.getRoleIcon()" alt="">
+                <img  v-if="course.activeRol"  :src="course.getRoleIcon()" alt="">
+                <img v-else src="res/images/logo_uceipa_gold.svg" alt="">
             </div>
             <section class="profile">
                 <div class="info">

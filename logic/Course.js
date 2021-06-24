@@ -143,6 +143,7 @@ define([
                 return false
             }
         }
+
         getChapterByActivity(activityId) {
             let indexChapter = -1
             this.chapters.map((chapter, index) => {
@@ -209,11 +210,6 @@ define([
             return this.profile.location?.name ?? ''
         }
 
-        getLocationImage() {
-            return this.profile.location?.cover?.url ?? ''
-        }
-
-
         getRole() {
             return this.profile.rol.name
         }
@@ -227,7 +223,6 @@ define([
         }
 
         graphColors() {
-
             return {
                 "dorado": [
                     "#263239",//initialValue
@@ -276,10 +271,6 @@ define([
             return activities.filter(a => a.completed[0] !== "completed").length === 0
         }
 
-        memoryShow(index) {
-            this.memory = index
-        }
-
         needImprovementDesired() {
             return this.competences.filter((c) => c.evaluation.improvementDesired === 0).length
         }
@@ -292,7 +283,6 @@ define([
             await this.setSchedule()
             await this.setStudentProfile()
             await this.setStudentCompetences()
-
             await this.setRubrics()
 
             this.setTools()
@@ -301,8 +291,7 @@ define([
             this.showRol()
             this.trackingMaps()
 
-
-            let [completed, pending] = this.activitiesTracking(false)
+            let [_, pending] = this.activitiesTracking(false)
             let finishArray = local("finishCourse") || []
             if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
                 this.setAlert("finishCourse")
@@ -328,6 +317,7 @@ define([
             this.hero_letter = this.schedule.hero_letter
             this.invitation = this.schedule.invitation
         }
+
         async setStudentProfile() {
             this.profile = await api.post('students/getProfileCourse', { courseId: this.courseId, studentId: this.studentId })
         }
@@ -335,7 +325,6 @@ define([
         async setRubrics() {
             this.rubrics = await api.post('students/getTools', { rolId: this.profile.rol.id });
         }
-
 
         async setStudentCompetences() {
             this.competences = await api.get(`courses/competencyAssessment?courseId=${this.courseId}&projectId= ${this.projectId}&studentId=${this.studentId}`);
@@ -380,13 +369,11 @@ define([
 
 
                     if (Array.isArray(content)) {
-                        content.map(act => {
-                            if (act.id === activity.id) {
-                                indexChapter = index
-                                act = activity
-                            }
-
-                        })
+                        let indexActivity = content.findIndex(act => act.id === activity.id)
+                        if (indexActivity >= 0) {
+                            indexChapter = index
+                            Object.assign(content[indexActivity], activity)
+                        }
                     } else {
                         let cities = content.map.locations.filter(l => l.end === 0)
                         let end = content.map.locations.filter(l => l.end === 1).length
@@ -396,30 +383,25 @@ define([
                             this.setAlert("newCity")
                         }
 
-                        content.map.locations.map(act => {
-                            if (act.id === activity.id) {
-                                activity.project_activities = activity.activity
-                                delete activity.activity
-                                indexChapter = index
-                                act = activity
-                            }
+                        let indexActivity = content.map.locations.findIndex(act => act.id === activity.id)
+                        if (indexActivity >= 0) {
+                            activity.project_activities = activity.activity
+                            delete activity.activity
+                            indexChapter = index
+                            Object.assign(content.map.locations[indexActivity], activity)
+                        }
 
-                        })
                     }
                 })
 
                 await this.updateChapters(this.chapters[indexChapter])
             } else {
-                this.hero_letter.map(card => {
-                    if (card.id === activity.id) {
-                        card = activity
-                    }
-                })
+                let indexActivity = this.hero_letter.findIndex(act => act.id === activity.id)
+                if (indexActivity >= 0) {
+                    Object.assign(this.hero_letter[indexActivity], activity)
+                }
                 await this.reset()
             }
-
-
-
         }
     }
 

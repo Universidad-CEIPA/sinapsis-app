@@ -132,7 +132,6 @@ define([
                         this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(chapter), forceActivity: content.id } })
                     } else {
                         content.type = "hero-letter"
-                        console.log(content)
                         this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(content) } })
                     }
 
@@ -150,11 +149,28 @@ define([
                 return act.activity ? act.activity.type : "map"
             },
             updateLayout() {
-                //this.course.memoryShow(0)
+
                 this.limitAnimation.finish = -(this.widthChapter * this.chapters.length + this.chapters.length * 20) + window.screen.width
 
 
-                let [completed, pending] = this.course.activitiesTracking(false)
+                let completedChapters = -1
+
+                this.course.chapters.map((chapter, index) => {
+                    if (!this.course.isCompletedChapter(chapter) && completedChapters < 0) { completedChapters = index; }
+                })
+
+                if (completedChapters > 0) {
+                    let next = -(this.widthChapter * completedChapters + (completedChapters - 1) * 20)
+
+                    while (next < this.limitAnimation.finish) {
+                        next = next + 10                        
+                    }
+                    this.animation = next
+                }
+
+
+
+                let [_, pending] = this.course.activitiesTracking(false)
                 let finishArray = local("finishCourse") || []
                 if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
                     this.course.setAlert("finishCourse")
@@ -194,7 +210,7 @@ define([
                 })
 
                 if (this.course.getAlert()) {
-                    
+
                     if (this.course.getAlert() === "finishCourse") {
                         let finishTime = local("finishCourse") || []
                         finishTime.push(this.course.courseId)
