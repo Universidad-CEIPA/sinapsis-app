@@ -152,6 +152,16 @@ define([
             updateLayout() {
                 //this.course.memoryShow(0)
                 this.limitAnimation.finish = -(this.widthChapter * this.chapters.length + this.chapters.length * 20) + window.screen.width
+
+
+                let [completed, pending] = this.course.activitiesTracking(false)
+                let finishArray = local("finishCourse") || []
+                if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
+                    this.course.setAlert("finishCourse")
+                    this.modal = true
+                }
+
+
             },
             handlePointerDown(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
@@ -183,8 +193,8 @@ define([
                     this.chapters.push(program)
                 })
 
-
                 if (this.course.getAlert()) {
+                    
                     if (this.course.getAlert() === "finishCourse") {
                         let finishTime = local("finishCourse") || []
                         finishTime.push(this.course.courseId)

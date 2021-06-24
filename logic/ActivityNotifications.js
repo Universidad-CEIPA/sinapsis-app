@@ -53,6 +53,7 @@ define([
                         let time = new Date(act.time)
 
                         date.setHours(time.getHours())
+
                         date.setMinutes(time.getMinutes());
                         date.setSeconds(0);
 
@@ -65,7 +66,7 @@ define([
                                 trigger: { at: date },
                                 extra: {
                                     route: "story:home",
-                                    params: {tiny: true}
+                                    params: { tiny: true }
                                 }
                             });
                     })
@@ -86,7 +87,7 @@ define([
                             trigger: { at: date },
                             extra: {
                                 route: "story:home",
-                                params: {tiny: true}
+                                params: { tiny: true }
                             }
                         });
 
@@ -110,7 +111,7 @@ define([
                         trigger: { at: date },
                         extra: {
                             route: "story:home",
-                            params: {tiny: true}
+                            params: { tiny: true }
                         }
                     });
             })
@@ -146,7 +147,7 @@ define([
                             trigger: { at: today },
                             extra: {
                                 route: "story:home",
-                                params: {tiny: true}
+                                params: { tiny: true }
                             }
                         });
                     })
@@ -160,7 +161,7 @@ define([
                         trigger: { at: today },
                         extra: {
                             route: "story:home",
-                            params: {tiny: true}
+                            params: { tiny: true }
                         }
                     });
 
@@ -177,9 +178,9 @@ define([
                     group: "activity",
                     trigger: { at: today },
                     extra: {
-						route: "story:home",
-						params: {tiny: true}
-					}
+                        route: "story:home",
+                        params: { tiny: true }
+                    }
                 });
             })
 
@@ -197,7 +198,7 @@ define([
         schedule(options) {
             // control de notificaciones en web
             console.log("ActivityNotifications::schedule", options.trigger ? options.trigger.at : "(now)", options.text);
-            
+
             return this.backend.schedule({
                 icon: null,
                 smallIcon: "res://notification",

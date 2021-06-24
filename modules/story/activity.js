@@ -247,7 +247,10 @@ define([
             }
         },
         mounted() {
-            document.getElementById("story-activity-view").scrollIntoView({ behavior: "smooth" });
+            if (document.getElementById("story-activity-view")){
+                document.getElementById("story-activity-view").scrollIntoView({ behavior: "smooth" });
+            }
+            
 
             if (this.chapter.type === 'hero-letter') {
                 this.course.setAlert("hero-letter")

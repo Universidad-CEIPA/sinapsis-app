@@ -1,7 +1,8 @@
 define([
     "text!./alert.html",
     "components/ui-modal",
-], (html, UiModal) => {
+    "local"
+], (html, UiModal, local) => {
 
     return {
         template: html,
@@ -40,6 +41,13 @@ define([
                 var focusItem = document.querySelector(Item)
                 focusItem.classList.remove("focusable");
 
+            },
+            removeFinish(){
+                this.course.removeAlert()
+                let finishTime = local("finishCourse") || []
+                finishTime.push(this.course.courseId)
+                local("finishCourse", finishTime)
+                this.course.setAlert("continueTravel")     
             },
             removeTourRol() {
                 this.removeTour()

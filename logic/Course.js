@@ -229,12 +229,12 @@ define([
         graphColors() {
 
             return {
-                "dorado":[
+                "dorado": [
                     "#263239",//initialValue
                     "#95bfcb",//improvementDesired
                     "#c39b52"//currentvalue
-                ] ,
-                "mision":[
+                ],
+                "mision": [
                     "#505659",//initialValue
                     "#c39b52",//improvementDesired
                     "#37356C"//currentvalue
@@ -301,6 +301,13 @@ define([
             this.showRol()
             this.trackingMaps()
 
+
+            let [completed, pending] = this.activitiesTracking(false)
+            let finishArray = local("finishCourse") || []
+            if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
+                this.setAlert("finishCourse")
+            }
+
         }
 
         selectTool(competence) {
@@ -357,12 +364,6 @@ define([
 
                 if (index === this.chapterActiveRol - 1 && this.showRol()) {
                     this.setAlert("showRol")
-                }
-
-                let [completed, pending] = this.activitiesTracking(false)
-
-                if (pending.length === 0 && (!local("finishCourse") || !local("finishCourse").includes(this.courseId))) {
-                    this.setAlert("finishCourse")
                 }
             }
 

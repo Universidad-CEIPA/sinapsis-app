@@ -4,8 +4,8 @@
             Mapa Ciudades
         </template>
         </template>
-            <template v-else>
-                
+        <template v-else>
+
             {{ title }}
         </template>
 
@@ -35,19 +35,16 @@
             <div class="competence-alert" v-if="showCompetence">
                 <section class="competence-title">
                     <img src="modules/story/images/completed.png" alt="">
-                    <div >
+                    <div>
                         Competencia a evaluar
                         <br>
-                        <strong> Orientación al logro</strong>
+                        <strong>{{ activity.activity.competence.name}}
+                        </strong>
                     </div>
                 </section>
                 <section class="competence-description">
-                    La orientación al logro es la capacidad de encaminar todos los actos al logro de lo esperado,
-                    actuando con velocidad y sentido de urgencia ante decisiones importantes, necesarias para satisfacer
-                    las necesidades del cliente, superar a los competidores o mejorar la organización
+                    {{ activity.activity.competence.description}}
                 </section>
-
-
             </div>
         </div>
 
@@ -132,5 +129,5 @@
 
         </div>
 
-<alert v-if="modal" @close="modal = false" :course="course" />
+        <alert v-if="modal" @close="modal = false" :course="course" />
 </section>
