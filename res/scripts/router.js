@@ -25,6 +25,10 @@ define([
 			{ name: "story:skills:desired", path: "/story/desired", component: m("story/desired-skills") },
 			{ name: "story:welcome", path: "/story/welcome", component: m("story/welcome-course") },
 
+			{ name: "story:test", path: "/story/test", component: m("story/autoevaluation") },
+
+
+
 
 			{ name: "welcome:index", path: "/welcome/:token", component: m("welcome/index"), props: true },
 			{ name: "welcome:login", path: "/login", component: m("welcome/login"), props: true },

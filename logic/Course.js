@@ -44,7 +44,6 @@ define([
             this.chapterActiveMap = []
 
             this.currentChapter = null
-            this.memory = 0
         }
 
         static getCurrent() {
@@ -340,7 +339,7 @@ define([
         }
 
         tools() {
-            return this.competences.filter(comp => comp.rubric)
+            return this.competences.filter(comp => comp.rubric?.length)
         }
 
         async updateChapters(chapter) {

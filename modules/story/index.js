@@ -163,7 +163,7 @@ define([
                     let next = -(this.widthChapter * completedChapters + (completedChapters - 1) * 20)
 
                     while (next < this.limitAnimation.finish) {
-                        next = next + 10                        
+                        next = next + 10
                     }
                     this.animation = next
                 }

@@ -4,7 +4,7 @@
         <div class="info-general">
             <div class="city-icon">
                 <img  v-if="course.activeRol"  :src="course.getRoleIcon()" alt="">
-                <img v-else src="res/images/logo_uceipa_gold.svg" alt="">
+                <img v-else :src="`res/images/${course.skin}/default-rol.png`" alt="">
             </div>
             <section class="profile">
                 <div class="info">
@@ -35,6 +35,7 @@
                         <p v-if="course.activeTools">{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
                     </li>
                 </ul>
+
             </section>
         </div>
 

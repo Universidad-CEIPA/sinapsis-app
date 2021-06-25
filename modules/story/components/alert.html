@@ -129,6 +129,7 @@
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
             <img src="modules/story/images/dorado/dorado-alert.png" alt="">
+            <img :src="`modules/story/images/${course.skin}/${course.skin}-alert.png`" alt="">
         </template>
         <h1>Continúa este viaje en </h1>
 
@@ -141,6 +142,7 @@
     <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'chaptersPending'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+            <img :src="`modules/story/images/${course.skin}/welcome.png`" alt="">
         </template>
         <h1>Te invitamos a ponerte al día en las tareas anteriores para poder entrar a esta actividad</h1>
 
@@ -153,6 +155,7 @@
     <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'activityDisable'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+            <img :src="`modules/story/images/${course.skin}/welcome.png`" alt="">
         </template>
         <h1>No hay más actividades pendientes, esta atento a nuevas entregas proximamente</h1>
 

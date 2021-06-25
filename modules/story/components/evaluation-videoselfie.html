@@ -4,7 +4,7 @@
         <p>Contesta las siguientes preguntas según tu experiencia</p>
     </header>
     <div class="info-alert">
-        <span data-icon="back"></span>
+        <img src="modules/story/images/completed.png" alt="">
         <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.</p>
     </div>
     <div class="avatar">
@@ -18,14 +18,14 @@
 </div>
 <div id="player" v-if="showVideostatus"></div>
 <div id="video-record" v-if="camera">
-    <div @click="startVideo" style="height: 70px;">
-        <img src="modules/story/images/camera.png" alt="" style="height: 70px;">
+    <div @click="startVideo">
+        <img src="modules/story/images/play.svg" alt="" class="controls">
     </div>
-    <div @click="stopVideo" style="height: 70px;">
-        <img src="modules/story/images/video.svg" alt="" style="height: 70px;">
+    <div @click="stopVideo">
+        <img src="modules/story/images/stop.svg" alt="" class="controls">
     </div>
 
-    <div @click="destroy" style="height: 70px;">
-        <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="" style="height: 70px;">
+    <div @click="destroy">
+        <img src="modules/story/images/cancel.svg" alt="" class="controls">
     </div>
 </div>
