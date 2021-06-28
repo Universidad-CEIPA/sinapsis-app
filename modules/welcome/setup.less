@@ -5,7 +5,8 @@
     display   : inline-grid;
     min-height: calc(100vh - 40px);
     padding   : 20px;
-    width     : inherit;
+    width     : -webkit-fill-available;
+    width     : -moz-available;
 
     .img-bottom {
         background: url('../../modules/welcome/images/chicos.svg') calc(100% * (var(--step) - 1)) 20px/cover no-repeat;
