@@ -13,7 +13,7 @@ define([
                 recorder: null,
                 fileSystem: null,
                 videoPlayer: null,
-                camera: 0,
+                camera: false,
                 showVideostatus: 0,
                 video
             };
@@ -29,7 +29,7 @@ define([
             },
             destroy() {
                 this.recorder.destroy();
-                this.camera = 0;
+                this.camera = false;
             },
             async showVideo() {
                 let url = "application/files/" + this.video;
@@ -43,7 +43,7 @@ define([
             },
             async startCamera() {
                 await this.recorder.initialize();
-                this.camera = 1
+                this.camera = true
             },
             startVideo() {
                 this.recorder.startRecording();
@@ -54,6 +54,14 @@ define([
                 local("video", this.video)
                 return this.video;
             },
+            reset() {
+                //this.answers.courseId = this.$root.currentCourse.courseId
+                //this.answers.studentId = this.$root.currentCourse.studentId
+                //this.answers.evaluation = 0
+                //this.answers.questionId = this.questions.id
+                //this.answers.type = this.questions.type
+                //this.answers.title = this.questions.content
+            }
         },
         async created() {
             await CapacitorVideoRecorder.get().then(recorder => this.recorder = recorder)
@@ -61,12 +69,11 @@ define([
                 this.videoPlayer = Capacitor.Plugins.CapacitorVideoPlayer;
                 this.addListenersToPlayerPlugin();
             }
-        },
-        mounted() {
-            this.answers = this.questions
-            Object.entries(this.answers).forEach(([key, question]) => {
-                question.answer = []
-            });
+
+            this.reset()
+            /*Object.entries(this.answers).forEach(([key, question]) => {
+                question.answer = 0
+            });*/
         },
         beforeDestroyed() {
             this.destroy()

@@ -74,7 +74,7 @@ define(() => {
 
         destroy() {
             this.backend.destroy();
-            this.backend = null
+            //this.backend = null
             return false
         }
 
