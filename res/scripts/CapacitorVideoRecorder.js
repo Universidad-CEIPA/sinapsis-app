@@ -14,14 +14,14 @@ define(() => {
             let Filesystem;
 
             let VideoRecorderPreviewFrame = {
-                    id: setId,
-                    stackPosition:position,
-                    width: 250,
-                    height: 500,
-                    x: 100,
-                    y: 100,
-                    borderRadius: 0
-                };
+                id: setId,
+                stackPosition: position,
+                width: 250,
+                height: 500,
+                x: 100,
+                y: 100,
+                borderRadius: 0
+            };
 
 
             if (window.Capacitor) {
@@ -33,7 +33,7 @@ define(() => {
             //this.VideoRecorderPreviewFrame.id = setId
             //this.VideoRecorderPreviewFrame.stackPosition = position
 
-            return new CapacitorVideoRecorder(backend, Filesystem,VideoRecorderPreviewFrame);
+            return new CapacitorVideoRecorder(backend, Filesystem, VideoRecorderPreviewFrame);
         }
 
         constructor(backend, Filesystem, VideoRecorderPreviewFrame) {
@@ -52,6 +52,10 @@ define(() => {
 
         async startRecording() {
             return await this.backend.startRecording().then();
+        }
+
+        async getDuration() {
+            return await this.backend.getDuration();
         }
 
         async stopRecording() {

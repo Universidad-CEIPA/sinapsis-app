@@ -13,7 +13,7 @@
     <div class="take-video" @click="startCamera">
         <img src="modules/story/images/camera.png" alt="">
     </div>
-    <button @click="showVideo">Show video</button>
+    <button @click="showVideo" v-if="video">Show video</button>
 
 </div>
 <div id="player" v-if="showVideostatus"></div>
