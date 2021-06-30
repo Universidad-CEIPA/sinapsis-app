@@ -1,16 +1,16 @@
 {
-  "appId": "co.edu.ceipa.app",
-  "appName": "Ceipa",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    },
-    "LocalNotifications": {
-      "smallIcon": "notification"
-    }
-  },
-  "cordova": {}
+	"appId": "co.edu.ceipa.app",
+	"appName": "Ceipa",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		},
+		"LocalNotifications": {
+			"smallIcon": "notification"
+		}
+	},
+	"cordova": {}
 }

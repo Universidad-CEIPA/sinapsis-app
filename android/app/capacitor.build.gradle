@@ -9,7 +9,6 @@ android {
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
-    implementation project(':teamhive-capacitor-video-recorder')
     implementation project(':capacitor-video-player')
 
 }

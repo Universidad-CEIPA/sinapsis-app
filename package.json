@@ -1,11 +1,13 @@
 {
 	"name": "ceipa",
+	"devDependencies": {},
 	"dependencies": {
-		"@capacitor/android": "^2.4.7",
-		"@capacitor/cli": "^2.4.7",
-		"@capacitor/core": "^2.4.7",
-		"@capacitor/ios": "^2.4.7",
-		"@teamhive/capacitor-video-recorder": "^4.0.1",
-		"capacitor-video-player": "^2.4.7-2"
+		"@capacitor/android": "^3.0.2",
+		"@capacitor/cli": "^3.0.2",
+		"@capacitor/core": "^3.0.2",
+		"@capacitor/filesystem": "^1.0.2",
+		"@capacitor/ios": "^3.0.2",
+		"capacitor-video-player": "^3.0.0-rc.2",
+		"hls.js": "^1.0.7"
 	}
 }
