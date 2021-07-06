@@ -1,9 +1,10 @@
 
 define([
     "text!./evaluation-videoselfie.html",
-    "CapacitorVideoPlayer",
+    "api",
     "local"
-], (html, CapacitorVideoPlayer, local) => {
+], (html, api, local) => {
+    "use strict";
 
     return {
         template: html,
@@ -11,21 +12,88 @@ define([
         data() {
             let video = local("video") || "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
             return {
+                maxTime: 60,
+                videoFile: null,
                 recorder: null,
                 fileSystem: null,
                 videoPlayer: null,
                 camera: false,
                 showVideostatus: false,
                 video,
-                interval:null,
+                interval: null,
                 _testApi: true,
                 _first: false,
-                _apiTimer1:null,
-                _apiTimer2:null,
-                _apiTimer3:null,
+                _apiTimer1: null,
+                _apiTimer2: null,
+                _apiTimer3: null,
             };
         },
         methods: {
+            handleInput(e) {
+                let file = e.target.files[0];
+
+                let videoUrl = URL.createObjectURL(file);
+                let audioElement = new Audio(videoUrl);
+
+                audioElement.addEventListener("loadedmetadata", () => {
+                    let duration = audioElement.duration;  //The duration is seconds, decimal, 182.36
+                    console.log(duration)
+                    if (duration > this.maxTime) {
+                        console.log("el video no debe durar mas de 1 minuto")
+                        return false;
+                    }
+                    this.addVideo(file);
+                });
+            },
+
+            async addVideo(file) {
+                this.videoFile = file
+
+                //console.log(filesystem)
+
+               await this.filesystem.writeFile({
+                    path: "videoselfies/video.mp4",
+                    data: file,
+                    directory: 'DOCUMENTS',
+                    encoding: 'utf8',
+                });
+
+
+                const contents = await this.filesystem.readFile({
+                    path: "videoselfies/video.mp4",
+                    directory: 'DOCUMENTS',
+                    encoding: 'utf8',
+                });
+
+                console.log('secrets:', contents);
+
+                let data = new FormData();
+                data.append("courseId", this.$root.currentCourse.courseId);
+                data.append("studentId", this.$root.currentCourse.studentId);
+                data.append("file", file);
+                data.append("questionId", this.questions.id);
+                data.append("type", this.questions.type);
+                data.append("title", this.questions.content);
+
+                this.uploading = true;
+                let respons = await api.post("students/uploadVideo", data, {
+                    /*onUploadProgress: e => {
+                        this.progress = ((e.loaded / e.total) * 100).toFixed(1);
+                    }*/
+                });
+                this.uploading = false;
+                if (respons) {
+                    this.videoFile = null
+                }
+                else {
+                    console.log("error")
+                }
+                return false;
+            },
+
+
+
+
             addListenersToPlayerPlugin() {
                 this.videoPlayer.addListener('jeepCapVideoPlayerPlay', (data) => { console.log('Event jeepCapVideoPlayerPlay ', data); }, false);
                 this.videoPlayer.addListener('jeepCapVideoPlayerPause', (data) => { console.log('Event jeepCapVideoPlayerPause ', data); }, false);
@@ -95,7 +163,7 @@ define([
             },
             async showVideo() {
                 let url = this.video //"application/files/" + this.video;
-                showVideostatus = true
+                this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
 
                 //await this.videoPlayer.isPlaying({ playerId: "player" });
@@ -142,7 +210,8 @@ define([
         async created() {
             //await CapacitorVideoRecorder.get().then(recorder => this.recorder = recorder)
             if (window.Capacitor) {
-                this.videoPlayer = CapacitorVideoPlayer;
+                this.videoPlayer = Capacitor.Plugins.CapacitorVideoPlayer;
+                this.filesystem =  Capacitor.Plugins.Filesystem,
                 this.addListenersToPlayerPlugin();
             }
 
