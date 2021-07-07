@@ -44,7 +44,7 @@ define([
             }
         },
         created() {
-            this.questions = /*local("questions")*/ [{ "id": 56, "type": "video", "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus auctor est. ", "order": null }]
+            this.questions = /*local("questions")*/[{ "id": 56, "type": "video", "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam rhoncus auctor est. ", "order": null }]
 
             if (this.course.getAlert()) {
                 this.modal = true

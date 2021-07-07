@@ -13,9 +13,16 @@
     <!--<div class="take-video" @click="startCamera">
         <img src="modules/story/images/camera.png" alt="">
     </div>-->
-    <input type="file" accept="video/mp4,video/x-m4v,video/*" class="input-file" @input="handleInput"
-        id="imageUpload" v-bind:disabled="videoFile">
-    <button @click="showVideo" v-if="video">Show video</button>
+    <div class="custom-input-file">
+        <input type="file" accept="video/mp4,video/x-m4v,video/*" class="input-file" @input="handleInput"
+            id="imageUpload">
+            Seleccionar Video
+    </div>
+    <br>
+    <button class="show action primary" @click="showVideo" v-if="videoFile">Ver video</button>
+
+    <button class="show action primary" @click="showVideo" v-if="videoFile">Grardar</button>
+
 
 </div>
 <div id="player" v-if="showVideostatus"></div>

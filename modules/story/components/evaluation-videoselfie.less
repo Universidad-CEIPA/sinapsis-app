@@ -50,9 +50,42 @@
 
 
     .player {
-        z-index: 9999999999999999;
+        z-index : 9999999999999999;
         position: fixed;
     }
+
+
+
+
+
+    .custom-input-file {
+        background-color: @good-color;
+        color           : #fff;
+        margin          : 0 auto 0;
+        overflow        : hidden;
+        padding         : 10px;
+        position        : relative;
+        text-align      : center;
+        max-width       : 250px;
+        border-radius   : 25px;
+
+        .input-file {
+            font-size: 10000px;
+            position : absolute;
+            height   : 100%;
+            width    : 100%;
+            right    : 0;
+            top      : 0;
+        }
+    }
+
+    .show {
+        max-width: 250px;
+    }
+
+
+
+
 }
 
 #video-record {
