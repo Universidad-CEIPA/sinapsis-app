@@ -38,7 +38,6 @@ define([
             },
 
             async addVideo(file) {
-                this.videoFile = file
                 const fileName = "question-" + this.questions.id + ".mp4";
                 const base64Data = await this.convertToBase64(file)
 
@@ -50,9 +49,12 @@ define([
                     });
 
                     const videoKey = "videos_" + this.$root.currentCourse.courseId
+                    const videoList = await this.storage.get({ key: videoKey })
 
+                    this.videos = videoList.value ? JSON.parse(videoList.value) : []
                     this.videos.unshift(savedFile.uri)
                     this.videoFile = savedFile.uri
+
                     this.storage.set({
                         key: videoKey,
                         value: JSON.stringify(this.videos)
@@ -62,7 +64,7 @@ define([
             },
 
 
-            async saveVideo(file) {
+            async saveVideo() {
                 this.uploading = true;
 
                 let respons = await api.post("students/uploadVideo", this.answer, {
@@ -75,6 +77,7 @@ define([
 
                 if (respons) {
                     this.videoFile = null
+                    this.$emit('next')
                 } else {
                     console.log("error")
                 }

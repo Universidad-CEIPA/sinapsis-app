@@ -8,20 +8,23 @@
         <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.</p>
     </div>
     <div class="avatar">
-        <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="">
+        <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="" v-if="!videoFile">
+        <div class="video" @click="showVideo" v-else>
+            play
+        </div>
     </div>
+
     <!--<div class="take-video" @click="startCamera">
         <img src="modules/story/images/camera.png" alt="">
     </div>-->
     <div class="custom-input-file">
         <input type="file" accept="video/mp4,video/x-m4v,video/*" class="input-file" @input="handleInput"
             id="imageUpload">
-            Seleccionar Video
+        Seleccionar Video
     </div>
     <br>
-    <button class="show action primary" @click="showVideo" v-if="videoFile">Ver video</button>
 
-    <button class="show action primary" @click="showVideo" v-if="videoFile">Grardar</button>
+    <button class="show action primary" @click="showVideo" v-if="videoFile">Guardar</button>
 
 
 </div>

@@ -3,7 +3,7 @@
     <div class="profile-content">
         <div class="info-general">
             <div class="city-icon">
-                <img  v-if="course.activeRol"  :src="course.getRoleIcon()" alt="">
+                <img v-if="course.activeRol" :src="course.getRoleIcon()" alt="">
                 <img v-else :src="`modules/story/images/${course.skin}/default-rol.png`" alt="">
             </div>
             <section class="profile">
@@ -39,7 +39,7 @@
             </section>
         </div>
 
-        <div class="info-binnacle">
+        <div class="info-binnacle" @click="$router.replace({ name: 'story:binnacle' })">
             <div class="legend">Mira aquí los videoselfies que has realizado</div>
             <div class="video">Ver bitacora de video</div>
         </div>
@@ -48,8 +48,8 @@
             <div class="title">Tus habilidades y progreso final</div>
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph" @click="$router.replace({ name: 'story:skills' })">
-                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()"
-                    :values="dataSets" :colors="colors" />
+                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets"
+                    :colors="colors" />
             </div>
             <button class="wish-eval action primary" v-if="course.needImprovementDesired()"
                 @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
@@ -60,10 +60,12 @@
                 </div>
                 <div class="type" :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
                     <span></span>Mi
-                    potencial deseado</div>
+                    potencial deseado
+                </div>
                 <div class="type" :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
                     <span></span>Mi
-                    potencial actual</div>
+                    potencial actual
+                </div>
             </div>
         </div>
         <div class="info-actions">

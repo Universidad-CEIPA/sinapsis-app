@@ -11,7 +11,8 @@ define([
         data() {
             return {
                 modal: false,
-                filter: 'all'
+                filter: 'all',
+                videos: null
             };
         },
         computed: {
@@ -88,8 +89,14 @@ define([
                 this.$nextTick(() => {
                     this.updateGraph();
                 });
-
             }
+        },
+        async created() {
+            const storage = Capacitor.Plugins.Storage;
+            const videoKey = "videos_" + this.course.courseId;
+            const videoList = await storage.get({ key: videoKey });
+            this.videos = videoList.value ? JSON.parse(videoList.value) : {}
+            console.log(this.videos);
         },
         beforeDestroy() {
             this.$refs.graph.destroy()
