@@ -32,10 +32,9 @@
     .avatar {
         width: 100%;
         text-align: center;
-        line-height: 50vh;
-        height: 50vh;
+        height: auto;
         max-width: 300px;
-        margin: auto;
+        margin: 20px auto;
 
         img {
             width: 90%;
@@ -65,41 +64,43 @@
     }
 
 
-
-
-
-    .custom-input-file {
-        background-color: @good-color;
-        color: #fff;
-        margin: 0 auto 0;
-        overflow: hidden;
-
-        position: relative;
-        text-align: center;
+    .actions {
         max-width: 250px;
-        width: 100%;
-        line-height: var(--action-height);
+        margin: auto;
 
-        border: var(--action-border);
-        border-radius: var(--action-radius);
+        .custom-input-file {
+            background-color: @good-color;
+            color: #fff;
+            margin: 0 auto 0;
+            overflow: hidden;
 
-
-        .input-file {
-            font-size: 10000px;
-            position: absolute;
-            height: 100%;
+            position: relative;
+            text-align: center;
+            max-width: 250px;
             width: 100%;
-            right: 0;
-            top: 0;
+            line-height: var(--action-height);
+
+            border: var(--action-border);
+            border-radius: var(--action-radius);
+
+
+            .input-file {
+                font-size: 10000px;
+                opacity: 0;
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                right: 0;
+                top: 0;
+            }
+        }
+
+        .show {
+            max-width: 250px;
+            margin: auto;
         }
     }
 
-    .show {
-        max-width: 250px;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
 
 
 

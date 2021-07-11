@@ -76,7 +76,6 @@ define([
                 this.uploading = false;
 
                 if (respons) {
-                    this.videoFile = null
                     this.$emit('next')
                 } else {
                     console.log("error")

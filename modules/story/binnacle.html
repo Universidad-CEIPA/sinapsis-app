@@ -10,13 +10,17 @@
             <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.
             </p>
         </div>
-
     </div>
 
 
     <div class="binnacle" v-if="!showVideostatus">
         <div v-for="video in videos" @click="playVideo(video.url)" class="video">
-            Pregunta - {{ video.question.id }}
+            <img :src="`modules/story/images/${course.skin}/default-video.png`" alt="">
+            <p>
+                <u>Pregunta - {{ video.question.id }}</u>
+                <br>
+                {{ $formatDate(video.created , "MMMM DD[/]YYYY  ") }}
+            </p>
         </div>
     </div>
     <div id="player" v-if="showVideostatus"></div>

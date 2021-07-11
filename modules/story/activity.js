@@ -83,7 +83,7 @@ define([
 
                     this.course.updateChapters(this.chapter);
 
-                    questions = this.activity.activity.questions
+                    questions = this.activity.activity.questions || []
 
                 } else {
 

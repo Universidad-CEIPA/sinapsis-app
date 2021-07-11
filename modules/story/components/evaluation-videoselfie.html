@@ -9,22 +9,26 @@
     </div>
     <div class="avatar">
         <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="" v-if="!videoFile">
-        <div class="video" @click="showVideo" v-else>
-            play
-        </div>
+        <img :src="`modules/story/images/${$root.currentCourse.skin}/default-video.png`" alt="" v-else
+            @click="showVideo">
     </div>
 
     <!--<div class="take-video" @click="startCamera">
         <img src="modules/story/images/camera.png" alt="">
     </div>-->
-    <div class="custom-input-file">
-        <input type="file" accept="video/mp4,video/x-m4v,video/*" class="input-file" @input="handleInput"
-            id="imageUpload">
-        Seleccionar Video
-    </div>
-    <br>
+    <div class="actions">
 
-    <button class="show action primary" @click="showVideo" v-if="videoFile">Guardar</button>
+        <div class="custom-input-file">
+            <input type="file" accept="video/mp4,video/x-m4v,video/*" class="input-file" @input="handleInput"
+                id="imageUpload">
+            Seleccionar Video
+        </div>
+        <br>
+        <span>Graba el video con tu dispositivo que no dure más de un minuto y subelo aquí</span>
+        <br>
+        <br>
+        <button class="show action primary" @click="saveVideo" v-if="videoFile">Guardar</button>
+    </div>
 
 
 </div>
