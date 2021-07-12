@@ -1,5 +1,5 @@
 {
-  "appId": "sinapsis.ceipa.app",
+  "appId": "co.edu.ceipa.sinapsis",
   "appName": "Sinapsis Ceipa",
   "bundledWebRuntime": false,
   "npmClient": "npm",
