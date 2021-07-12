@@ -42,6 +42,10 @@ define([
                 const base64Data = await this.convertToBase64(file)
 
                 if (window.Capacitor) {
+                    if (Capacitor.platform === "ios") {
+                        fileName = "files/" + video;
+                    }
+
                     const savedFile = await this.filesystem.writeFile({
                         path: fileName,
                         data: base64Data,
@@ -107,11 +111,8 @@ define([
             async showVideo() {
                 let video = this.videoFile.split("/")
                 video = video[video.length - 1]
-                if (Capacitor.platform === "android") {
-                    let url = "application/files/" + video;
-                } else if (Capacitor.platform === "ios") {
-                    let url = "application/" + video;
-                }
+
+                let url = "application/files/" + video;
 
                 this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
