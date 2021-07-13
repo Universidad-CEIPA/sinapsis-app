@@ -1,0 +1,16 @@
+{
+	"appId": "co.edu.ceipa.sinapsis",
+	"appName": "Sinapsis Ceipa",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "www",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		},
+		"LocalNotifications": {
+			"smallIcon": "notification"
+		}
+	},
+	"cordova": {}
+}
