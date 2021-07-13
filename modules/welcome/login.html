@@ -22,19 +22,18 @@
 			Revisa la información
 		</template>
 		<template #aside>
-			<a @click="type='request'">¿Aún no lo tienes?</a>
+			<a @click="type='recover'">¿Olvidaste tu contraseña?</a>
 		</template>
 	</ui-form>
 
-	<ui-form :action="resendEmail" :model="user" submit-label="Enviar" @success="acceptUser" v-if="type==='request'">
+	<ui-form action="students/forgetPassword" :model="recoverData" submit-label="Enviar" v-if="type==='recover'">
 		<template #header>
 			<div class="invitation">
 				<strong>Para iniciar esta aventura, te enviaremos </strong> <br>
-				un correo electrónico con el link de ingreso
-			</div>
-			<h1>¿Aún no lo tienes?</h1>
+				un correo electrónico con la recuperación de contraseña
+			<h1>¿Olvidaste tu contraseña?</h1>
 		</template>
-		<ui-input type="email" label="Correo electrónico" v-model="user.email" required>
+		<ui-input type="email" label="Correo electrónico" v-model="recoverData.email" required>
 			<template #validation>
 				Ingresa una dirección de correo válida
 			</template>

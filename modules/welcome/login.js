@@ -14,6 +14,9 @@ define([
 					email: null,
 					password: null
 				},
+				recoverData: {
+					email: null,
+				},
 				type: 'login'
 			};
 		},

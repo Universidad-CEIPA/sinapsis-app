@@ -92,11 +92,12 @@ define([
             }
         },
         async created() {
-            const storage = Capacitor.Plugins.Storage;
-            const videoKey = "videos_" + this.course.courseId;
-            const videoList = await storage.get({ key: videoKey });
-            this.videos = videoList.value ? JSON.parse(videoList.value) : {}
-            console.log(this.videos);
+            if(window.Capacitor){
+                const storage = Capacitor.Plugins.Storage;
+                const videoKey = "videos_" + this.course.courseId;
+                const videoList = await storage.get({ key: videoKey });
+                this.videos = videoList.value ? JSON.parse(videoList.value) : {}
+            }
         },
         beforeDestroy() {
             this.$refs.graph.destroy()

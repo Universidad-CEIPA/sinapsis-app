@@ -42,10 +42,7 @@ define([
                 const base64Data = await this.convertToBase64(file)
 
                 if (window.Capacitor) {
-                    if (Capacitor.platform === "ios") {
-                        fileName = "files/" + video;
-                    }
-
+                    
                     const savedFile = await this.filesystem.writeFile({
                         path: fileName,
                         data: base64Data,
@@ -53,16 +50,16 @@ define([
                     });
 
                     const videoKey = "videos_" + this.$root.currentCourse.courseId
-                    const videoList = await this.storage.get({ key: videoKey })
+                    const videoList = null//await this.storage.get({ key: videoKey })
 
                     this.videos = videoList.value ? JSON.parse(videoList.value) : []
                     this.videos.unshift(savedFile.uri)
                     this.videoFile = savedFile.uri
 
-                    this.storage.set({
+                    /*this.storage.set({
                         key: videoKey,
                         value: JSON.stringify(this.videos)
-                    })
+                    })*/
                 }
                 this.answer.append("file", file);
             },
