@@ -36,7 +36,6 @@ define([
             async success(result, data) {
                 this.$emit('next')
             },
-
             reset() {
                 this.answers.courseId = this.$root.currentCourse.courseId
                 this.answers.studentId = this.$root.currentCourse.studentId
@@ -48,9 +47,6 @@ define([
         },
         created() {
             this.reset()
-            /*Object.entries(this.answers).forEach(([key, question]) => {
-                question.answer = 0
-            });*/
         },
         watch: {
             questions() {

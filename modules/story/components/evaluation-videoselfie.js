@@ -42,7 +42,7 @@ define([
                 const base64Data = await this.convertToBase64(file)
 
                 if (window.Capacitor) {
-                    
+
                     const savedFile = await this.filesystem.writeFile({
                         path: fileName,
                         data: base64Data,
@@ -136,7 +136,6 @@ define([
                 this.storage = Capacitor.Plugins.Storage;
                 this.addListenersToPlayerPlugin();
             }
-
             this.reset()
         },
     }

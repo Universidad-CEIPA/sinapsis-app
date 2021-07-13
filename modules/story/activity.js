@@ -66,7 +66,6 @@ define([
                 this.activity = this.chapter.activities[index]
             },
             async completedActivity() {
-
                 await api.post('students/studentCourseActivity', {
                     student: this.course.studentId,
                     activity: this.activity.activity.id,
@@ -107,8 +106,6 @@ define([
                 } else {
                     this.$router.replace({ name: 'story:home' })
                 }
-
-
             },
             goDown() {
                 document.getElementById("activity").scrollIntoView({ behavior: "smooth" });
@@ -250,7 +247,6 @@ define([
             if (document.getElementById("story-activity-view")){
                 document.getElementById("story-activity-view").scrollIntoView({ behavior: "smooth" });
             }
-            
 
             if (this.chapter.type === 'hero-letter') {
                 this.course.setAlert("hero-letter")

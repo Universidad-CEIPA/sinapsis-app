@@ -84,23 +84,7 @@ define([
         },
         computed: {
             typeAlert() {
-                return {
-                    "startCourse": "startCourse",
-                    "finishCourse": "finishCourse",
-                    "continueTravel": "continueTravel",
-                    "chapterCompleted": "chapterCompleted",
-                    "showRol": "showRol",
-                    "showTools": "showTools",
-                    "showCities": "showCities",
-                    "startQuestions": "startQuestions",
-                    "newCity": "newCity",
-                    "tiny": "tiny",
-                    "tools": "tools",
-                    "hero-letter": "hero-letter",
-                    "chaptersPending": "chaptersPending",
-                    "activityDisable": "activityDisable",
-                    "finish-evaluation": "finish-evaluation"
-                }[this.course.getAlert()];
+                return this.course.getAlert();
             },
             itemFront() {
                 return {
@@ -123,7 +107,6 @@ define([
             if (this.itemFront) {
                 this.addClass()
             }
-
         },
         components: {
             UiModal

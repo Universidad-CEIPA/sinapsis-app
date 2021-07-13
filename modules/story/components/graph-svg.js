@@ -22,7 +22,6 @@ define([
         },
         methods: {
             sizeChart() {
-
                 var widthS = window.screen.width
                 if (widthS < 370) {
                     return 250

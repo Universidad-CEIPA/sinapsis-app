@@ -19,7 +19,7 @@ define([
         },
         computed: {
             classes() {
-                return "map-"+ (this.course.indexMap() + 1)
+                return "map-" + (this.course.indexMap() + 1)
             }
         },
         methods: {
@@ -146,9 +146,6 @@ define([
                 memoryPoints.forEach((value, index) => {
                     memoryPoints.slice(index, index + 4).forEach((next, key) => {
                         var line = document.createElementNS(xmlns, 'line');
-                        //pointsValue = value.x + "," + value.y + " " + next.x + "," + next.y + " ";
-                        //pointsValue += (next.x - 10) + "," + (next.y - 10) + " " + (value.x - 10) + "," + (value.y - 10);
-                        //line.setAttributeNS(null, 'points', pointsValue);
                         line.setAttributeNS(null, 'stroke', "#000")
                         line.setAttributeNS(null, 'stroke-width', "20");
                         line.setAttributeNS(null, 'x1', value.x);
@@ -157,9 +154,6 @@ define([
                         line.setAttributeNS(null, 'y2', next.y);
 
                         var line2 = document.createElementNS(xmlns, 'line');
-                        //pointsValue = value.x + "," + value.y + " " + next.x + "," + next.y + " ";
-                        //pointsValue += (next.x - 10) + "," + (next.y - 10) + " " + (value.x - 10) + "," + (value.y - 10);
-                        //line.setAttributeNS(null, 'points', pointsValue);
                         line2.setAttributeNS(null, 'stroke', "#E1CDA8")
                         line2.setAttributeNS(null, 'stroke-width', "18");
                         line2.setAttributeNS(null, 'x1', value.x);
@@ -213,11 +207,11 @@ define([
             },
 
         },
-        async created(){
-          await  this.course.setSchedule()
+        async created() {
+            await this.course.setSchedule()
         },
         mounted() {
-            
+
             this.chapter = this.content ? JSON.parse(this.content) : this.course.getCurrentChapter()
             this.reset()
             this.calculateDistribute();

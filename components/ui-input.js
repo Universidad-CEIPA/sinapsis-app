@@ -65,6 +65,10 @@ define([
 			labelProp: {
 				type: String,
 				default: "name"
+			},
+			checked: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -86,6 +90,7 @@ define([
 					delete attrs.readOnly;
 				}
 				delete attrs.idProp;
+				delete attrs.label;
 				delete attrs.labelProp;
 				delete attrs.modelValue;
 				delete attrs.selectOptions;

@@ -54,7 +54,6 @@ define([
 				}
 				this._lastDelta = 0;
 				this.dragProject = null;
-
 			},
 			setImage(image) {
 				if (image.length) {

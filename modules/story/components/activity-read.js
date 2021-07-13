@@ -21,7 +21,6 @@ define([
             title(){
                 return this.course.chapters[this.currentChapter - 1].title || ""
             }
-
         },
         created() {
             this.currentChapter = this.course.getChapterByActivity(this.activity.id)

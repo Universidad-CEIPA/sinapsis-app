@@ -33,12 +33,7 @@ define([
             }
         },
         created() {
-
             this.reset()
-
-            /*Object.entries(this.answers).forEach(([key, question]) => {
-                question.answer = ""
-            });*/
         },
         watch: {
             questions() {

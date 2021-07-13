@@ -242,8 +242,6 @@ define([
             this.updateLayout();
             document.getElementById("story-home-view").scrollIntoView({ behavior: "smooth" });
 
-
-
             if (this.tiny) {
                 this.tinyAlert = true
             }

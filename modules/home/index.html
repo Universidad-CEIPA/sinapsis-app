@@ -14,15 +14,12 @@
 				<span class="title-project">
 					{{project.courseName[0]}} - {{ project.name }}
 				</span>
-
 				<div class="card">
 					<div class="shadow-card" v-if="!this._lastDelta">
-						<section v-if="index !== 0 "
-							:style="{'--prev-image': setImage(projects[index -1].image)}">
+						<section v-if="index !== 0 " :style="{'--prev-image': setImage(projects[index -1].image)}">
 						</section>
 					</div>
-					<div class="current-card" @click="goCourse"
-						:style="{'--current-image': setImage(project.image)}">
+					<div class="current-card" @click="goCourse" :style="{'--current-image': setImage(project.image)}">
 						<p>
 							{{ !project.image.length ? project.name : '' }}
 						</p>
@@ -40,10 +37,8 @@
 							:style="{'--next-image': setImage(projects[index +1].image)}">
 						</section>
 					</div>
-
 				</div>
 			</template>
 		</div>
 		</transition-group>
-
 </section>

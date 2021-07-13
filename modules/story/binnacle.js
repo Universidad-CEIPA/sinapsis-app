@@ -42,9 +42,9 @@ define([
             }
 
             this.videos = await api.get(`students/getUploadVideos?courseId=${this.course.courseId}&studentId=${this.course.studentId}`);
-            this.videos.forEach(async (element) => {
+            /*this.videos.forEach(async (element) => {
                 const file = await this.getFileFromUrl(element.url, 'question_' + element.question.id + '.mp4', element.type);
-            });
+            });*/
         }
     }
 });

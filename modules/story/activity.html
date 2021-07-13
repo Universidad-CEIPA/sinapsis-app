@@ -1,14 +1,7 @@
 <section class="view-section" id="story-activity-view" :class="course.skin">
     <header v-if="!isHero"><span data-icon="tiny-back" @click="viewBack"></span>
-        <template v-if="isMap">
-            Mapa Ciudades
-        </template>
-        </template>
-        <template v-else>
-
-            {{ title }}
-        </template>
-
+        <template v-if="isMap"> Mapa Ciudades </template>
+        <template v-else> {{ title }} </template>
     </header>
     <div class="welcome" id="welcome" v-if="isHero || isMap">
         <div class="title-type" :class="activity.type">
@@ -23,7 +16,6 @@
                         <img :src="cover?.url ?? 'modules/story/images/camera.png'" alt="" class="cover">
                     </div>
                 </div>
-
             </template>
         </div>
 
@@ -53,13 +45,9 @@
     <div class="activity" id="activity" :class="{ 'scroll-padding' : scroll}">
         <div class="title">
             <div v-if="!isHero && !isMap">
-                <template v-if="scroll">
-                    {{chapterName}}
-                </template>
-                <template v-else>
-                    {{activity.activity.name}}
-                </template>
-
+                
+                <template v-if="scroll"> {{chapterName}} </template>
+                <template v-else> {{activity.activity.name}} </template>
 
                 <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
             </div>
@@ -78,9 +66,7 @@
                     <template v-if="course.chapterActiveRol ===  chapter.chapterNumber  && course.lastRolPending()">
                         descubre tu gremio
                     </template>
-                    <template v-else>
-                        prepárate para la próxima lectura
-                    </template>
+                    <template v-else> prepárate para la próxima lectura </template>
 
                     <button class="action primary completed" @click="completedActivity">
                         <template v-if="course.chapterActiveRol ===  chapter.chapterNumber  && course.lastRolPending()">

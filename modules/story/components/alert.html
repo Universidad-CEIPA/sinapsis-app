@@ -23,7 +23,6 @@
             Puntaje: {{course.selectedTool.evaluation.value}}</div>
         <div class="line"></div>
         <div>{{course.selectedTool.rubric[0]?.description ?? ''}}</div>
-
     </ui-modal>
 </transition>
 
@@ -54,7 +53,6 @@
                 <button class="done action primary" data-icon-after="arrow-right"
                     @click="removeTourRol">Continuar</button>
             </footer>
-
         </ui-modal>
     </div>
 </transition>
@@ -73,7 +71,6 @@
                 <button class="done action primary" data-icon-after="arrow-right" @click="removeTourTools">Ver
                     perfil</button>
             </footer>
-
         </ui-modal>
     </div>
 </transition>
@@ -95,7 +92,6 @@
 <transition>
     <div class="tiny-alert" v-if="typeAlert === 'tiny'">
         <div class="msg">
-
         </div>
     </div>
 </transition>
@@ -103,7 +99,6 @@
 <transition>
     <ui-modal @close="removeFinish" class="alert-modal  finish" v-if="typeAlert === 'finishCourse'">
         <template #title>
-
             <img :src="`modules/story/images/${course.skin}/conquistador.png`" alt="">
             <div class="text-header">Eres un conquistador</div>
         </template>
@@ -112,15 +107,16 @@
         </div>
 
         <div>Has completado todas las actividades. <br>
-            Te invitamos el próximo <span class="invitation-date"> {{ $formatDate(course.invitation.date , "DD [de] MMMM") }} en {{ course.invitation.description }} a las {{ $formatDate(course.invitation.hour , "hh:mm a") }} </span> para realizar la actividad de cierre
-            
+            Te invitamos el próximo <span class="invitation-date"> {{ $formatDate(course.invitation.date , "DD [de]
+                MMMM") }} en {{ course.invitation.description }} a las {{ $formatDate(course.invitation.hour , "hh:mm
+                a") }} </span> para realizar la actividad de cierre
+
         </div>
         <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
         <footer>
             <button class="done action primary" data-icon-after="arrow-right" @click="removeFinish">Ver mi
                 progreso</button>
         </footer>
-
     </ui-modal>
 </transition>
 
@@ -134,7 +130,6 @@
         <h1>Continúa este viaje en </h1>
 
         <button class="done action primary" @click="redirectCeipa"> www.ceipa.edu.co</button>
-
     </ui-modal>
 </transition>
 
@@ -147,7 +142,6 @@
         <h1>Te invitamos a ponerte al día en las tareas anteriores para poder entrar a esta actividad</h1>
 
         <button class="done action primary" @click="remove">Continuar</button>
-
     </ui-modal>
 </transition>
 
@@ -160,7 +154,6 @@
         <h1>No hay más actividades pendientes, esta atento a nuevas entregas proximamente</h1>
 
         <button class="done action primary" @click="remove">Continuar</button>
-
     </ui-modal>
 </transition>
 

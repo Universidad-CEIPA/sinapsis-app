@@ -12,7 +12,6 @@
         </div>
     </div>
 
-
     <div class="binnacle" v-if="!showVideostatus">
         <div v-for="video in videos" @click="playVideo(video.url)" class="video">
             <img :src="`modules/story/images/${course.skin}/default-video.png`" alt="">
