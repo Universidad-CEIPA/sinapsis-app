@@ -107,9 +107,7 @@
         </div>
 
         <div>Has completado todas las actividades. <br>
-            Te invitamos el próximo <span class="invitation-date"> {{ $formatDate(course.invitation.date , "DD [de]
-                MMMM") }} en {{ course.invitation.description }} a las {{ $formatDate(course.invitation.hour , "hh:mm
-                a") }} </span> para realizar la actividad de cierre
+            Te invitamos el próximo <span class="invitation-date"> {{ $formatDate(course.invitation.date , "DD [de] MMMM") }} en {{ course.invitation.description }} a las {{ $formatDate(course.invitation.hour , "hh:mm a") }} </span> para realizar la actividad de cierre
 
         </div>
         <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
@@ -124,7 +122,6 @@
     <ui-modal @close="removeContinue" class="alert-modal  continue-travel" v-if="typeAlert === 'continueTravel'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
-            <img src="modules/story/images/dorado/dorado-alert.png" alt="">
             <img :src="`modules/story/images/${course.skin}/${course.skin}-alert.png`" alt="">
         </template>
         <h1>Continúa este viaje en </h1>

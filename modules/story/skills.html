@@ -8,24 +8,28 @@
             <div class="subtitle">Conoce tus competencias destacadas</div>
             <div class="graph">
                 <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets()"
-                    :colors="colors()"/>
+                    :colors="colors()" />
             </div>
             <div class="type-eval">
                 <div class="type" :style="{'--color-circle' : course.graphColors()[0]}" @click="filterGraph('auto')">
-                    <span></span>Autoevaluación inicial</div>
+                    <span></span>Autoevaluación inicial
+                </div>
                 <div class="type" :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
-                    <span></span>Mi potencial deseado</div>
+                    <span></span>Mi potencial deseado
+                </div>
                 <div class="type" :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
-                    <span></span>Mi potencial actual</div>
+                    <span></span>Mi potencial actual
+                </div>
             </div>
         </div>
 
         <div class="details">
             <div class="line-time">
-                Mi potencial actual
-                <br>
-                {{dates[position]}}
-                <br>
+
+                Mi potencial
+                <span class="date">
+                    {{ dates[position]!= "Actual" ?$formatDate(dates[position] , "DD[/]MM[/]YYYY "): dates[position] }}
+                </span>
                 <div class="slider">
                     <ui-input type="range" label="" v-model="position" min="0" :max="dates.length - 1"
                         @input="updateGraph"></ui-input>
@@ -34,67 +38,15 @@
             </div>
             <div class="explain">
                 <div class="sub-title">
-                    Subcompetencias
+                    Competencias
                 </div>
                 <div class="competences">
-                    <div>
+                    <div v-for="cmpt in course.competences">
                         <hr>
-                        <div class="name">Efectividad</div>
-                        IN Orientacion dirigida
+                        <div class="name">{{cmpt.name}}</div>
+                        {{cmpt.number}}
                         <br>
-                        SO orientacion lograda
-                        <br>
-                        GA Negociacion
-                        <br>
-                        EM Negociacion
-                        <br>
-                    </div>
-                    <div>
-                        <hr>
-                        <div class="name">Efectividad</div>
-                        IN Orientacion dirigida
-                        <br>
-                        SO orientacion lograda
-                        <br>
-                        GA Negociacion
-                        <br>
-                        EM Negociacion
-                        <br>
-                    </div>
-                    <div>
-                        <hr>
-                        <div class="name">Efectividad</div>
-                        IN Orientacion dirigida
-                        <br>
-                        SO orientacion lograda
-                        <br>
-                        GA Negociacion
-                        <br>
-                        EM Negociacion
-                        <br>
-                    </div>
-                    <div>
-                        <hr>
-                        <div class="name">Efectividad</div>
-                        IN Orientacion dirigida
-                        <br>
-                        SO orientacion lograda
-                        <br>
-                        GA Negociacion
-                        <br>
-                        EM Negociacion
-                        <br>
-                    </div>
-                    <div>
-                        <hr>
-                        <div class="name">Efectividad</div>
-                        IN Orientacion dirigida
-                        <br>
-                        SO orientacion lograda
-                        <br>
-                        GA Negociacion
-                        <br>
-                        EM Negociacion
+                        {{cmpt.description}}
                         <br>
                     </div>
                 </div>

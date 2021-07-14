@@ -292,6 +292,8 @@
                 grid-template-columns: 1fr 1fr;
                 font-size            : 0.8em;
                 place-items          : center;
+                max-width            : fit-content;
+                float                : right;
 
                 .icons {
                     height: 30px;
@@ -334,21 +336,12 @@
         --height-chapters: 150px;
         --padding-chapter: 15px;
 
-        height                 : var(--height-chapters);
-        left                   : 0;
-        position               : relative;
-        column-gap             : 20px;
-        margin-top             : -50px;
-        margin-bottom          : 50px;
-
-        .back,
-        .next {
-            width      : 20px;
-            height     : var(--height-chapters);
-            padding    : var(--padding-chapter) 0;
-            line-height: var(--height-chapters);
-            text-align : center;
-        }
+        height       : var(--height-chapters);
+        left         : 0;
+        position     : relative;
+        column-gap   : 20px;
+        margin-top   : -50px;
+        margin-bottom: 50px;
 
         .slide-chapters {
 

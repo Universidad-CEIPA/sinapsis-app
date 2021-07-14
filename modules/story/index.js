@@ -109,8 +109,17 @@ define([
                     if (this.afterChaptersCompleted(c.chapterNumber - 1)) {
                         if (this.course.chapterActiveMap.includes(c.chapterNumber)) {
                             this.course.activeMap = true
-                            this.course.setAlert("showCities")
-                            this.modal = true
+                            let showCities = local("activeMap") || []
+
+                            if (!(showCities.includes(this.course.courseId))) {
+                                this.course.setAlert("showCities")
+                                showCities.push(this.course.courseId)
+                                local("activeMap", showCities)
+
+                                this.modal = true
+                            } else {
+                                this.$router.push({ name: 'story:map', params: { content: JSON.stringify(c) } })
+                            }
 
                             this.course.currentChapter = c
                         } else {
@@ -172,7 +181,7 @@ define([
 
                 let [_, pending] = this.course.activitiesTracking(false)
                 let finishArray = local("finishCourse") || []
-                if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
+                if (pending.length === 0 && !(finishArray.includes(this.course.courseId))) {
                     this.course.setAlert("finishCourse")
                     this.modal = true
                 }

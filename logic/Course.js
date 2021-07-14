@@ -36,7 +36,7 @@ define([
 
             this.activeRol = false
             this.activeCity = false
-            this.activeMap = false
+            this.activeMap = local("activeMap")?.includes(this.courseId) ?? false
             this.activeTools = false
 
 
@@ -282,20 +282,26 @@ define([
             await this.setSchedule()
             await this.setStudentProfile()
             await this.setStudentCompetences()
-            await this.setRubrics()
 
-            this.setTools()
-            local("currentCourse", this.getFullInfo());
+            if (this.validateCourse()) {
+                await this.setRubrics()
 
-            this.showRol()
-            this.trackingMaps()
+                this.setTools()
+                local("currentCourse", this.getFullInfo());
 
-            let [_, pending] = this.activitiesTracking(false)
-            let finishArray = local("finishCourse") || []
-            if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
-                this.setAlert("finishCourse")
+                this.showRol()
+                this.trackingMaps()
+
+                let [_, pending] = this.activitiesTracking(false)
+                let finishArray = local("finishCourse") || []
+                if (pending.length === 0 && !(finishArray.length > 0 || finishArray.includes(this.courseId))) {
+                    this.setAlert("finishCourse")
+                }
+                return true
+            } else {
+                this.destroy()
+                return false
             }
-
         }
 
         selectTool(competence) {
@@ -326,7 +332,7 @@ define([
         }
 
         async setStudentCompetences() {
-            this.competences = await api.get(`courses/competencyAssessment?courseId=${this.courseId}&projectId= ${this.projectId}&studentId=${this.studentId}`);
+            this.competences = await api.get(`courses/competencyAssessment?courseId=${this.courseId}&projectId=${this.projectId}&studentId=${this.studentId}`);
         }
 
         setTools() {
@@ -401,6 +407,26 @@ define([
                 }
                 await this.reset()
             }
+        }
+
+
+        validateCourse() {
+            let status = true
+
+
+            this.chapters.map(c => {
+                let activities = c.activities.length ? c.activities : c.maps.map.locations
+
+                if (typeof activities === "undefined") {
+                    status = false
+                }
+            })
+
+            if (this.profile) {
+                status = false
+            }
+
+            return status
         }
     }
 

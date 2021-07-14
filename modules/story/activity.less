@@ -152,6 +152,7 @@
 
             .bottom-finish {
                 padding-top: 10px;
+                display: grid;
 
                 .completed {
                     align-items: center;
@@ -163,7 +164,7 @@
                     font-weight: bold;
                     display    : inline-flex;
 
-                    font-size: var(--font-size);
+                    font-size: 1em;
 
                     .has-icon;
 
@@ -203,31 +204,26 @@
 
 
     .scroll-activities {
-        position             : fixed;
-        background-color     : @bg-color;
-        height               : 80px;
-        width                : 100%;
-        display              : flex;
-        top                  : calc(100vh - 80px);
-        grid-template-columns: 20px 1fr 20px;
-        color                : #fff;
-
-        .back,
-        .next {
-            padding    : 5px;
-            width      : 10px;
-            line-height: 70px;
-        }
+        position        : fixed;
+        background-color: @bg-color;
+        height          : 80px;
+        top             : calc(100vh - 80px);
+        color           : #fff;
+        width           : 100%;
+        text-align      : -webkit-center;
 
         .items {
-            display              : grid;
-            grid-template-columns: repeat(4, 1fr);
-            font-size            : 0.8em;
-            text-align           : center;
-            width                : 100%;
+            display   : inline-flex;
+            position  : relative;
+            left      : calc(var(--left-animation) * 1px);
+            font-size : 0.8em;
+            text-align: center;
 
             .item {
                 padding-top: 10px;
+                width      : calc(var(--width-activity) * 1px);
+                height     : 80px;
+
 
                 &.pending {
                     // compute color to filter  https://codepen.io/sosuke/pen/Pjoqqp

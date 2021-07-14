@@ -12,6 +12,7 @@ define([
         template: html,
         props: ["content", "forceActivity", "course"],
         data() {
+            widthScroll = 85;
             return {
                 optionsPanel: false,
                 type: "reading",
@@ -24,7 +25,14 @@ define([
                 activityScrolls: [],
                 selectScroll: 0,
                 chapter: null,
-                modal: false
+                modal: false,
+
+                widthScroll,
+                animation: 20,
+                limitAnimation: {
+                    start: 0,
+                    finish: 0
+                }
 
             };
         },
@@ -41,9 +49,6 @@ define([
             },
             itemsShow() {
                 return this.activityScrolls.slice(this.startShow, this.maxShow + this.startShow)
-            },
-            maxShow() {
-                return 4
             },
             typeComponent() {
                 return {
@@ -135,33 +140,38 @@ define([
             },
             handlePointerDown(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                this._pointerStart = e;
-                this._lastDelta = 0;
+                this._pointerStart = e.clientX;
             },
             handlePointerMove(e) {
                 if (e.changedTouches) e = e.changedTouches[0];
-                if (this._lastDelta || Math.abs(this._pointerStart.clientX - e.clientX) > 5) {
-                    this.dragX = Math.round(e.clientX - this._pointerStart.clientX);
+                if (Math.abs(this._pointerStart - e.clientX) > 1) {
+                    this.dragX = Math.round(e.clientX - this._pointerStart);
+                    this._pointerStart = e.clientX
 
-                    let delta = this.dragX < 0 ? 1 : -1;
+                    let next = this.animation + this.dragX
 
-                    if (delta !== this._lastDelta) {
-                        this._lastDelta = delta;
-
-                        let nextStart = this.startShow + delta
-                        if (nextStart >= 0 && nextStart + this.maxShow <= this.activityScrolls.length) {
-                            this.dragShow = nextStart
-                        }
+                    if (next <= this.limitAnimation.start && next >= this.limitAnimation.finish) {
+                        this.animation = next
                     }
+
                 }
             },
-            handlePointerUp(e) {
-                if (e.changedTouches) e = e.changedTouches[0];
-                if (Math.abs(this._pointerStart.clientX - e.clientX) > 5 && this.dragShow >= 0 && this.dragShow + this.maxShow <= this.activityScrolls.length && this.dragShow !== null) {
-                    this.startShow = this.dragShow
+            updateScroll() {
+                let maxScroll = this.widthScroll * this.activityScrolls.length
+                this.limitAnimation.finish = -(maxScroll) + window.screen.width
+
+                if (window.screen.width > maxScroll) {
+                    this.limitAnimation.finish = 0
                 }
-                this._lastDelta = 0;
-                this.dragShow = null;
+
+                if (this.selectScroll) {
+                    let next = -(this.widthScroll * this.selectScroll)
+
+                    while (next < this.limitAnimation.finish) {
+                        next = next + 10
+                    }
+                    this.animation = next
+                }
             }
 
         },
@@ -209,7 +219,6 @@ define([
                             this.selectScroll = this.activityScrolls.findIndex(a => a.id === this.activity.activity.id)
                         }
 
-
                     } else if (this.forceActivity) {
                         this.activity = this.chapter.activities.find(a => a.id == this.forceActivity)
                     } else {
@@ -244,7 +253,15 @@ define([
             }
         },
         mounted() {
-            if (document.getElementById("story-activity-view")){
+
+            if (this.chapter.scroll) {
+                window.addEventListener("resize", this._resizeHandler = e => {
+                    this.updateScroll();
+                });
+                this.updateScroll();
+            }
+
+            if (document.getElementById("story-activity-view")) {
                 document.getElementById("story-activity-view").scrollIntoView({ behavior: "smooth" });
             }
 

@@ -115,9 +115,6 @@ define([
                     let url = "application/" + video;
                 }
 
-                console.log(this.videoFile)
-                console.log(url)
-
                 this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
             },

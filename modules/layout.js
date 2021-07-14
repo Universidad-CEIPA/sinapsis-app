@@ -36,8 +36,7 @@ define([
 			async setCourse(course) {
 				if (course !== null) {
 					this.currentCourse = await new Course(course, this.user.id)
-					await this.currentCourse.reset()
-					return true
+					return await this.currentCourse.reset()
 				}
 				return false
 			},

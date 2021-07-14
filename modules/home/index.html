@@ -8,6 +8,7 @@
 		<p>
 			¿Cuál aventura quieres iniciar?
 		</p>
+
 		<div class="cards" v-for="(project,index) in projects" @touchstart="handlePointerDown"
 			@touchmove="handlePointerMove" @touchend="handlePointerUp">
 			<template v-if="currentIndex === index">
@@ -40,5 +41,7 @@
 				</div>
 			</template>
 		</div>
-		</transition-group>
+		<p v-if="notification">
+			{{ notification }}
+		</p>
 </section>

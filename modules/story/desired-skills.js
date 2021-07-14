@@ -34,7 +34,9 @@ define([
             },
         },
         created() {
-            this.course.competences.map((c) => {
+            let available = this.course.competences.filter(comp => comp.rubric)
+            
+            available.map((c) => {
                 this.skills.evaluations.push({ name: c.name, ...c.evaluation })
             })
         },

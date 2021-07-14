@@ -91,8 +91,6 @@ define([
             }
         },
         async created() {
-
-
         },
         async mounted() {
             await api.post('students/getHistoryCompetences', { courseId: this.course.courseId, studentId: this.course.studentId }).then(result => {

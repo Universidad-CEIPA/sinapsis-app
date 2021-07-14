@@ -3,7 +3,8 @@ define([
     "components/ui-modal",
     "./components/alert",
     "./components/graph-svg",
-], (html, UiModal, alert, graphSvg) => {
+    "api"
+], (html, UiModal, alert, graphSvg, api) => {
 
     return {
         template: html,
@@ -92,12 +93,14 @@ define([
             }
         },
         async created() {
+            const videoList = null
             if(window.Capacitor){
                 const storage = Capacitor.Plugins.Storage;
                 const videoKey = "videos_" + this.course.courseId;
-                const videoList = await storage.get({ key: videoKey });
-                this.videos = videoList.value ? JSON.parse(videoList.value) : {}
+                videoList = await storage.get({ key: videoKey });
+                
             }
+            this.videos = (videoList?.value) ? JSON.parse(videoList.value) : await api.get(`students/getUploadVideos?courseId=${this.course.courseId}&studentId=${this.course.studentId}`)
         },
         beforeDestroy() {
             this.$refs.graph.destroy()
