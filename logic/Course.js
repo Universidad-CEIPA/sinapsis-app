@@ -413,6 +413,9 @@ define([
         validateCourse() {
             let status = true
 
+            if (typeof this.profile === "string") {
+                return false
+            }
 
             this.chapters.map(c => {
                 let activities = c.activities.length ? c.activities : c.maps.map.locations
@@ -421,10 +424,6 @@ define([
                     status = false
                 }
             })
-
-            if (this.profile) {
-                status = false
-            }
 
             return status
         }
