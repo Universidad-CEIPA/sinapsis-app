@@ -1,0 +1,55 @@
+<section class="" id="setup-account" :style="{'--step': step}">
+    <div class="img-bottom"></div>
+    <article @touchstart="handlePointerDown" @touchmove="handlePointerMove" @touchend="handlePointerUp">
+        <div class="header">
+            <img src="res/images/logo_uceipa_white.svg" alt="">
+        </div>
+        <section v-if="step === WELCOME_STEP" class="section-step">
+            <div class="title">Bienvenid{{ $root.user.gender === 'm'?'o':'a' }} {{ $root.user.name}}</div>
+            <div class="subtitle">
+                Nuestra aplicación te sumergirá en <strong>apasionantes historias</strong> que fortalecerán tus
+                competencias
+            </div>
+        </section>
+        <section v-if="step === INSTRUCTION_STEP" class="section-step">
+            <div class="subtitle">
+                Para disfrutar de este viaje tendras que...
+            </div>
+
+            <ul>
+                <li data-icon="storytelling">
+                    <p><strong>Leer las historias </strong> que te llegarán periodicamente</p>
+                </li>
+                <li data-icon="evaluation">
+                    <p><strong>Autoevaluarte</strong> contestando algunas preguntas</p>
+                </li>
+                <li data-icon="binnacle">
+                    <p><strong>Crear tu bitácora</strong> de videoselfies</p>
+                </li>
+                <li data-icon="compass">
+                    <p><strong>A medida que avanzas,</strong> tu avatar adquiere mejores herramientas para seguir en
+                        este viaje</p>
+                </li>
+                <li data-icon="map">
+                    <p><strong>Tu progeso es esencial</strong> para nosotros y tendrás un historial a medida que vas
+                        avanzando</p>
+                </li>
+            </ul>
+
+        </section>
+        <section v-if="step === FINISH_STEP" class="section-step">
+            <div class="subtitle">Para comenzar primero verifiquemos tus datos personales</div>
+            <div class="img-check">
+                <img src="modules/welcome/images/check_valid.svg" alt="">
+            </div>
+            <button class="done action primary" data-icon-after="arrow-right" @click="$router.push({ name: 'home:profile' })"> Iniciar </button>
+        </section>
+        <footer>
+            <div class="counter">
+                <div v-for="indicator in MAX_STEPS" class="indicator" @click="returnStep(indicator)"
+                    :class="{current: indicator === step}">
+                </div>
+            </div>
+        </footer>
+    </article>
+</section>

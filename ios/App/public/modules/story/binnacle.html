@@ -1,0 +1,27 @@
+<section class="view-section" id="story-binnacle-view" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:home' })"></span> BITÁCORA
+    </header>
+
+    <div class="introduction">
+        <h3>Ponte a prueba</h3>
+        <p>Contesta las siguientes preguntas según tu experiencia</p>
+        <div class="info-alert">
+            <img src="modules/story/images/completed.png" alt="">
+            <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="binnacle" v-if="!showVideostatus">
+        <div v-for="video in videos" @click="playVideo(video.url)" class="video">
+            <img :src="`modules/story/images/${course.skin}/default-video.png`" alt="">
+            <p>
+                <u>Pregunta - {{ video.question.id }}</u>
+                <br>
+                {{ $formatDate(video.created , "MMMM DD[/]YYYY  ") }}
+            </p>
+        </div>
+    </div>
+    <div id="player" v-if="showVideostatus"></div>
+</section>

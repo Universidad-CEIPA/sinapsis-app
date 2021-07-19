@@ -1,0 +1,13 @@
+<section class="view-section" id="view-story-finish" :class="course.skin">
+
+    <img :src="`modules/story/images/${course.skin}/finish.png`" alt="" class="image-finish">
+
+    <div class="text">
+        Te invitamos a explorar nuevamente
+        <div class="name-project"> {{course.name}}</div>
+        y leer todos los capitulos
+        <img v-if="course.skin === 'dorado'" class="arabesco" src="modules/story/images/arabesco-gold.svg" alt="">
+    </div>
+    <button class="action primary" data-icon-after="arrow-right" @click="$router.replace({ name: 'story:home' })">
+        Explorar </button>
+</section>

@@ -1,0 +1,20 @@
+<ui-form :model="answers" submit-label="Continuar" action="students/saveEvaluation"  @success="success" id="evaluation-cuantitative" >
+    <template #header>
+        <h3>Ponte a prueba</h3>
+        <p>Realiza la siguiente autoevaluación según cada pregunta</p>
+    </template>
+
+    <ui-input type="range" :label="answers.title" v-model="answers.evaluation" required
+    @input="calculateLeft(answers.evaluation, $event)" @click="calculateLeft(answers.evaluation, $event)">
+    <template #validation>
+        Ingresa un valor
+    </template>
+</ui-input>
+
+    <!--<ui-input v-for="q,index in answers" type="range" :label="(index+1) +'. '+ q.content" v-model="q.answer" required
+        @input="calculateLeft(q.answer, $event)" @click="calculateLeft(q.answer, $event)">
+        <template #validation>
+            Ingresa un valor
+        </template>
+    </ui-input>-->
+</ui-form>

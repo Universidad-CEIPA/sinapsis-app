@@ -1,0 +1,49 @@
+#graph-svg {
+    width: 500px;
+    height: 500px;
+
+
+    @media (max-width: 760px) {
+        width: 300px;
+        height: 300px;
+    }
+
+    @media (max-width: 370px) {
+        width: 250px;
+        height: 250px;
+    }
+
+
+    &.mision_graph {
+        .tag-name {
+            color: @mision-color;
+            font-weight: bold;
+        }
+
+        .bigCircle,
+        .midCircle {
+            stroke: @good-color;
+        }
+
+        .arrow {
+            stroke: @mision-color
+        }
+    }
+
+
+    &.dorado_graph {
+        .tag-name {
+            color: #fff;
+        }
+
+        .bigCircle,
+        .midCircle {
+            stroke: @dorado-color;
+        }
+
+        .arrow {
+            stroke: #fff
+        }
+    }
+
+}

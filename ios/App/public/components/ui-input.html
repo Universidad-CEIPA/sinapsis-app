@@ -1,0 +1,42 @@
+<div class="ui-input" :class="uiClasses">
+	<label class="input-label" :for="htmlId" ><slot name="label">{{ label }}</slot></label>
+	<template v-if="type === 'select'">
+		<select class="input-field select-field" ref="input" :value="filteredModelValue" v-bind="attributes"
+			@input="handleInput">
+			<option v-if="placeholder" value="">{{ placeholder }}</option>
+			<option v-for="o in options" :value="getOptionValue(o)">
+				<slot name="option">{{ getOptionLabel(o) }}</slot>
+			</option>
+		</select>
+	</template>
+	<template v-else-if="type === 'textarea'">
+		<textarea class="input-field textarea-field" ref="input" :value="modelValue" v-bind="attributes"
+			@input="handleInput"></textarea>
+	</template>
+	<template v-else>
+		<input class="input-field default-field" ref="input" :value="modelValue" :type="type" v-bind="attributes"
+			@input="handleInput">
+	</template>
+	<slot>
+		<template v-if="type === 'checkbox'">
+			<label class="input-check" :for="htmlId"></label>
+		</template>
+		<template v-if="type === 'range'">
+			<label class="input-tag" :for="htmlId">{{ modelValue }}</label>
+		</template>
+	</slot>
+
+
+	<template v-if="$slots.hint && isValid">
+		<p class="input-hint">
+			<slot name="hint"></slot>
+		</p>
+	</template>
+	<template v-if="!isValid">
+		<div class="notice input-notice validation-notice error">
+			<p>
+				<slot name="validation">{{ ui.strings.form.field.validationError }}</slot>
+			</p>
+		</div>
+	</template>
+</div>

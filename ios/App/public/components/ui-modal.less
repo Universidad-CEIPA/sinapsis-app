@@ -1,0 +1,31 @@
+.ui-modal {
+	display: grid;
+	place-items: center;
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 20px;
+	overflow: auto;
+	background: var(--backdrop-bg);
+
+	.modal-container {
+		padding: 20px;
+		border-radius: var(--panel-radius-l);
+		background-color: var(--panel-bg-color);
+
+		> header {
+			display: grid;
+			grid-gap: 20px;
+			grid-template-columns: 1fr auto;
+			align-items: center;
+		}
+
+		.close {
+			width: var(--action-icon-compact-width);
+			height: var(--action-icon-compact-height);
+		}
+	}
+}

@@ -1,0 +1,133 @@
+<section class="view-section" id="story-activity-view" :class="course.skin">
+    <header v-if="!isHero"><span data-icon="tiny-back" @click="viewBack"></span>
+        <template v-if="isMap">
+            Mapa Ciudades
+        </template>
+        </template>
+        <template v-else>
+
+            {{ title }}
+        </template>
+
+    </header>
+    <div class="welcome" id="welcome" v-if="isHero || isMap">
+        <div class="title-type" :class="activity.type">
+            <template v-if="isHero">
+                Carta del héroe
+                <img src="modules/story/images/arabesco-gold.svg" class="arabezco" alt="">
+            </template>
+            <template v-else-if="activity.type === 'map'">
+                Bienvenido a
+                <div class="container-img">
+                    <div class="circle">
+                        <img :src="cover?.url ?? 'modules/story/images/camera.png'" alt="" class="cover">
+                    </div>
+                </div>
+
+            </template>
+        </div>
+
+        <div class="content">
+            <div class="title">
+                {{activity.activity.name}}
+            </div>
+
+            <div class="competence-alert" v-if="showCompetence">
+                <section class="competence-title">
+                    <img src="modules/story/images/completed.png" alt="">
+                    <div>
+                        Competencia a evaluar
+                        <br>
+                        <strong>{{ activity.activity.competence.name}}
+                        </strong>
+                    </div>
+                </section>
+                <section class="competence-description">
+                    {{ activity.activity.competence.description}}
+                </section>
+            </div>
+        </div>
+
+        <button class="action primary button-down" @click="goDown" data-icon="down"></button>
+    </div>
+    <div class="activity" id="activity" :class="{ 'scroll-padding' : scroll}">
+        <div class="title">
+            <div v-if="!isHero && !isMap">
+                <template v-if="scroll">
+                    {{chapterName}}
+                </template>
+                <template v-else>
+                    {{activity.activity.name}}
+                </template>
+
+
+                <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+            </div>
+        </div>
+
+        <component :is="typeComponent" :activity="activity.activity" :course="course" class="activity-content">
+
+            <div class="finish-activity" v-if="activity.completed[0] !== 'completed'">
+                <img class="arabesco-top" src="modules/story/images/arabesco-blue-half.svg" alt="">
+                <img class="arabesco-down" src="modules/story/images/arabesco-blue-half.svg" alt="">
+                <h1> ¡Muy bien!</h1>
+                <div class="image-center"></div>
+
+                <div class="bottom-finish">
+                    <strong> Has completado esta entrega,</strong> toca el botón y
+                    <template v-if="course.chapterActiveRol ===  chapter.chapterNumber  && course.lastRolPending()">
+                        descubre tu gremio
+                    </template>
+                    <template v-else>
+                        prepárate para la próxima lectura
+                    </template>
+
+                    <button class="action primary completed" @click="completedActivity">
+                        <template v-if="course.chapterActiveRol ===  chapter.chapterNumber  && course.lastRolPending()">
+                            Descubre tu gremio
+                        </template>
+                        <template v-else>
+                            Marcar como completado
+                        </template>
+                    </button>
+                </div>
+            </div>
+        </component>
+    </div>
+
+    <div class="panel" style="display: none;">
+        <div class="options" v-show="optionsPanel">
+            <div v-if="type !== 'audio'" @click="type = 'audio';optionsPanel= !optionsPanel"><img
+                    src="modules/story/images/audio.svg" alt=""></div>
+            <div v-if="type !== 'video'" @click="type = 'video';optionsPanel= !optionsPanel"><img
+                    src="modules/story/images/video.svg" alt=""></div>
+            <div v-if="type !== 'reading'" @click="type = 'reading';optionsPanel= !optionsPanel">Lect</div>
+        </div>
+        <div class="control" @click="optionsPanel= !optionsPanel"> {{ optionsPanel ? '<' : '>' }} </div>
+        </div>
+
+
+        <div class="scroll-activities" :style="{'--show-activities':maxShow }" v-if="scroll">
+            <div class="back">
+                <span v-if="startShow != 0">
+                    < </span>
+            </div>
+            <div class="items" @touchstart="handlePointerDown" @touchmove="handlePointerMove"
+                @touchend="handlePointerUp">
+                <div class="item" v-for="item in itemsShow"
+                    :class="{'selected': selectScroll === item.position  , 'pending': !item.completed}"
+                    @click="changeActivity(item.position)">
+                    <img :src="item.img" alt="">
+                    {{ item.name}}
+                </div>
+            </div>
+            <div class="next">
+                <span v-if="(maxShow + startShow) < activityScrolls.length">
+                    >
+                </span>
+            </div>
+
+        </div>
+
+        <alert v-if="modal" @close="modal = false" :course="course" />
+</section>

@@ -1,0 +1,47 @@
+<div id="evaluation-videoselfie" v-if="!camera && !showVideostatus">
+    <header>
+        <h3>Ponte a prueba</h3>
+        <p>Contesta las siguientes preguntas según tu experiencia</p>
+    </header>
+    <div class="info-alert">
+        <img src="modules/story/images/completed.png" alt="">
+        <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.</p>
+    </div>
+    <div class="avatar">
+        <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="" v-if="!videoFile">
+        <img :src="`modules/story/images/${$root.currentCourse.skin}/default-video.png`" alt="" v-else
+            @click="showVideo">
+    </div>
+
+    <!--<div class="take-video" @click="startCamera">
+        <img src="modules/story/images/camera.png" alt="">
+    </div>-->
+    <div class="actions">
+
+        <div class="custom-input-file">
+            <input type="file" accept="video/mp4,video/x-m4v,video/*" class="input-file" @input="handleInput"
+                id="imageUpload">
+            Seleccionar Video
+        </div>
+        <br>
+        <span>Graba el video con tu dispositivo que no dure más de un minuto y subelo aquí</span>
+        <br>
+        <br>
+        <button class="show action primary" @click="saveVideo" v-if="videoFile">Guardar</button>
+    </div>
+
+
+</div>
+<div id="player" v-if="showVideostatus"></div>
+<!--<div id="video-record" v-if="camera">
+    <div @click="startVideo">
+        <img src="modules/story/images/play.svg" alt="" class="controls">
+    </div>
+    <div @click="stopVideo">
+        <img src="modules/story/images/stop.svg" alt="" class="controls">
+    </div>
+
+    <div @click="destroy">
+        <img src="modules/story/images/cancel.svg" alt="" class="controls">
+    </div>
+</div>-->

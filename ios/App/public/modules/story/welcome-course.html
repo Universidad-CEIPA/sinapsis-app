@@ -1,0 +1,19 @@
+<section class="view-section" id="home-welcome-view" :class="course.skin">
+    <div class="header">
+        <img src="res/images/logo_uceipa_gold.svg" alt="">
+    </div>
+    <div class="img-project">
+        <img :src="course.image" alt="">
+
+    </div>
+    <button class="done action primary" data-icon-after="arrow-right"
+        @click="$router.push({ name: 'story:home', params:{ 'redirect': course.needImprovementDesired } })"> Iniciar
+    </button>
+    <div class="back">
+        <a @click="$router.push({ name: 'home', params:{'close' : true} })">Regresar</a>
+        <br>
+        <br>
+        <button @click="forceNotifications">Forzar Notificaciones</button>
+    </div>
+
+</section>
