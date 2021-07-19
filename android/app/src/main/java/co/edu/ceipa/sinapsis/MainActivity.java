@@ -1,4 +1,4 @@
-package sinapsis.ceipa.app;
+package co.edu.ceipa.sinapsis;
 
 import android.os.Bundle;
 
