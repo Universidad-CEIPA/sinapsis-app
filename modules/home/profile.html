@@ -7,9 +7,14 @@
         <template #header>
             <h3>{{ username }} estos son tus datos</h3>
         </template>
-        <ui-input type="text" label="Nombre Completo" v-model="user.name" required>
+        <ui-input type="text" label="Nombre" v-model="user.name" required>
             <template #validation>
-                Ingresa tu nombre completo
+                Ingresa tu nombre
+            </template>
+        </ui-input>
+        <ui-input type="text" label="Apellido" v-model="user.last_name" required>
+            <template #validation>
+                Ingresa tu apellido
             </template>
         </ui-input>
         <ui-input type="select" label="Identificación" v-model="user.documentType" :selectOptions="options" required>
