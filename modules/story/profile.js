@@ -13,7 +13,7 @@ define([
             return {
                 modal: false,
                 filter: 'all',
-                videos: null
+                videos: []
             };
         },
         computed: {
@@ -93,14 +93,14 @@ define([
             }
         },
         async created() {
-            const videoList = null
-            if(window.Capacitor){
+            const videoList = []
+            if (window.Capacitor) {
                 const storage = Capacitor.Plugins.Storage;
                 const videoKey = "videos_" + this.course.courseId;
                 videoList = await storage.get({ key: videoKey });
-                
             }
-            this.videos = (videoList?.value) ? JSON.parse(videoList.value) : await api.get(`students/getUploadVideos?courseId=${this.course.courseId}&studentId=${this.course.studentId}`)
+
+            this.videos = (videoList?.value) ? JSON.parse(videoList.value) : await this.course.getVideos()
         },
         beforeDestroy() {
             this.$refs.graph.destroy()

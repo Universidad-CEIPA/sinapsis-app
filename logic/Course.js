@@ -44,10 +44,17 @@ define([
             this.chapterActiveMap = []
 
             this.currentChapter = null
+
+            this.videos = null
         }
 
         static getCurrent() {
             return local("currentCourse");
+        }
+
+        async getVideos(){
+            await this.setVideos()
+            return this.videos
         }
 
         showRol() {
@@ -342,6 +349,10 @@ define([
                     comp.rubric = rubric.rubrics[0].avatars.filter(av => av.threshold >= comp.evaluation.value)
                 }
             })
+        }
+
+        async setVideos(){
+            this.videos = await api.get(`students/getUploadVideos?courseId=${this.courseId}&studentId=${this.studentId}`)
         }
 
         tools() {
