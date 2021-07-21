@@ -114,7 +114,7 @@ define([
                 let url = "application/files/" + video;
                 
                 if (Capacitor.platform === "ios") {
-                    let url = "application/" + video;
+                    url = "application/" + video;
                 }
 
                 console.log(url)
