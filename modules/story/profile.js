@@ -93,7 +93,7 @@ define([
             }
         },
         async created() {
-            const videoList = []
+            let videoList = []
             if (window.Capacitor) {
                 const storage = Capacitor.Plugins.Storage;
                 const videoKey = "videos_" + this.course.courseId;

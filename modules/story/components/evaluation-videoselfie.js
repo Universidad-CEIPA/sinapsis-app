@@ -109,11 +109,11 @@ define([
                 let video = this.videoFile.split("/")
                 video = video[video.length - 1]
 
-                if (Capacitor.platform === "android") {
-                    let url = "application/files/" + video;
-                } else if (Capacitor.platform === "ios") {
+                //if (Capacitor.platform === "android") {
+                let url = "application/files/" + video;
+                /*} else if (Capacitor.platform === "ios") {
                     let url = "application/" + video;
-                }
+                }*/
 
                 this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
