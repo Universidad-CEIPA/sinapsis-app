@@ -71,7 +71,7 @@ define([
                 this.activity = this.chapter.activities[index]
             },
             async completedActivity() {
-                await api.post('students/studentCourseActivity', {
+                let result = await api.post('students/studentCourseActivity', {
                     student: this.course.studentId,
                     activity: this.activity.activity.id,
                     status: "completed"
@@ -95,6 +95,7 @@ define([
                     tempAct.completed[0] = "completed"
                     this.course.updateActivity(tempAct);
                     if (this.isMap) {
+                        this.activity.activity = this.activity.project_activities
                         questions = this.activity.project_activities.questions
                     }
                     if (this.isHero) {

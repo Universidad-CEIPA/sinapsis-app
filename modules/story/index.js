@@ -211,7 +211,7 @@ define([
             if (this.redirect) {
                 this.$router.replace({ name: "story:profile" })
             } else {
-
+                this.course.setCurrentChapter(null)
                 this.course.chapters.forEach((program, index) => {
                     program.title = "Capítulo " + (index + 1)
                     program.chapterNumber = index + 1

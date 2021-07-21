@@ -172,7 +172,6 @@ define([
                 document.querySelector(".map-container").appendChild(canvas)
             },
             goBack() {
-                this.course.setCurrentChapter(null)
                 this.$router.replace({ name: 'story:home' })
             },
             openActivity(c) {
@@ -200,12 +199,17 @@ define([
             updateLayout() {
                 let content = document.querySelector(".map-container")
 
-                this.sizeWidth = content.offsetWidth
-                this.sizeHeight = this.finalDistribution.length * 120
+                if (content) {
+                    this.sizeWidth = content.offsetWidth
+                    this.sizeHeight = this.finalDistribution.length * 120
 
-                this.drawRoads();
+                    this.drawRoads();
+                }
+
             },
-
+            destroy() {
+                window.removeEventListener("resize", this._resizeHandler);
+            }
         },
         async created() {
             await this.course.setSchedule()
@@ -225,7 +229,7 @@ define([
             });
         },
         beforeDestroy() {
-            window.removeEventListener("resize", this._resizeHandler);
+            this.destroy()
         },
         components: {
             alert
