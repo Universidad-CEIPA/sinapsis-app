@@ -34,10 +34,13 @@ define([
 	router.beforeEach((to, from, next) => {
 		let user = local('user');
 		let questions = local('questions');
+		let video = local("videoPending")
+
 		if (!user && to.name !== "welcome:login" && to.name !== "welcome:index") {
 			next({ name: "welcome:login" });
-		//} else if (questions) {
-		//	next({ name: "story:evaluation" });
+		} else if (video) {
+			local("videoPending", null)
+			next({ name: "story:evaluation" });
 		} else {
 			next();
 		}

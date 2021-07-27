@@ -79,6 +79,7 @@ define([
                 this.uploading = false;
 
                 if (respons) {
+                    local("videoPending", null)
                     this.$emit('next')
                 } else {
                     console.log("error")
@@ -117,7 +118,6 @@ define([
                     url = "application/" + video;
                 }
 
-                console.log(url)
                 this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
             },
@@ -130,6 +130,7 @@ define([
             }
         },
         async created() {
+            local("videoPending",true)
             if (window.Capacitor) {
                 this.videoPlayer = Capacitor.Plugins.CapacitorVideoPlayer;
                 this.filesystem = Capacitor.Plugins.Filesystem;

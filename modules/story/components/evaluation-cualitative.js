@@ -1,8 +1,9 @@
 define([
     "text!./evaluation-cualitative.html",
+    "local",
     "components/ui-form",
     "components/ui-input",
-], (html, UiForm, UiInput) => {
+], (html, local, UiForm, UiInput) => {
 
     return {
         template: html,
@@ -21,6 +22,7 @@ define([
         },
         methods: {
             async success(result, data) {
+                local("videoPending", null)
                 this.$emit('next')
             },
             reset() {
@@ -33,6 +35,7 @@ define([
             }
         },
         created() {
+            local("videoPending", true)
             this.reset()
         },
         watch: {
