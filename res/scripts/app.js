@@ -3,6 +3,7 @@ define([
 	"vue",
 	"vue-date",
 	"vue-util",
+	"polyfills"
 ], (Layout, Vue, VueDate, VueUtil) => {
 	
 	const app = Vue.createApp(Layout);

@@ -14,6 +14,7 @@ requirejs.config({
 		"dayjs-es": "lib/dayjs-es.min",
 		"dayjs-relativeTime": "lib/dayjs-relativeTime.min",
 		"dayjs-utc": "lib/dayjs-utc.min",
+		"smoothscroll": "lib/smoothscroll.min",
 		"text": "lib/text",
 		"tiny-emitter": "lib/tinyemitter.min",
 		"vue": "lib/vue.global.prod",
