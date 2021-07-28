@@ -164,13 +164,23 @@
             }
 
             .modal-container {
-                background: url('../images/mision/alert-texture.jpg') 50% 50%/cover no-repeat;
-                max-width : 300px;
+                //background: url('../images/mision/alert-texture.jpg') 50% 50%/cover no-repeat;
+                background-color: #fff;
+                max-width       : 300px;
+
+                header {
+                    img {
+                        max-width    : 300px;
+                        margin-bottom: -40%;
+                    }
+                }
 
                 .modal-content {
+                    color: @mision-color;
+
                     .done {
-                        color           : @mision-color;
-                        background-color: #fff;
+                        color           : #fff;
+                        background-color: @mision-color;
                     }
                 }
             }

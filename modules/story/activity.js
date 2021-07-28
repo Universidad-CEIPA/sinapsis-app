@@ -69,6 +69,7 @@ define([
             changeActivity(index) {
                 this.selectScroll = index
                 this.activity = this.chapter.activities[index]
+                this.updateScroll()
             },
             async completedActivity() {
                 let result = await api.post('students/studentCourseActivity', {

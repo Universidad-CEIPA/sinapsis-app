@@ -115,13 +115,16 @@
             justify-content: space-evenly;
 
             .type {
-                font-size       : .7em;
-                height          : 50px;
-                border-radius   : 10px;
-                background-color: @good-color;
-                padding         : 10px;
-                width           : 75px;
+                font-size    : .7em;
+                height       : 50px;
+                border-radius: 10px;
+                border       : @good-color 1px solid;
+                padding      : 10px;
+                width        : 70px;
 
+                &.active {
+                    background-color: @good-color;
+                }
 
                 span {
                     height          : 10px;

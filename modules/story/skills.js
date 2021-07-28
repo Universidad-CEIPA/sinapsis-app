@@ -14,7 +14,11 @@ define([
                 history: [],
                 dates: [],
                 position: 0,
-                filter: 'all'
+                filter: {
+                    auto: true,
+                    desired: true,
+                    current: true
+                },
             }
         },
         computed: {
@@ -36,55 +40,30 @@ define([
                     }
                 }
 
-                let filter = {
-                    'all': [
-                        initialValue,
-                        improvementDesired,
-                        currentvalue
-                    ],
-                    'auto': [
-                        initialValue
-                    ],
-                    'desired': [
-                        improvementDesired
-                    ],
-                    'current': [
-                        currentvalue
-                    ],
-                }
+                let fil = []
 
-                return filter[this.filter]
+                this.filter.auto ? fil.push(initialValue) : false
+                this.filter.desired ? fil.push(improvementDesired) : false
+                this.filter.current ? fil.push(currentvalue) : false
+
+                return fil
             },
             colors() {
                 let [initialValue, improvementDesired, currentvalue] = this.course.graphColors()
 
-                let filter = {
-                    'all': [
-                        initialValue,
-                        improvementDesired,
-                        currentvalue
-                    ],
-                    'auto': [
-                        initialValue
-                    ],
-                    'desired': [
-                        improvementDesired
-                    ],
-                    'current': [
-                        currentvalue
-                    ],
-                }
-                return filter[this.filter]
+                let fil = []
+
+                this.filter.auto ? fil.push(initialValue) : false
+                this.filter.desired ? fil.push(improvementDesired) : false
+                this.filter.current ? fil.push(currentvalue) : false
+
+                return fil
             },
             updateGraph() {
                 this.$refs.graph.reset();
             },
             filterGraph(filter) {
-                if (filter === this.filter) {
-                    this.filter = 'all'
-                } else {
-                    this.filter = filter
-                }
+                this.filter[filter] = !this.filter[filter]
                 this.$nextTick(() => {
                     this.updateGraph();
                 });

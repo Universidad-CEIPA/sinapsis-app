@@ -11,13 +11,16 @@
                     :colors="colors()" />
             </div>
             <div class="type-eval">
-                <div class="type" :style="{'--color-circle' : course.graphColors()[0]}" @click="filterGraph('auto')">
+                <div class="type" :class="{'active':filter.auto}" :style="{'--color-circle' : course.graphColors()[0]}"
+                    @click="filterGraph('auto')">
                     <span></span>Autoevaluación inicial
                 </div>
-                <div class="type" :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
+                <div class="type" :class="{'active':filter.desired}"
+                    :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
                     <span></span>Mi potencial deseado
                 </div>
-                <div class="type" :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
+                <div class="type" :class="{'active':filter.current}"
+                    :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
                     <span></span>Mi potencial actual
                 </div>
             </div>

@@ -21,8 +21,9 @@ strong {
 }
 
 .mision {
-    --color-track  : @mision-color;
-    --opacity-track: .7;
+    --color-track      : #9A9AB4;
+    --color-input-range: #DDDDE7;
+    --opacity-track    : .7;
 
 
     .input-tag {
@@ -31,16 +32,17 @@ strong {
 
     .ui-range {
         .input-field {
-            background: @mision-color;
-            opacity   : .2;
+            //background: @mision-color;
+            //opacity   : .2;
         }
     }
 }
 
 .dorado {
 
-    --color-track  : #3db4e4;
-    --opacity-track: 1;
+    --color-track      : #3db4e4;
+    --color-input-range: #cce5eb;
+    --opacity-track    : 1;
 
     .input-tag {
         background: @bg-color;
@@ -133,7 +135,7 @@ strong {
         padding           : 0;
         -webkit-appearance: none;
         overflow          : hidden;
-        background        : #cce5eb;
+        background      : var(--color-input-range);
         border-radius     : 50px;
         width             : 100%;
 

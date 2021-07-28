@@ -133,12 +133,19 @@ define([
                 }
             },
             openActivityList(content) {
+
                 if (content.activity) {
                     let chapterID = this.course.getChapterByActivity(content.activity.id)
 
                     if (chapterID) {
-                        let chapter = this.chapters.find(c => c.chapterNumber === chapterID)
-                        this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(chapter), forceActivity: content.id } })
+                        if (this.afterChaptersCompleted(chapterID - 1)) {
+                            let chapter = this.chapters.find(c => c.chapterNumber === chapterID)
+                            this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(chapter), forceActivity: content.id } })
+                        } else {
+                            this.course.setAlert("chaptersPending")
+                            this.modal = true
+                        }
+                        
                     } else {
                         content.type = "hero-letter"
                         this.$router.push({ name: 'story:activity', params: { content: JSON.stringify(content) } })
@@ -146,8 +153,13 @@ define([
 
                 } else {
                     let chapterID = this.course.getChapterByMap(content.map.id)
-                    let chapter = this.chapters.find(c => c.chapterNumber === chapterID)
-                    this.$router.push({ name: 'story:map', params: { content: JSON.stringify(chapter) } })
+                    if (this.afterChaptersCompleted(chapterID - 1)) {
+                        let chapter = this.chapters.find(c => c.chapterNumber === chapterID)
+                        this.$router.push({ name: 'story:map', params: { content: JSON.stringify(chapter) } })
+                    } else {
+                        this.course.setAlert("chaptersPending")
+                        this.modal = true
+                    }
                 }
 
             },

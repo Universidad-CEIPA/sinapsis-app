@@ -152,7 +152,7 @@
 
             .bottom-finish {
                 padding-top: 10px;
-                display: grid;
+                display    : grid;
 
                 .completed {
                     align-items: center;
@@ -207,7 +207,8 @@
         position        : fixed;
         background-color: @bg-color;
         height          : 80px;
-        top             : calc(100vh - 80px);
+        top             : calc(100vh - 80px - env(safe-area-inset-bottom));
+        padding-bottom  : env(safe-area-inset-bottom);
         color           : #fff;
         width           : 100%;
         text-align      : -webkit-center;

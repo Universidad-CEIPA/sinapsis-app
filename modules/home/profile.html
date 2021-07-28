@@ -1,6 +1,8 @@
 <section class="view-section" id="edit-account">
     <div class="header">
-        <img src="res/images/logo_uceipa_white.svg" alt="">
+        <img v-if="course" src="res/images/left-arrow.svg" class="back" alt=""
+            @click="$router.replace({ name: 'home' })">
+        <img src=" res/images/logo_uceipa_white.svg" class="logo" alt="">
     </div>
 
     <ui-form :model="user" submit-label="Actualizar datos" :action="`students/${user.id}`" @success="success">
