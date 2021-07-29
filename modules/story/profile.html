@@ -28,11 +28,14 @@
                 <h5 v-if="course.skin === 'dorado'">Tus Herramientas</h5>
                 <h5 v-if="course.skin === 'mision'">Tus gadgets</h5>
                 <ul class="tools-list">
-                    <li v-for="competence in course.tools()" @click="showInfoTool(competence)">
+                    <li v-if="course.activeTools" v-for="competence in course.tools()" @click="showInfoTool(competence)">
                         <div class="circle-img">
-                            <img v-if="course.activeTools" :src="getCoverTool(competence)" alt="">
+                            <img  :src="getCoverTool(competence)" alt="">
                         </div>
-                        <p v-if="course.activeTools">{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
+                        <p>{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
+                    </li>
+                    <li v-else v-for="index in 3" :key="index">
+                        <div class="circle-img empty"></div> 
                     </li>
                 </ul>
 

@@ -8,6 +8,6 @@
         y leer todos los capitulos
         <img v-if="course.skin === 'dorado'" class="arabesco" src="modules/story/images/arabesco-gold.svg" alt="">
     </div>
-    <button class="action primary" data-icon-after="arrow-right" @click="$router.replace({ name: 'story:home' })">
+    <button class="action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="$router.replace({ name: 'story:home' })">
         Explorar </button>
 </section>

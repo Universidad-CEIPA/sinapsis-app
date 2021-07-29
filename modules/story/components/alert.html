@@ -7,7 +7,7 @@
         <img v-if="course.skin === 'mision'" src="modules/story/images/divisor.png" alt="">
         <div class="bottom-alert">
             <div> Has completado este capitulo, <br>prepárate para las próximas entregas</div>
-            <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
+            <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="remove">Continuar</button>
         </div>
     </ui-modal>
 </transition>
@@ -34,7 +34,7 @@
         <h1>¡Fabuloso!</h1>
         <div class="bottom-alert">
             <div> Es momento de autoevaluarte</div>
-            <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
+            <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="remove">Continuar</button>
         </div>
     </ui-modal>
 </transition>
@@ -50,7 +50,7 @@
             <h1>¡Felicidades!</h1>
             <div> Según tus competencias este es tu gremio</div>
             <footer>
-                <button class="done action primary" data-icon-after="arrow-right"
+                <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`"
                     @click="removeTourRol">Continuar</button>
             </footer>
         </ui-modal>
@@ -68,7 +68,7 @@
             <img src="modules/story/images/arabesco-gold.svg" alt="">
             <div> Acorde a tus competencias estas son tus herramientas</div>
             <footer>
-                <button class="done action primary" data-icon-after="arrow-right" @click="removeTourTools">Ver
+                <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="removeTourTools">Ver
                     perfil</button>
             </footer>
         </ui-modal>
@@ -112,7 +112,7 @@
         </div>
         <div> conoce tu progreso durante todas las actividades y autoevaluaciones</div>
         <footer>
-            <button class="done action primary" data-icon-after="arrow-right" @click="removeFinish">Ver mi
+            <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="removeFinish">Ver mi
                 progreso</button>
         </footer>
     </ui-modal>
@@ -162,7 +162,7 @@
         <h1>Genial</h1>
         <div class="bottom-alert">
             <div> Haz completado la autoevaluación sigue explorando el mapa</div>
-            <button class="done action primary" data-icon-after="arrow-right" @click="removeEvaluation">Volver al
+            <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="removeEvaluation">Volver al
                 mapa</button>
         </div>
     </ui-modal>
@@ -179,7 +179,7 @@
             Ponte a prueba y sé más efectivo
         </div>
         <footer>
-            <button class="done action primary" data-icon-after="arrow-right" @click="remove">Continuar</button>
+            <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="remove">Continuar</button>
         </footer>
     </ui-modal>
 </transition>
@@ -191,7 +191,7 @@
             <img src="modules/story/images/arabesco-gold.svg" alt="">
             <div>Desde aquí puedes entrar al mapa de las ciudades <strong>La conquista del Dorado</strong></div>
             <footer>
-                <button class="done action primary" data-icon-after="arrow-right" @click="removeTourMaps">Explorar
+                <button class="done action primary" :data-icon-after="`arrow-right-${course.skin}`" @click="removeTourMaps">Explorar
                     Mapa</button>
             </footer>
         </ui-modal>

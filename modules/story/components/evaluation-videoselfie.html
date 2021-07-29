@@ -1,4 +1,4 @@
-<div id="evaluation-videoselfie" v-if="!camera && !showVideostatus">
+<div id="evaluation-videoselfie" v-if="!camera && !showVideostatus" :class="`skin-${$root.currentCourse.skin}`">
     <header>
         <h3>Ponte a prueba</h3>
         <p>Evalua tu experiencia</p>
@@ -27,7 +27,7 @@
         <span>Graba el video con tu dispositivo que no dure más de un minuto y subelo aquí</span>
         <br>
         <br>
-        <button class="show action primary" @click="saveVideo" v-if="videoFile">Guardar</button>
+        <button class="show action primary" @click="saveVideo" v-if="!videoFile">Guardar</button>
     </div>
 
 

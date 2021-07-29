@@ -1,6 +1,17 @@
 #evaluation-cualitative {
     padding: 30px 20px 20px;
 
+    &.skin-dorado{
+        .action {
+            .icon("arrow-right-dorado");
+        }
+    }
+    &.skin-mision{
+        .action {
+            .icon("arrow-right-mision");
+        }
+    }
+
     .form-header {
         color: @bg-color;
 
@@ -23,7 +34,6 @@
             width: 250px;
 
             .action {
-                .icon("arrow-right");
                 .has-icon-after;
 
                 .done;
@@ -36,4 +46,7 @@
         min-height: 200px;
         height    : auto;
     }
+
+
+    
 }

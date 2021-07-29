@@ -1,5 +1,5 @@
 <ui-form :model="answers" submit-label="Continuar" action="students/saveEvaluation" @success="success"
-    id="evaluation-cualitative">
+    id="evaluation-cualitative" :class="`skin-${$root.currentCourse.skin}`">
     <template #header>
         <h3>Ponte a prueba</h3>
         <p>Contesta la siguiente pregunta según tu experiencia</p>

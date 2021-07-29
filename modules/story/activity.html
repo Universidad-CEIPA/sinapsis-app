@@ -3,6 +3,10 @@
         <template v-if="isMap"> Mapa Ciudades </template>
         <template v-else> {{ title }} </template>
     </header>
+    <header v-else-if="activity.completed[0] === 'completed'">
+        <span data-icon="tiny-back" @click="viewBack"></span>
+        Carta del héroe
+    </header>
     <div class="welcome" id="welcome" v-if="isHero || isMap">
         <div class="title-type" :class="activity.type">
             <template v-if="isHero">
