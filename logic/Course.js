@@ -278,7 +278,8 @@ define([
         }
 
         needImprovementDesired() {
-            return this.competences.filter((c) => c.evaluation.improvementDesired === 0).length
+            let competencesAvailable = this.competences.filter(comp => comp.rubric)
+            return competencesAvailable.filter((c) => c.evaluation.improvementDesired === 0).length
         }
 
         removeAlert() {
