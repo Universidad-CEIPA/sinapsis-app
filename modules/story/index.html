@@ -2,9 +2,9 @@
     <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:welcome' })"></span>{{ course.name }}
     </header>
 
-    <div class="general">
+    <div class="general"  @click="$router.replace({name : 'story:profile'})">
 
-        <div class="info" @click="$router.replace({name : 'story:profile'})">
+        <div class="info">
             <div class="advances">
                 <div class="circle"><span class="circle-text">{{course.advanceChapters()}}</span></div>
                 <span>Capítulos</span>
@@ -14,7 +14,7 @@
                 <img :src="course.getRoleAvatar()" alt="">
             </div>
 
-            <span class="name">{{ $root.user.name }}</span>
+            <span class="name">{{ $root.user.name }} <span data-icon="profile"></span></span>
 
             <span class="role" v-if="course.activeRol">Eres {{ course.getRole() }}</span>
             <span class="city" v-if="course.activeCity">Perteneces a {{ course.getLocation() }}</span>

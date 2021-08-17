@@ -17,7 +17,9 @@ define([
 				recoverData: {
 					email: null,
 				},
-				type: 'login'
+				type: 'login',
+				typePassword: "password",
+				icon: "eyes"
 			};
 		},
 		methods: {
@@ -27,7 +29,17 @@ define([
 			},
 			resendEmail() {
 				api.post("students/resend", this.user.email);
-			}
+			},
+			passwordChangeType() {
+				if (this.typePassword === "password") {
+					this.typePassword = "text";
+					this.icon = "close-eyes";
+				}
+				else if (this.typePassword === "text") {
+					this.typePassword = "password";
+					this.icon = "eyes";
+				}
+			},
 
 		},
 		created() {

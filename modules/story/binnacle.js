@@ -1,7 +1,9 @@
 define([
     "text!./binnacle.html",
     "api",
-], (html, api) => {
+    "components/ui-modal",
+    "./components/alert"
+], (html, api, UiModal, Alert) => {
 
     return {
         template: html,
@@ -9,9 +11,16 @@ define([
         data() {
             return {
                 videos: {},
+                answers: {},
                 videoPlayer: null,
-                showVideostatus: false
+                showVideostatus: false,
+                modal: false,
+                currentQuestion:''
             }
+        }, 
+        components: {
+            UiModal,
+            Alert
         },
         methods: {
             addListenersToPlayerPlugin() {
@@ -31,8 +40,13 @@ define([
             async playVideo(videoUrl) {
                 this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: videoUrl, playerId: "player", componentTag: "#video-player" });
-            }
+            },
 
+            showQuestion(question){
+                this.course.setAlert("showQuestion");
+                this.currentQuestion = question;
+                this.modal = true;
+            }
         },
 
         async created() {
@@ -41,8 +55,8 @@ define([
                 this.addListenersToPlayerPlugin();
             }
             
-
             this.videos = await this.course.getVideos()
+            this.answers = await this.course.getAnswers()
             /*this.videos.forEach(async (element) => {
                 const file = await this.getFileFromUrl(element.url, 'question_' + element.question.id + '.mp4', element.type);
             });*/

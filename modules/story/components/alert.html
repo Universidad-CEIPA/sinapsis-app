@@ -143,6 +143,17 @@
 </transition>
 
 <transition>
+    <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'showQuestion'">
+        <template #title>
+            <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
+        </template>
+        <h1>PREGUNTA:</h1>
+        <br>
+        <h1><slot></slot></h1>
+    </ui-modal>
+</transition>
+
+<transition>
     <ui-modal @close="remove" class="alert-modal  continue-travel" v-if="typeAlert === 'activityDisable'">
         <template #title>
             <img src="modules/story/images/arabesco-gold-half.svg" alt="" class="arabezco">
@@ -214,3 +225,5 @@
         </div>
     </ui-modal>
 </transition>
+
+

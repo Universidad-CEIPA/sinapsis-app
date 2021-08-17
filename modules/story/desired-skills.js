@@ -39,6 +39,13 @@ define([
             available.map((c) => {
                 this.skills.evaluations.push({ name: c.name, ...c.evaluation })
             })
+            
+            this.skills.evaluations.forEach((s)=>{
+                if (s.improvementDesired == 0){
+                    s.improvementDesired = s.initialValue
+                }
+            })
+
         },
         mounted() {
             var inputs = document.querySelectorAll('.input-field')

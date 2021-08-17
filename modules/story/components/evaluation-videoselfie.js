@@ -18,6 +18,7 @@ define([
                 videoFile: null,
 
                 showVideostatus: false,
+                message:''
             };
         },
         methods: {
@@ -30,7 +31,8 @@ define([
                 audioElement.addEventListener("loadedmetadata", () => {
                     let duration = audioElement.duration;
                     if (duration > this.maxTime) {
-                        console.log("El video no debe durar mas de 1 minuto")
+                        this.message = "El video no debe durar mas de 1 minuto";
+                        setInterval(function () { this.message = '' }, 5000);
                         return false;
                     }
                     this.addVideo(file);
@@ -55,8 +57,6 @@ define([
                     this.videos = videoList.value ? JSON.parse(videoList.value) : []
                     this.videos.unshift(savedFile.uri)
                     this.videoFile = savedFile.uri
-
-                    console.log(this.videoFile)
 
                     this.storage.set({
                         key: videoKey,

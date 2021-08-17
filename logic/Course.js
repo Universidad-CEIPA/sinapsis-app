@@ -46,6 +46,12 @@ define([
             this.currentChapter = null
 
             this.videos = null
+            this.answersQualitative = null
+        }
+        
+        async getAnswers(){
+            await this.setAnswers()
+            return this.answersQualitative
         }
 
         static getCurrent() {
@@ -56,6 +62,7 @@ define([
             await this.setVideos()
             return this.videos
         }
+
 
         showRol() {
             this.activeTools = this.isCompletedChapter(this.chapters[this.chapterActiveRol - 1])
@@ -318,6 +325,10 @@ define([
 
         setAlert(alert) {
             this.notifications = alert
+        }
+
+        async setAnswers() {
+            this.answersQualitative = await api.get(`students/getAnswerQualitative?courseId=${this.courseId}&studentId=${this.studentId}`)
         }
 
         setCurrentChapter(chapter) {

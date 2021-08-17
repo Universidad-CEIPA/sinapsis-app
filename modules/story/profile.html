@@ -28,23 +28,29 @@
                 <h5 v-if="course.skin === 'dorado'">Tus Herramientas</h5>
                 <h5 v-if="course.skin === 'mision'">Tus gadgets</h5>
                 <ul class="tools-list">
-                    <li v-if="course.activeTools" v-for="competence in course.tools()" @click="showInfoTool(competence)">
+                    <li v-if="course.activeTools" v-for="competence in course.tools()"
+                        @click="showInfoTool(competence)">
                         <div class="circle-img">
-                            <img  :src="getCoverTool(competence)" alt="">
+                            <img :src="getCoverTool(competence)" alt="">
                         </div>
                         <p>{{competence.rubric ? competence.rubric[0]?.name ?? '' : ''}}</p>
                     </li>
                     <li v-else v-for="index in 3" :key="index">
-                        <div class="circle-img empty"></div> 
+                        <div class="circle-img empty"></div>
                     </li>
                 </ul>
 
             </section>
         </div>
 
-        <div class="info-binnacle" @click="$router.replace({ name: 'story:binnacle' })" v-if="videos.length">
-            <div class="legend">Mira aquí los videoselfies que has realizado</div>
-            <div class="video">Ver bitacora de video</div>
+        <div class="info-activities" @click="$router.replace({ name: 'story:home' })">
+            <div class="legend">Continua tu viaje en esta aventura</div>
+            <div class="goActivities">Ir a actividades</div>
+        </div>
+
+        <div class="info-binnacle" @click="$router.replace({ name: 'story:binnacle' })">
+            <div class="legend">Mira aquí las autoevaluaciones que has realizado</div>
+            <div class="video">Ver bitacora</div>
         </div>
 
         <div class="info-graph">
@@ -54,25 +60,24 @@
                 <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets"
                     :colors="colors" />
             </div>
-            <button class="wish-eval action primary" v-if="course.needImprovementDesired()"
-                @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
-                tu potencial deseado</button>
-            <div v-else class="type-eval">
+            <div class="type-eval">
                 <div class="type" :class="{'active':filter.auto}" :style="{'--color-circle' : course.graphColors()[0]}"
                     @click="filterGraph('auto')">
                     <span></span>Autoevaluación inicial
                 </div>
-                <div class="type" :class="{'active':filter.desired}" :style="{'--color-circle' : course.graphColors()[1]}"
-                    @click="filterGraph('desired')">
+                <div class="type" :class="{'active':filter.desired}"
+                    :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
                     <span></span>Mi
                     potencial deseado
                 </div>
-                <div class="type" :class="{'active':filter.current}" :style="{'--color-circle' : course.graphColors()[2]}"
-                    @click="filterGraph('current')">
+                <div class="type" :class="{'active':filter.current}"
+                    :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
                     <span></span>Mi
                     potencial actual
                 </div>
             </div>
+            <button class="wish-eval action primary" @click="$router.replace({ name: 'story:skills:desired' })">Ingresa
+                tu potencial deseado</button>
         </div>
         <div class="info-actions">
             <button class="action primary" data-icon-after="edit"

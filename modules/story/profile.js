@@ -71,14 +71,7 @@ define([
             }
         },
         async created() {
-            let videoList = []
-            if (window.Capacitor) {
-                const storage = Capacitor.Plugins.Storage;
-                const videoKey = "videos_" + this.course.courseId;
-                videoList = await storage.get({ key: videoKey });
-            }
-
-            this.videos = (videoList?.value) ? JSON.parse(videoList.value) : await this.course.getVideos()
+            this.videos = await this.course.getBinnacle()
         },
         beforeDestroy() {
             this.$refs.graph.destroy()

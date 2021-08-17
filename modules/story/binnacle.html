@@ -3,8 +3,8 @@
     </header>
 
     <div class="introduction">
-        <h3>Ponte a prueba</h3>
-        <p>Contesta las siguientes preguntas según tu experiencia</p>
+        <h3>Bitacora</h3>
+        <p>Esta es la bitácora que creaste en el trancurso de todo tu proceso</p>
         <div class="info-alert">
             <img src="modules/story/images/completed.png" alt="">
             <p>Recuerda que tus videoselfies son privados y solo tú los podrás ver. Ellas se almacenarán en tu bitácora.
@@ -13,14 +13,29 @@
     </div>
 
     <div class="binnacle" v-if="!showVideostatus">
-        <div v-for="video in videos" @click="playVideo(video.url)" class="video">
-            <img :src="`modules/story/images/${course.skin}/default-video.png`" alt="">
+        <span v-if="videos.length">VIDEOS</span>
+        <div v-for="video in videos"  class="video">
+            <img :src="`modules/story/images/${course.skin}/default-video.png`" alt="" @click="playVideo(video.url)">
             <p>
-                <u>Pregunta - {{ video.question.id }}</u>
+                <u @click="showQuestion(video.question.content)">Pregunta - {{ video.question.id }}</u>
                 <br>
-                {{ $formatDate(video.created , "MMMM DD[/]YYYY  ") }}
+                {{ $formatDate(video.created , "MMMM DD[/]YYYY ") }}
+            </p>
+        </div>
+        <span  v-if="answers.length">PREGUNTAS</span>
+        <div v-for="answer in answers" class="answer">
+            <div>
+                {{answer.answer}}
+            </div>
+            <p>
+                <u @click="showQuestion(answer.question.content)">Pregunta - {{ answer.question.id }}</u>
+                <br>
+                {{ $formatDate(answer.created , "MMMM DD[/]YYYY ") }}
             </p>
         </div>
     </div>
     <div id="player" v-if="showVideostatus"></div>
+    <alert v-if="modal" @close="modal = false" :course="course" >
+        {{currentQuestion}}
+    </alert>
 </section>

@@ -9,8 +9,11 @@
     </div>
     <div class="avatar">
         <img :src="`modules/story/images/${$root.currentCourse.skin}/icon-video.png`" alt="" v-if="!videoFile">
-        <img :src="`modules/story/images/${$root.currentCourse.skin}/default-video.png`" alt="" v-else
-            @click="showVideo">
+        <template v-else>
+            <h1> Previsualización </h1>
+            <img :src="`modules/story/images/${$root.currentCourse.skin}/default-video.png`" alt="" @click="showVideo">
+            <p>Puedes cambiar el video antes de guardar</p>
+        </template>
     </div>
 
     <!--<div class="take-video" @click="startCamera">
@@ -23,6 +26,7 @@
                 id="imageUpload">
             Seleccionar Video
         </div>
+        <div class="notice" v-if="message">{{message}}</div>
         <br>
         <span>Graba el video con tu dispositivo que no dure más de un minuto y subelo aquí</span>
         <br>
