@@ -16,7 +16,7 @@ define([
 			{ name: "story:activity", path: "/story/activity", component: m("story/activity"), props: true },
 			{ name: "story:binnacle", path: "/story/binnacle", component: m("story/binnacle") },
 			{ name: "story:credits", path: "/story/credits", component: m("story/credits") },
-			{ name: "story:evaluation", path: "/story/autoevaluation", component: m("story/autoevaluation") },
+			{ name: "story:evaluation", path: "/story/autoevaluation", component: m("story/autoevaluation"), props: true  },
 			{ name: "story:finish", path: "/story/finish", component: m("story/finish") },
 			{ name: "story:home", path: "/story/home", component: m("story/index"), props: true },
 			{ name: "story:map", path: "/story/map", component: m("story/map"), props: true },

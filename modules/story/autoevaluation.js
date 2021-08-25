@@ -9,7 +9,7 @@ define([
 
     return {
         template: html,
-        props: ["course"],
+        props: ["course","type"],
         data() {
             return {
                 currentQuestion: 0,
@@ -38,8 +38,12 @@ define([
                     local("questions", this.questions.slice(this.currentQuestion))
                 } else {
                     local("questions", null)
-                    this.course.setAlert("finish-evaluation")
-                    this.modal = true
+                    if (this.type === "map"){
+                        this.course.setAlert("finish-evaluation")
+                        this.modal = true
+                    }else{
+                        this.$router.replace({ name: 'story:home' })
+                    }
                 }
             }
         },

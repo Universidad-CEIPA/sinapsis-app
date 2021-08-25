@@ -18,6 +18,7 @@
             <img :src="`modules/story/images/${course.skin}/default-video.png`" alt="" @click="playVideo(video.url)">
             <p>
                 <u @click="showQuestion(video.question.content)">Pregunta - {{ video.question.id }}</u>
+                <span data-icon="delete" @click="deleteFile(video)"></span>
                 <br>
                 {{ $formatDate(video.created , "MMMM DD[/]YYYY ") }}
             </p>

@@ -31,6 +31,10 @@ define([
                 this.videoPlayer.addListener('jeepCapVideoPlayerReady', (data) => { }, false);
                 this.videoPlayer.addListener('jeepCapVideoPlayerPlaying', async (data) => { }, false);
             },
+            async deleteFile(video){
+                await api.delete(`students/deleteVideo/${video.id}/${video.question.id}/${this.course.studentId}`);
+                this.videos = await this.course.getVideos();
+            },
             async getFileFromUrl(url, name, type) {
                 const response = await fetch(url);
                 const data = await response.blob();

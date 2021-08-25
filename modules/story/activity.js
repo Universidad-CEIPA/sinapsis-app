@@ -53,6 +53,8 @@ define([
             typeComponent() {
                 return {
                     "reading": "activity-read",
+                    "outdoor": "activity-read",
+                    "indoor": "activity-read",
                     "audio": "activity-audio",
                     "video": "activity-video"
                 }[this.type];
@@ -75,6 +77,7 @@ define([
                 let result = await api.post('students/studentCourseActivity', {
                     student: this.course.studentId,
                     activity: this.activity.activity.id,
+                    courseId: this.course.courseId,
                     status: "completed"
                 })
 
@@ -106,8 +109,8 @@ define([
 
                 if (questions.length) {
                     local("questions", questions)
-                    this.course.setAlert("startQuestions")
-                    this.$router.push({ name: 'story:evaluation' })
+                    this.course.setAlert("startQuestions");
+                    this.$router.push({ name: 'story:evaluation', params: { 'type': this.activity.type} })
                 } else if (this.activity.type === "map") {
                     this.$router.replace({ name: 'story:map' })
                 } else {
@@ -180,8 +183,7 @@ define([
         created() {
             if (this.content) {
                 this.chapter = JSON.parse(this.content)
-
-
+                
                 let exceptions = [
                     'map',
                     'hero-letter'

@@ -18,7 +18,10 @@ define([
                 videoFile: null,
 
                 showVideostatus: false,
-                message:''
+                message: '',
+
+
+                prevVideo: false,
             };
         },
         methods: {
@@ -68,21 +71,40 @@ define([
 
 
             async saveVideo() {
-                this.uploading = true;
+                let result = false
 
-                let respons = await api.post("students/uploadVideo", this.answer, {
-                    /*onUploadProgress: e => {
-                        this.progress = ((e.loaded / e.total) * 100).toFixed(1);
-                    }*/
-                });
-
-                this.uploading = false;
-
-                if (respons) {
-                    local("videoPending", null)
-                    this.$emit('next')
+                if (!this.prevVideo) {
+                    if (window.Capacitor) {
+                        Capacitor.Plugins.Dialog.alert({ message: "Por favor previsualizar el video cargado", title: "¡Advertencia!" }).then(result => result.value);
+                    } else {
+                        alert("Por favor previsualizar el video cargado");
+                    }
                 } else {
-                    console.log("error")
+                    result = false;
+                    if (window.Capacitor) {
+                        result = await Capacitor.Plugins.Dialog.confirm({ message: "Despues de guardado el video no se podrá editar, por favor verifique el video seleccionado", title: "¡Advertencia!" }).then(result => result.value);
+                    } else {
+                        result = confirm("Despues de guardado el video no se podrá editar, por favor verifique el video seleccionado");
+                    }
+
+                    if (result) {
+                        this.uploading = true;
+
+                        let respons = await api.post("students/uploadVideo", this.answer, {
+                            /*onUploadProgress: e => {
+                                this.progress = ((e.loaded / e.total) * 100).toFixed(1);
+                            }*/
+                        });
+
+                        this.uploading = false;
+
+                        if (respons) {
+                            local("videoPending", null)
+                            this.$emit('next')
+                        } else {
+                            console.log("error")
+                        }
+                    }
                 }
 
                 return false;
@@ -113,11 +135,11 @@ define([
                 video = video[video.length - 1]
 
                 let url = "application/files/" + video;
-                
+
                 if (Capacitor.platform === "ios") {
                     url = "application/" + video;
                 }
-
+                this.prevVideo = true
                 this.showVideostatus = true
                 await this.videoPlayer.initPlayer({ mode: "fullscreen", url: url, playerId: "player", componentTag: "#video-player" });
             },
@@ -130,7 +152,7 @@ define([
             }
         },
         async created() {
-            local("videoPending",true)
+            local("videoPending", true)
             if (window.Capacitor) {
                 this.videoPlayer = Capacitor.Plugins.CapacitorVideoPlayer;
                 this.filesystem = Capacitor.Plugins.Filesystem;
