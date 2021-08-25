@@ -9,7 +9,14 @@ define([
 
     return {
         template: html,
-        props: ["course","type"],
+        props: {
+            course: {
+                required: true
+            },
+            type:{
+                default: "whatever"
+            }
+        },
         data() {
             return {
                 currentQuestion: 0,
