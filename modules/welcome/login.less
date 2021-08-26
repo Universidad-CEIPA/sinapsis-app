@@ -1,0 +1,63 @@
+#login-view {
+    background: url('../../res/images/bg_sky.svg') 50% 50%/cover no-repeat;
+    position: absolute;
+    padding: 50px;
+    display: grid;
+    grid-template-rows: 50% 50%;
+
+    .welcome {
+        line-height: 50px;
+        align-self: center;
+        text-align: center;
+        color: @main-color;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    form {
+        text-align: center;
+        color: white;
+        font-size: 0.9rem;
+
+
+        .form-notice{
+            color: @critical-color;
+        }
+
+    }
+
+    .input-field {
+        background: rgba(0,0,0,0.2);
+        color: #fff;
+        text-align: center;
+    }
+
+    .input-iconLeft {
+        position             : relative;
+
+        >h1 {
+            position: absolute;
+            right   : 10px;
+            top     : 26px;
+            filter: invert(1);
+
+            &::before {
+                width : var(--icon-input-size);
+                height: var(--icon-input-size);
+            }
+        }
+    }
+
+    .form-actions {
+        button {
+            border: 0;
+            font-size: 1.2em;
+        }
+    }
+
+    .invitation {
+        margin-bottom: 20px;
+    }
+}

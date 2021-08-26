@@ -1,0 +1,49 @@
+<section class="view-section" id="login-view">
+	<div class="welcome">
+		<h1>Bienvenido a nuestra aplicacion</h1>
+		<img src="res/images/logo_uceipa_gold.svg" alt="">
+	</div>
+
+	<ui-form action="students/login" :model="user" submit-label="Entrar" @success="acceptUser" @error="errorUser"
+		v-if="type==='login'">
+		<template #header>
+			<p>Inicie sesión con el correo y la contraseña asignada</p>
+		</template>
+		<ui-input type="email" label="Correo electrónico" v-model="user.email" required>
+			<template #validation>
+				Ingresa una dirección de correo válida
+			</template>
+		</ui-input>
+		<div class="input-iconLeft">
+			<ui-input :type="typePassword" label="Contraseña" v-model="user.password" required>
+				<template #validation>
+					Ingresa tu contraseña
+				</template>
+			</ui-input>
+			<h1 :data-icon="icon" @click="passwordChangeType"></h1>
+		</div>
+		<template #error>
+			Revisa la información
+		</template>
+		<template #aside>
+			<a @click="type='recover'">¿Olvidaste tu contraseña?</a>
+		</template>
+	</ui-form>
+
+	<ui-form action="students/forgetPassword" :model="recoverData" submit-label="Enviar" v-if="type==='recover'">
+		<template #header>
+			<div class="invitation">
+				<strong>Para iniciar esta aventura, te enviaremos </strong> <br>
+				un correo electrónico con la recuperación de contraseña
+				<h1>¿Olvidaste tu contraseña?</h1>
+		</template>
+		<ui-input type="email" label="Correo electrónico" v-model="recoverData.email" required>
+			<template #validation>
+				Ingresa una dirección de correo válida
+			</template>
+		</ui-input>
+		<template #aside>
+			<a @click="type='login'">Login</a>
+		</template>
+	</ui-form>
+</section>

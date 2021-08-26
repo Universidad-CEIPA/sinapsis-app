@@ -1,0 +1,35 @@
+<section class="view-section" id="story-map-view" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="goBack"></span> CIUDADES </header>
+    <div :class="classes">
+        <div class="title">
+            <h3>Explora</h3>
+            Ingresa a cada ciudad y aprende sobre ella
+        </div>
+
+        <div class="map-container">
+
+            <div v-for="group in finalDistribution" class="group-city">
+                <div v-for="city in group" class="city-content">
+
+                    <div class="city" :style="city.style" @click="openActivity(city)">
+                        <div class="city-logo" :class="{'city-end' : city.end}">
+                            <img v-if="city.end" :src="`modules/story/images/decor-end-${course.indexMap() + 1}.png`"
+                                alt="" class="decor-end">
+                            <img v-if="city.end" :src="`modules/story/images/decor-end-${course.indexMap() + 1}.png`"
+                                alt="" class="decor-end-revert">
+                            <img v-if="!city.end && course.indexMap() === 1" src="modules/story/images/feather.png"
+                                alt="" class="feather">
+                            <img :src="city.cover?.url ?? 'modules/story/images/camera.png'" alt="" class="cover"
+                                :class="{'pending': city.completed[0] !== 'completed'}">
+                            <img v-if="city.completed[0] === 'completed'" src="modules/story/images/completed.png"
+                                class="check" alt="">
+                        </div>
+                        <div class="city-name">{{ city.name}}</div>
+                    </div>
+                </div>
+            </div>
+            <svg :width="sizeWidth" :height="sizeHeight" class="roads"></svg>
+        </div>
+    </div>
+    <alert v-if="modal" @close="modal = false" :course="course" />
+</section>

@@ -1,0 +1,35 @@
+<section id="activity-read" :style="{'--font-size':fontSize}">
+    <ul class="letters">
+        <li class="small" :class="{'active':fontSize === '0.8em'}" @click="fontSize = '0.8em'">a</li>
+        <li class="medium" :class="{'active':fontSize === '1em'}" @click="fontSize = '1em'">a</li>
+        <li class="big" :class="{'active':fontSize === '1.3em'}" @click="fontSize = '1.3em'">a</li>
+    </ul>
+    <div class="name" :class="{'full-title' : showImages}">
+
+        <div class="avatar" v-if="showImages">
+            <img class="circle" :src="`modules/story/images/avatar/${activity.name}.png`" alt="">
+        </div>
+        <div class="title-activity">
+            <template v-if="activity.type !== 'hero-letter'">
+                <template v-if="showImages">
+                    Entrega {{countActivity}}
+                </template>
+                <template v-else>
+                    {{ title }}
+                </template>
+                <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+                {{ activity.name }}
+            </template>
+            <template v-else>
+                Carta del Héroe
+            </template>
+            <img class="arabesco-title" src="modules/story/images/arabesco-gold.svg" alt="">
+        </div>
+    </div>
+    
+    <div class="text">
+        {{ activity.content}}
+    </div>
+
+    <slot></slot>
+</section>

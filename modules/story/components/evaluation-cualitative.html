@@ -1,0 +1,15 @@
+<ui-form :model="answers" submit-label="Continuar" action="students/saveEvaluation" @success="success"
+    id="evaluation-cualitative" :class="`skin-${$root.currentCourse.skin}`">
+    <template #header>
+        <h3>Ponte a prueba</h3>
+        <p>Contesta la siguiente pregunta según tu experiencia</p>
+    </template>
+
+
+    <ui-input type="textarea" rows="10" :label="answers.title" v-model="answers.evaluation" required
+        placeholder="Escribe tu respesta aquí">
+        <template #validation>
+            Ingresa un valor
+        </template>
+    </ui-input>
+</ui-form>

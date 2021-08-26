@@ -1,0 +1,176 @@
+#home-index-view {
+    background : url('../../res/images/bg_sky.svg') 50% 50%/cover no-repeat;
+    position   : absolute;
+    padding    : 35px;
+    height     : calc(100% - 70px);
+    color      : #fff;
+    font-weight: bolder;
+
+    .header {
+        padding      : 20px;
+        border-bottom: #fff solid 1px;
+        text-align   : center;
+
+        img {
+            max-width: 150px;
+        }
+    }
+
+    .slide-cards {
+        text-align: center;
+
+        p {
+            padding: 15px 0;
+        }
+
+
+        .slide-enter-active {
+            .current-card {
+                animation: bounce-in 1s;
+            }
+
+        }
+
+        .slide-leave-active {
+            .current-card {
+                animation: bounce-in 1s reverse;
+            }
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .cards {
+            .card {
+                display : flex;
+                position: relative;
+                margin  : 20px 0;
+                width   : 300px;
+                left    : calc(50% - 150px);
+
+                .default-card {
+                    height    : 280px; // original 480px
+                    width     : 200px; // original 300px
+                    box-shadow: 10px 10px 5px 2px rgba(0, 0, 0, 0.44);
+                }
+
+                .shadow-card {
+                    width  : 50px;
+                    margin : 20px 0;
+                    padding: 0;
+
+
+                    section {
+                        .default-card;
+                        max-width    : 50px;
+                        background   : var(--prev-image) 0 0/cover no-repeat;
+                        border-radius: 8px 0 0 8px;
+                    }
+
+                    &:last-child {
+                        section {
+                            background   : var(--next-image) 100% 0/cover no-repeat;
+                            border-radius: 0 8px 8px 0;
+                        }
+                    }
+                }
+
+                .current-card,
+                .dummy-card {
+                    border-radius: 8px;
+
+                    p {
+                        display       : table-cell;
+                        vertical-align: middle;
+                        text-align    : center;
+                    }
+                }
+
+                .current-card {
+                    .default-card;
+                    z-index         : 1;
+                    background-color: @bg-color;
+                    background      : var(--current-image) 50% 50%/cover no-repeat;
+                    padding         : 20px;
+                    display         : table;
+                }
+
+                .dummy-card {
+                    .default-card;
+                    position  : absolute;
+                    top       : 0;
+                    left      : 0;
+                    right     : 0;
+                    background: var(--dummy-image) 50% 50%/cover no-repeat;
+                    padding   : 20px;
+                    animation : dummy-card-enter 200ms;
+
+                    &.v-leave-active {
+                        animation: dummy-card-leave 200ms;
+                    }
+                }
+
+            }
+        }
+    }
+
+
+
+    &.prev-project,
+    &.next-project {
+        overflow: hidden;
+    }
+
+    &.prev-project {
+
+        .current-card {
+            transform: translateX(calc(var(--drag-x) * 1px));
+        }
+
+        .dummy-card {
+            transform: translateX(calc(-100% + var(--drag-x) * 1px));
+        }
+    }
+
+    &.next-project {
+
+        .current-card {
+            transform: translateX(calc(var(--drag-x) * 1px));
+        }
+
+        .dummy-card {
+            transform: translateX(calc(100% + var(--drag-x) * 1px));
+        }
+    }
+}
+
+@keyframes dummy-card-enter {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes dummy-card-leave {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}

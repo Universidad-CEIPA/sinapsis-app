@@ -1,0 +1,111 @@
+<section class="view-section" id="story-home-view" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:welcome' })"></span>{{ course.name }}
+    </header>
+
+    <div class="general"  @click="$router.replace({name : 'story:profile'})">
+
+        <div class="info">
+            <div class="advances">
+                <div class="circle"><span class="circle-text">{{course.advanceChapters()}}</span></div>
+                <span>Capítulos</span>
+            </div>
+            <div class="avatar">
+                <div class="shadow-focus"></div>
+                <img :src="course.getRoleAvatar()" alt="">
+            </div>
+
+            <span class="name">{{ $root.user.name }} <span data-icon="profile"></span></span>
+
+            <span class="role" v-if="course.activeRol">Eres {{ course.getRole() }}</span>
+            <span class="city" v-if="course.activeCity">Perteneces a {{ course.getLocation() }}</span>
+        </div>
+
+        <div class="complement">
+            <div class="items">
+                <section class="position" v-if="course.activeMap">
+                    <div class="icons">
+                        <img src="modules/story/images/city.svg" alt="">
+                    </div>
+                    Ciudades
+                </section>
+                <section class="tools" v-if="course.activeTools">
+                    <div class="icons">
+                        <img src="modules/story/images/tools-1.svg" alt="">
+                        <img src="modules/story/images/tools-2.svg" alt="">
+                        <img src="modules/story/images/tools-3.svg" alt="">
+                    </div>
+                    Herramientas
+                </section>
+            </div>
+
+            <img v-if="course.getRoleIcon()" :src="course.getRoleIcon()" alt="">
+        </div>
+    </div>
+    <div class="chapters" :style="{'--width-chapter':widthChapter}">
+        <div class="slide-chapters" :style="{'--left-animation':animation}" @touchstart="handlePointerDown"
+            @touchmove="handlePointerMove">
+            <div v-for="c,index in chapters" class="chapter" @click="openActivity(c)">
+                <div v-if="disableTime(c)" class="disable-mask"></div>
+                <div class="tittle">
+                    {{c.title}}
+                </div>
+                <section class="content">
+                    <div class="slide-advance">
+                        <div class="progress-chapter" :style="{'--width-advance': advancePercent(c)+'%' }">
+                            <div class="text-advance">
+                                {{advanceCompleted(c)}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="summary">{{c.name}}</div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="activities">
+        <div class="header"> Tus actividades</div>
+        <section>
+            <div class="tabs">
+                <ul>
+                    <li :class="{'active': filterActivities === 'progress' }" @click="filterActivities = 'progress' ">En
+                        curso</li>
+                    <li :class="{'active': filterActivities === 'completed' }" @click="filterActivities = 'completed' ">
+                        Completadas</li>
+                </ul>
+            </div>
+
+            <div class="activity-content">
+                <div class="tiny-alert" v-if="tinyAlert" @click="tinyAlert = false">
+                    <div class="msg">
+                        Te ha llegado una nueva actividad
+                    </div>
+                </div>
+                <div class="activity progress" v-if="filterActivities === 'progress'"
+                    v-for="activity in activityPending" @click="openActivityList(activity)">
+                    <img :src="`modules/story/images/${course.skin}/icon-${setImage(activity)}.png`" alt="">
+
+                    <div class="title" v-if="activity.chapter">Lee el capitulo {{activity.chapter}}</div>
+                    <div class="title" v-else>Carta del Héroe</div>
+                    <div class="content">{{setName(activity)}}</div>
+                    <div class="date">Enviado {{dateAgo(activity)}}</div>
+
+                </div>
+
+                <div class="activity completed" v-if="filterActivities === 'completed'"
+                    v-for="activity in activityCompleted" @click="openActivityList(activity)">
+                    <img :src="`modules/story/images/${course.skin}/icon-${setImage(activity)}.png`" alt="">
+                    <div class="title" v-if="activity.chapter">Lee el capitulo {{activity.chapter}}</div>
+                    <div class="title" v-else>Carta del Héroe</div>
+                    <div class="content">{{setName(activity)}}</div>
+                    <div class="date">Enviado {{dateAgo(activity)}}</div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <alert v-if="modal" @close="modal = false" :course="course" />
+
+    <div class="shadow" v-if="tinyAlert">
+    </div>
+</section>

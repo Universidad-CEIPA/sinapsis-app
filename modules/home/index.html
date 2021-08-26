@@ -1,0 +1,47 @@
+<section class="view-section" id="home-index-view"
+	:class="this._lastDelta ? (this._lastDelta < 0 ? 'prev-project' : 'next-project') : null"
+	:style="{'--drag-x': dragX}">
+	<div class="header">
+		<img src="res/images/logo_uceipa_white.svg" alt="">
+	</div>
+	<div class="slide-cards">
+		<p>
+			¿Cuál aventura quieres iniciar?
+		</p>
+
+		<div class="cards" v-for="(project,index) in projects" @touchstart="handlePointerDown"
+			@touchmove="handlePointerMove" @touchend="handlePointerUp">
+			<template v-if="currentIndex === index">
+				<span class="title-project">
+					{{project.courseName[0]}} - {{ project.name }}
+				</span>
+				<div class="card">
+					<div class="shadow-card" v-if="!this._lastDelta">
+						<section v-if="index !== 0 " :style="{'--prev-image': setImage(projects[index -1].image)}">
+						</section>
+					</div>
+					<div class="current-card" @click="goCourse" :style="{'--current-image': setImage(project.image)}">
+						<p>
+							{{ !project.image.length ? project.name : '' }}
+						</p>
+					</div>
+					<transition>
+						<div class="dummy-card" v-if="dragProject || dragProject === 0"
+							:style="{'--dummy-image':  setImage(projects[dragProject].image)}">
+							<p>
+								{{ !projects[dragProject].image.length ? projects[dragProject].name : '' }}
+							</p>
+						</div>
+					</transition>
+					<div class="shadow-card" v-if="!this._lastDelta">
+						<section v-if="index !== projects.length - 1 "
+							:style="{'--next-image': setImage(projects[index +1].image)}">
+						</section>
+					</div>
+				</div>
+			</template>
+		</div>
+		<p v-if="notification">
+			{{ notification }}
+		</p>
+</section>

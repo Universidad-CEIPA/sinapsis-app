@@ -1,0 +1,7 @@
+<section class="view-section" id="form-autoevaluation" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span>AUTOEVALUACIÓN
+    </header>
+    <component :is="typeComponent" :questions="questions[currentQuestion]" @next="nextQuestion" ref="question"></component>
+
+    <alert v-if="modal" @close="closeAlert" :course="course" />
+</section>

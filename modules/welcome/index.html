@@ -1,0 +1,16 @@
+<div>
+    <h1>
+        !Hola¡ <br>
+        {{ $root.user.name}}
+    </h1>
+
+    Te damos la Bienvenida a nuestra aplicación
+
+    <h1>
+        Inicia esta aventura
+    </h1>
+
+    <button @click="$router.push({name: 'welcome:setup'})">
+        Activa tu cuenta
+    </button>
+</div>

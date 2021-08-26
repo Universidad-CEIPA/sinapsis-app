@@ -1,0 +1,63 @@
+<section class="view-section" id="story-profile-skills" :class="course.skin">
+    <header><span data-icon="tiny-back" @click="$router.replace({ name: 'story:profile' })"></span> TUS HABILIDADES
+    </header>
+    <div class="skills">
+
+        <div class="info-graph">
+            <div class="title">Tus habilidades y progreso final</div>
+            <div class="subtitle">Conoce tus competencias destacadas</div>
+            <div class="graph">
+                <graph-svg ref="graph" :class="course.skin+'_graph'" :tags="course.graphTags()" :values="dataSets()"
+                    :colors="colors()" />
+            </div>
+            <div class="type-eval">
+                <div class="type" :class="{'active':filter.auto}" :style="{'--color-circle' : course.graphColors()[0]}"
+                    @click="filterGraph('auto')">
+                    <span></span>Autoevaluación inicial
+                </div>
+                <div class="type" :class="{'active':filter.desired}"
+                    :style="{'--color-circle' : course.graphColors()[1]}" @click="filterGraph('desired')">
+                    <span></span>Mi potencial deseado
+                </div>
+                <div class="type" :class="{'active':filter.current}"
+                    :style="{'--color-circle' : course.graphColors()[2]}" @click="filterGraph('current')">
+                    <span></span>Mi potencial actual
+                </div>
+            </div>
+        </div>
+
+        <div class="details">
+            <div class="line-time">
+
+                Mi potencial
+                <span class="date">
+                    {{ dates[position]!= "Actual" ?$formatDate(dates[position] , "DD[/]MM[/]YYYY "): dates[position] }}
+                </span>
+                <div class="slider">
+                    <ui-input type="range" label="" v-model="position" min="0" :max="dates.length - 1"
+                        @input="updateGraph"></ui-input>
+                </div>
+                Desplaza la barra para conocer tus competencias en evaluaciones anteriores a lo largo del tiempo
+            </div>
+            <div class="explain">
+                <div class="sub-title">
+                    Competencias
+                </div>
+                <div class="competences">
+                    <div v-for="cmpt in course.competences">
+                        <hr>
+                        <div class="name">{{cmpt.name}}</div>
+                        {{cmpt.number}}
+                        <br>
+                        {{cmpt.description}}
+                        <br>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+</section>
