@@ -1,5 +1,5 @@
-const API_BASE_URL = "https://backend.uceipa.shiftactive.com/";
-//const API_BASE_URL = "https://appapi.ceipa.edu.co/";
+//const API_BASE_URL = "https://backend.uceipa.shiftactive.com/";
+const API_BASE_URL = "https://appapi.ceipa.edu.co/";
 
 requirejs.config({
 	baseUrl: "res/scripts",
