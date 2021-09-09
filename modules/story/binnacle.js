@@ -32,7 +32,7 @@ define([
                 this.videoPlayer.addListener('jeepCapVideoPlayerPlaying', async (data) => { }, false);
             },
             async deleteFile(video){
-                await api.delete(`students/deleteVideo/${video.id}/${video.question.id}/${this.course.studentId}`);
+                await api.delete(`students/deleteVideo/${video.id}/${video.question.id}/${this.course.studentId}/${this.course.courseId}`);
                 this.videos = await this.course.getVideos();
             },
             async getFileFromUrl(url, name, type) {
