@@ -102,7 +102,14 @@ define([
                             local("videoPending", null)
                             this.$emit('next')
                         } else {
-                            console.log("error")
+                            if (window.Capacitor) {
+                                Capacitor.Plugins.Dialog.alert({
+                                    message: "Ha ocurrido un error",
+                                    title: "¡Error!"
+                                }).then(result => result.value);
+                            } else {
+                                alert("Ha ocurrido un error");
+                            }
                         }
                     }
                 }
